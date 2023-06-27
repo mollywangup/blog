@@ -25,7 +25,7 @@ enableAppbarLangIcon = false
 
 # header
 homeHeaderType = "text" # text, img, slide, typewriter
-hideHomeHeaderWhenMobile = false
+hideHomeHeaderWhenMobile = true
 
 # menu
 showMobileMenuTerms = ["tags", "categories"]
@@ -60,7 +60,7 @@ publicationIcon = "📚"
 typeIcon = "🎯"
 
 # whoami
-myname = "Mollywang"
+myname = "Molly Wang"
 email = "mollywangup@gmail.com"
 whoami = "PM"
 bioImageUrl = "images/whoami/avatar.jpg"
