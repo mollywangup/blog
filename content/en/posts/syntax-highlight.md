@@ -6,8 +6,6 @@ draft: false
 hideToc: false
 enableToc: true
 enableTocContent: false
-author: Jeus
-authorEmoji: 🎅
 pinned: true
 tags:
 - hugo

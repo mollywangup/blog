@@ -6,8 +6,6 @@ draft: false
 hideToc: false
 enableToc: true
 enableTocContent: false
-author: Lee
-authorEmoji: 👺
 tags: 
 - shortcodes
 - privacy

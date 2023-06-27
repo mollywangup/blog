@@ -7,8 +7,6 @@ draft: false
 hideToc: false
 enableToc: true
 enableTocContent: false
-author: Park
-authorEmoji: 👽
 libraries:
 - katex
 ---

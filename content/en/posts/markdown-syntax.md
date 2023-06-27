@@ -6,8 +6,6 @@ draft: false
 hideToc: false
 enableToc: true
 enableTocContent: true
-author: Choi
-authorEmoji: 🤖
 tags:
 - markdown
 - css

@@ -7,8 +7,6 @@ draft: false
 hideToc: false
 enableToc: true
 enableTocContent: false
-author: Kim
-authorEmoji: 👻
 tags: 
 - emoji
 - gamoji
