@@ -3,7 +3,7 @@ title = "Molly's Note Book"
 theme = "zzo"
 
 defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
+defaultContentLanguageInSubdir = false # disable redirect 'root/' to 'root/en/'
 hasCJKLanguage = true
 
 summaryLength = 70
