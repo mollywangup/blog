@@ -3,7 +3,7 @@ logoType = "short" # long, short
 description = "The Zzo theme for Hugo example site."
 custom_css = []
 custom_js = []
-useFaviconGenerator = true # https://www.favicon-generator.org/
+useFaviconGenerator = false # https://www.favicon-generator.org/
 meta_image = ""
 themecolor = ""
 
@@ -24,7 +24,7 @@ enableAppbarSearchIcon = false
 enableAppbarLangIcon = false
 
 # header
-homeHeaderType = "text" # text, img, slide, typewriter
+homeHeaderType = "" # text, img, slide, typewriter
 hideHomeHeaderWhenMobile = true
 
 # menu
@@ -63,7 +63,7 @@ typeIcon = "🎯"
 myname = "Molly Wang"
 email = "mollywangup@gmail.com"
 whoami = "PM"
-bioImageUrl = "images/whoami/avatar.jpg"
+bioImageUrl = "https://user-images.githubusercontent.com/46241961/249026893-9edc421a-18d3-4daf-a3f9-5d17b0c447cf.jpg"
 useGravatar = false
 location = "Xi'an, China"
 organization = "GrowthMobi"
