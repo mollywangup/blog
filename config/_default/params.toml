@@ -16,7 +16,7 @@ notAllowedTypesInHomeFeed = ["about", "archive", "contact", "talks", "showcase",
 viewportSize = "normal" # widest, wider, wide, normal, narrow
 enableUiAnimation = true
 hideSingleContentsWhenJSDisabled = false
-enablePinnedPosts = true
+enablePinnedPosts = false
 minItemsToShowInTagCloud = 1 # Minimum items to show in tag cloud
 
 # appbar
@@ -64,7 +64,7 @@ myname = "Molly Wang"
 email = "mollywangup@gmail.com"
 whoami = "PM"
 # bioImageUrl = "https://user-images.githubusercontent.com/46241961/249026893-9edc421a-18d3-4daf-a3f9-5d17b0c447cf.jpg"
-bioImageUrl = "images/whoami/avatar.jpg"
+bioImageUrl = "images/whoami/avatar.jpg" # work fine after setting defaultContentLanguageInSubdir to false
 useGravatar = false
 location = "Xi'an, China"
 organization = "GrowthMobi"
