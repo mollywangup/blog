@@ -3,62 +3,62 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://blog.mollywangup.com/ko/en/</loc>
+    <loc>https://mollywangup.com/ko/en/</loc>
   </url>
   
   <url>
-    <loc>https://blog.mollywangup.com/ko/categories/</loc>
+    <loc>https://mollywangup.com/ko/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.mollywangup.com/en/categories/"
+                href="https://mollywangup.com/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="https://blog.mollywangup.com/ko/categories/"
+                href="https://mollywangup.com/ko/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://blog.mollywangup.com/ko/</loc>
+    <loc>https://mollywangup.com/ko/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.mollywangup.com/en/"
+                href="https://mollywangup.com/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="https://blog.mollywangup.com/ko/"
+                href="https://mollywangup.com/ko/"
                 />
   </url>
   
   <url>
-    <loc>https://blog.mollywangup.com/ko/series/</loc>
+    <loc>https://mollywangup.com/ko/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.mollywangup.com/en/series/"
+                href="https://mollywangup.com/en/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="https://blog.mollywangup.com/ko/series/"
+                href="https://mollywangup.com/ko/series/"
                 />
   </url>
   
   <url>
-    <loc>https://blog.mollywangup.com/ko/tags/</loc>
+    <loc>https://mollywangup.com/ko/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://blog.mollywangup.com/en/tags/"
+                href="https://mollywangup.com/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ko"
-                href="https://blog.mollywangup.com/ko/tags/"
+                href="https://mollywangup.com/ko/tags/"
                 />
   </url>
   

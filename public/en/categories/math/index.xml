@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>math on Molly&#39;s Blog</title>
-    <link>https://blog.mollywangup.com/en/categories/math/</link>
+    <link>https://mollywangup.com/en/categories/math/</link>
     <description>Recent content in math on Molly&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,17 +16,17 @@
     <copyright>©2023, All Rights Reserved</copyright>
     <lastBuildDate>Sat, 16 Nov 2019 12:00:06 +0900</lastBuildDate>
     
-        <atom:link href="https://blog.mollywangup.com/en/categories/math/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://mollywangup.com/en/categories/math/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>MathJax support</title>
-        <link>https://blog.mollywangup.com/en/posts/test-mathjax/</link>
+        <link>https://mollywangup.com/en/posts/test-mathjax/</link>
         <pubDate>Sat, 16 Nov 2019 12:00:06 +0900</pubDate>
         <author>mollywangup@gmail.com (Molly Wang)</author>
         <atom:modified>Sat, 16 Nov 2019 12:00:06 +0900</atom:modified>
-        <guid>https://blog.mollywangup.com/en/posts/test-mathjax/</guid>
+        <guid>https://mollywangup.com/en/posts/test-mathjax/</guid>
         <description>When $a \ne 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are
 $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</description>
         
@@ -55,11 +55,11 @@ $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</description>
       
       <item>
         <title>Katex support</title>
-        <link>https://blog.mollywangup.com/en/posts/test-katex/</link>
+        <link>https://mollywangup.com/en/posts/test-katex/</link>
         <pubDate>Fri, 15 Nov 2019 12:00:06 +0900</pubDate>
         <author>mollywangup@gmail.com (Molly Wang)</author>
         <atom:modified>Fri, 15 Nov 2019 12:00:06 +0900</atom:modified>
-        <guid>https://blog.mollywangup.com/en/posts/test-katex/</guid>
+        <guid>https://mollywangup.com/en/posts/test-katex/</guid>
         <description>The following
 $$ \int_{a}^{b} x^2 dx $$
 Is an integral

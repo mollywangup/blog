@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>index on Molly&#39;s Blog</title>
-    <link>https://blog.mollywangup.com/en/tags/index/</link>
+    <link>https://mollywangup.com/en/tags/index/</link>
     <description>Recent content in index on Molly&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -15,17 +15,17 @@
     <webMaster>mollywangup@gmail.com (Molly Wang)</webMaster>
     <copyright>©2023, All Rights Reserved</copyright>
     
-        <atom:link href="https://blog.mollywangup.com/en/tags/index/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://mollywangup.com/en/tags/index/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>Posts</title>
-        <link>https://blog.mollywangup.com/en/posts/</link>
+        <link>https://mollywangup.com/en/posts/</link>
         <pubDate>Sat, 25 Jan 2020 06:40:51 +0900</pubDate>
         <author>mollywangup@gmail.com (Molly Wang)</author>
         
-        <guid>https://blog.mollywangup.com/en/posts/</guid>
+        <guid>https://mollywangup.com/en/posts/</guid>
         <description></description>
         
         <dc:creator>Hugo Authors</dc:creator>

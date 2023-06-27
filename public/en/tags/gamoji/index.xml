@@ -7,7 +7,7 @@
   xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>gamoji on Molly&#39;s Blog</title>
-    <link>https://blog.mollywangup.com/en/tags/gamoji/</link>
+    <link>https://mollywangup.com/en/tags/gamoji/</link>
     <description>Recent content in gamoji on Molly&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
@@ -16,17 +16,17 @@
     <copyright>©2023, All Rights Reserved</copyright>
     <lastBuildDate>Mon, 16 Dec 2019 12:00:06 +0900</lastBuildDate>
     
-        <atom:link href="https://blog.mollywangup.com/en/tags/gamoji/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://mollywangup.com/en/tags/gamoji/index.xml" rel="self" type="application/rss+xml" />
     
 
       
       <item>
         <title>Emoji Support</title>
-        <link>https://blog.mollywangup.com/en/posts/emoji-support/</link>
+        <link>https://mollywangup.com/en/posts/emoji-support/</link>
         <pubDate>Mon, 16 Dec 2019 12:00:06 +0900</pubDate>
         <author>mollywangup@gmail.com (Molly Wang)</author>
         <atom:modified>Mon, 16 Dec 2019 12:00:06 +0900</atom:modified>
-        <guid>https://blog.mollywangup.com/en/posts/emoji-support/</guid>
+        <guid>https://mollywangup.com/en/posts/emoji-support/</guid>
         <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
         
         <dc:creator>Hugo Authors</dc:creator>
