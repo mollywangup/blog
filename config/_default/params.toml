@@ -1,9 +1,9 @@
 logoText = "Molly's Blog"
 logoType = "short" # long, short
-description = "The Zzo theme for Hugo example site."
+description = "Notes."
 custom_css = []
 custom_js = []
-useFaviconGenerator = false # https://www.favicon-generator.org/
+useFaviconGenerator = true # https://www.favicon-generator.org/
 meta_image = ""
 themecolor = ""
 
@@ -64,11 +64,11 @@ myname = "Molly Wang"
 email = "mollywangup@gmail.com"
 whoami = "PM"
 # bioImageUrl = "https://user-images.githubusercontent.com/46241961/249026893-9edc421a-18d3-4daf-a3f9-5d17b0c447cf.jpg"
-bioImageUrl = "images/whoami/avatar.jpg" # work fine after setting defaultContentLanguageInSubdir to false
+bioImageUrl = "images/whoami/avatar.jpg" # works fine after setting defaultContentLanguageInSubdir to false
 useGravatar = false
 location = "Xi'an, China"
 organization = "GrowthMobi"
-link = "https://mollywangup.com"
+link = "https://mollywangup.com/"
 
 # sidebar
 enableBio = true
@@ -93,13 +93,13 @@ enableSidebarPostsByOrder = false
 showPoweredBy = true
 showFeedLinks = true
 showSocialLinks = true
-enableLangChange = true
+enableLangChange = false
 enableThemeChange = true
 
 # service
 googleTagManager = "" # GTM-XXXXXX
 baiduAnalytics = ""
-enableBusuanzi = true
+enableBusuanzi = false
 busuanziSiteUV = true
 busuanziSitePV = true
 busuanziPagePV = true
@@ -115,7 +115,7 @@ disqus_shortname = ""
 commento = false
 
 [telegram]
-  enable = false
+  enable = true
   siteId = ""
   dataLimit = 5
 
@@ -126,8 +126,8 @@ commento = false
   clientSecret = ""       # Your client secret
 
 [utterances]       # https://utteranc.es/
-  owner = ""              # Your GitHub ID
-  repo = ""               # The repo to store comments
+  owner = "mollywangup"              # Your GitHub ID
+  repo = "mollywangup/blog-comment"               # The repo to store comments
 
 [gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
   owner = ""              # Your GitHub ID
@@ -165,8 +165,8 @@ commento = false
   email = "mailto:mollywangup@gmail.com"
   phone = ""
   facebook = "https://www.facebook.com/molly.wang.dd/"
-  twitter = "http://example.org/"
-  github = "https://github.com/zzossig/hugo-theme-zzo"
+  twitter = "https://twitter.com/mollywa02643359"
+  github = "https://github.com/mollywangup"
   stack-overflow = ""
   instagram = ""
   google-plus = ""
@@ -206,6 +206,10 @@ commento = false
   username = ""
 [[share]]
   name = "twitter"
+[[share]]
+  name = "reddit"
+[[share]]
+  name = "douban"
 
 [[footerLinks]]
   name = ""
