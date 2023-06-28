@@ -21,3 +21,4 @@
 go.work
 
 public/
+*.DS_Store
