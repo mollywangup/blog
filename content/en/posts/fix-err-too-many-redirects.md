@@ -26,3 +26,5 @@ categories:
 {{< /alert >}}
 
 > [Cloudflare - Available encryption modes](https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/#available-encryption-modes)
+
+> <a href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/#available-encryption-modes" target="_blank">Cloudflare - Available encryption modes</a>
