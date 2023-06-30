@@ -1,8 +1,8 @@
 ---
 title: "Fix Druid Batch Ingestion Tasks"
 date: 2023-06-30T07:37:04Z
-draft: false
-description: 
+draft: true
+description: Duplicate column entries found, 
 hideToc: false
 enableToc: true
 enableTocContent: false
