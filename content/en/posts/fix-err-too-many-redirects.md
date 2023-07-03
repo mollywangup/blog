@@ -15,16 +15,22 @@ categories:
 
 ## 问题描述
 
-当打开某个网址时，浏览器提示：`ERR_TOO_MANY_REDIRECTS`
+当打开自己的网站时，浏览器报错：`ERR_TOO_MANY_REDIRECTS`
 
-## 解决方案
+## 问题定位
 
-如果有接Cloudflare，可以尝试将 `SSL/TLS encryption mode` 修改为 `Full (strict)`
+这个报错通常是由于重定向死循环导致，如下图: 
 
-{{< alert theme="info" >}}
-[Cloudflare - Available encryption modes](https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/#available-encryption-modes)
-{{< /alert >}}
+<img src='/images/posts/redirect_loop.png' alt='A Redirect Loop'>
 
-> <a href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/#available-encryption-modes" target="_blank">Cloudflare - Available encryption modes</a>
+## 解决思路
+
+检查网站的重定向设置，无论是主动设置的还是被动设置的。
+
+### 思路一：排除 Cloudflare 设置
+
+如果有接 Cloudflare, 可以尝试将 `SSL/TLS encryption mode` 修改为 `Full (strict)`
+
+> Cloudflare 官方参考文档：<a href="https://developers.cloudflare.com/ssl/troubleshooting/too-many-redirects/#err_too_many_redirects" target="_blank">ERR_TOO_MANY_REDIRECTS</a>
 
 <img src='/images/posts/cloudflare_ssltls_encryption_mode.png' alt='SSL/TLS encryption mode'>
