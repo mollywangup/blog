@@ -19,14 +19,12 @@ categories:
 
 1. 如果受众包含儿童，则必须遵守儿童政策 (COPPA)，具体指需要 **禁止收集device identifiers**；
 2. 如果受众包含美国加州，则必须遵守《加利福尼亚隐私权法案》(CPRA)；
-  {{< notice info >}}
-  原 `CCPA` 已于 2023 年 1 月 1 日 修订并扩展为 `CPRA`
-  {{< /notice >}}
   {{< alert theme="info" >}}
-  原 `CCPA` 已于 2023 年 1 月 1 日 修订并扩展为 `CPRA`
+  <cite>The California Privacy Rights Act (CPRA) is a data privacy law that amends and expands upon the CCPA. The law takes effect on January 1, 2023.[^1]</cite>
   {{< /alert >}}
-1. 如果受众包含欧盟、英国，则必须遵守欧盟通用数据保护条例 (GDPR)；
-2. 如果受众包含巴西，则必须遵守巴西通用数据保护法 (LGPD)；
+  [^1]: The California Privacy Rights Act (CPRA) is a data privacy law that amends and expands upon the CCPA. The law takes effect on January 1, 2023.[California Consumer Privacy Act (CCPA)](https://cloud.google.com/security/compliance/ccpa) during Gopherfest, November 18, 2015.
+3. 如果受众包含欧盟、英国，则必须遵守欧盟通用数据保护条例 (GDPR)；
+4. 如果受众包含巴西，则必须遵守巴西通用数据保护法 (LGPD)；
 
 
 ## 隐私定义
@@ -257,7 +255,7 @@ Helping publishers comply with the California Consumer Privacy Act (CCPA)
 Helping users comply with the Lei Geral de Proteção de Dados (LGPD)
 
 
-<a href="" target="_blank"></a>
+<a href="https://cloud.google.com/security/compliance/ccpa" target="_blank"></a>
 <a href="" target="_blank"></a>
 <a href="" target="_blank"></a>
 <a href="" target="_blank"></a>
