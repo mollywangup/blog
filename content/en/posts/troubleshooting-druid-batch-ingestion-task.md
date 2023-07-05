@@ -23,7 +23,7 @@ categories:
 
 ## Duplicate column entries found
 
-### 详细报错：
+### errorMsg
 ```Prolog
 "errorMsg": "CannotParseExternalData: Duplicate column entries found : [0, Facebook]"
 ```
@@ -40,7 +40,7 @@ categories:
 
 {{< /expand >}}
 
-### 解决方案：
+### Solution
 `Apache Druid` 属于列式存储，出现此问题的根本原因是，**存在名称相同的两列**。需要定位到名称相同的两列，并进行手动调整；
 
 ## InsertTimeOutOfBounds
