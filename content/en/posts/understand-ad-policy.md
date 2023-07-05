@@ -67,6 +67,40 @@ AdMob：https://support.google.com/admob/answer/7676680?hl=en
 
 禁用device identifiers，具体指将device identifiers共享给bidders，只能对用户展示非个性化广告；
 
+{{< tabs COPPA GDPR CCPA >}}
+  {{< tab >}}
+
+  ### <a href="https://developers.google.com/admob/android/targeting#child-directed_setting" target="_blank">Child-directed setting (COPPA)</a> 
+
+  ```Java
+  RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
+      .toBuilder()
+      .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
+      .build();
+  MobileAds.setRequestConfiguration(requestConfiguration);
+  ```
+
+  ⚠️Becareful that the content in the tab should be different from each other. The tab makes unique id hashes depending on the tab contents. So, If you just copy-paste the tabs with multiple times, since it has the same contents, the tab will not work.
+
+  {{< /tab >}}
+  {{< tab >}}
+
+  ### <a href="https://developers.google.com/admob/android/targeting#users_under_the_age_of_consent" target="_blank">Users under the age of consent (GDPR)</a>
+
+  ```Java
+  RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
+      .toBuilder()
+      .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE)
+      .build();
+  MobileAds.setRequestConfiguration(requestConfiguration);
+  ```
+
+  ### <a href="https://developers.google.com/admob/android/ccpa" target="_blank">Restricted Data Processing (CCPA)</a>
+
+  Great!
+  {{< /tab >}}
+{{< /tabs >}}
+
 ##### AdMob SDK
 
 <a href="https://developers.google.com/admob/android/targeting#child-directed_setting" target="_blank">Child-directed setting (COPPA)</a>
