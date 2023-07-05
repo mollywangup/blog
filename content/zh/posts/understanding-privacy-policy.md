@@ -9,10 +9,25 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Monetization
+- GP
 categories:
 - Privacy policy
 - SDK
 ---
+
+## 结论
+
+1. 如果受众包含儿童，则必须遵守儿童政策 (COPPA)，具体指需要 **禁止收集device identifiers**；
+2. 如果受众包含美国加州，则必须遵守《加利福尼亚隐私权法案》(CPRA)；
+  {{< notice info >}}
+  原 `CCPA` 已于 2023 年 1 月 1 日 修订并扩展为 `CPRA`
+  {{< /notice >}}
+  {{< alert theme="info" >}}
+  原 `CCPA` 已于 2023 年 1 月 1 日 修订并扩展为 `CPRA`
+  {{< /alert >}}
+1. 如果受众包含欧盟、英国，则必须遵守欧盟通用数据保护条例 (GDPR)；
+2. 如果受众包含巴西，则必须遵守巴西通用数据保护法 (LGPD)；
+
 
 ## 隐私定义
 

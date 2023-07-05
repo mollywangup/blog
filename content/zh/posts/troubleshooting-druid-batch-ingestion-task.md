@@ -14,7 +14,7 @@ categories:
 - Troubleshooting
 ---
 
-## Background information
+## 背景信息
 
 - Apache Druid: `26.0.0`
 - Batch ingestion task informations:
@@ -40,7 +40,7 @@ categories:
 
 {{< /expand >}}
 
-### Solution
+### 解决方案
 
 `Apache Druid` 属于列式存储，出现此问题的根本原因是，**存在名称相同的两列**。需要定位到名称相同的两列，并进行手动调整；
 
@@ -48,7 +48,7 @@ categories:
 
 ### errorMsg
 
-### Solution
+### 解决方案
 
 ## 
 
@@ -57,7 +57,7 @@ categories:
 "errorMsg": "The worker that this task is assigned did not start it in timeout[PT5M]. See overlord and middleMana..."
 ```
 
-### Solution
+### 解决方案
 一般情况下是因为服务器存储空间不足。（🙊 来自小公司的小声bb）
 以下清理内存的一些常用方法。
 
