@@ -15,6 +15,7 @@ categories:
 ---
 
 ## 背景信息
+## Background information
 
 - Apache Druid: `26.0.0`
 - Batch ingestion task informations:
@@ -23,7 +24,7 @@ categories:
 
 ## Duplicate column entries found
 
-### errorMsg
+#### errorMsg
 ```Prolog
 "errorMsg": "CannotParseExternalData: Duplicate column entries found : [0, Facebook]"
 ```
