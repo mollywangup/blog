@@ -1,5 +1,5 @@
 ---
-title: "解决 Apache Druid 批量 Ingestion Tasks"
+title: "解决 Druid 批量任务中的各种报错"
 date: 2023-06-30T07:37:04Z
 draft: false
 description: Apache Druid batch ingestion tasks, duplicate column entries found
@@ -37,39 +37,36 @@ categories:
 
 ## 
 
-### 问题定位
-
-    "errorMsg": "The worker that this task is assigned did not start it in timeout[PT5M]. See overlord and middleMana..."
-
-
-### 解决方案
-
-一般情况下是因为服务器存储空间不足。
-
-{{< tabs Linux MacOS >}}
-
-  {{< tab >}}
-
-  ### Linux section
-
-  ```bash
-  df -h
-  du -sh /var/log/* | sort -hr | head -n 10
+- 详细报错：
+  ```prolog
+  "errorMsg": "The worker that this task is assigned did not start it in timeout[PT5M]. See overlord and middleMana..."
   ```
 
-  {{< /tab >}}
-  {{< tab >}}
+- 解决方案：
+  一般情况下是因为服务器存储空间不足。
 
-  ### MacOS section
+  {{< tabs Linux MacOS >}}
 
-  Hello world!
-  {{< /tab >}}
-{{< /tabs >}}
+    {{< tab >}}
 
-## 
+    ### Linux section
 
-    Max retries exceeded with url: /druid/v2/sql/task/
+    ```bash
+    df -h
+    du -sh /var/log/* | sort -hr | head -n 10
+    ```
+
+    {{< /tab >}}
+    {{< tab >}}
+
+    ### MacOS section
+
+    Hello world!
+    {{< /tab >}}
+  {{< /tabs >}}
+
+## Max retries exceeded with url: /druid/v2/sql/task/
 
 
-##
-    "errorMsg": "InsertTimeOutOfBounds: Query generated time chunk
+
+## InsertTimeOutOfBounds: Query generated time chunk
