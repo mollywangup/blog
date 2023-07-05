@@ -1,5 +1,5 @@
 ---
-title: "解决 Druid 批量任务中的各种报错"
+title: "解决 Druid Batch Ingestion Tasks 中的各种报错"
 date: 2023-06-30T07:37:04Z
 draft: false
 description: Apache Druid batch ingestion tasks, duplicate column entries found
@@ -12,6 +12,15 @@ tags:
 categories:
 - Troubleshooting
 ---
+
+## 背景信息
+- Apache Druid: 26.0.0
+- Batch ingestion information:
+  - <a href="https://druid.apache.org/docs/latest/multi-stage-query/index.html" target="_blank">SQL-based ingestion</a>
+  - <a href="https://druid.apache.org/docs/latest/ingestion/native-batch-input-sources.html#s3-input-source" target="_blank">S3 input source</a>
+
+
+
 
 ## Duplicate column entries found
 
@@ -26,7 +35,7 @@ categories:
 
     <img src='/images/posts/duplicate_column_entries_normal.png' alt='正常的表头'>
 
-  - 以下是有问题的表头：原始数据表头丢失，导致Druid自动识别到存在两列的列名称都为空；
+  - 以下是有问题的表头：原始数据表头丢失，导致Druid自动识别到存在三列名称都为空的列；
     
     <img src='/images/posts/duplicate_column_entries_err.png' alt='异常表头'>
 
@@ -43,7 +52,7 @@ categories:
   ```
 
 - 解决方案：
-  一般情况下是因为服务器存储空间不足（来自小公司的小声bb）。
+  一般情况下是因为服务器存储空间不足。（来自小公司的小声bb）
   以下清理内存的一些常用方法。
 
   {{< tabs Linux MacOS >}}
