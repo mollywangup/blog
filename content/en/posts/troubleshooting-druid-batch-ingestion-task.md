@@ -1,5 +1,5 @@
 ---
-title: "解决 Druid Batch Ingestion Tasks 中的各种报错"
+title: "解决 Druid Batch Ingestion Task 中的各种报错"
 date: 2023-06-30T07:37:04Z
 draft: false
 description: Apache Druid batch ingestion tasks, duplicate column entries found
@@ -14,12 +14,11 @@ categories:
 ---
 
 ## 背景信息
-- Apache Druid: 26.0.0
-- Batch ingestion information:
+
+- Apache Druid: `26.0.0`
+- Batch ingestion task informations:
   - <a href="https://druid.apache.org/docs/latest/multi-stage-query/index.html" target="_blank">SQL-based ingestion</a>
   - <a href="https://druid.apache.org/docs/latest/ingestion/native-batch-input-sources.html#s3-input-source" target="_blank">S3 input source</a>
-
-
 
 
 ## Duplicate column entries found
@@ -52,7 +51,7 @@ categories:
   ```
 
 - 解决方案：
-  一般情况下是因为服务器存储空间不足。（来自小公司的小声bb）
+  一般情况下是因为服务器存储空间不足。（🙊 来自小公司的小声bb）
   以下清理内存的一些常用方法。
 
   {{< tabs Linux MacOS >}}
