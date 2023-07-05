@@ -7,7 +7,7 @@
 
 [zh]
   title = "Molly's Blog"
-  languageName = "Chinese"
+  languageName = "中文简体"
   weight = 1
   languagedir = "ltr"
   contentdir = "content/zh"
