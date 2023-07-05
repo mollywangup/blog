@@ -22,11 +22,17 @@ categories:
 
   {{< expand "踩坑举例：发生在 S3 的 .csv.gz 原始数据" >}}
 
-  以下是正常的表头：
-  <img src='/images/posts/duplicate_column_entries_normal.png' alt='正常的表头'>
+  - 以下是正常的表头：
 
-  以下是有问题的表头：原始数据表头丢失，导致Druid自动识别到存在两列的列名称都为空
-  <img src='/images/posts/duplicate_column_entries_err.png' alt='异常表头'>
+    | Inline&nbsp;&nbsp;&nbsp;     | Markdown&nbsp;&nbsp;&nbsp;  | In&nbsp;&nbsp;&nbsp;                | Table      |
+    | ---------- | --------- | ----------------- | ---------- |
+    | *italics*  | **bold**  | ~~strikethrough~~&nbsp;&nbsp;&nbsp; | `code`     |
+
+    <img src='/images/posts/duplicate_column_entries_normal.png' alt='正常的表头'>
+
+  - 以下是有问题的表头：原始数据表头丢失，导致Druid自动识别到存在两列的列名称都为空；
+    
+    <img src='/images/posts/duplicate_column_entries_err.png' alt='异常表头'>
 
   {{< /expand >}}
 
