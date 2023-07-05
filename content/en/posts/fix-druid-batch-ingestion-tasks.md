@@ -8,7 +8,7 @@ enableToc: true
 enableTocContent: false
 tocPosition: inner
 tags:
-- Apache Druid
+- Apache Druid, SQL-based ingestion
 categories:
 - Troubleshooting
 ---
@@ -16,7 +16,7 @@ categories:
 ## Duplicate column entries found
 
 - 详细报错：
-  ```json
+  ```Prolog
   "errorMsg": "CannotParseExternalData: Duplicate column entries found : [0, Facebook]"
   ```
 
@@ -28,22 +28,19 @@ categories:
 
   {{< /expand >}}
 
-
-- 问题定位：
-  `Apache Druid` 属于列式存储，出现此问题的根本原因是，**存在名称相同的两列**；
-
 - 解决方案：
-  定位到名称相同的两列，并手动修改列名称；
+  `Apache Druid` 属于列式存储，出现此问题的根本原因是，**存在名称相同的两列**。需要定位到名称相同的两列，并进行手动调整；
 
 ## 
 
 - 详细报错：
-  ```prolog
+  ```Prolog
   "errorMsg": "The worker that this task is assigned did not start it in timeout[PT5M]. See overlord and middleMana..."
   ```
 
 - 解决方案：
-  一般情况下是因为服务器存储空间不足。
+  一般情况下是因为服务器存储空间不足（来自小公司的小声bb）。
+  以下清理内存的一些常用方法。
 
   {{< tabs Linux MacOS >}}
 
@@ -69,4 +66,6 @@ categories:
 
 
 
-## InsertTimeOutOfBounds: Query generated time chunk
+## InsertTimeOutOfBounds
+
+Query generated time chunk
