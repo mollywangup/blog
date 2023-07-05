@@ -18,14 +18,18 @@ categories:
 ## 结论
 
 1. 隐私范畴：不同国家/律法的定义有差异，但可以近似于`设备信息`和`浏览器cookies`；
-2. 如何确定该遵守哪些隐私政策：
-   - 如果受众包含儿童，则必须遵守儿童政策 (COPPA)，具体指需要 **禁止收集device identifiers**；
+2. 隐私政策的核心思想：
+   - 未经允许，不得收集并利用个人隐私信息，进行商业盈利行为；
+   - 
+   - 个性化广告（盈利行为）；
+3. 如何确定该遵守哪些隐私政策：
+   - 如果受众包含儿童，则必须遵守《儿童在线隐私保护法》(COPPA)；
    - 如果受众包含美国加州，则必须遵守《加利福尼亚隐私权法案》(CPRA)；
-		{{< alert theme="info" >}}
-		The California Privacy Rights Act (CPRA) is a data privacy law that amends and expands upon the CCPA. The law takes effect on January 1, 2023.
-		{{< /alert >}}
-   - 如果受众包含欧盟、英国，则必须遵守欧盟通用数据保护条例 (GDPR)；
-   - 如果受众包含巴西，则必须遵守巴西通用数据保护法 (LGPD)；
+   - 如果受众包含欧盟、英国，则必须遵守《欧盟通用数据保护条例》(GDPR)；
+   - 如果受众包含巴西，则必须遵守《巴西通用数据保护法》(LGPD)；
+4. 遵守隐私政策的核心做法：
+   - 未经允许，不得收集个人敏感信息，用以进行个性化广告（盈利行为）；
+   - 
 
 
 
@@ -269,3 +273,8 @@ Helping users comply with the Lei Geral de Proteção de Dados (LGPD)
 <a href="" target="_blank"></a>
 <a href="" target="_blank"></a>
 <a href="" target="_blank"></a>
+
+
+		{{< alert theme="info" >}}
+		The California Privacy Rights Act (CPRA) is a data privacy law that amends and expands upon the CCPA. The law takes effect on January 1, 2023.
+		{{< /alert >}}
