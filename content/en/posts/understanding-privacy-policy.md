@@ -1,5 +1,5 @@
 ---
-title: "Understand Ad Policy"
+title: "Understanding Privacy Policy (Ad)"
 date: 2022-09-29T07:14:58Z
 draft: false
 description: 
@@ -14,7 +14,7 @@ categories:
 - SDK
 ---
 
-## Privacy定义
+## Privacy 定义
 
 隐私在不同政策（国家）法律/平台下的定义（核心是device identifiers、cookies）
 - <a href="https://support.google.com/admob/answer/7686480?hl=en" target="_blank">"Personally Identifiable Information" (PII)</a>
