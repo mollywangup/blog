@@ -14,7 +14,7 @@ categories:
 - Troubleshooting
 ---
 
-Background information
+## Background information
 
 - Apache Druid: `26.0.0`
 - Batch ingestion task informations:
@@ -41,42 +41,45 @@ Background information
 {{< /expand >}}
 
 ### Solution
+
 `Apache Druid` 属于列式存储，出现此问题的根本原因是，**存在名称相同的两列**。需要定位到名称相同的两列，并进行手动调整；
 
 ## InsertTimeOutOfBounds
 
-- 解决方案：
+### errorMsg
+
+### Solution
 
 ## 
 
-- 详细报错：
-  ```Prolog
-  "errorMsg": "The worker that this task is assigned did not start it in timeout[PT5M]. See overlord and middleMana..."
+### errorMsg
+```Prolog
+"errorMsg": "The worker that this task is assigned did not start it in timeout[PT5M]. See overlord and middleMana..."
+```
+
+### Solution
+一般情况下是因为服务器存储空间不足。（🙊 来自小公司的小声bb）
+以下清理内存的一些常用方法。
+
+{{< tabs Linux MacOS >}}
+
+  {{< tab >}}
+
+  ### Linux section
+
+  ```bash
+  df -h
+  du -sh /var/log/* | sort -hr | head -n 10
   ```
 
-- 解决方案：
-  一般情况下是因为服务器存储空间不足。（🙊 来自小公司的小声bb）
-  以下清理内存的一些常用方法。
+  {{< /tab >}}
+  {{< tab >}}
 
-  {{< tabs Linux MacOS >}}
+  ### MacOS section
 
-    {{< tab >}}
-
-    ### Linux section
-
-    ```bash
-    df -h
-    du -sh /var/log/* | sort -hr | head -n 10
-    ```
-
-    {{< /tab >}}
-    {{< tab >}}
-
-    ### MacOS section
-
-    Hello world!
-    {{< /tab >}}
-  {{< /tabs >}}
+  Hello world!
+  {{< /tab >}}
+{{< /tabs >}}
 
 ## Max retries exceeded with url: /druid/v2/sql/task/
 
