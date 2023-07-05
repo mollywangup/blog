@@ -5,9 +5,17 @@
   languagedir = "ltr"
   contentdir = "content/en"
 
+[zh]
+  title = "Molly's Blog"
+  languageName = "English"
+  weight = 1
+  languagedir = "ltr"
+  contentdir = "content/zh"
+
 # [ko]
 #   title = "Hugo Zzo Theme"
 #   languageName = "한국어"
 #   weight = 2
 #   languagedir = "ltr"
 #   contentdir = "content/ko"
+

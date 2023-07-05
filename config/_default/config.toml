@@ -2,7 +2,7 @@ baseURL = "https://mollywangup.com/"
 title = "Molly's Blog"
 theme = "zzo"
 
-defaultContentLanguage = "en"
+defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = false # disable redirect 'root/' to 'root/en/'
 hasCJKLanguage = true
 
