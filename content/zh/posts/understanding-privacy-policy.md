@@ -9,6 +9,7 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Monetization
+- AdMob
 - GP
 categories:
 - Privacy policy
@@ -22,15 +23,14 @@ categories:
 2. 隐私政策的核心思想：
    - 受众包含儿童的App需遵守儿童政策，即禁止收集device identifiers；
    - 是否允许根据用户的device identifiers、cookies来对用户展示个性化广告；
-   - 未经允许，不得收集并利用个人隐私信息，进行个性化广告（盈利行为）；
-	{{< alert theme="warning" >}}
-注意，但是**可以**进行非个性化广告的
-	{{< /alert >}}
-1. 如何确定该遵守哪些隐私政策：
+   - 未经允许，不得收集并利用个人隐私信息，进行个性化广告（盈利行为）。注意，但是**可以**进行非个性化广告的
+3. 如何确定该遵守哪些隐私政策：
    - 如果受众包含儿童，则必须遵守《儿童在线隐私保护法》(COPPA)；
    - 如果受众包含美国加州，则必须遵守《加利福尼亚隐私权法案》(CPRA)；
    - 如果受众包含欧盟、英国，则必须遵守《欧盟通用数据保护条例》(GDPR)；
    - 如果受众包含巴西，则必须遵守《巴西通用数据保护法》(LGPD)；
+4. 分别一句话解读广告政策：
+   - 
 
 ## 概念定义
 
@@ -50,16 +50,6 @@ categories:
 
 <a href="https://android-developers.googleblog.com/2022/11/keeping-google-play-safe.html" target="_blank">Keeping Google Play Safe with New Features and Programs</a>
 
-## Data practices in Families apps（上架GP必看）
-
-中心思想：受众包含儿童的App需遵守儿童政策，即**禁止收集device identifiers**；
-> https://support.google.com/googleplay/android-developer/answer/11043825?hl=en 
-> Apps that target both children and older audiences must not transmit AAID, SIM 
-> serial, build serial, BSSID, MAC, SSID, IMEI and/or IMSI from children or users of 
-> unknown age.
-
-AdMob：https://support.google.com/admob/answer/7676680?hl=en
-
 ### 个性化广告
 
 1. 基于用户兴趣，来对用户进行个性化广告展示；
@@ -76,7 +66,8 @@ AdMob：https://support.google.com/admob/answer/7676680?hl=en
 
 ## 隐私政策（四大政策）
 
-### The Children’s Online Privacy Protection Act (COPPA)
+### COPPA
+The Children’s Online Privacy Protection Act (COPPA)
 
 - 针对受众群体中包含儿童/未成年用户的App（也称为Family Policy）
 1. Tag an ad request from an app for child-directed treatment
@@ -84,7 +75,8 @@ AdMob：https://support.google.com/admob/answer/7676680?hl=en
 3. Set a maximum ad content rating
 4. https://www.ftc.gov/business-guidance/privacy-security/childrens-privacy
 
-### EU user consent policy (GDPR)
+### GDPR
+EU user consent policy (GDPR)
 
 - 针对欧盟、英国、瑞士的用户
 1. Tools to help publishers comply with the GDPR
@@ -93,19 +85,21 @@ AdMob：https://support.google.com/admob/answer/7676680?hl=en
 4. IAB CMP list：https://iabeurope.eu/cmp-list/
 5. IAB Europe Transparency & Consent Framework Policies：https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/?rd=1#Appendix_A_Purposes_and_Features_Definitions 
 
-### California Consumer Privacy Act (CCPA)
+### CCPA
+California Consumer Privacy Act (CCPA)
 
 - 针对美国加利福尼亚洲的用户
 Helping publishers comply with the California Consumer Privacy Act (CCPA) 
 
-### Lei Geral de Proteção de Dados (LGPD)
+### LGPD
+Lei Geral de Proteção de Dados (LGPD)
 
 - 针对巴西的用户
 Helping users comply with the Lei Geral de Proteção de Dados (LGPD)
 
 ## 应对措施
 
-核心：禁用device identifiers，具体指将device identifiers共享给bidders，只能对用户展示非个性化广告；
+中心思想：禁用device identifiers，具体指将device identifiers共享给bidders，只能对用户展示非个性化广告；
 
 ### 一劳永逸的方法
 
@@ -126,49 +120,28 @@ Helping users comply with the Lei Geral de Proteção de Dados (LGPD)
 
 #### AdMob SDK
 
-{{< tabs COPPA GDPR CCPA LGPD >}}
-  {{< tab >}}
+<a href="https://developers.google.com/admob/android/targeting#child-directed_setting" target="_blank">Child-directed setting (COPPA)</a>
+<a href="https://developers.google.com/admob/android/targeting#users_under_the_age_of_consent" target="_blank">Users under the age of consent (GDPR)</a>
+<a href="https://developers.google.com/admob/android/ccpa" target="_blank">Restricted Data Processing (CCPA)</a>
 
-   - <a href="https://developers.google.com/admob/android/targeting#child-directed_setting" target="_blank">Child-directed setting (COPPA)</a> 
+```Java
+// COPPA
+RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
+    .toBuilder()
+    .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
+    .build();
+MobileAds.setRequestConfiguration(requestConfiguration);
 
-  ```Java
-  RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
-      .toBuilder()
-      .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
-      .build();
-  MobileAds.setRequestConfiguration(requestConfiguration);
-  ```
+// GDPR
+RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
+    .toBuilder()
+    .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE)
+    .build();
+MobileAds.setRequestConfiguration(requestConfiguration);
+```
 
-  > Apps that target both children and older audiences must not transmit AAID, SIM serial, build serial, BSSID, MAC, SSID, IMEI and/or IMSI from children or users of unknown age.
-
-  {{< /tab >}}
-  {{< tab >}}
-
-   - <a href="https://developers.google.com/admob/android/targeting#users_under_the_age_of_consent" target="_blank">Users under the age of consent (GDPR)</a>
-
-  ```Java
-  RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
-      .toBuilder()
-      .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE)
-      .build();
-  MobileAds.setRequestConfiguration(requestConfiguration);
-  ```
-
-  {{< /tab >}}
-  {{< tab >}}
-
-   - <a href="https://developers.google.com/admob/android/ccpa" target="_blank">Restricted Data Processing (CCPA)</a>
-
-  其他（不用管）
-
-  {{< /tab >}}
-  {{< tab >}}
-
-  无需额外的措施
-
-  {{< /tab >}}
-
-{{< /tabs >}}
+> https://support.google.com/googleplay/android-developer/answer/11043825?hl=en 
+> Apps that target both children and older audiences must not transmit AAID, SIM serial, build serial, BSSID, MAC, SSID, IMEI and/or IMSI from children or users of unknown age.
 
 #### Facebook SDK
 
