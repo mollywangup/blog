@@ -19,20 +19,28 @@ categories:
 ## 结论
 
 1. 隐私范畴：
-   - 不同国家/律法的定义有差异，但可以近似为`设备信息`和`浏览器cookies`；
+  不同国家/律法的定义有差异，但可以近似为 **可用于标识用户的信息**，
+   - 对于应用: `device identifiers`
+   - 对于网站: `cookies`
 2. 隐私政策的核心思想：
+   - 赋予用户保护隐私的选择权，用于自有选择选择：是否允许根据用户的device identifiers、cookies来对用户展示个性化广告；
+  根据用户的device identifiers、cookies来对用户展示个性化广告；
+   - 
+   - 如果受众包含儿童，则一律禁止收集隐私信息；
    - 受众包含儿童的App需遵守儿童政策，即禁止收集device identifiers；
    - 是否允许根据用户的device identifiers、cookies来对用户展示个性化广告；
    - 未经允许，不得收集并利用个人隐私信息，进行个性化广告（盈利行为）。注意，但是**可以**进行非个性化广告的
-3. 如何确定该遵守哪些隐私政策：
+1. 如何确定应该遵守哪些隐私政策：
    - 如果受众包含儿童，则必须遵守《儿童在线隐私保护法》(COPPA)；
    - 如果受众包含美国加州，则必须遵守《加利福尼亚隐私权法案》(CPRA)；
    - 如果受众包含欧盟、英国，则必须遵守《欧盟通用数据保护条例》(GDPR)；
    - 如果受众包含巴西，则必须遵守《巴西通用数据保护法》(LGPD)；
-4. 分别一句话解读广告政策：
-   - 
 
 ## 概念定义
+
+### 常看常新（重要）
+
+<a href="https://android-developers.googleblog.com/2022/11/keeping-google-play-safe.html" target="_blank">Keeping Google Play Safe with New Features and Programs</a>
 
 ### 隐私
 
@@ -45,10 +53,6 @@ categories:
 - <a href="https://www.facebook.com/about/privacy/update/printable/" target="_blank">Facebook</a>
 - <a href="https://unity.com/legal/privacy-policy" target="_blank">Unity Ads</a>
 - <a href="https://www.applovin.com/privacy/" target="_blank">AppLovin</a>
-
-## 常看常新（重要）
-
-<a href="https://android-developers.googleblog.com/2022/11/keeping-google-play-safe.html" target="_blank">Keeping Google Play Safe with New Features and Programs</a>
 
 ### 个性化广告
 
@@ -99,7 +103,17 @@ Helping users comply with the Lei Geral de Proteção de Dados (LGPD)
 
 ## 应对措施
 
+根据应用的受众设置来确定：
+1. 如果受众包含儿童，则必须遵守 COPPA, 即**必须禁止收集device identifiers**；
+2. 如果受众不包含儿童，则
+   
 中心思想：禁用device identifiers，具体指将device identifiers共享给bidders，只能对用户展示非个性化广告；
+
+### Google长远规划
+
+<a href="https://privacysandbox.com/intl/en_us/" target="_blank">Privacy Sandbox技术</a>
+
+## 受众包含儿童的应对措施
 
 ### 一劳永逸的方法
 
@@ -112,11 +126,7 @@ Helping users comply with the Lei Geral de Proteção de Dados (LGPD)
  tools:node="remove"/>
 ```
 
-### Google长远规划
-
-<a href="https://privacysandbox.com/intl/en_us/" target="_blank">Privacy Sandbox技术</a>
-
-### SDK层面声明
+### 逐个SDK声明
 
 #### AdMob SDK
 
