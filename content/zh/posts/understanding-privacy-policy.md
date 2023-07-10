@@ -18,13 +18,9 @@ categories:
 
 ## 背景信息
 
-- 业务背景
-  - 移动应用/游戏出海业务
-  - 广告变现角度（开发者角度）
-  - GP包
-- 主要内容
-  - 隐私政策对广告变现的影响
-  - 上架GP包的最佳做法
+- 移动应用/游戏出海业务
+- 广告变现角度（开发者角度）
+- GP包
 
 ## 结论
 
@@ -34,7 +30,7 @@ categories:
    - 对于网站: `cookies`
 2. 隐私政策的核心思想：
    - **`收集隐私数据 = 收集用户身份标识信息 = 针对非匿名用户展示个性化广告`**；
-   - 💡保护隐私和向用户展示非个性化广告是不冲突的，因此此时用户是匿名的；
+   - 💡保护隐私和向用户展示非个性化广告是不冲突的，因为此时用户是匿名的；
 3. 四大隐私政策：
    - 如果受众包含儿童，则必须遵守《儿童在线隐私保护法》(COPPA)；
    - 如果受众包含美国加州，则必须遵守《加利福尼亚隐私权法案》(CPRA)；
@@ -49,7 +45,7 @@ categories:
 
 ### 隐私
 
-隐私在不同政策（国家）法律/平台下的定义（核心是device identifiers、cookies）
+隐私在不同政策（国家）法律/平台下的定义：
 - <a href="https://support.google.com/admob/answer/7686480?hl=en" target="_blank">"Personally Identifiable Information" (PII)</a>
 - <a href="https://www.google.com/policies/privacy/" target="_blank">Google Play Services</a>
 - <a href="https://support.google.com/admob/answer/6128543/" target="_blank">AdMob</a>
@@ -72,19 +68,18 @@ categories:
 2. 会使用device identifiers、cookies，但是不能用于个性化广告，仅可用于频次控制、反作弊等；
 3. AdMob定义的：<a href="https://support.google.com/admob/answer/7676680?hl=en" target="_blank">Non-personalized ads (NPA)</a>
 
-## 应对措施
+### 谷歌儿童政策
 
-根据应用的受众设置来确定：
-1. 如果受众包含儿童，则必须遵守 COPPA, 即**必须禁止收集device identifiers**；
-2. 如果受众不包含儿童，则
-   
+> https://support.google.com/googleplay/android-developer/answer/11043825?hl=en 
+> Apps that target both children and older audiences must not transmit AAID, SIM serial, build serial, BSSID, MAC, SSID, IMEI and/or IMSI from children or users of unknown age.
+
+## 最佳做法
+  
 中心思想：禁用device identifiers，具体指将device identifiers共享给bidders，只能对用户展示非个性化广告；
 
 ### Google长远规划
 
 <a href="https://privacysandbox.com/intl/en_us/" target="_blank">Privacy Sandbox技术</a>
-
-## 受众包含儿童的应对措施
 
 ### 一劳永逸的方法
 
@@ -120,9 +115,6 @@ RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
     .build();
 MobileAds.setRequestConfiguration(requestConfiguration);
 ```
-
-> https://support.google.com/googleplay/android-developer/answer/11043825?hl=en 
-> Apps that target both children and older audiences must not transmit AAID, SIM serial, build serial, BSSID, MAC, SSID, IMEI and/or IMSI from children or users of unknown age.
 
 #### Facebook SDK
 
@@ -190,10 +182,6 @@ import com.vungle.warren.Vungle;
 Vungle.updateConsentStatus(Vungle.Consent.OPTED_IN, "1.0.0");
 Vungle.updateCCPAStatus(Vungle.Consent.OPTED_IN);
 ```
-
-#### Pangle SDK
-
-**不属于**支持儿童政策的SDK列表，跳过；
 
 ## 附：四大隐私政策
 
