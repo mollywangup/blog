@@ -10,8 +10,9 @@ tocPosition: inner
 tags:
 - Invalid activity
 - Monetization
+- AdMob
 categories:
-- 
+- Policy
 ---
 
 ## 无效活动

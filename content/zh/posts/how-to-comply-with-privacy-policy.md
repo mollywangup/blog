@@ -12,7 +12,7 @@ tags:
 - AdMob
 - GP
 categories:
-- Privacy policy
+- Policy
 - SDK
 ---
 
