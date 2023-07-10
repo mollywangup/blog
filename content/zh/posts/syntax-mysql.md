@@ -18,7 +18,6 @@ categories:
 ### 首次仅登录
 
 ```shell
-# 首次登录
 mysql -uroot
 ```
 
@@ -211,16 +210,16 @@ UPDATE `callback` SET `app_id` = (SELECT offer.app_id FROM offer WHERE callback.
 
 ### 备份数据库
 
-#### 备份
+- 备份
 
 ```sql
 mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /path/xxx.sql
 ```
 
-#### 恢复
+- 恢复
 ```sql
-# 如果是.zip格式需先解压，解压后后缀为.sql
-# 恢复整个数据库
+-- 如果是.zip格式需先解压，解压后后缀为.sql
+-- 恢复整个数据库
 mysql -uroot -p<password> <database_name> < /path/xxx.sql
 
 ```
