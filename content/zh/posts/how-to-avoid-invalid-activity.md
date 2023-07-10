@@ -57,9 +57,11 @@ categories:
 植入指南：https://support.google.com/admob/answer/6329638?hl=en
 
 1. 需手动添加广告标识（Ad Attribution），即下图中的黄色badge：
-    <img src='/images/posts/ad-attribution-badge.png' alt='Ad Attribution badge'>
+
+<img src='/images/posts/ad-attribution-badge.png' alt='Ad Attribution badge'>
 
 2. 广告背景必须不可点击：
+   
     > 广告背景必须是不可点击的（即不含可供点击的“空白区域”）。如果您将图片要素用作广告背景，则该图片必须是不可点击的。
 
     <img src='/images/posts/ad-background-unclickable.png' alt='Ad background unclickable'>
