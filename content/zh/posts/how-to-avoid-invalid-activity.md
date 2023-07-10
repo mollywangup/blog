@@ -23,11 +23,11 @@ categories:
     可理解为：广告点击表现异常时，会被AdMob（各个广告平台大同小异）判定为无效活动。且无效活动不会产生收益，已产生的收益也会被收回；
     > 所有可能会虚增广告客户费用或发布商收入的点击或展示都属于无效流量。这其中包括蓄意制造的欺诈性流量，也包括误点击。 
 2. 被判定为无效活动的后果：
-   - 轻则限制广告填充，即在广告请求环节返回`ERROR_CODE_NO_FILL`；
+   - **轻则限制广告填充**，即在广告请求环节返回`ERROR_CODE_NO_FILL`；
 {{< expand "ERROR_CODE_NO_FILL" >}}
 The ad request was successful, but no ad was returned due to lack of ad inventory.
 {{< /expand >}}
-   - 重则封变现账户。如反面教材Unity Ads；
+   - **重则封变现账户**；
   
 ### 如何避免无效活动
 
@@ -51,6 +51,14 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 结论：**添加测试设备就安全**；
 
+<img src='use-test-device.png' alt='Use test device'>
+
+| 是否使用测试广告单元ID&nbsp;&nbsp;&nbsp; | 是否添加测试设备&nbsp;&nbsp;&nbsp; | 安全性评估&nbsp;&nbsp;&nbsp; | 建议程度 | 测试机的广告效果 |
+| ---------- | --------- | ----------------- | ---------- | ---------- |
+| *yes* | yes | 最安全 | 强烈建议 |  |
+| no | yes | 100%安全 | 建议 |  |
+| yes | no | 不太安全 | 不建议 |  |
+| no | no | 不安全 | 禁止 |  |
 
 ### 建议做法二：遵守广告格式植入指南
 
