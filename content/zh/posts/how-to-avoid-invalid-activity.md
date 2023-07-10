@@ -51,7 +51,7 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 结论：**添加测试设备就安全**；
 
-<img src='use-test-device.png' alt='Use test device'>
+<img src='/images/posts/use-test-device.png' alt='Use test device'>
 
 | 是否使用测试广告单元ID&nbsp;&nbsp;&nbsp; | 是否添加测试设备&nbsp;&nbsp;&nbsp; | 安全性评估&nbsp;&nbsp;&nbsp; | 建议程度 | 测试机的广告效果 |
 | ---------- | --------- | ----------------- | ---------- | ---------- |
