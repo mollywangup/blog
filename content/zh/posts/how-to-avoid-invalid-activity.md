@@ -42,8 +42,8 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
   
 #### 参考别人的经验
 
-1. 来自呼伟：https://mp.weixin.qq.com/s/GlQqIXEX2afZoDjgIUuX3w
-2. 来自AdMob官方案例分享：https://mp.weixin.qq.com/s/mKDoqlt4hwGLdfZKkxREgA
+1. 来自呼伟: https://mp.weixin.qq.com/s/GlQqIXEX2afZoDjgIUuX3w
+2. 来自AdMob官方案例分享: https://mp.weixin.qq.com/s/mKDoqlt4hwGLdfZKkxREgA
 
 ## 如何风控
 
@@ -62,7 +62,7 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 #### 原生广告（Native Advanced）
 
-植入指南：https://support.google.com/admob/answer/6329638?hl=en
+植入指南: https://support.google.com/admob/answer/6329638?hl=en
 
 1. 需手动添加广告标识（Ad Attribution），即下图中的黄色badge：
 
@@ -76,7 +76,7 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 #### 插屏广告（Interstitial）
 
-植入指南：https://support.google.com/admob/answer/6066980?hl=zh-Hans
+植入指南: https://support.google.com/admob/answer/6066980?hl=zh-Hans
 
 1. 插屏广告展示前后必须是不同的页面，即如 A页面 -> 插屏广告 -> B页面：
 
@@ -89,7 +89,7 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 #### 开屏广告（App Open）
 
-植入指南：https://support.google.com/admob/answer/9341964?hl=zh-Hans
+植入指南: https://support.google.com/admob/answer/9341964?hl=zh-Hans
 1. 合规做法：
     启动页 -> 开屏广告（展示在启动页动画上） -> 主界面
 
