@@ -25,43 +25,45 @@ mysql -uroot
 ### 首次登录并设置密码
 
 ```shell
-mysqladmin -u root -p password <Password>
+mysqladmin -u root -p password <password>
 ```
 
 ### 设置/修改密码
 
 ```sql
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <Password>;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <password>;
 ```
 
-### 数据库登录
+### 数据库连接
 
 #### 普通登录
 
 ```shell
 mysql -u root  -p
-mysql -h {Host} -P {Port} -u {UserName} -p 
+mysql -h <host> -P <port> -u <username> -p 
 ```
 
 #### SSH登录
 
+和普通登录一个道理，只是需要提前登录SSH;
+
 ```shell
-ssh ec2-user@ec2-18-196-30-101.eu-central-1.compute.amazonaws.com
-mysql -h tc-ff-prod-rds-slave.cn2n4ksfkf1t.eu-central-1.rds.amazonaws.com -u wangli -p
+ssh <ssh_user>@<ssh_host>
+mysql -h <host> -u <username> -p
 ```
 
-#### Python连接
+#### URI连接
 
-```python
+```
+mysql://<username>:<password>@<host>:<port>/<database_name>
 ```
 
-## 用户和权限管理
+## 权限管理
 
 ### 新增用户
 
-`其中'wangli'@'%'表示可连远程`
 ```sql
-CREATE USER 'wangli'@'%' IDENTIFIED WITH mysql_native_password BY 'jywlbj';
+CREATE USER 'wangli'@'%' IDENTIFIED WITH mysql_native_password BY '12345678';
 ```
 
 ### 查看权限
@@ -83,7 +85,7 @@ REVOKE ALL PRIVILEGES ON *.* FROM 'wangli'@'%';
 FLUSH PRIVILEGES;
 
 # 授权指定数据库
-GRANT ALL PRIVILEGES ON fengche.* TO 'admin'@'%';
+GRANT ALL PRIVILEGES ON <database_name>.* TO 'admin'@'%';
 FLUSH PRIVILEGES;
 ```
 
@@ -92,12 +94,12 @@ FLUSH PRIVILEGES;
 ### 创建数据库
 
 ```sql
-CREATE DATABASE <DBName>;
+CREATE DATABASE <database_name>;
 ```
 
 ### 删除数据库
 ```sql
-DROP DATABASE <DBName>;
+DROP DATABASE <database_name>;
 ```
 
 ### 显示数据库
@@ -107,7 +109,7 @@ SHOW DATABASES;
 
 ### 切换数据库
 ```sql
-USE <DBName>;
+USE <database_name>;
 ```
 
 ## 数据表操作
@@ -142,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `mytable `(
 ### 删除数据表
 
 ```sql
-DROP TABLE <TableName>;
+DROP TABLE <table_name>;
 ```
 
 ### 显示数据表
@@ -156,7 +158,7 @@ SHOW TABLES;
 #### DELETE语句
 
 ```sql
-DELETE FROM `sources_adplatform_temp` WHERE `date` BETWEEN '2021-02-01' AND '2021-02-01';
+DELETE FROM <table_name> WHERE `date` BETWEEN '2021-02-01' AND '2021-02-01';
 ```
 
 #### INSERT语句
@@ -169,10 +171,10 @@ INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)
 
 ```sql
 -- 新增字段
-ALTER TABLE `sources_adjust` ADD  `revenue_events_adjust` INT DEFAULT 0;
+ALTER TABLE <table_name> ADD `new_int_col` INT DEFAULT 0;
 
 -- 修改字段定义
-ALTER TABLE `sources_adplatform_temp` MODIFY `optimizer` VARCHAR(20);
+ALTER TABLE <table_name> MODIFY `optimizer` VARCHAR(20);
 
 -- 删除UNIQUE KEY后并新增
 SHOW KEYS FROM `internal_revenue`;
@@ -206,6 +208,47 @@ UPDATE `callback` SET `app_id` = (SELECT offer.app_id FROM offer WHERE callback.
 ```
 
 ## 其他
+
+### 备份数据库
+
+#### 备份
+
+```sql
+mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /path/xxx.sql
+```
+
+#### 恢复
+```sql
+# 如果是.zip格式需先解压，解压后后缀为.sql
+# 恢复整个数据库
+mysql -uroot -p<password> <database_name> < /path/xxx.sql
+
+```
+
+### 报错解决
+
+#### sudo: netstat: command not found
+
+解决方案: https://www.linuxandubuntu.com/home/fixed-bash-netstat-command-not-found-error
+
+```shell
+# Ubuntu
+sudo apt install net-tools
+```
+
+### Linux MySQL 配置路径
+
+```shell
+cat /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+### 服务重启
+
+```shell
+service mysql restart
+```
+
+### 其他查看
 
 #### 查看Host
 ```sql
