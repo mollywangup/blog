@@ -26,11 +26,11 @@ categories:
 ## 结论
 
 1. 隐私范畴：
-  不同国家/律法的定义有差异，但可以近似为**用户身份标识信息**，
+  不同国家/律法的定义有差异，但可以近似为**用户身份识别信息**，
    - 对于移动应用：`device identifiers`
    - 对于网站: `cookies`
 2. 隐私政策的核心思想：
-   - **`收集隐私数据 = 收集用户身份标识信息 = 针对非匿名用户展示个性化广告`**；
+   - **`收集隐私数据 = 收集用户身份识别信息 = 针对非匿名用户展示个性化广告`**；
    - 💡保护隐私和向用户展示非个性化广告是不冲突的，因为此时用户是匿名的；
 3. 四大隐私政策：
    - 如果受众包含儿童，则必须遵守《儿童在线隐私保护法》(COPPA)；
@@ -40,7 +40,7 @@ categories:
 
 ## 概念定义
 
-### 常看常新（重要）
+### 常看常新
 
 <a href="https://android-developers.googleblog.com/2022/11/keeping-google-play-safe.html" target="_blank">Keeping Google Play Safe with New Features and Programs</a>
 
@@ -60,7 +60,7 @@ categories:
 
 1. 基于用户兴趣，来对用户进行个性化广告展示；
 2. 使用device identifiers、cookies，用于个性化广告；
-3. Google定义的：<a href="https://support.google.com/admob/answer/7676680?hl=en" target="_blank">Personalized ads</a>
+3. AdMob定义的：<a href="https://support.google.com/admob/answer/7676680?hl=en" target="_blank">Personalized ads</a>
 4. IAB定义的：
 
 ### 非个性化广告 (NPA)
@@ -172,6 +172,7 @@ Vungle.updateCCPAStatus(Vungle.Consent.OPTED_IN);
 ## 附：四大隐私政策
 
 ### COPPA
+
 The Children’s Online Privacy Protection Act (COPPA)
 
 针对受众群体中包含儿童/未成年用户的App（也称为Family Policy）
