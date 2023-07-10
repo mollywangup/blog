@@ -1,5 +1,5 @@
 ---
-title: "广告风控指南之无效流量"
+title: "广告风控指南：无效流量"
 date: 2022-10-18T09:43:43Z
 draft: false
 description: Invalid activity.
