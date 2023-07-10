@@ -20,8 +20,8 @@ categories:
 
 ## Facebook Ads
  
-官方文档: https://developers.facebook.com/docs/marketing-apis
-目标: 通过Facebook Ads API接口，实现请求所有Facebook广告账户的数据；
+- 官方文档: https://developers.facebook.com/docs/marketing-apis
+- 目标: 通过Facebook Ads API接口，实现请求所有Facebook广告账户的数据；
 
 ### 申请API接口的方法
 
@@ -107,19 +107,19 @@ businesses_manager_tentacles:
 
 ## Apple Search Ads
 
-官方文档: https://developer.apple.com/documentation/apple_search_ads
+- 官方文档: https://developer.apple.com/documentation/apple_search_ads
 
 
 ## Adjust
 
-官方文档: https://help.adjust.com/zh/article/kpi-service
+- 官方文档: https://help.adjust.com/zh/article/kpi-service
 
 
 
 ## AdMob
 
-官方文档: https://developers.google.com/admob/api/v1/report-metrics-dimensions
+- 官方文档: https://developers.google.com/admob/api/v1/report-metrics-dimensions
 
 ## GA4
 
-官方文档: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema
+- 官方文档: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema
