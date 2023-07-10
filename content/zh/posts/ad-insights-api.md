@@ -19,10 +19,9 @@ categories:
 ---
 
 ## Facebook Ads
-
-### 
-官方文档：https://developers.facebook.com/docs/marketing-apis
-目标：通过Facebook Ads API接口，实现请求所有Facebook广告账户的数据；
+ 
+官方文档: https://developers.facebook.com/docs/marketing-apis
+目标: 通过Facebook Ads API接口，实现请求所有Facebook广告账户的数据；
 
 ### 申请API接口的方法
 
@@ -70,6 +69,32 @@ businesses_manager_tentacles:
    - 替代的方案是什么？人工导入格式化的.csv文件上传至指定接口。
 
 ### 最终的指标字典
+
+| 编号  | 字段 | 定义 | 数据类型 | 数据来源 | API字段 |
+| --- | --- | --- | --- | --- | --- | 
+| 1 | app_name | App标识，与数据库的订单表取齐，全部小写 | varchar(15) | 通过AdSet层级的AdPromotedObject对象的object_store_url或者application_id间接获得 | 具体方法见fb_campaign_promoted_object.py |
+| 2 | os_name | 设备类型，如android/ios | varchar(7)  | 通过AdSet层级的AdPromotedObject对象的object_store_url或者application_id间接获得 | 具体方法见fb_campaign_promoted_object.py |
+| 3 | store_type | 应用商店，如google/itunes/huawei/apkpure等，不与目前的init_market_code取齐 | varchar(10) | 通过AdSet层级的AdPromotedObject对象的object_store_url或者application_id间接获得 | 具体方法见fb_campaign_promoted_object.py |
+| 4 | media_source | 流量来源，如facebook_ads, google_ads, organic等 | varchar(25) | 通过请求时的access_token确定 | / |
+| 5 | account_id | 广告账户ID. facebook_ads如act_12345678901, google_ads如act_123-456-7890, apple_search_ads如orgid_2006298 | varchar(25) | API | account_id |
+| 6 | account_name | 广告账户名称 | varchar(50) | API | account_name |
+| 7 | campaign_id | 广告推广计划ID | varchar(20) | API | 'level': 'campaign', campaign_id |
+| 8 | campaign_name | 广告推广计划名称 | varchar(255) | API | 'level': 'campaign', campaign_name |
+| 9 | date | 日期 | date | API | 由date_start + date_stop + time_increment确定，理论上我们应该是分天请求 |
+| 10 | country | 国家，ISO 3166标准 | varchar(7) | API | 'breakdowns': ['country'] |
+| 11 | impressions | 广告展示量 | int | API | impressions |
+| 12 | clicks | 广告点击量 | int | API | clicks |
+| 13 | install_adplatform | 广告安装量 | int | API | actions, 这个字段返回一个json格式的，需要使用'filtering'，具体方法见fb_campaign_insights.py |
+| 14 | cost | 广告花费 | float | API | spend |
+| 15 | purchase_value | 广告带来的收入 | float | API | actions, 这个字段返回一个json格式的，需要使用'filtering'，具体方法见fb_campaign_insights.py |
+| 16 | purchase | 广告带来的收入对应的购买的笔数（付费次数） | int | API | actions, 这个字段返回一个json格式的，需要使用'filtering'，具体方法见fb_campaign_insights.py |
+| 17 | purchase_unique | 广告带来的收入对应的购买的人数（付费人数） | int | API | actions, 这个字段返回一个json格式的，需要使用'filtering'，具体方法见fb_campaign_insights.py |
+| 18 | optimizer | 优化师，如：wy_汪悦 | varchar(20) | 通过正则表达式确定，具体方法见find.py | / |
+| 19 | data_source | 所属BM/MCC | varchar(25) | 通过请求时的access_token确定 | / |
+| 20 | currency | 货币单位，目前全部是USD | varchar(3) | API | account_currency |
+| 21 | is_organic | 只有两种取值：organic和non-organic | varchar(12) | 通过maps.yaml中的映射关系确定 |  |
+| 22 | geographic | 国家的全称 | varchar(50) | 临时的字段，为了配合google_ads的本地.csv性质的数据源 | / |
+| 23 | attribution_setting | 归因设置，如：1d_click | varchar(25) | API | attribution_setting  |
 
 ### 参考文档
 
