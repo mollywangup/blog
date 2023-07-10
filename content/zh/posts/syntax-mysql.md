@@ -9,6 +9,7 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - MySQL
+- OLTP
 categories:
 - DB
 ---
@@ -47,7 +48,7 @@ mysql -h <host> -P <port> -u <username> -p
 和普通登录一个道理，只是需要提前登录SSH;
 
 ```shell
-ssh <ssh_user>@<ssh_host>
+ssh <sshuser>@<sshhost>
 mysql -h <host> -u <username> -p
 ```
 
@@ -60,6 +61,8 @@ mysql://<username>:<password>@<host>:<port>/<database_name>
 ## 权限管理
 
 ### 新增用户
+
+以下以用户`wangli`为例：
 
 ```sql
 CREATE USER 'wangli'@'%' IDENTIFIED WITH mysql_native_password BY '12345678';
@@ -176,47 +179,43 @@ ALTER TABLE <table_name> ADD `new_int_col` INT DEFAULT 0;
 ALTER TABLE <table_name> MODIFY `optimizer` VARCHAR(20);
 
 -- 删除UNIQUE KEY后并新增
-SHOW KEYS FROM `internal_revenue`;
-ALTER TABLE `internal_revenue` DROP INDEX `app_name`;
-ALTER TABLE `internal_revenue` ADD UNIQUE KEY (`app_name`, `os_name`, `store_type`,  `channel_id`, `channel`, `login_type_code`,  `login_type`, `date_paying`, `country`,  `timezone`);
+SHOW KEYS FROM <table_name>;
+ALTER TABLE <table_name> DROP INDEX `app_name`;
+ALTER TABLE <table_name> ADD UNIQUE KEY (`app_name`, `os_name`, `store_type`,  `channel_id`, `channel`, `login_type_code`,  `login_type`, `date_paying`, `country`,  `timezone`);
 
 -- 删除字段
-ALTER TABLE internal_revenue_cohort DROP days_after_register;
+ALTER TABLE <table_name> DROP `days_after_register`;
 
 -- 新增并来源于已有字段的处理
-ALTER TABLE `evest_postback_install3` ADD `event_time_hour` INT;
-UPDATE `evest_postback_install3` SET event_time_hour = (SELECT HOUR(`Event Time`));
-
-ALTER TABLE `bq_full` ADD `minute_x` INT NOT NULL DEFAULT -777;
-UPDATE `bq_full` SET minute_x = (SELECT TIMESTAMPDIFF(MINUTE, first_open_time, event_timestamp));
+ALTER TABLE <table_name> ADD `event_time_hour` INT;
 
 -- 日期处理
-ALTER TABLE `callback` ADD `update_time_utc` DATETIME;
-UPDATE `callback` SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERVAL -8 hour));
+ALTER TABLE <table_name> ADD `update_time_utc` DATETIME;
 ```
 
 #### UPDATE语句
 
 ```sql
-UPDATE `bq_full` SET minute_x = (SELECT TIMESTAMPDIFF(MINUTE, first_open_time, event_timestamp));
-UPDATE `offer` SET `pid_int` = (SELECT REGEXP_SUBSTR(`ClickUrl`,'pid=.*_int'));
-UPDATE `offer` SET `pid_int` = (SELECT REGEXP_REPLACE(`pid_int`, 'pid=', ''));
-UPDATE `callback` SET `offer_id` = (SELECT sendtask.OfferID FROM sendtask WHERE callback.task_id=sendtask.ID);
-UPDATE `offer` SET `af_prt` = (SELECT REGEXP_SUBSTR(`ClickUrl`, '\\?af_prt=[\w\sa-zA-Z0-9_]*&|&af_prt=[\w\sa-zA-Z0-9_]*&|&af_prt=.*'));
-UPDATE `callback` SET `app_id` = (SELECT offer.app_id FROM offer WHERE callback.offer_id=offer.ID);
+UPDATE <table_name> SET event_time_hour = (SELECT HOUR(`Event Time`));
+UPDATE <table_name> SET minute_x = (SELECT TIMESTAMPDIFF(MINUTE, first_open_time, event_timestamp));
+UPDATE <table_name> SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERVAL -8 hour));
 ```
+
+## 常用查询
+
+
 
 ## 其他
 
 ### 备份数据库
 
-备份
+#### 备份
 
 ```sql
 mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /path/xxx.sql
 ```
 
-恢复
+#### 恢复
 
 ```sql
 -- 如果是.zip格式需先解压，解压后后缀为.sql
