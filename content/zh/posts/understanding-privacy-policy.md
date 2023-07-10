@@ -2,7 +2,7 @@
 title: "理解隐私政策"
 date: 2022-09-29T07:14:58Z
 draft: false
-description: 
+description: COPPA/CPRA/GDPR/LGPD
 hideToc: false
 enableToc: true
 enableTocContent: false
