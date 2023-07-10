@@ -20,6 +20,7 @@ categories:
 
 - 移动应用/游戏出海业务
 - 广告变现角度（开发者角度）
+- AdMob作为聚合平台
 - GP包
 
 ## 结论
@@ -75,7 +76,7 @@ categories:
 
 ## 最佳做法
   
-中心思想：禁用device identifiers，具体指将device identifiers共享给bidders，只能对用户展示非个性化广告；
+总结起来：设置年龄tag、移除广告ID权限；
 
 ### Google长远规划
 
@@ -96,24 +97,18 @@ categories:
 
 #### AdMob SDK
 
+说明：COPPA 和 GDPR 的tag二选一即可；
+
 <a href="https://developers.google.com/admob/android/targeting#child-directed_setting" target="_blank">Child-directed setting (COPPA)</a>
 <a href="https://developers.google.com/admob/android/targeting#users_under_the_age_of_consent" target="_blank">Users under the age of consent (GDPR)</a>
 <a href="https://developers.google.com/admob/android/ccpa" target="_blank">Restricted Data Processing (CCPA)</a>
 
 ```Java
 // COPPA
-RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
-    .toBuilder()
-    .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
-    .build();
-MobileAds.setRequestConfiguration(requestConfiguration);
+.setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
 
 // GDPR
-RequestConfiguration requestConfiguration = MobileAds.getRequestConfiguration()
-    .toBuilder()
-    .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE)
-    .build();
-MobileAds.setRequestConfiguration(requestConfiguration);
+.setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_TRUE)
 ```
 
 #### Facebook SDK
@@ -144,9 +139,6 @@ MobileAds.setRequestConfiguration(requestConfiguration);
 <a href="https://developers.google.com/admob/android/mediation/applovin#ccpa" target="_blank">setDoNotSell (CCPA)</a>
 
 ```Java
-import com.applovin.sdk.AppLovinPrivacySettings;
-// ...
-
 AppLovinPrivacySettings.setIsAgeRestrictedUser(true, context);
 AppLovinPrivacySettings.setHasUserConsent(true, context);
 AppLovinPrivacySettings.setDoNotSell(true, context);
@@ -158,9 +150,6 @@ AppLovinPrivacySettings.setDoNotSell(true, context);
 <a href="https://developers.google.com/admob/android/mediation/unity#ccpa" target="_blank">CCPA</a>
 
 ```Java
-import com.unity3d.ads.metadata.MetaData;
-// ...
-
 MetaData gdprMetaData = new MetaData(this);
 gdprMetaData.set("gdpr.consent", true);
 gdprMetaData.commit();
@@ -176,9 +165,6 @@ ccpaMetaData.commit();
 <a href="https://developers.google.com/admob/android/mediation/vungle#ccpa" target="_blank">CCPA</a>
 
 ```Java
-import com.vungle.warren.Vungle;
-// ...
-
 Vungle.updateConsentStatus(Vungle.Consent.OPTED_IN, "1.0.0");
 Vungle.updateCCPAStatus(Vungle.Consent.OPTED_IN);
 ```
@@ -202,9 +188,9 @@ EU user consent policy (GDPR)
 
 1. Tools to help publishers comply with the GDPR: https://support.google.com/admob/answer/7666366?hl=en
 2. EU user consent policy: https://www.google.com/about/company/user-consent-policy/
-3. Helping publishers and advertisers with consent：https://www.cookiechoices.org/intl/en/
+3. Helping publishers and advertisers with consent: https://www.cookiechoices.org/intl/en/
 4. IAB CMP list：https://iabeurope.eu/cmp-list/
-5. IAB Europe Transparency & Consent Framework Policies：https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/?rd=1#Appendix_A_Purposes_and_Features_Definitions 
+5. IAB Europe Transparency & Consent Framework Policies: https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/?rd=1#Appendix_A_Purposes_and_Features_Definitions 
 
 ### CCPA
 California Consumer Privacy Act (CCPA)
@@ -213,12 +199,13 @@ California Consumer Privacy Act (CCPA)
 
 Helping publishers comply with the California Consumer Privacy Act (CCPA): https://support.google.com/admob/answer/9561022?hl=en
 
-### LGPD
-Lei Geral de Proteção de Dados (LGPD)
-
-- 针对巴西的用户
-Helping users comply with the Lei Geral de Proteção de Dados (LGPD): https://support.google.com/admob/answer/9930897?hl=en
-
 {{< alert theme="info" >}}
 The California Privacy Rights Act (CPRA) is a data privacy law that amends and expands upon the CCPA. The law takes effect on January 1, 2023.
 {{< /alert >}}
+
+### LGPD
+Lei Geral de Proteção de Dados (LGPD)
+
+针对巴西的用户
+
+Helping users comply with the Lei Geral de Proteção de Dados (LGPD): https://support.google.com/admob/answer/9930897?hl=en
