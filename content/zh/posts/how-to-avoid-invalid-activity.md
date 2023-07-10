@@ -51,8 +51,6 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 结论：**添加测试设备就安全**；
 
-<img src='/images/posts/use-test-device.png' alt='Use test device'>
-
 | 是否使用测试广告单元ID&nbsp;&nbsp;&nbsp; | 是否添加测试设备&nbsp;&nbsp;&nbsp; | 安全性评估&nbsp;&nbsp;&nbsp; | 建议程度 | 测试机的广告效果 |
 | ---------- | --------- | ----------------- | ---------- | ---------- |
 | *yes* | yes | 最安全 | 强烈建议 |  |
@@ -68,7 +66,7 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 1. 需手动添加广告标识（Ad Attribution），即下图中的黄色badge：
 
-<img src='/images/posts/ad-attribution-badge.png' alt='Ad Attribution badge'>
+    <img src='/images/posts/ad-attribution-badge.png' alt='Ad Attribution badge'>
 
 2. 广告背景必须不可点击：
    
@@ -81,6 +79,7 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 植入指南：https://support.google.com/admob/answer/6066980?hl=zh-Hans
 
 1. 插屏广告展示前后必须是不同的页面，即如 A页面 -> 插屏广告 -> B页面：
+
     <img src='/images/posts/interstitial-y.png' alt='best practice for Interstitial ad'>
 
 2. 当进行插屏广告的展示时，需要确保App暂停跑接下来的流程；
@@ -92,15 +91,18 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 植入指南：https://support.google.com/admob/answer/9341964?hl=zh-Hans
 1. 合规做法：
-  启动页 -> 开屏广告（展示在启动页动画上） -> 主界面
+    启动页 -> 开屏广告（展示在启动页动画上） -> 主界面
+
     <img src='/images/posts/app-open-y.png' alt='best practice for App Open ad'>
 
 2. 违规做法：
-  - 启动页 -> 主界面 -> 开屏广告（展示在主界面上）
-  <img src='/images/posts/app-open-n1.png' alt='not approved for App Open ad1'>
+   - 启动页 -> 主界面 -> 开屏广告（展示在主界面上）
 
-  - 启动页 -> 开屏广告（展示在空白/未知内容上） -> 主界面
-   <img src='/images/posts/app-open-n2.png' alt='not approved for App Open ad2'>
+    <img src='/images/posts/app-open-n1.png' alt='not approved for App Open ad1'>
+
+   - 启动页 -> 开屏广告（展示在空白/未知内容上） -> 主界面
+    
+    <img src='/images/posts/app-open-n2.png' alt='not approved for App Open ad2'>
 
 
 ### 建议做法三：基于CTR的优化
