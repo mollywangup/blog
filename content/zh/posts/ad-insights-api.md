@@ -2,7 +2,7 @@
 title: "数据抓取方法论"
 date: 2021-01-18T06:08:30Z
 draft: false
-description: 
+description: Facebook Ads/Google Ads/Apple Search Ads/Adjust/AdMob/GA4
 hideToc: false
 enableToc: true
 enableTocContent: false
