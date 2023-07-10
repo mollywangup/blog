@@ -24,7 +24,9 @@ categories:
     > 所有可能会虚增广告客户费用或发布商收入的点击或展示都属于无效流量。这其中包括蓄意制造的欺诈性流量，也包括误点击。 
 2. 被判定为无效活动的后果：
    - 轻则限制广告填充，即在广告请求环节返回`ERROR_CODE_NO_FILL`；
-        > The ad request was successful, but no ad was returned due to lack of ad inventory.
+{{< expand "ERROR_CODE_NO_FILL" >}}
+The ad request was successful, but no ad was returned due to lack of ad inventory.
+{{< /expand >}}
    - 重则封变现账户。如反面教材Unity Ads；
   
 ### 如何避免无效活动
