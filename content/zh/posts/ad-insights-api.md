@@ -107,12 +107,19 @@ businesses_manager_tentacles:
 
 ## Apple Search Ads
 
+官方文档: https://developer.apple.com/documentation/apple_search_ads
+
 
 ## Adjust
+
+官方文档: https://help.adjust.com/zh/article/kpi-service
+
 
 
 ## AdMob
 
+官方文档: https://developers.google.com/admob/api/v1/report-metrics-dimensions
 
 ## GA4
 
+官方文档: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema
