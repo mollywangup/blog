@@ -1,5 +1,5 @@
 ---
-title: "理解广告隐私政策"
+title: "理解隐私政策"
 date: 2022-09-29T07:14:58Z
 draft: false
 description: 
@@ -16,19 +16,26 @@ categories:
 - SDK
 ---
 
+## 背景信息
+
+- 业务背景
+  - 移动应用/游戏出海业务
+  - 广告变现角度（开发者角度）
+  - GP包
+- 主要内容
+  - 隐私政策对广告变现的影响
+  - 上架GP包的最佳做法
+
 ## 结论
 
 1. 隐私范畴：
-  不同国家/律法的定义有差异，但可以近似为 **可用于标识用户的信息**，
-   - 对于应用: `device identifiers`
+  不同国家/律法的定义有差异，但可以近似为**可用于标识用户的信息**，
+   - 对于应用：`device identifiers`
    - 对于网站: `cookies`
 2. 隐私政策的核心思想：
-   - 赋予用户保护隐私的选择权，用于自有选择选择：是否允许根据用户的device identifiers、cookies来对用户展示个性化广告；
-  根据用户的device identifiers、cookies来对用户展示个性化广告；
-   - 
-   - 如果受众包含儿童，则一律禁止收集隐私信息；
-   - 受众包含儿童的App需遵守儿童政策，即禁止收集device identifiers；
-   - 是否允许根据用户的device identifiers、cookies来对用户展示个性化广告；
+  由于用户的隐私信息，具有优化收入的用途（个性化广告 vs 非个性化广告），出于保护用户隐私信息的出发点，广告政策对开发者的约束如下：
+   - 如果受众包含儿童，则一律禁止展示个性化广告，具体应对措施指；
+   - 如果受众不包含儿童，则
    - 未经允许，不得收集并利用个人隐私信息，进行个性化广告（盈利行为）。注意，但是**可以**进行非个性化广告的
 1. 如何确定应该遵守哪些隐私政策：
    - 如果受众包含儿童，则必须遵守《儿童在线隐私保护法》(COPPA)；
@@ -66,40 +73,6 @@ categories:
 1. 基于当前的上下文信息，及粗略的地理位置估计，来对用户进行非个性化广告展示；
 2. 会使用device identifiers、cookies，但是不能用于个性化广告，仅可用于频次控制、反作弊等；
 3. AdMob定义的：<a href="https://support.google.com/admob/answer/7676680?hl=en" target="_blank">Non-personalized ads (NPA)</a>
-
-
-## 隐私政策（四大政策）
-
-### COPPA
-The Children’s Online Privacy Protection Act (COPPA)
-
-- 针对受众群体中包含儿童/未成年用户的App（也称为Family Policy）
-1. Tag an ad request from an app for child-directed treatment
-2. Comply with Google Play’s Families Policy using AdMob
-3. Set a maximum ad content rating
-4. https://www.ftc.gov/business-guidance/privacy-security/childrens-privacy
-
-### GDPR
-EU user consent policy (GDPR)
-
-- 针对欧盟、英国、瑞士的用户
-1. Tools to help publishers comply with the GDPR
-2. https://www.google.com/about/company/user-consent-policy/
-3. Helping publishers and advertisers with consent：https://www.cookiechoices.org/intl/en/
-4. IAB CMP list：https://iabeurope.eu/cmp-list/
-5. IAB Europe Transparency & Consent Framework Policies：https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/?rd=1#Appendix_A_Purposes_and_Features_Definitions 
-
-### CCPA
-California Consumer Privacy Act (CCPA)
-
-- 针对美国加利福尼亚洲的用户
-Helping publishers comply with the California Consumer Privacy Act (CCPA) 
-
-### LGPD
-Lei Geral de Proteção de Dados (LGPD)
-
-- 针对巴西的用户
-Helping users comply with the Lei Geral de Proteção de Dados (LGPD)
 
 ## 应对措施
 
@@ -224,16 +197,42 @@ Vungle.updateCCPAStatus(Vungle.Consent.OPTED_IN);
 
 **不属于**支持儿童政策的SDK列表，跳过；
 
+## 附：四大隐私政策
 
-### 政策本身
+### COPPA
+The Children’s Online Privacy Protection Act (COPPA)
 
+针对受众群体中包含儿童/未成年用户的App（也称为Family Policy）
 
+1. Tag an ad request from an app for child-directed treatment: https://support.google.com/admob/answer/6219315?hl=en
+2. Comply with Google Play’s Families Policy using AdMob: https://support.google.com/admob/answer/6223431?hl=en
+3. Set a maximum ad content rating: https://support.google.com/admob/answer/10478094?hl=en
+4. Complying with COPPA: Frequently Asked Questions: https://www.ftc.gov/business-guidance/resources/complying-coppa-frequently-asked-questions
 
-<a href="" target="_blank"></a>
-<a href="" target="_blank"></a>
-<a href="" target="_blank"></a>
+### GDPR
+EU user consent policy (GDPR)
 
+针对欧盟、英国、瑞士的用户
 
-		{{< alert theme="info" >}}
-		The California Privacy Rights Act (CPRA) is a data privacy law that amends and expands upon the CCPA. The law takes effect on January 1, 2023.
-		{{< /alert >}}
+1. Tools to help publishers comply with the GDPR: https://support.google.com/admob/answer/7666366?hl=en
+2. EU user consent policy: https://www.google.com/about/company/user-consent-policy/
+3. Helping publishers and advertisers with consent：https://www.cookiechoices.org/intl/en/
+4. IAB CMP list：https://iabeurope.eu/cmp-list/
+5. IAB Europe Transparency & Consent Framework Policies：https://iabeurope.eu/iab-europe-transparency-consent-framework-policies/?rd=1#Appendix_A_Purposes_and_Features_Definitions 
+
+### CCPA
+California Consumer Privacy Act (CCPA)
+
+针对美国加利福尼亚洲的用户
+
+Helping publishers comply with the California Consumer Privacy Act (CCPA): https://support.google.com/admob/answer/9561022?hl=en
+
+### LGPD
+Lei Geral de Proteção de Dados (LGPD)
+
+- 针对巴西的用户
+Helping users comply with the Lei Geral de Proteção de Dados (LGPD): https://support.google.com/admob/answer/9930897?hl=en
+
+{{< alert theme="info" >}}
+The California Privacy Rights Act (CPRA) is a data privacy law that amends and expands upon the CCPA. The law takes effect on January 1, 2023.
+{{< /alert >}}
