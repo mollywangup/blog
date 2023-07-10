@@ -23,7 +23,7 @@ categories:
 - 官方文档: https://developers.facebook.com/docs/marketing-apis
 - 目标: 通过Facebook Ads API接口，实现请求所有Facebook广告账户的数据；
 
-### 申请API接口的方法
+### 申请API接口
 
 #### 方法概述
 
@@ -53,7 +53,7 @@ businesses_manager_tentacles:
 		system_user_access_token: # 必填项；申请的最终的access_token
 ```
 
-### 请求原始数据的方法
+### 请求方法
 
 #### 方法概述
 
@@ -68,7 +68,7 @@ businesses_manager_tentacles:
    - 为什么需要考虑这个方案的存在性？因为Google Ads现在就没有申请到接口，Facebook Ads虽然现在两个BM都申请到了但存在BM被封进而接口失效的风险；
    - 替代的方案是什么？人工导入格式化的.csv文件上传至指定接口。
 
-### 最终的指标字典
+### 指标字典
 
 | 编号  | 字段 | 定义 | 数据类型 | 数据来源 | API字段 |
 | --- | --- | --- | --- | --- | --- | 
