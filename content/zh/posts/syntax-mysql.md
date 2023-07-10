@@ -15,63 +15,58 @@ categories:
 
 ## 初始化
 
-### 首次登录并设置密码
+### 首次仅登录
 
 ```shell
 # 首次登录
 mysql -uroot
 ```
 
-```sql
--- 设置密码
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <Password>;
-```
-
-### 设置密码
+### 首次登录并设置密码
 
 ```shell
 mysqladmin -u root -p password <Password>
 ```
 
-### 修改密码
+### 设置/修改密码
 
 ```sql
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <Password>;
 ```
 
-## 数据库登录
+### 数据库登录
 
-### 普通登录
+#### 普通登录
 
-```sh
+```shell
 mysql -u root  -p
 mysql -h {Host} -P {Port} -u {UserName} -p 
 ```
 
-### SSH登录
+#### SSH登录
 
-```bash
+```shell
 ssh ec2-user@ec2-18-196-30-101.eu-central-1.compute.amazonaws.com
 mysql -h tc-ff-prod-rds-slave.cn2n4ksfkf1t.eu-central-1.rds.amazonaws.com -u wangli -p
 ```
 
-### Python连接
+#### Python连接
 
 ```python
 ```
 
-## 用户及权限管理
+## 用户和权限管理
 
 ### 新增用户
 
 `其中'wangli'@'%'表示可连远程`
-```mysql
+```sql
 CREATE USER 'wangli'@'%' IDENTIFIED WITH mysql_native_password BY 'jywlbj';
 ```
 
 ### 查看权限
 
-```mysql
+```sql
 SHOW GRANTS FOR root@localhost;
 SHOW GRANTS FOR admin;
 ```
@@ -92,34 +87,27 @@ GRANT ALL PRIVILEGES ON fengche.* TO 'admin'@'%';
 FLUSH PRIVILEGES;
 ```
 
-### 查看用户
-
-```sql
-USE mysql;
-SELECT host, user, authentication_string, plugin FROM user;
-```
-
 ## 数据库操作
 
 ### 创建数据库
 
 ```sql
-create database chushou_vchat_tmp;
+CREATE DATABASE <DBName>;
 ```
 
 ### 删除数据库
 ```sql
-drop database chushou_vchat_tmp;
+DROP DATABASE <DBName>;
 ```
 
 ### 显示数据库
 ```sql
-show databases;
+SHOW DATABASES;
 ```
 
 ### 切换数据库
 ```sql
-use chushou_vchat_tmp;
+USE <DBName>;
 ```
 
 ## 数据表操作
@@ -128,10 +116,10 @@ use chushou_vchat_tmp;
 
 ```sql
 # 复制已有数据库表
-CREATE TABLE `evest_postback_install` AS (SELECT * from `evest_postback_install3`);
+CREATE TABLE `new_table` AS (SELECT * FROM `old_table`);
 
-# 直接创建数据库表: account_id_config
-CREATE TABLE IF NOT EXISTS `account_id_config `(
+# 直接创建数据库表: 
+CREATE TABLE IF NOT EXISTS `mytable `(
    `id` INT UNSIGNED AUTO_INCREMENT,
    `account_id` VARCHAR(25) NOT NULL COMMENT '广告账户ID',
    `account_name` VARCHAR(50),
@@ -154,13 +142,13 @@ CREATE TABLE IF NOT EXISTS `account_id_config `(
 ### 删除数据表
 
 ```sql
-drop table sources_adjust_tmp;
+DROP TABLE <TableName>;
 ```
 
 ### 显示数据表
 
 ```sql
-show tables;
+SHOW TABLES;
 ```
 
 ### 修改数据表
@@ -217,7 +205,7 @@ UPDATE `offer` SET `af_prt` = (SELECT REGEXP_SUBSTR(`ClickUrl`, '\\?af_prt=[\w\s
 UPDATE `callback` SET `app_id` = (SELECT offer.app_id FROM offer WHERE callback.offer_id=offer.ID);
 ```
 
-## 其他操作
+## 其他
 
 #### 查看Host
 ```sql
@@ -228,4 +216,11 @@ SELECT SUBSTRING_INDEX(host,':',1) AS ip , COUNT(*) FROM information_schema.proc
 
 ```sql
 SHOW VARIABLES WHERE Variable_name = 'port';
+```
+
+#### 查看用户
+
+```sql
+USE mysql;
+SELECT host, user, authentication_string, plugin FROM user;
 ```
