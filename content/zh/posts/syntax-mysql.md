@@ -43,14 +43,14 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <Password
 
 ### 普通登录
 
-```shell
+```sh
 mysql -u root  -p
 mysql -h {Host} -P {Port} -u {UserName} -p 
 ```
 
 ### SSH登录
 
-```shell
+```bash
 ssh ec2-user@ec2-18-196-30-101.eu-central-1.compute.amazonaws.com
 mysql -h tc-ff-prod-rds-slave.cn2n4ksfkf1t.eu-central-1.rds.amazonaws.com -u wangli -p
 ```
@@ -180,28 +180,28 @@ INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)
 #### ALTER语句
 
 ```sql
-# 新增字段
+-- 新增字段
 ALTER TABLE `sources_adjust` ADD  `revenue_events_adjust` INT DEFAULT 0;
 
-# 修改字段定义
+-- 修改字段定义
 ALTER TABLE `sources_adplatform_temp` MODIFY `optimizer` VARCHAR(20);
 
-# 删除UNIQUE KEY后并新增
+-- 删除UNIQUE KEY后并新增
 SHOW KEYS FROM `internal_revenue`;
 ALTER TABLE `internal_revenue` DROP INDEX `app_name`;
 ALTER TABLE `internal_revenue` ADD UNIQUE KEY (`app_name`, `os_name`, `store_type`,  `channel_id`, `channel`, `login_type_code`,  `login_type`, `date_paying`, `country`,  `timezone`);
 
-# 删除字段
+-- 删除字段
 ALTER TABLE internal_revenue_cohort DROP days_after_register;
 
-# 新增并来源于已有字段的处理
+-- 新增并来源于已有字段的处理
 ALTER TABLE `evest_postback_install3` ADD `event_time_hour` INT;
 UPDATE `evest_postback_install3` SET event_time_hour = (SELECT HOUR(`Event Time`));
 
 ALTER TABLE `bq_full` ADD `minute_x` INT NOT NULL DEFAULT -777;
 UPDATE `bq_full` SET minute_x = (SELECT TIMESTAMPDIFF(MINUTE, first_open_time, event_timestamp));
 
-# 日期处理
+-- 日期处理
 ALTER TABLE `callback` ADD `update_time_utc` DATETIME;
 UPDATE `callback` SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERVAL -8 hour));
 ```
