@@ -10,9 +10,9 @@ tocPosition: inner
 tags:
 - BigQuery
 - Looker Studio
-- BI
 - SQL
 categories:
+- BI
 - Raw data
 ---
 
