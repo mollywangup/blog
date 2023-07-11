@@ -52,7 +52,7 @@ crontab -e
 
 示例任务：每天凌晨清除该路径下的日志文件；
 
-```crontab
+```cron
 0 0 * * * sudo rm /opt/druid/apache-druid-26.0.0/log/*.log
 ```
 
