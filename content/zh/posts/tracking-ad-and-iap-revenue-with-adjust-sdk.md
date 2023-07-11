@@ -55,7 +55,7 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 #### 参考文档
 
 1. Adjust: [Get real-time data using SDK postbacks](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
-2. [核心] Track AppLovin MAX ad revenue with Adjust SDK: https://github.com/adjust/unity_sdk/blob/master/doc/english/sdk-to-sdk/applovin-max.md
+2. GitHub: [Track AppLovin MAX ad revenue with Adjust SDK](https://github.com/adjust/unity_sdk/blob/master/doc/english/sdk-to-sdk/applovin-max.md)
 
 #### 优缺点
 
@@ -79,7 +79,7 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 - 优点：快速，成本低；
 - 缺点：非实时；
 
-## 内购收入
+## 统计内购收入
 
 ### 方式一（SDK方式）（推荐）
 
