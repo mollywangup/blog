@@ -106,7 +106,11 @@ categories:
 
 ### 测试方法
 
-参考 【风控】在debug包中不展示生产环境的广告 中的Mediation Debugger for Unity
+使用 [Mediation Debugger](https://dash.applovin.com/documentation/mediation/unity/testing-networks/mediation-debugger)
+
+参考资料：
+1. Mediation Debugger for Unity: [Displaying the Mediation Debugger](https://dash.applovin.com/documentation/mediation/unity/testing-networks/mediation-debugger#displaying-the-mediation-debugger)
+2. 线下PDF版：
 
 ## Adjust SDK
 
