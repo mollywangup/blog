@@ -41,14 +41,14 @@ categories:
 {{< expand "Step1. 获取 referrerUrl" >}}
 
 1. 先接 [Play Install Referrer](https://developer.android.com/google/play/installreferrer/library) 客户端库；
-2. 再通过客户端库的方法获取原始的referrerUrl；
+2. 再通过客户端库的方法获取原始的 referrerUrl；
 
 {{< /expand >}}
 
 {{< expand "Step2. 解析 referrerUrl（核心）" >}}
 
 1. 先从`referrerUrl`中获取`utm_content`；
-2. 再解密`utm_content`。方法见官方的 [Understand Facebook App Ads Referral URLs](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)，需要用到Facebook Decryption Key；
+2. 再解密`utm_content`。方法见官方的 [Understand Facebook App Ads Referral URLs](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)，需要用到 Facebook Decryption Key；
 
 {{< /expand >}}
 
@@ -80,7 +80,7 @@ categories:
 
 #### referrerUrl 格式说明
 
-1. 格式（以下使用的是同一个例子）：
+格式（以下使用的是同一个例子）：
 
 {{< tabs 原始格式 decode后的格式 >}}
 {{< tab >}}
@@ -99,7 +99,7 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
 {{< /tab >}}
 {{< /tabs >}}
 
-2. 结构说明（重点是处理`utm_content`）：
+结构（重点是处理`utm_content`）：
 
 | / | 说明 | 是否Firebase已自动统计 | 例子 |
 | ---------- | --------- | ----------------- | ---------- |
