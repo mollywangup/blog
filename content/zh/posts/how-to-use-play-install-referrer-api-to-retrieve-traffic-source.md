@@ -112,7 +112,7 @@ categories:
 
 参考来自 Facebook 官方文档: https://developers.facebook.com/docs/app-ads/install-referrer/
 
-{{< tabs 原始格式 decode后的格式 解密并decode最核心的`data`后的格式 >}}
+{{< tabs 原始格式 decode后的格式 解密并decode最核心的data后的格式 >}}
 {{< tab >}}
 
 ```Plain Text
