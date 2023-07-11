@@ -106,11 +106,17 @@ categories:
 
 ### 测试方法
 
-使用 [Mediation Debugger](https://dash.applovin.com/documentation/mediation/unity/testing-networks/mediation-debugger)
+使用 Mediation Debugger 也就是测试套件：
 
-参考资料：
-1. Mediation Debugger for Unity: [Displaying the Mediation Debugger](https://dash.applovin.com/documentation/mediation/unity/testing-networks/mediation-debugger#displaying-the-mediation-debugger)
-2. 线下PDF版：
+1. 官方网站：[Displaying the Mediation Debugger](https://dash.applovin.com/documentation/mediation/unity/testing-networks/mediation-debugger#displaying-the-mediation-debugger)
+
+    ```C#
+    MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) => {
+        // Show Mediation Debugger
+        MaxSdk.ShowMediationDebugger();
+    };
+    ```
+2. 线下PDF版：<a href="https://mollywangup.com/pdf/Mediation%20Debugger%20%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%20-%20v23.2.pdf" target="_blank">Mediation Debugger 使用说明 - v23.2</a>
 
 ## Adjust SDK
 
