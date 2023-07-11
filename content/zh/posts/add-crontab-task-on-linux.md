@@ -19,9 +19,7 @@ categories:
 
 {{< tabs Linux macOS>}}
   {{< tab >}}
-
-	AWS Linux
-
+	
   ```shell
   sudo yum install cronie
 	# 启动cron服务
