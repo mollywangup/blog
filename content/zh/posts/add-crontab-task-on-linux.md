@@ -17,7 +17,7 @@ categories:
 
 ## Step1. 安装Crontab
 
-{{< tabs Linux(AWS) macOS>}}
+{{< tabs Linux macOS>}}
   {{< tab >}}
 
 	AWS Linux
