@@ -112,6 +112,8 @@ categories:
 
 ### 常用功能
 
+👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-ad-and-iap-revenue-with-adjust-sdk/" target="_blank">使用 Adjust SDK 追踪广告&内购收入</a>
+
 1. 事件统计功能（Log Events）；
 2. 手动统计广告收入（Ad Revenue）：方法是将MAX SDK的广告收入转发给Adjust SDK；
 3. 手动统计内购收入（IAP）：方法是自定义一个内购收入事件，然后将收入上报至该事件；
@@ -180,6 +182,8 @@ categories:
 ### 常用功能
 
 获取用户来源，仅限安卓；（主要通过解析`referrerUrl`）
+
+👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/how-to-use-play-install-referrer-api-to-retrieve-traffic-source/" target="_blank">使用 Play Install Referrer API 解析 Facebook Campaign</a>
 
 ### 官方文档
 1. [Android] [Play Install Referrer Library](https://developer.android.com/google/play/installreferrer/library)
