@@ -99,7 +99,7 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
 {{< /tab >}}
 {{< /tabs >}}
 
-2. 结构说明（重点是处理utm_content）：
+2. 结构说明（重点是处理`utm_content`）：
 
 | / | 说明 | 是否Firebase已自动统计 | 例子 |
 | ---------- | --------- | ----------------- | ---------- |
@@ -149,7 +149,7 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
 #### 解析方法
 
 1. 先从 referrerUrl 中获取 utm_content；
-    注意：原始的referrerUrl和获取到的utm_content，在进行下一步操作之前，都需要先decode；
+    注意：原始的 referrerUrl 和获取到的 utm_content，在进行下一步操作之前，都需要先decode；
 2. 再解密 utm_content（最核心的一步）：
     官方方法：[Example Decryption with PHP](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)
     具体方法如下：
@@ -168,7 +168,7 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
                   <img src='/images/posts/tag-gcm-16bytes.png' alt='Tag length 16 bytes'>
          - **nonce**：随机数，无实际意义，解密需要；
     4. 最后，使用以上信息，解密；
-      其中，解密后的明文见 ***utm_content格式说明*** 中的 ***解密并decode最核心的`data`后的格式***；
+      其中，解密后的明文见 ***utm_content 格式说明*** 中的 ***解密并decode最核心的`data`后的格式***；
 
 ### 步骤三：处理解析结果
 
@@ -187,7 +187,7 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
 
 ## 测试方法
 
-使用本文中的 *referrerUrl格式说明* 中的例子即可；
+使用本文中的 *referrerUrl 格式说明* 中的例子即可；
 
 ## 附
 
@@ -203,7 +203,7 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
 
 见 [Adjust Placeholders for Partners](https://partners.adjust.com/placeholders/#Referrer)
 
-```url
+```Plain Text
 utm_source%3Dmy.apps.com%26utm_campaign%3Dmy_campaign%26utm_content%3D%7B%22key1%22%3A0%2C%22key2%22%3A1623237220%7D
 ```
 
