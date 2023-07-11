@@ -24,7 +24,7 @@ categories:
 ### 常用功能
 
 1. 分析功能：事件统计和设置用户属性（Log Events & setUserProperty）；
-2. 统计bug/崩溃等（Firebase Crashlytics），且支持自定义key细化发生场景；
+2. 统计bug/崩溃等（Firebase Crashlytics），且支持自定义 key 细化发生场景；
 3. 接入多种登录方式如Facebook/PlayGames等（Firebase Authentication功能）；
 
 ### 官方文档
@@ -45,8 +45,8 @@ categories:
 ### 常用功能
 
 1. 事件统计功能（Log Events）：只要接了Facebook SDK，就等同于可实现在Facebook Ads上进行推广；
-  - 自动事件统计功能；
-  - 手动事件统计功能；
+   - 自动事件统计功能；
+   - 手动事件统计功能；
 2. 登录功能（Facebook Login）：可直接接入，也可通过其他集成服务如Firebase接；
 3. 分享功能（Sharing）；
 4. 深度链接（Deep Link）；
@@ -71,9 +71,9 @@ categories:
 
 ### 注意事项
 
-创建Facebook开发者账号时，需要以下两个信息（由研发反馈）：
-1. GP正式包的key的哈希值；
-2. 启动Facebook SDK的类名；
+创建 Facebook 开发者账号时，需要以下两个信息（由研发反馈）：
+1. GP 正式包的 key 的哈希值；
+2. 启动 Facebook SDK 的类名；
 
 ## MAX SDK
 
