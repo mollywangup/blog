@@ -38,38 +38,26 @@ categories:
 
 共三步：
 
-{{< expand "1. 获取 referrerUrl" >}}
+{{< expand "步骤一. 获取 referrerUrl" >}}
 
 1. 先接 [Play Install Referrer](https://developer.android.com/google/play/installreferrer/library) 客户端库；
 2. 再通过客户端库的方法获取原始的referrerUrl；
 
 {{< /expand >}}
 
-{{< expand "2. 解析 referrerUrl（核心）" >}}
+{{< expand "步骤二. 解析 referrerUrl（核心）" >}}
 
 1. 先从`referrerUrl`中获取`utm_content`；
 2. 再解密`utm_content`。方法见官方的 [Understand Facebook App Ads Referral URLs](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)，需要用到Facebook Decryption Key；
 
 {{< /expand >}}
 
-{{< expand "3. 处理解析结果" >}}
+{{< expand "步骤三. 处理解析结果" >}}
 
 1. 先从解密后的`utm_content`中获取`campaign_group_id`；
 2. 再将`campaign_group_id`设置为用户属性`campaign_id`；
 
 {{< /expand >}}
-
-**Step1. 获取 referrerUrl**
-1. 先接 [Play Install Referrer](https://developer.android.com/google/play/installreferrer/library) 客户端库；
-2. 再通过客户端库的方法获取原始的referrerUrl；
-
-**Step2. 解析 referrerUrl（核心）**
-1. 先从`referrerUrl`中获取`utm_content`；
-2. 再解密`utm_content`。方法见官方的 [Understand Facebook App Ads Referral URLs](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)，需要用到Facebook Decryption Key；
-
-**Step3. 处理解析结果**
-1. 先从解密后的`utm_content`中获取`campaign_group_id`；
-2. 再将`campaign_group_id`设置为用户属性`campaign_id`；
 
 ### 步骤一：获取 referrerUrl
 
