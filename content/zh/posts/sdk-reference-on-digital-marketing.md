@@ -30,15 +30,15 @@ categories:
 ### 官方文档
 
 1. [Firebase] Google Analytics for Unity：
-   - Get started：https://firebase.google.com/docs/analytics/unity/start
-   - Log events：https://firebase.google.com/docs/analytics/unity/events
-   - Set user properties：https://firebase.google.com/docs/analytics/unity/properties
+   - [Get started](https://firebase.google.com/docs/analytics/unity/start)
+   - [Log events](https://firebase.google.com/docs/analytics/unity/events)
+   - [Set user properties](https://firebase.google.com/docs/analytics/unity/properties)
 2. [Firebase] Firebase Crashlytics：
-   - Get started：https://firebase.google.com/docs/crashlytics/get-started?platform=unity
-   - Add custom keys：https://firebase.google.com/docs/crashlytics/customize-crash-reports?platform=unity#add-keys
-3. [Firebase] Firebase Authentication：https://firebase.google.com/docs/auth/unity/start
-   - Facebook Login：https://firebase.google.com/docs/auth/unity/facebook-login
-   - Play Games Login：https://firebase.google.com/docs/auth/unity/play-games
+   - [Get started](https://firebase.google.com/docs/crashlytics/get-started?platform=unity)
+   - [Add custom keys](https://firebase.google.com/docs/crashlytics/customize-crash-reports?platform=unity#add-keys)
+3. [Firebase] [Firebase Authentication](https://firebase.google.com/docs/auth/unity/start)
+   - [Facebook Login](https://firebase.google.com/docs/auth/unity/facebook-login)
+   - [Play Games Login](https://firebase.google.com/docs/auth/unity/play-games)
 
 ## Facebook SDK
 
@@ -54,9 +54,9 @@ categories:
 ### 官方文档
 
 1. [Facebook] ：
-  - Getting Started with the Facebook Unity SDK：https://developers.facebook.com/docs/unity/gettingstarted
-  - How to Log App Events：https://developers.facebook.com/docs/app-events/unity#get-started---unity
-2. [GitHub] Facebook SDK for Unity：https://github.com/facebook/facebook-sdk-for-unity
+   - [Getting Started with the Facebook Unity SDK](https://developers.facebook.com/docs/unity/gettingstarted)
+   - [How to Log App Events](https://developers.facebook.com/docs/app-events/unity#get-started---unity)
+2. [GitHub] [Facebook SDK for Unity](https://github.com/facebook/facebook-sdk-for-unity)
 
 ### 测试方法
 
@@ -89,21 +89,20 @@ categories:
 ### 官方文档
 
 1. [MAX]：
-   - Integrate MAX for Unity：https://dash.applovin.com/documentation/mediation/unity/getting-started/integration
+   - [Integrate MAX for Unity](https://dash.applovin.com/documentation/mediation/unity/getting-started/integration)
    - Ad Formats:
-     - Rewarded：https://dash.applovin.com/documentation/mediation/unity/ad-formats/rewarded-ads
-     - Interstitial：https://dash.applovin.com/documentation/mediation/unity/ad-formats/interstitials
+     - [Rewarded](https://dash.applovin.com/documentation/mediation/unity/ad-formats/rewarded-ads)
+     - [Interstitial](https://dash.applovin.com/documentation/mediation/unity/ad-formats/interstitials)
    - Ad Networks：
-     - Meta Audience Network：https://dash.applovin.com/documentation/mediation/unity/mediation-setup/facebook 
-     - AdMob：
-     - bidding：https://dash.applovin.com/documentation/mediation/unity/mediation-setup/google
-     - waterfall：https://dash.applovin.com/documentation/mediation/unity/mediation-setup/admob
-     - Unity Ads：https://dash.applovin.com/documentation/mediation/unity/mediation-setup/unityads
-     - Liftoff Monetize (原Vungle)：https://dash.applovin.com/documentation/mediation/unity/mediation-setup/liftoff
-     - Chartboost：https://dash.applovin.com/documentation/mediation/unity/mediation-setup/chartboost
-     - DT Exchange (原AdColony)：https://dash.applovin.com/documentation/mediation/unity/mediation-setup/fyber-marketplace
-     - Mintegral：https://dash.applovin.com/documentation/mediation/unity/mediation-setup/mintegral
-2. [MAX] Impression-Level User Revenue API：https://dash.applovin.com/documentation/mediation/unity/getting-started/advanced-settings#impression-level-user-revenue-api
+     - [Meta Audience Network](https://dash.applovin.com/documentation/mediation/unity/mediation-setup/facebook)
+     - [AdMob bidding](https://dash.applovin.com/documentation/mediation/unity/mediation-setup/google)
+     - [AdMob waterfall](https://dash.applovin.com/documentation/mediation/unity/mediation-setup/admob)
+     - [Unity Ads](https://dash.applovin.com/documentation/mediation/unity/mediation-setup/unityads)
+     - [Liftoff Monetize](https://dash.applovin.com/documentation/mediation/unity/mediation-setup/liftoff) (原Vungle)
+     - [Chartboost](https://dash.applovin.com/documentation/mediation/unity/mediation-setup/chartboost)
+     - [DT Exchange](https://dash.applovin.com/documentation/mediation/unity/mediation-setup/fyber-marketplace) (原AdColony)
+     - [Mintegral](https://dash.applovin.com/documentation/mediation/unity/mediation-setup/mintegral)
+2. [MAX] [Impression-Level User Revenue API](https://dash.applovin.com/documentation/mediation/unity/getting-started/advanced-settings#impression-level-user-revenue-api)
 
 ### 测试方法
 
@@ -123,18 +122,18 @@ categories:
 ### 官方文档
 
 1. [Adjust] ：
-   - Integrate Adjust SDK for Unity：https://help.adjust.com/en/article/get-started-unity-sdk
+   - [Integrate Adjust SDK for Unity](https://help.adjust.com/en/article/get-started-unity-sdk)
 2. [GitHub] ：
    - Track events：
-     - Track an event：https://github.com/adjust/unity_sdk/blob/master/README.md#track-an-event
-     - Add Event parameters：https://github.com/adjust/unity_sdk/blob/master/README.md#event-parameters
+     - [Track an event](https://github.com/adjust/unity_sdk/blob/master/README.md#track-an-event)
+     - [Add Event parameters](https://github.com/adjust/unity_sdk/blob/master/README.md#event-parameters)
    - Track ad revenue：
-     - Track AppLovin MAX ad revenue with Adjust SDK：https://github.com/adjust/unity_sdk/blob/master/doc/english/sdk-to-sdk/applovin-max.md
-     - Ad revenue tracking：https://github.com/adjust/unity_sdk/blob/master/README.md#ad-ad-revenue
+     - [Track AppLovin MAX ad revenue with Adjust SDK](https://github.com/adjust/unity_sdk/blob/master/doc/english/sdk-to-sdk/applovin-max.md)
+     - [Ad revenue tracking](https://github.com/adjust/unity_sdk/blob/master/README.md#ad-ad-revenue)
    - Track IAP：
-     - Track revenue：https://github.com/adjust/unity_sdk/blob/master/README.md#track-revenue
-     - Revenue deduplication：https://github.com/adjust/unity_sdk/blob/master/README.md#revenue-deduplication
-     - Subscription tracking：https://github.com/adjust/unity_sdk/blob/master/README.md#subscription-tracking
+     - [Track revenue](https://github.com/adjust/unity_sdk/blob/master/README.md#track-revenue)
+     - [Revenue deduplication](https://github.com/adjust/unity_sdk/blob/master/README.md#revenue-deduplication)
+     - [Subscription tracking](https://github.com/adjust/unity_sdk/blob/master/README.md#subscription-tracking)
 
 ### 测试方法
 
@@ -149,10 +148,10 @@ categories:
 
 ### 官方文档
 
-1. [Unity] Set up and integrating Unity IAP：https://docs.unity3d.com/Packages/com.unity.purchasing@4.7/manual/Overview.html
+1. [Unity] [Set up and integrating Unity IAP](https://docs.unity3d.com/Packages/com.unity.purchasing@4.7/manual/Overview.html)
 2. [Unity] ErrorCode
-   - InitializationFailureReason：https://docs.unity3d.com/Packages/com.unity.purchasing@4.6/api/UnityEngine.Purchasing.InitializationFailureReason.html
-   - PurchaseFailureReason：https://docs.unity3d.com/Packages/com.unity.purchasing@4.6/api/UnityEngine.Purchasing.PurchaseFailureReason.html
+   - [InitializationFailureReason](https://docs.unity3d.com/Packages/com.unity.purchasing@4.6/api/UnityEngine.Purchasing.InitializationFailureReason.html)
+   - [PurchaseFailureReason](https://docs.unity3d.com/Packages/com.unity.purchasing@4.6/api/UnityEngine.Purchasing.PurchaseFailureReason.html)
 
 ## Helpshift SDK
 
@@ -164,7 +163,7 @@ categories:
 
 ### 官方文档
 
-[Helpshift] Integrating Contact Us & In App Messaging：https://developers.helpshift.com/sdkx-unity/support-tools-android/#conversation-view
+[Helpshift] [Integrating Contact Us & In App Messaging](https://developers.helpshift.com/sdkx-unity/support-tools-android/#conversation-view)
 
 ## APT（Android Performance Tuner）
 
@@ -174,7 +173,7 @@ categories:
 
 ### 官方文档
 
-[Android] Overview of Android Performance Tuner (Unity)：https://developer.android.com/games/sdk/performance-tuner/unity
+[Android] [Overview of Android Performance Tuner (Unity)](https://developer.android.com/games/sdk/performance-tuner/unity)
 
 ## Play Install Referrer API
 
@@ -183,5 +182,5 @@ categories:
 获取用户来源，仅限安卓；（主要通过解析`referrerUrl`）
 
 ### 官方文档
-1. [Android] Play Install Referrer Library：https://developer.android.com/google/play/installreferrer/library
-2. [Facebook] Understand Facebook App Ads Referral URLs：https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data
+1. [Android] [Play Install Referrer Library](https://developer.android.com/google/play/installreferrer/library)
+2. [Facebook] [Understand Facebook App Ads Referral URLs](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)
