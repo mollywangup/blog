@@ -1,6 +1,20 @@
 ---
-title: "Adjust Raw Data Sql"
-date: 2023-07-11T16:03:28Z
-draft: true
+title: "简易 BI：将 Adjust 原始数据可视化至 Superset"
+date: 2023-05-07T16:03:28Z
+draft: false
+description: 
+hideToc: false
+enableToc: true
+enableTocContent: false
+tocPosition: inner
+tags:
+- Adjust
+- Superset
+categories:
+- Raw data
 ---
+
+## 背景信息
+
+## 
 
