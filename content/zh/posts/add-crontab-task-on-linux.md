@@ -1,6 +1,54 @@
 ---
-title: "在Linux上添加定时任务"
+title: "在 Linux 上添加定时任务"
 date: 2023-07-11T02:19:20Z
 draft: false
+description: Invalid activity.
+hideToc: false
+enableToc: true
+enableTocContent: false
+tocPosition: inner
+tags:
+- Crontab
+- Linux
+- Shell
+categories:
+- Tool
 ---
 
+## Step1. 安装Crontab
+
+{{< tabs Linux(AWS) macOS>}}
+  {{< tab >}}
+
+	AWS Linux
+
+  ```shell
+  sudo yum install cronie
+	# 启动cron服务
+	sudo service crond start
+	# 开机自启
+	sudo chkconfig crond on
+  ```
+
+  {{< /tab >}}
+  {{< tab >}}
+
+  macOS
+
+  {{< /tab >}}
+{{< /tabs >}}
+
+## Step2. 编写定时任务
+
+1. 编辑crontab文件：
+
+```shell
+crontab -e
+```
+
+2. 设置定时任务：
+```
+0 0 * * * sudo rm /opt/druid/apache-druid-26.0.0/log/*.log
+```
+
+保存并关闭后，该定时任务即生效；
