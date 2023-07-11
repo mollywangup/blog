@@ -61,20 +61,20 @@ categories:
 
 ### 步骤一：获取 referrerUrl
 
-先接Play Install Referrer客户端库：
-- 官方文档: https://developer.android.com/google/play/installreferrer/library
-- 他人做法参考: https://www.geeksforgeeks.org/how-to-use-google-play-install-referrer-api-in-android/
+1. 先接Play Install Referrer客户端库：
+   - 官方文档: https://developer.android.com/google/play/installreferrer/library
+   - 他人做法参考: https://www.geeksforgeeks.org/how-to-use-google-play-install-referrer-api-in-android/
 
-再获取原始的referrerUrl：
-- 官方方法: https://developer.android.com/google/play/installreferrer/library#install-referrer
-- 参考：
-    ```java
-    ReferrerDetails response = referrerClient.getInstallReferrer();
-    String referrerUrl = response.getInstallReferrer(); // 就是这个东西，且仅需这一个
-    long referrerClickTime = response.getReferrerClickTimestampSeconds();
-    long appInstallTime = response.getInstallBeginTimestampSeconds();
-    boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
-    ```
+2. 再获取原始的referrerUrl：
+   - 官方方法: https://developer.android.com/google/play/installreferrer/library#install-referrer
+   - 参考：
+       ```java
+       ReferrerDetails response = referrerClient.getInstallReferrer();
+       String referrerUrl = response.getInstallReferrer(); // 就是这个东西，且仅需这一个
+       long referrerClickTime = response.getReferrerClickTimestampSeconds();
+       long appInstallTime = response.getInstallBeginTimestampSeconds();
+       boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
+       ```
 
 ### 步骤二：解析 referrerUrl
 
