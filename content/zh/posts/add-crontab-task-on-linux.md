@@ -2,7 +2,7 @@
 title: "在 Linux 上添加定时任务"
 date: 2023-07-11T02:19:20Z
 draft: false
-description: Invalid activity.
+description: Crontab task.
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -18,35 +18,38 @@ categories:
 ## Step1. 安装Crontab
 
 {{< tabs Linux macOS>}}
-  {{< tab >}}
-	
-  ```shell
-  sudo yum install cronie
-	# 启动cron服务
-	sudo service crond start
-	# 开机自启
-	sudo chkconfig crond on
-  ```
+{{< tab >}}
 
-  {{< /tab >}}
-  {{< tab >}}
+```shell
+sudo yum install cronie
 
-  macOS
+# 启动服务
+sudo service crond start
 
-  {{< /tab >}}
+# 开机自启
+sudo chkconfig crond on
+```
+
+{{< /tab >}}
+{{< tab >}}
+
+```shell
+```
+
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Step2. 编写定时任务
 
-1. 编辑crontab文件：
+### 1. 编辑crontab文件：
 
 ```shell
 crontab -e
 ```
 
-2. 设置定时任务：
+### 2. 设置定时任务：
 ```
 0 0 * * * sudo rm /opt/druid/apache-druid-26.0.0/log/*.log
 ```
 
-保存并关闭后，该定时任务即生效；
+### 3. 保存并关闭；
