@@ -1,5 +1,5 @@
 ---
-title: "使用 Play Install Referrer API 解析Facebook Campaign信息"
+title: "使用 Play Install Referrer API 解析 Facebook Campaign"
 date: 2022-10-25T06:17:06Z
 draft: false
 description: Use Play Install Referrer API to retrieve traffic source.
@@ -19,7 +19,7 @@ categories:
 
 ### 目标
 
-区分用户来源，更具体一点指 **Facebook推广用户来源于哪一个具体的Facebook Campaign**；
+区分用户来源，更具体一点指 **Facebook 推广用户来源于哪一个具体的 Facebook Campaign**；
 
 ### 说明
 
@@ -37,19 +37,19 @@ categories:
 ### 方法概述
 
 共三步：
-1. **获取 referrerUrl**：
-    包含以下2个步骤：
-   - 先接 [Play Install Referrer](https://developer.android.com/google/play/installreferrer/library) 客户端库；
-   - 再通过客户端库的方法获取原始的referrerUrl；
-1. 解析referrerUrl（核心）：
-  - 包含以下2个步骤：
-    - 先从`referrerUrl`中获取`utm_content`；
-    - 再解密`utm_content`。方法见官方的 [Understand Facebook App Ads Referral URLs](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)，需要用到Facebook Decryption Key；
-2. 处理解析结果：
-  - 包含以下2个步骤：
-    - 先从解密后的`utm_content`中获取`campaign_group_id`：
-    - 再将`campaign_group_id`设置为用户属性`campaign_id`；
-  
+
+**Step1. 获取 referrerUrl**
+1. 先接 [Play Install Referrer](https://developer.android.com/google/play/installreferrer/library) 客户端库；
+2. 再通过客户端库的方法获取原始的referrerUrl；
+
+**Step2. 解析 referrerUrl（核心）**
+1. 先从`referrerUrl`中获取`utm_content`；
+2. 再解密`utm_content`。方法见官方的 [Understand Facebook App Ads Referral URLs](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)，需要用到Facebook Decryption Key；
+
+**Step3. 处理解析结果**
+1. 先从解密后的`utm_content`中获取`campaign_group_id`；
+2. 再将`campaign_group_id`设置为用户属性`campaign_id`；
+
 ### 步骤一：获取 referrerUrl
 
 1. 先接Play Install Referrer客户端库：
