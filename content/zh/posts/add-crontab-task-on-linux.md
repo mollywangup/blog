@@ -21,6 +21,7 @@ categories:
 {{< tab >}}
 
 ```shell
+# 安装
 sudo yum install cronie
 
 # 启动服务
@@ -41,15 +42,15 @@ sudo chkconfig crond on
 
 ## Step2. 编写定时任务
 
-### 1. 编辑crontab文件：
+### 1. 编辑crontab文件
 
 ```shell
 crontab -e
 ```
 
-### 2. 设置定时任务：
-```
+### 2. 设置定时任务
+```crontab
 0 0 * * * sudo rm /opt/druid/apache-druid-26.0.0/log/*.log
 ```
 
-### 3. 保存并关闭；
+### 3. 保存并关闭
