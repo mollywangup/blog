@@ -1,5 +1,5 @@
 ---
-title: "将 BigQuery 原始数据可视化至 Looker Studio"
+title: "简易 BI：将 BigQuery 原始数据可视化至 Looker Studio"
 date: 2023-03-06T16:02:30Z
 draft: false
 description: BigQuery raw data.
