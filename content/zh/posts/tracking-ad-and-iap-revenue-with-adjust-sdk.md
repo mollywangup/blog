@@ -95,7 +95,7 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
     ```
 2. 关于事件`purchase`的补充说明：
    - **event token**: `8u8bek` （已在Adjust后台创建）；
-    <img scr='/images/posts/event-token-8u8bek.png' alt='Event token example'>
+    <img src='/images/posts/event-token-8u8bek.png' alt='Event token example'>
    - **`setRevenue`**：币种需要设置为`USD`，即默认币种；
    - **`setTransactionId`**：为了防止重复统计内购收入，可设置为`Google Transaction ID`；即使用谷歌支付时谷歌生成的订单唯一标识；
    - 其余参数：现阶段暂时不加，因为即使加了，面板上也无法查看，只能通过导出raw data的方式；
