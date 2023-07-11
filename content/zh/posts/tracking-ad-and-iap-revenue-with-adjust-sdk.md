@@ -1,8 +1,8 @@
 ---
-title: "使用 Adjust SDK 统计广告&内购收入"
+title: "使用 Adjust SDK 追踪广告&内购收入"
 date: 2023-02-02T06:06:12Z
 draft: false
-description: Tracking Ad and IAP Revenue With Adjust SDK.
+description: Tracking Ad and IAP revenue with Adjust SDK.
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -21,7 +21,7 @@ categories:
 1. 需要在 Adjust 面板查看广告收入数据；
 2. 需要在 Adjust 面板查看内购收入数据；
 
-## 统计广告收入
+## 追踪广告收入
 
 ### 方式一（SDK-to-SDK方式）（推荐）
 
@@ -79,7 +79,7 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 - 优点：快速，成本低；
 - 缺点：非实时；
 
-## 统计内购收入
+## 追踪内购收入
 
 ### 方式一（SDK方式）（推荐）
 
