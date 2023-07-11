@@ -1,5 +1,5 @@
 ---
-title: "简易 BI：将 Adjust 原始数据可视化至 Superset"
+title: "简易 BI：将 Adjust 原始数据可视化至 Apache Superset"
 date: 2023-05-07T16:03:28Z
 draft: false
 description: 
@@ -10,6 +10,7 @@ tocPosition: inner
 tags:
 - Adjust
 - Superset
+- BI
 categories:
 - Raw data
 ---
