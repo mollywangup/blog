@@ -10,8 +10,8 @@ tocPosition: inner
 tags:
 - Adjust
 - Superset
-- BI
 categories:
+- BI
 - Raw data
 ---
 
