@@ -27,10 +27,10 @@ categories:
 
 - 实现方法：
   - 工具：Play Install Referrer API；
-  - 体现：Firebase的用户属性`campaign_id`；
+  - 体现：Firebase 的用户属性`campaign_id`；
 - 局限性：
   - 仅支持安卓系统；
-  - 仅支持Facebook Ads；
+  - 仅支持 Facebook Ads；
 
 ## 具体实现
 
@@ -38,21 +38,21 @@ categories:
 
 共三步：
 
-{{< expand "步骤一. 获取 referrerUrl" >}}
+{{< expand "步骤一：获取 referrerUrl" >}}
 
 1. 先接 [Play Install Referrer](https://developer.android.com/google/play/installreferrer/library) 客户端库；
 2. 再通过客户端库的方法获取原始的referrerUrl；
 
 {{< /expand >}}
 
-{{< expand "步骤二. 解析 referrerUrl（核心）" >}}
+{{< expand "步骤二：解析 referrerUrl（核心）" >}}
 
 1. 先从`referrerUrl`中获取`utm_content`；
 2. 再解密`utm_content`。方法见官方的 [Understand Facebook App Ads Referral URLs](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)，需要用到Facebook Decryption Key；
 
 {{< /expand >}}
 
-{{< expand "步骤三. 处理解析结果" >}}
+{{< expand "步骤三：处理解析结果" >}}
 
 1. 先从解密后的`utm_content`中获取`campaign_group_id`；
 2. 再将`campaign_group_id`设置为用户属性`campaign_id`；
@@ -61,19 +61,20 @@ categories:
 
 ### 步骤一：获取 referrerUrl
 
-1. 先接Play Install Referrer客户端库：
-  - 官方文档: https://developer.android.com/google/play/installreferrer/library
-  - 他人做法参考: https://www.geeksforgeeks.org/how-to-use-google-play-install-referrer-api-in-android/
-2. 再获取原始的referrerUrl：
-  - 官方方法：https://developer.android.com/google/play/installreferrer/library#install-referrer
-    参考：
-```java
-ReferrerDetails response = referrerClient.getInstallReferrer();
-String referrerUrl = response.getInstallReferrer(); // 就是这个东西，且仅需这一个
-long referrerClickTime = response.getReferrerClickTimestampSeconds();
-long appInstallTime = response.getInstallBeginTimestampSeconds();
-boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
-```
+先接Play Install Referrer客户端库：
+- 官方文档: https://developer.android.com/google/play/installreferrer/library
+- 他人做法参考: https://www.geeksforgeeks.org/how-to-use-google-play-install-referrer-api-in-android/
+
+再获取原始的referrerUrl：
+- 官方方法: https://developer.android.com/google/play/installreferrer/library#install-referrer
+- 参考：
+    ```java
+    ReferrerDetails response = referrerClient.getInstallReferrer();
+    String referrerUrl = response.getInstallReferrer(); // 就是这个东西，且仅需这一个
+    long referrerClickTime = response.getReferrerClickTimestampSeconds();
+    long appInstallTime = response.getInstallBeginTimestampSeconds();
+    boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
+    ```
 
 ### 步骤二：解析 referrerUrl
 
