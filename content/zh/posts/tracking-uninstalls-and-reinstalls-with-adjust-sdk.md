@@ -33,4 +33,5 @@ categories:
      - 获取 registration token，也就是Adjust需要的那个`pushNotificationsToken`；
 2. 在 Adjust SDK 设置 [Push tokens](https://help.adjust.com/en/article/push-tokens-android-sdk)；
 3. 准备 FCM server key，并配置到 Adjust 后台；
+   
    <img src='/images/posts/FCM-server-key-config.png' alt='FCM server key config example'>
