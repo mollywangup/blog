@@ -13,6 +13,7 @@ tags:
 - Druid
 - Superset
 - OLAP
+- SQL
 categories:
 - BI
 - DB
