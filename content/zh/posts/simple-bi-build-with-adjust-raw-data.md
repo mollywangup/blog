@@ -1,5 +1,5 @@
 ---
-title: "简易 BI：将 Adjust 原始数据可视化至 Apache Superset"
+title: "简易 BI: Adjust + Druid + Superset"
 date: 2023-05-07T16:03:28Z
 draft: false
 description: 
@@ -16,6 +16,9 @@ categories:
 ---
 
 ## 背景信息
+
+"简易 BI：将 Adjust 原始数据可视化至 Apache Superset"
+
 
 ## 
 

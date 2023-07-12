@@ -18,7 +18,11 @@ categories:
 
 ## 背景信息
 
+将 Firebase 原始数据导出至 BigQuery 后，需要对来自 BigQuery 的原始数据进行分析；
+
 ## 原始字段
+
+
 
 ## 加工字段的SQL语句
 

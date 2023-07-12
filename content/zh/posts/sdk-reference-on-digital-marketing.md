@@ -29,8 +29,8 @@ categories:
 
 1. 分析功能：事件统计和设置用户属性（Log Events & setUserProperty）；
 2. 统计bug/崩溃等（Firebase Crashlytics），且支持自定义 key 细化发生场景；
-3. 远程控制（Remote Config）：
-4. 收集启动时长，监控网络请求等性能数据（Performance）：
+3. 远程控制（Remote Config）；
+4. 收集启动时长，监控网络请求等性能数据（Performance）；
 5. 接入多种登录方式如Facebook/PlayGames等（Firebase Authentication功能）；
 
 ### 官方文档
@@ -99,7 +99,7 @@ categories:
    - 接入不同的广告格式（Ad Formats）：Rewarded/Interstitial 等；
    - 接入多个广告源（Ad Networks）：
      - 自有广告源：AppLovin；
-     - 非自有广告源：AdMob/Meta/Unity/Vungle等几十个；
+     - 非自有广告源：AdMob/Meta/Unity/Vungle 等几十个；
 2. 获取广告收入；
 
 ### 官方文档
