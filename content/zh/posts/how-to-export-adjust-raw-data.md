@@ -2,7 +2,7 @@
 title: "将 Adjust 原始数据导出的两种方式"
 date: 2023-04-04T16:01:08Z
 draft: false
-description: 共两种方式，实时回传和每小时 csv 同步到云存储。
+description: 共两种方式，实时回传和每小时上传 CSV 至云储存。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -54,7 +54,7 @@ categories:
     - Adjust SDK方式上报（够用了）：https://help.adjust.com/en/article/event-tracking-android-sdk#callback-parameters
     - Adjust S2S方式上报：https://help.adjust.com/en/article/server-to-server-events#share-custom-data
 
-### 方法一：CSV导出至云服务器
+### 方法一：CSV 至云储存
 
 1. 每小时自动导出一次：https://help.adjust.com/en/article/csv-uploads
    <img src='/images/posts/csv-uploads.png' alt='csv-uploads'>
