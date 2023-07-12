@@ -2,7 +2,7 @@
 title: "接入各种登录方式"
 date: 2023-03-02T15:03:42Z
 draft: false
-description: 
+description: 可直接接入，可间接接入如通过 Firebase Authentication. 包括常见登录方式 Facebook/Google/Play Games.
 hideToc: false
 enableToc: true
 enableTocContent: false

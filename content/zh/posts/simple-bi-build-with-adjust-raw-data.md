@@ -28,7 +28,7 @@ categories:
   - MMP；
   - 用于收集原始数据；
 - **S3**：
-  - 云存储；
+  - 云存储，分布式文件系统；
   - 用于存储原始数据；
 - **Apache Druid**：
   - 开源的 OLAP 数据库，列式存储，时间序列分析；
@@ -42,18 +42,34 @@ categories:
 
 👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-ad-and-iap-revenue-with-adjust-sdk/" target="_blank">使用 Adjust 追踪广告&内购收入</a>
 
-使用 Adjust 收集原始数据，
+### 事件分类
+
+使用 Adjust 收集原始数据，根据事件类型可分为两类：
+
+普通事件：
+
+收入事件：
+
+
+### 参数
 
 
 ## Step2. 存储原始数据
 
 
 
-## Step3. 转存原始数据
+
+## Step3. 转存至数仓
+
+
 
 
 ## Step4. 可视化
 
+
+
+
+## 附：原始数据清洗 SQL
 
 
 

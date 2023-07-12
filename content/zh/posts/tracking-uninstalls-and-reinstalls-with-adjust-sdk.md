@@ -2,7 +2,7 @@
 title: "使用 Adjust + FCM 追踪卸载和重装"
 date: 2023-05-04T09:41:20Z
 draft: false
-description: Tracking uninstall and reinstall with Adjust SDK.
+description: Adjust 无法独自实现，需要借助 FCM.
 hideToc: false
 enableToc: true
 enableTocContent: false
