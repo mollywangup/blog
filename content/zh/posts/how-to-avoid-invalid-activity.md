@@ -2,7 +2,7 @@
 title: "广告风控指南：无效流量"
 date: 2022-10-18T09:43:43Z
 draft: false
-description: Invalid activity.
+description: 使用测试广告，遵守广告格式植入指南，基于 CTR 的优化，使用最新的变现SDK.
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -105,9 +105,9 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
     <img src='/images/posts/app-open-n2.png' alt='not approved for App Open ad2'>
 
 
-### 建议做法三：基于CTR的优化
+### 建议做法三：基于 CTR 的优化
 
-#### 经验CTR
+#### 经验 CTR
 
 1. AdMob: 5%左右；
 2. Facebook Audience Network: 5%内是安全线，10%是会判违规；

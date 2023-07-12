@@ -2,7 +2,7 @@
 title: "使用 Play Install Referrer API 解析 Facebook Campaign"
 date: 2022-10-25T06:17:06Z
 draft: false
-description: Use Play Install Referrer API to retrieve traffic source.
+description: 解析加密的 Facebook 广告的 Referrer 信息，从中获取 campaign 等信息。
 hideToc: false
 enableToc: true
 enableTocContent: false

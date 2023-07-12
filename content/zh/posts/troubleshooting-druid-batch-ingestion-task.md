@@ -1,8 +1,8 @@
 ---
-title: "解决 Druid Batch Ingestion Task 中的各种报错"
+title: "踩坑：Druid Batch Ingestion Task 中的各种报错"
 date: 2023-06-30T07:37:04Z
 draft: false
-description: Apache Druid batch ingestion tasks, duplicate column entries found
+description: duplicate column entries found
 hideToc: false
 enableToc: true
 enableTocContent: false

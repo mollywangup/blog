@@ -1,8 +1,8 @@
 ---
-title: "ERR_TOO_MANY_REDIRECTS"
-date: 2023-06-29T03:55:45Z
+title: "踩坑：ERR_TOO_MANY_REDIRECTS"
+date: 2021-06-29T03:55:45Z
 draft: false
-description: After you add a new domain to Cloudflare, your visitors’ browsers might display ERR_TOO_MANY_REDIRECTS or The page isn’t redirecting properly errors. 
+description: 自建的网站，当添加 Cloudflare 后，忽然报错 ERR_TOO_MANY_REDIRECTS. 
 hideToc: false
 enableToc: true
 enableTocContent: false

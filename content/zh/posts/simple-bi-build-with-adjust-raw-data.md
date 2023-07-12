@@ -12,8 +12,8 @@ tags:
 - S3
 - Druid
 - Superset
-categories:
 - OLAP
+categories:
 - BI
 - DB
 - Columnar
@@ -39,10 +39,13 @@ categories:
 
 ## Step1. 收集原始数据
 
+👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-ad-and-iap-revenue-with-adjust-sdk/" target="_blank">使用 Adjust SDK 追踪广告&内购收入</a>
+
 使用 Adjust 收集原始数据，
 
 
 ## Step2. 存储原始数据
+
 
 
 ## Step3. 转存原始数据

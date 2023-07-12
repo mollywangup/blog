@@ -2,7 +2,7 @@
 title: "MySQL 基本语法"
 date: 2021-01-28T06:48:47Z
 draft: false
-description: MySQL syntax
+description: CURD, 用户及权限管理，常用数据库和数据表操作等。
 hideToc: false
 enableToc: true
 enableTocContent: false
