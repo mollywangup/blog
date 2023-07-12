@@ -23,20 +23,14 @@ categories:
 
 理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；
 
-<div style="text-align:left;">
 <img src='/images/posts/firebase-projects-hierarchy_projects-apps-resources.png' alt='Firebase Project' style="max-width:80%; height:auto;">
-</div>
 
 ### 常用功能
 
 1. 分析功能：事件统计和设置用户属性（Log Events & setUserProperty）；
-   <!-- <img src='/images/posts/relationship-between-GA-and-firebase.png' alt='relationship-between-GA-and-firebase'> -->
 2. 统计bug/崩溃等（Firebase Crashlytics），且支持自定义 key 细化发生场景；
 3. 远程控制（Remote Config）：
-   <!-- <img src='/images/posts/modify-remote-config-programmatically.png' alt='Remote Config'>
-   <img src='/images/posts/propagate-remote-config-updates-in-real-time.png' alt='Cloud Functions'> -->
 4. 收集启动时长，监控网络请求等性能数据（Performance）：
-   <!-- <img src='/images/posts/firebase-performance.png' alt='Performance'> -->
 5. 接入多种登录方式如Facebook/PlayGames等（Firebase Authentication功能）；
 
 ### 官方文档
@@ -56,6 +50,11 @@ categories:
    - [Get Started with Firebase Authentication in Unity](https://firebase.google.com/docs/auth/unity/start)
    - [Facebook Login](https://firebase.google.com/docs/auth/unity/facebook-login)
    - [Play Games Login](https://firebase.google.com/docs/auth/unity/play-games)
+
+### 测试方法
+
+- 测试 Crashlytics：[Test your Crashlytics implementation](https://firebase.google.com/docs/crashlytics/test-implementation?platform=android)
+- 测试 Performance：[Performance Monitoring troubleshooting and FAQ](https://firebase.google.com/docs/perf-mon/troubleshooting?platform=android)
 
 ## Facebook SDK
 
