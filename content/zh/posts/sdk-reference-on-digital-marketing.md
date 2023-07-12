@@ -29,12 +29,12 @@ categories:
 
 1. 分析功能：事件统计和设置用户属性（Log Events & setUserProperty）；
    
-   <img src='/images/posts/relationship-between-GA-and-firebase.png' alt='relationship-between-GA-and-firebase'>
+   <img src='/images/posts/relationship-between-GA-and-firebase.png' alt='relationship-between-GA-and-firebase' style="max-width:60%; height:auto;">
 2. 统计bug/崩溃等（Firebase Crashlytics），且支持自定义 key 细化发生场景；
 3. 远程控制（Remote Config）：
    
-   <img src='/images/posts/modify-remote-config-programmatically.png' alt='Remote Config'>
-   <img src='/images/posts/propagate-remote-config-updates-in-real-time.png' alt='Cloud Functions'>
+   <img src='/images/posts/modify-remote-config-programmatically.png' alt='Remote Config' style="max-width:60%; height:auto;">
+   <img src='/images/posts/propagate-remote-config-updates-in-real-time.png' alt='Cloud Functions' style="max-width:60%; height:auto;">
 4. 收集启动时长，监控网络请求等性能数据（Performance）：
    
    <img src='/images/posts/firebase-performance.png' alt='Performance'>
