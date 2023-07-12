@@ -12,7 +12,8 @@ tags:
 - Facebook Ads
 - MAX
 - Adjust
-- IAP & Subscription
+- IAP
+- Subscription
 - Helpshift
 - APT
 categories:
