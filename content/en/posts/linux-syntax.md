@@ -1,6 +1,0 @@
----
-title: "Linux Syntax"
-date: 2023-07-03T10:48:12Z
-draft: true
----
-
