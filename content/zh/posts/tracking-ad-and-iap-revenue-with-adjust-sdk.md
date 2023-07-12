@@ -2,7 +2,7 @@
 title: "使用 Adjust 追踪广告&内购收入"
 date: 2023-02-02T06:06:12Z
 draft: false
-description: 广告收入通过聚合 SDK 转发而来，内购收入通过设置带有货币金额属性的事件而来；
+description: 广告收入通过聚合 SDK 转发而来（额外收费服务），一次性购买的内购收入通过设置带有货币金额属性的事件而来，订阅性质的内购收入有专门的 subscription API（额外收费服务）。
 hideToc: false
 enableToc: true
 enableTocContent: false
