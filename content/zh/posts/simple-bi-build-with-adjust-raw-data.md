@@ -1,5 +1,5 @@
 ---
-title: "简易 BI: Adjust + Druid + Superset"
+title: "BI 方案：Adjust + Druid + Superset"
 date: 2023-05-07T16:03:28Z
 draft: false
 description: 
