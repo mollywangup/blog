@@ -19,16 +19,20 @@ categories:
 
 ## 背景信息
 
-本文旨在将来自 Adjust 的原始数据可视化在 Superset;
+本文旨在将来自 Adjust 的原始数据可视化在 Superset. 其中，不同的工具分工如下：
 
-- Adjust: 收集原始数据；
-- S3: 存储原始数据；
-- Apache Druid: 
-  - 批量摄取来自 S3 的原始数据；
-  - 将 segment 数据持久化到 S3（建议新建一个专门的存储捅）；
-- Apache Superset: 开源的可视化工具；
+- **Adjust**：收集原始数据；
+- **S3**：存储原始数据；
+- **Apache Druid**：
+  - 开源的 OLAP 数据库，优势是时间序列分析；
+  - 可实现批量摄取来自 S3 的原始数据；
+  - 可实现将 segments 数据持久化到 S3（建议新建一个专门的存储捅）；
+- **Apache Superset**：
+  - 开源的可视化工具；
+  - 支持直接连接 Apache Druid 数据库；
 
 ## Step1. 收集原始数据
+
 
 
 
