@@ -10,8 +10,8 @@ tocPosition: inner
 tags:
 - Adjust
 - S3
-- Druid
-- Superset
+- Apache Druid
+- Apache Superset
 - OLAP
 - SQL
 categories:
