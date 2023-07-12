@@ -2,7 +2,7 @@
 title: "BI 方案：Firebase + GCS + BigQuery + Looker Studio"
 date: 2023-03-06T16:02:30Z
 draft: false
-description: （deprecated）简易 BI：将 Firebase 原始数据可视化至 Looker Studio.
+description: 【太贵弃之】简易 BI：将 Firebase 原始数据可视化至 Looker Studio.
 hideToc: false
 enableToc: true
 enableTocContent: false
