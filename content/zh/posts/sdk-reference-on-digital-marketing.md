@@ -2,7 +2,7 @@
 title: "通用：上架 GP 常用 SDK/Service 集成需求"
 date: 2023-03-29T09:35:45Z
 draft: false
-description: 
+description: Firebase, Facebook, MAX, Adjust, Helpshift, APT
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -21,11 +21,21 @@ categories:
 
 ## Firebase SDK
 
+理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；
+
+<img src='/images/posts/firebase-projects-hierarchy_projects-apps-resources.png' alt='Firebase Project'>
+
 ### 常用功能
 
 1. 分析功能：事件统计和设置用户属性（Log Events & setUserProperty）；
+   <img src='/images/posts/relationship-between-GA-and-firebase.png' alt='relationship-between-GA-and-firebase'>
 2. 统计bug/崩溃等（Firebase Crashlytics），且支持自定义 key 细化发生场景；
-3. 接入多种登录方式如Facebook/PlayGames等（Firebase Authentication功能）；
+3. 远程控制（Remote Config）：
+   <img src='/images/posts/modify-remote-config-programmatically.png' alt='Remote Config'>
+   <img src='/images/posts/propagate-remote-config-updates-in-real-time.png' alt='Cloud Functions'>
+4. 收集启动时长，监控网络请求等性能数据（Performance）：
+   <img src='/images/posts/firebase-performance.png' alt='Performance'>
+5. 接入多种登录方式如Facebook/PlayGames等（Firebase Authentication功能）；
 
 ### 官方文档
 
@@ -36,7 +46,12 @@ categories:
 2. [Firebase] Firebase Crashlytics：
    - [Get started](https://firebase.google.com/docs/crashlytics/get-started?platform=unity)
    - [Add custom keys](https://firebase.google.com/docs/crashlytics/customize-crash-reports?platform=unity#add-keys)
-3. [Firebase] [Firebase Authentication](https://firebase.google.com/docs/auth/unity/start)
+3. [Firebase] Remote Config：
+   - [Get started with Firebase Remote Config](https://firebase.google.com/docs/remote-config/get-started?&platform=android)
+4. [Firebase] Performance Monitoring：
+   - [Get started with Performance Monitoring for Android](https://firebase.google.com/docs/perf-mon/get-started-android)
+5. [Firebase] Firebase Authentication：
+   - [Get Started with Firebase Authentication in Unity](https://firebase.google.com/docs/auth/unity/start)
    - [Facebook Login](https://firebase.google.com/docs/auth/unity/facebook-login)
    - [Play Games Login](https://firebase.google.com/docs/auth/unity/play-games)
 
