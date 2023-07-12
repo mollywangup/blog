@@ -53,6 +53,17 @@ categories:
 - 支付异常：需要交互；
 - 其他（取消/重复购买/仅iOS的特殊异常）：暂不处理；
 
+​```plantuml
+@startuml
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: Another authentication Response
+@enduml
+​```
+
+
 
 ## 附：IAP 官方流程
 
