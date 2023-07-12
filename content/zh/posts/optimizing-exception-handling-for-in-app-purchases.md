@@ -37,11 +37,11 @@ categories:
 
 | 类型 | 具体异常 | 异常描述 | 处理方案 |
 | ---------- | --------- | ----------------- | ---------- |
-| 判断网络（初始化前） | `NetworkUnavailable` | 新增的自定义异常 | 网络异常 |
-| InitializationFailureReason（3个） | `AppNotKnown` | The store reported the app as unknown. Typically indicates the app has not been created on the relevant developer portal, or the wrong identifier has been configured. | 支付失败 |
+| 判断网络<br>（初始化前） | `NetworkUnavailable` | 新增的自定义异常 | 网络异常 |
+| 初始化阶段（3个） | `AppNotKnown` | The store reported the app as unknown. Typically indicates the app has not been created on the relevant developer portal, or the wrong identifier has been configured. | 支付失败 |
 |  | `NoProductsAvailable` | No products available for purchase, Typically indicates a configuration error. | 支付失败 |
 |  | `PurchasingUnavailable` | In App Purchases disabled in device settings. | 支付失败 |
-| PurchaseFailureReason（8个） | `DuplicateTransaction` | The transaction has already been completed successfully. This error can occur on Apple platforms if the transaction is finished successfully while the user is logged out of the app store, using a receipt generated while the user was logged in. | / |
+| 支付阶段（8个） | `DuplicateTransaction` | The transaction has already been completed successfully. This error can occur on Apple platforms if the transaction is finished successfully while the user is logged out of the app store, using a receipt generated while the user was logged in. | / |
 |  | `ExistingPurchasePending` | Another purchase is already in progress. | / |
 |  | `PaymentDeclined` | There was a problem with the payment. This is unique to Apple platforms. | / |
 |  | `ProductUnavailable` | The product was reported unavailable by the purchasing system. | 支付失败 |
