@@ -9,7 +9,7 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Firebase
-- Facebook
+- Facebook Ads
 - MAX
 - Adjust
 - IAP & Subscription
@@ -138,7 +138,7 @@ categories:
 
 ### 常用功能
 
-👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-ad-and-iap-revenue-with-adjust-sdk/" target="_blank">使用 Adjust SDK 追踪广告&内购收入</a>
+👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-ad-and-iap-revenue-with-adjust-sdk/" target="_blank">使用 Adjust 追踪广告&内购收入</a>
 
 1. 事件统计功能（Log Events）；
 2. 手动统计广告收入（Ad Revenue）：方法是将MAX SDK的广告收入转发给Adjust SDK；

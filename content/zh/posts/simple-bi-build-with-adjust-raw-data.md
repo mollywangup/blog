@@ -40,7 +40,7 @@ categories:
 
 ## Step1. 收集原始数据
 
-👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-ad-and-iap-revenue-with-adjust-sdk/" target="_blank">使用 Adjust SDK 追踪广告&内购收入</a>
+👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-ad-and-iap-revenue-with-adjust-sdk/" target="_blank">使用 Adjust 追踪广告&内购收入</a>
 
 使用 Adjust 收集原始数据，
 

@@ -1,8 +1,8 @@
 ---
-title: "使用 Adjust SDK 追踪广告&内购收入"
+title: "使用 Adjust 追踪广告&内购收入"
 date: 2023-02-02T06:06:12Z
 draft: false
-description: Tracking Ad and IAP revenue with Adjust SDK.
+description: 广告收入通过聚合 SDK 转发而来，内购收入通过设置带有货币金额属性的事件而来；
 hideToc: false
 enableToc: true
 enableTocContent: false
