@@ -38,10 +38,10 @@ categories:
 | 类型 | 具体异常  | 处理方案 |
 | ---------- | --------- | ---------- |
 | 判断网络<br>（初始化前） | `NetworkUnavailable` | 网络异常 |
-| 初始化阶段<br>（3个） | `AppNotKnown` | 支付失败 |
+| InitializationFailureReason<br>（3个） | `AppNotKnown` | 支付失败 |
 |  | `NoProductsAvailable` | 支付失败 |
 |  | `PurchasingUnavailable` | 支付失败 |
-| 支付阶段<br>（8个） | `DuplicateTransaction` | / |
+| PurchaseFailureReason<br>（8个） | `DuplicateTransaction` | / |
 |  | `ExistingPurchasePending` | / |
 |  | `PaymentDeclined` | / |
 |  | `ProductUnavailable` | 支付失败 |
