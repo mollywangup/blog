@@ -67,7 +67,7 @@ whoami = "一个数据产品人的自我修养"
 bioImageUrl = "images/whoami/avatar.jpg" # works fine after setting defaultContentLanguageInSubdir to false
 useGravatar = false
 location = "Xi'an, China"
-organization = "GrowthMobi"
+organization = ""
 link = "https://mollywangup.com/"
 
 # sidebar
