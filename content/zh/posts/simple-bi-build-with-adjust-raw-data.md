@@ -2,7 +2,7 @@
 title: "BI 方案：Adjust + S3 + Druid + Superset"
 date: 2023-05-07T16:03:28Z
 draft: false
-description: 简易 BI：将 Adjust 原始数据可视化至 Apache Superset.
+description: 将 Adjust 原始数据可视化至 Apache Superset.
 hideToc: false
 enableToc: true
 enableTocContent: false
