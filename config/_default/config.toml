@@ -52,6 +52,3 @@ googleAnalytics = "G-BGX5B906J4"
   category = "categories"
   tag = "tags"
   series = "series"
-
-[params]
-  plantuml = true
