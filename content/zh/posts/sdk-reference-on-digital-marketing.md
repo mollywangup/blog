@@ -23,7 +23,7 @@ categories:
 
 理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；
 
-<img src='/images/posts/firebase-projects-hierarchy_projects-apps-resources.png' alt='Firebase Project'>
+<img src='/images/posts/firebase-projects-hierarchy_projects-apps-resources.png' alt='Firebase Project' style="max-width:80%; height:auto;">
 
 ### 常用功能
 
