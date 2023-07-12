@@ -12,7 +12,7 @@ buildFuture = true
 copyright = "©{year}, All content is licensed under <a target='_blank' rel='external noopener' href='https://creativecommons.org/licenses/by-nc/4.0/'>CC BY-NC 4.0</a>."
 timeout = 10000
 enableEmoji = true
-paginate = 13
+paginate = 20
 rssLimit = 100
 
 enableGitInfo = false
