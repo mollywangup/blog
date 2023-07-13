@@ -18,6 +18,7 @@ categories:
 - BI
 - DB
 - Columnar
+- MMP
 ---
 
 ## 背景信息

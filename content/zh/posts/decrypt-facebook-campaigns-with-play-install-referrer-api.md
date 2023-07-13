@@ -1,8 +1,8 @@
 ---
-title: "使用 Play Install Referrer API 解析 Facebook Campaign"
+title: "使用 Play Install Referrer API 解密 Facebook Campaign"
 date: 2022-10-25T06:17:06Z
 draft: false
-description: 解析加密的 Facebook 广告的 Referrer 信息，从中获取 campaign 等信息。
+description: 手动解密 Facebook Campaign.
 hideToc: false
 enableToc: true
 enableTocContent: false

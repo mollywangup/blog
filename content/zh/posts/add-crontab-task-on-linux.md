@@ -10,7 +10,6 @@ tocPosition: inner
 tags:
 - Crontab
 - Linux
-- Shell
 categories:
 - Tool
 ---
