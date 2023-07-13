@@ -20,15 +20,14 @@ categories:
 
 1. 看板数据不支持按照**事件参数**进行更细颗粒度的分析，而原始数据可以；
 2. 看板数据不支持自由的多维度交叉分析，而原始数据可以；
-3. 看板数据无法分析默认统计到的一些玩家属性如设备信息等，而原始数据可以；
-
+3. 看板数据无法分析默认统计到的一些玩家属性如设备信息等，而原始数据可以；<br><br>
 
 因此，使用原始数据具有更自由更广阔的分析空间。
 
 ### Why Adjust NOT BigQuery？
 
 1. 时效性：
-   - BigQuery：延迟1天半（也可以实时得加钱）；
+   - BigQuery：延迟1天半（也可以实时但得加钱）；
    - Adjust：接近实时；
 2. 费用成本：
    - BigQuery：相对高额的计算/分析费用，可参考 [How BigQuery pricing works](https://cloud.google.com/bigquery/#section-5)
@@ -47,8 +46,8 @@ categories:
 1. 基于事件和事件参数导出；
 2. 支持的事件：包含自动/手动统计：
 	- 自动统计的事件：除了 **`Events`**，其余全部为自动统计事件；
-	- 手动统计的事件：**`Events`**；
-	- <img src='/images/posts/recommended-placeholders-for-callbacks.png' alt='recommended-placeholders-for-callbacks'>
+	- 手动统计的事件：**`Events`**；<br>
+	<img src='/images/posts/recommended-placeholders-for-callbacks.png' alt='recommended-placeholders-for-callbacks'><br>
 3. 支持的事件参数：包含自动/手动两类：
 	- 自动统计的参数：对应叫做`Placeholder`，支持的列表见 [Adjust Placeholders for Partners
 ](https://partners.adjust.com/placeholders)
@@ -58,7 +57,7 @@ categories:
 
 ### 方法一：CSV 至云储存
 
-1. 每小时自动导出一次：[CSV uploads to cloud storage](https://help.adjust.com/en/article/csv-uploads)
+1. 设置每小时自动导出一次：[CSV uploads to cloud storage](https://help.adjust.com/en/article/csv-uploads)
 
 2. 需要提前设置接收的云服务器（二选一）：
 	- AWS S3：[Set up your project in the AWS Management Console](https://help.adjust.com/en/article/amazon-s3#set-up-in-aws-console)
@@ -70,16 +69,14 @@ categories:
 		- 内置参数：使用花括号，如`{gps_adid}`
 		- 自定义参数：使用中括号，如`[user_id]`
 	- 例子：
-		```plaintext
-		"my constant",{gps_adid},[user_id],{installed_at},{event_name},[item_number],{reporting_revenue}
-		```
+```plaintext
+"my constant",{gps_adid},[user_id],{installed_at},{event_name},[item_number],{reporting_revenue}
+```
 
 ### 方法二：实时回传
 
-1. 设置实时回传：[Set up callbacks](https://help.adjust.com/en/article/set-up-callbacks)
-
-	<img src='/images/posts/setup-callbacks.png' alt='setup-callbacks'>
-
+1. 设置实时回传：[Set up callbacks](https://help.adjust.com/en/article/set-up-callbacks)<br>
+	<img src='/images/posts/setup-callbacks.png' alt='setup-callbacks'><br>
 2. 需要提前在自有服务器配置回传 URL：
 	- [Callback structure](https://help.adjust.com/en/article/callback-structure)
 	- [Recommended placeholders for callbacks](https://help.adjust.com/en/article/recommended-placeholders-callbacks)
