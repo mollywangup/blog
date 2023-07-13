@@ -1,5 +1,5 @@
 ---
-title: "使用 FCM 实现 Push 消息功能"
+title: "使用 FCM 实现推送功能"
 date: 2023-02-07T02:03:15Z
 draft: false
 description: FCM 是一个支持跨平台消息传递的免费解决方案。实现的前提是 FCM SDK 为每个新增设备生成唯一标识 registration token，用以消息定位。
