@@ -127,7 +127,7 @@ commento = false
 
 [utterances]       # https://utteranc.es/
   owner = "mollywangup"              # Your GitHub ID
-  repo = "mollywangup/blog-comment"               # The repo to store comments
+  repo = "mollywangup/blog"               # The repo to store comments
 
 [gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
   owner = ""              # Your GitHub ID
