@@ -1,8 +1,8 @@
 ---
-title: "将 Adjust 原始数据导出的两种方式"
+title: "将 Adjust 原始数据导出的两种方法"
 date: 2023-04-04T16:01:08Z
 draft: false
-description: 共两种方式，实时回传和每小时上传 CSV 至云储存。
+description: 共两种方法，实时回传和每小时上传 CSV 至云储存。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -16,18 +16,12 @@ categories:
 
 ## 背景信息
 
-### Why 原始数据？
+由于 Adjust 看板数据具有较大的分析局限性，因此有必要使用[原始数据导出功能](https://help.adjust.com/en/article/raw-data-exports)，用以更细颗粒度、更自由的多维度交叉分析。
 
-1. 看板数据不支持按照**事件参数**进行更细颗粒度的分析，而原始数据可以；
-2. 看板数据不支持自由的多维度交叉分析，而原始数据可以；
-3. 看板数据无法分析默认统计到的一些玩家属性如设备信息等，而原始数据可以；<br><br>
-
-因此，使用原始数据具有更自由更广阔的分析空间。
-
-### Why Adjust NOT BigQuery？
+{{< expand "为什么不建议使用 BigQuery?" >}}
 
 1. 时效性：
-   - BigQuery：延迟1天半（也可以实时但得加钱）；
+   - BigQuery：延迟1天半，实时额外收费见 [Data extraction pricing](https://cloud.google.com/bigquery/pricing#data_extraction_pricing)；
    - Adjust：接近实时；
 2. 费用成本：
    - BigQuery：相对高额的计算/分析费用，可参考 [How BigQuery pricing works](https://cloud.google.com/bigquery/#section-5)
@@ -39,21 +33,33 @@ categories:
    - BigQuery：使用 Firebase 进行事件统计，需要单独处理打通推广侧（目前仅可实现 Facebook Ads，未来其他推广平台都是潜在的坑）；
    - Adjust：自备服务器，自建数据库（但原始数据已经接近结构化了）；
 
+{{< /expand >}}
+
 ## 如何导出
 
-### 说明
+共两种方法，一种是导出至云存储，一种是实时回传给自己的服务器。
 
-1. 基于事件和事件参数导出；
-2. 支持的事件：包含自动/手动统计：
-	- 自动统计的事件：除了 **`Events`**，其余全部为自动统计事件；
-	- 手动统计的事件：**`Events`**；<br>
-	<img src='/images/posts/recommended-placeholders-for-callbacks.png' alt='recommended-placeholders-for-callbacks'><br>
-3. 支持的事件参数：包含自动/手动两类：
-	- 自动统计的参数：对应叫做`Placeholder`，支持的列表见 [Adjust Placeholders for Partners
+![How it works（图源 Adjust）](https://images.ctfassets.net/5s247im0esyq/5IzZDHUzGTvKFMe2IGnPCj/5b60d8ac5c97a05b2e71976c7be8b77f/02075bdf-e44b-4d3c-ac3b-31b736c20a56.png)
+
+### 导出机制
+
+基于事件（广义）及对应的事件参数导出。其中：
+
+###### 支持的事件（广义）：
+- Click
+- Installs
+- Events：需要手动创建`event_token`
+- Ad revenue：需要依赖聚合 SDK 获取，且额外收费；
+- Subscriptions：需要手动添加额外的代码，且额外收费；
+- Uninstall：需要依赖 FCM SDK 每天发送静默推送消息来监测是否已卸载；
+<!-- <img src='/images/posts/recommended-placeholders-for-callbacks.png' alt='recommended-placeholders-for-callbacks'><br> -->
+
+###### 支持的事件参数：
+- 内置参数：对应 `Placeholder`，支持的列表见 [Adjust Placeholders for Partners
 ](https://partners.adjust.com/placeholders)
-	- 手动统计的参数：对应叫做`CallbackParameter`，支持的上报方式见：
-		- Adjust SDK方式上报（够用了）：[Callback parameters](https://help.adjust.com/en/article/event-tracking-android-sdk#callback-parameters)
-		- Adjust S2S方式上报：[Share custom data](https://help.adjust.com/en/article/server-to-server-events#share-custom-data)
+- 自定义参数：对应 `CallbackParameter`，支持的上报方式见：
+	- Adjust SDK方式上报：[Callback parameters](https://help.adjust.com/en/article/event-tracking-android-sdk#callback-parameters)
+	- Adjust S2S方式上报：[Share custom data](https://help.adjust.com/en/article/server-to-server-events#share-custom-data)
 
 ### 方法一：CSV 至云储存
 
@@ -69,10 +75,8 @@ categories:
 		- 内置参数：使用花括号，如`{gps_adid}`
 		- 自定义参数：使用中括号，如`[user_id]`
 	- 例子：
-```plaintext
-"my constant",{gps_adid},[user_id],{installed_at},{event_name},[item_number],{reporting_revenue}
-```
-
+		```plaintext
+		"my constant",{gps_adid},[user_id],{installed_at},{event_name},[item_number],{reporting_revenue}
 ### 方法二：实时回传
 
 1. 设置实时回传：[Set up callbacks](https://help.adjust.com/en/article/set-up-callbacks)<br>

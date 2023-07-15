@@ -2,7 +2,7 @@
 title: "在 Linux 上添加定时任务"
 date: 2023-07-11T02:19:20Z
 draft: false
-description: Crontab task.
+description: 使用 Crontab 创建简单的定时任务。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -14,7 +14,7 @@ categories:
 - Tool
 ---
 
-## Step1. 安装Crontab
+## Step1. 安装 Crontab
 
 {{< tabs Linux macOS>}}
 {{< tab >}}
@@ -41,7 +41,7 @@ sudo chkconfig crond on
 
 ## Step2. 编写定时任务
 
-### 1. 编辑crontab文件
+### 1. 编辑 crontab 文件
 
 ```shell
 crontab -e
