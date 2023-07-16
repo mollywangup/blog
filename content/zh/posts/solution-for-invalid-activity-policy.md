@@ -17,9 +17,16 @@ categories:
 
 无效流量，也常称作无效活动，以下统一口径为无效流量。
 
-## 无效流量
+## 结论
 
-### 定义及影响
+1. 减少误点击（划重点：各广告平台权重最高的数据指标是 CTR ）：
+   - 可通过使用测试广告单元 ID 及添加测试设备，来避免开发者的误点击；
+   - 可通过遵守广告格式植入指南，来避免用户的误点击；
+   - 可通过优化广告请求及展示逻辑，来进行频次控制；
+2. 使用最新的变现 SDK：
+   - 可避免因 SDK 自身 bug 引发的相关问题；
+
+## 无效流量
 
 1. 定义见 [Invalid traffic](https://support.google.com/admob/answer/3342054?hl=en)
 	可理解为：广告点击表现异常时，会被AdMob（各个广告平台大同小异）判定为无效流量。且无效流量不会产生收益，已产生的收益也会被收回；
@@ -30,22 +37,6 @@ categories:
 The ad request was successful, but no ad was returned due to lack of ad inventory.
 {{< /expand >}}
 	- **重则封变现账户**；
-  
-### 如何避免无效流量
-
-#### 核心
-
-1. 减少误点击（划重点：各广告平台权重最高的数据指标是 CTR ）：
-	- 可通过使用测试广告单元 ID 及添加测试设备，来避免开发者的误点击；
-	- 可通过遵守广告格式植入指南，来避免用户的误点击；
-	- 可通过优化广告请求及展示逻辑，来进行频次控制；
-2. 使用最新的变现 SDK：
-	- 可避免因 SDK 自身 bug 引发的相关问题；
-  
-#### 参考别人的经验
-
-1. 来自呼伟：[Admob账户“无效流量”被限制，账户解封经历](https://mp.weixin.qq.com/s/GlQqIXEX2afZoDjgIUuX3w)
-2. 来自 AdMob 官方案例分享：[AdMob 开发者成功解除无效流量限制的亲身案例分享](https://mp.weixin.qq.com/s/mKDoqlt4hwGLdfZKkxREgA)
 
 ## 如何风控
 
@@ -53,12 +44,12 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 结论：**添加测试设备就安全**；
 
-| 是否使用测试广告单元ID&nbsp;&nbsp;&nbsp; | 是否添加测试设备&nbsp;&nbsp;&nbsp; | 安全性评估&nbsp;&nbsp;&nbsp; | 建议程度 | 测试机的广告效果 |
-| ---------- | --------- | ----------------- | ---------- | ---------- |
-| *yes* | yes | 最安全 | 强烈建议 |  |
-| no | yes | 100%安全 | 建议 |  |
-| yes | no | 不太安全 | 不建议 |  |
-| no | no | 不安全 | 禁止 |  |
+| 是否使用测试广告单元ID&nbsp;&nbsp;&nbsp; | 是否添加测试设备&nbsp;&nbsp;&nbsp; | 安全性评估&nbsp;&nbsp;&nbsp; | 建议程度 |
+| ---------- | --------- | ----------------- | ---------- |
+| *yes* | yes | 最安全 | 强烈建议 |
+| no | yes | 100%安全 | 建议 |
+| yes | no | 不太安全 | 不建议 |
+| no | no | 不安全 | 禁止 |
 
 ### 建议做法二：遵守广告格式植入指南
 
@@ -124,42 +115,26 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 具体做法：
 1. 设置固定的启动时长，如10s；
 2. 设置启动时间间隔，如10s；
-	- 适用于以下两种情况：
-		- 冷启动 -> 热启动
-		- 热启动 -> 热启动
-	- 不适用于以下两种情况：
-		- 冷启动 -> 冷启动
-		- 热启动 -> 冷启动
 
 #### 优化开屏位置的广告展示 
 
 目标：降低误点击，使广告展示没那么突兀；
 
-具体做法：
-1. 适用于interstitial和app_open这两种广告格式；
-2. 核心：给用户3s至10s的缓冲时间；
+具体做法：给用户3s至10s的缓冲时间；
 
-#### 优化App内页面间切换的动画
+#### 优化 App 内页面间切换的动画
 
 目标：页面切换丝滑，广告载入载出也丝滑；
 
 具体做法：
-1. 设置左滑/右滑规则：
-	- 进入次级页面的切换动画，从A页面（无动画） -> 进入B页面（有动画）；
-	- 退出次级页面的切换动画：退出A页面（有动画） -> 进入B页面（无动画）；
-2. 适配 RTL;
+1. 设置页面间的左滑/右滑规则；
+2. 适配 RTL；
 
 #### 完整且准确的跟踪广告活动
 
-目标：
+目标：对于用户在应用中完整的广告活动，做到有较高程度的把控；
 
-- 对于用户在应用中完整的广告活动，做到有较高程度的把控；
-- 核心：拿到点击事件的 ad_response_id；
-
-具体做法：
-1. **广告加载环节**：即ad_load_success和ad_load_error这2个事件；
-2. **广告展示环节**：即ad_show_success和ad_show_error这2个事件；
-3. **广告点击环节**：即ad_click_goal这1个事件；
+具体做法：在广告加载、广告展示、广告点击事件中，收集点击的唯一标识`ad_response_id`参数；
 
 #### 全屏广告格式阅后即焚
 
@@ -167,7 +142,13 @@ The ad request was successful, but no ad was returned due to lack of ad inventor
 
 具体做法：
 1. 展示全屏广告后 -> 用户立即切到后台 -> 再次热启动回到前台 -> **该全屏广告不应该还在**；
-	- 补充：无论用户点击/未点击广告；
 2. 当用户回到前台后，按照**手动关闭全屏广告**的流程，展示相应流程的下一步的页面；
 
 ### 建议做法四：使用最新的变现 SDK
+
+详见各个 SDK 文档的 release notes.
+
+### 参考别人的经验
+
+1. 来自呼伟：[Admob账户“无效流量”被限制，账户解封经历](https://mp.weixin.qq.com/s/GlQqIXEX2afZoDjgIUuX3w)
+2. 来自 AdMob 官方案例分享：[AdMob 开发者成功解除无效流量限制的亲身案例分享](https://mp.weixin.qq.com/s/mKDoqlt4hwGLdfZKkxREgA)

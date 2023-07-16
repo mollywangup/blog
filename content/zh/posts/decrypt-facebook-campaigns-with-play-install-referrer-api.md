@@ -15,15 +15,7 @@ categories:
 - Attribution
 ---
 
-## 背景信息
-
-### 目标
-
-区分用户来源，更具体一点指 **Facebook 推广用户来源于哪一个具体的 Facebook Campaign**；
-
-### 说明
-
-如果已经接了 Adjust/AppsFlyer SDK, 则可直接略过。本文旨在手动解析一手的 Referrer 信息，并设置为 Firebase 用户属性。其中：
+本文旨在手动解析一手的 Referrer 信息，并设置为 Firebase 用户属性。如果已经接了 MMP，可直接略过。（🤝 感兴趣的话也可以了解下）
 
 - 实现方法：
   - 工具：Play Install Referrer API；
@@ -32,9 +24,7 @@ categories:
   - 仅支持安卓系统；
   - 仅支持 Facebook Ads；
 
-## 具体实现
-
-### 方法概述
+## 方法概述
 
 共三步：
 
@@ -59,6 +49,8 @@ categories:
 
 {{< /expand >}}
 
+## 具体实现
+
 ### Step1. 获取 referrerUrl
 
 1. 先接 Play Install Referrer 客户端库：
@@ -67,14 +59,13 @@ categories:
 
 2. 再获取原始的 referrerUrl：
    - 官方方法：[Getting the install referrer](https://developer.android.com/google/play/installreferrer/library#install-referrer)
-   - 参考：
-       ```java
-       ReferrerDetails response = referrerClient.getInstallReferrer();
-       String referrerUrl = response.getInstallReferrer(); // 就是这个东西，且仅需这一个
-       long referrerClickTime = response.getReferrerClickTimestampSeconds();
-       long appInstallTime = response.getInstallBeginTimestampSeconds();
-       boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
-       ```
+      ```java
+      ReferrerDetails response = referrerClient.getInstallReferrer();
+      String referrerUrl = response.getInstallReferrer(); // 就是这个东西，且仅需这一个
+      long referrerClickTime = response.getReferrerClickTimestampSeconds();
+      long appInstallTime = response.getInstallBeginTimestampSeconds();
+      boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
+      ```
 
 ### Step2. 解析 referrerUrl
 
@@ -103,10 +94,10 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
 
 | / | 说明 | 是否Firebase已自动统计 | 例子 |
 | ---------- | --------- | ----------------- | ---------- |
-| `utm_source` | - 指流量来源；<br>- 字符串格式；| - 是；<br>- 体现在BigQuery的**traffic_source.source** | - (direct)<br>- apps.facebook.com<br>- google-play |
-| `utm_medium` | 同上 | - 是；<br>- 体现在BigQuery的**traffic_source.medium** | (none)<br>organic |
+| `utm_source` | 指流量来源；<br>字符串格式；| 是；<br>体现在BigQuery的**traffic_source.source** | (direct)<br>apps.facebook.com<br>google-play |
+| `utm_medium` | 同上 | 是；<br>体现在BigQuery的**traffic_source.medium** | (none)<br>organic |
 | `utm_campaign` | 同上 | / | / |
-| `utm_content` | - 一般主要用于解析来自Facebook Ads的广告；<br>- json字符串格式；| - **否**；<br>- 因此重点是这里） | - 详见下方；<br>- Facebook Ads需进一步解密；|
+| `utm_content` | 一般主要用于解析来自Facebook Ads的广告；<br>json字符串格式；| **否**；<br>因此重点是这里 | 详见下方；<br>Facebook Ads需进一步解密；|
 
 #### utm_content 格式说明
 
@@ -176,14 +167,13 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
 2. 设置用户属性 `campaign_id`：
    - 触发场景：新用户首次启动时触发，且仅触发一次（越早越好）；
    - 方法：[Set user properties](https://firebase.google.com/docs/analytics/user-properties?platform=android)
-    参考：
-        ```java
-        // 正常获取时
-        mFirebaseAnalytics.setUserProperty("campaign_id", campaign_group_id);
+      ```java
+      // 正常获取时
+      mFirebaseAnalytics.setUserProperty("campaign_id", campaign_group_id);
 
-        // 异常时（无法获取或解析）
-        mFirebaseAnalytics.setUserProperty("campaign_id", "unknown");
-        ```
+      // 异常时（无法获取或解析）
+      mFirebaseAnalytics.setUserProperty("campaign_id", "unknown");
+      ```
 
 ## 测试方法
 

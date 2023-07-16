@@ -18,8 +18,8 @@ categories:
 ## 背景信息
 
 两个目标：
-1. 需要在 Adjust 面板查看广告收入数据；
-2. 需要在 Adjust 面板查看内购收入数据；
+1. 需要在 Adjust 看板查看广告收入数据；
+2. 需要在 Adjust 看板查看内购收入数据；
 
 ## 追踪广告收入
 
@@ -28,7 +28,7 @@ categories:
 #### 方法描述
 
 MAX SDK 可获取 [Impression-Level User Revenue](https://dash.applovin.com/documentation/mediation/android/getting-started/advanced-settings#impression-level-user-revenue-api)，通过 SDK-to-SDK 的方式，将 MAX SDK 的 **`ad revenue`** 转发给 Adjust SDK.
-参考：
+
 ```C#
 // Adjust SDK initialization
 AdjustConfig adjustConfig = new AdjustConfig("{YourAppToken}", AdjustEnvironment.Sandbox);
@@ -86,7 +86,6 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 #### 方法描述
 
 1. 通过 Adjust SDK 手动统计一个内购事件如`purchase`，并为其设置金额和币种参数。
-  参考：
     ```C#
     AdjustEvent adjustEvent = new AdjustEvent("8u8bek");
     adjustEvent.setRevenue(0.01, "USD");
@@ -94,14 +93,9 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
     Adjust.trackEvent(adjustEvent);
     ```
 2. 关于事件`purchase`的补充说明：
-   - **event token**: `8u8bek` （已在Adjust后台创建）；
-    <img src='/images/posts/event-token-8u8bek.png' alt='Event token example'>
+   - **event token**: `8u8bek` （在 Adjust 后台创建）；
    - **`setRevenue`**：币种需要设置为`USD`，即默认币种；
    - **`setTransactionId`**：为了防止重复统计内购收入，可设置为`Google Transaction ID`；即使用谷歌支付时谷歌生成的订单唯一标识；
-   - 其余参数：现阶段暂时不加，因为即使加了，面板上也无法查看，只能通过导出raw data的方式；
-        > https://help.adjust.com/en/article/raw-data-exports
-        > https://github.com/adjust/unity_sdk/blob/master/README.md#et-revenue
-        > In addition to the data points the Adjust SDK collects by default, you can use the Adjust SDK to track and add as many custom values as you need (user IDs, product IDs, etc.) to the event or session. Custom parameters are only available as raw data and will not appear in your Adjust dashboard.
 
 #### 参考文档
 

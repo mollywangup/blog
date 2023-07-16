@@ -21,6 +21,8 @@ categories:
 - MMP
 ---
 
+本文适用于侧重广告变现的 Unity 游戏。
+
 ## Firebase SDK
 
 理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；
@@ -206,6 +208,10 @@ categories:
 [Android] [Overview of Android Performance Tuner (Unity)](https://developer.android.com/games/sdk/performance-tuner/unity)
 
 ## Play Install Referrer API
+
+{{< notice info >}}
+注意：接了 MMP 就可以不用接这个了。
+{{< /notice >}}
 
 ### 常用功能
 

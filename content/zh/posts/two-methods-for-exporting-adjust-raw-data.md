@@ -14,11 +14,13 @@ categories:
 - MMP
 ---
 
-## 背景信息
-
 由于 Adjust 看板数据具有较大的分析局限性，因此有必要使用[原始数据导出功能](https://help.adjust.com/en/article/raw-data-exports)，用以更细颗粒度、更自由的多维度交叉分析。
 
-{{< expand "为什么不建议使用 BigQuery?" >}}
+共两种方法，一种是导出至云存储，一种是实时回传给自己的服务器。
+
+![How it works（图源 Adjust）](https://images.ctfassets.net/5s247im0esyq/5IzZDHUzGTvKFMe2IGnPCj/5b60d8ac5c97a05b2e71976c7be8b77f/02075bdf-e44b-4d3c-ac3b-31b736c20a56.png)
+
+<!-- {{< expand "为什么不建议使用 BigQuery?" >}}
 
 1. 时效性：
    - BigQuery：延迟1天半，实时额外收费见 [Data extraction pricing](https://cloud.google.com/bigquery/pricing#data_extraction_pricing)；
@@ -31,37 +33,36 @@ categories:
    - Adjust：专业的归因供应商，打通推广+变现两侧；
 4. 开发成本：
    - BigQuery：使用 Firebase 进行事件统计，需要单独处理打通推广侧（目前仅可实现 Facebook Ads，未来其他推广平台都是潜在的坑）；
-   - Adjust：自备服务器，自建数据库（但原始数据已经接近结构化了）；
+   - Adjust：自备服务器，自建数据库（但原始数据已经接近结构化了）； -->
 
-{{< /expand >}}
+<!-- {{< /expand >}} -->
 
-## 如何导出
+## 导出机制
 
-共两种方法，一种是导出至云存储，一种是实时回传给自己的服务器。
+基于事件（广义）及对应的事件参数导出。
 
-![How it works（图源 Adjust）](https://images.ctfassets.net/5s247im0esyq/5IzZDHUzGTvKFMe2IGnPCj/5b60d8ac5c97a05b2e71976c7be8b77f/02075bdf-e44b-4d3c-ac3b-31b736c20a56.png)
+### 支持的事件（广义）
 
-### 导出机制
+Adjust 称为 `activity_kind`，但本质上属于**事件**。对应的是触发机制。常见需要导出的事件如下：
 
-基于事件（广义）及对应的事件参数导出。其中：
-
-###### 支持的事件（广义）：
 - Click
 - Installs
-- Events：需要手动创建`event_token`
+- Events：需要手动创建`event_token`；
 - Ad revenue：需要依赖聚合 SDK 获取，且额外收费；
 - Subscriptions：需要手动添加额外的代码，且额外收费；
 - Uninstall：需要依赖 FCM SDK 每天发送静默推送消息来监测是否已卸载；
-<!-- <img src='/images/posts/recommended-placeholders-for-callbacks.png' alt='recommended-placeholders-for-callbacks'><br> -->
 
-###### 支持的事件参数：
+### 支持的事件参数
+
+对应的是数据颗粒度。按照是否需要手动设置，共分为以下两类：
+
 - 内置参数：对应 `Placeholder`，支持的列表见 [Adjust Placeholders for Partners
 ](https://partners.adjust.com/placeholders)
 - 自定义参数：对应 `CallbackParameter`，支持的上报方式见：
-	- Adjust SDK方式上报：[Callback parameters](https://help.adjust.com/en/article/event-tracking-android-sdk#callback-parameters)
-	- Adjust S2S方式上报：[Share custom data](https://help.adjust.com/en/article/server-to-server-events#share-custom-data)
+	- SDK 方式：[Callback parameters](https://help.adjust.com/en/article/event-tracking-android-sdk#callback-parameters)
+	- S2S 方式：[Share custom data](https://help.adjust.com/en/article/server-to-server-events#share-custom-data)
 
-### 方法一：CSV 至云储存
+## 方法一：CSV 至云储存
 
 1. 设置每小时自动导出一次：[CSV uploads to cloud storage](https://help.adjust.com/en/article/csv-uploads)
 
@@ -77,7 +78,7 @@ categories:
 	- 例子：
 		```plaintext
 		"my constant",{gps_adid},[user_id],{installed_at},{event_name},[item_number],{reporting_revenue}
-### 方法二：实时回传
+## 方法二：实时回传
 
 1. 设置实时回传：[Set up callbacks](https://help.adjust.com/en/article/set-up-callbacks)<br>
 	<img src='/images/posts/setup-callbacks.png' alt='setup-callbacks'><br>

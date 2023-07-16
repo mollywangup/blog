@@ -2,7 +2,7 @@
 title: "快速生成一个安全的随机密码"
 date: 2021-03-16T01:15:43Z
 draft: false
-description: 强迫症患者的福音。使用的是 OpenSSL 和 pwgen.
+description: 选择困难症患者的福音。使用的是 OpenSSL 和 pwgen.
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -17,63 +17,27 @@ categories:
 
 ## 使用 OpenSSL
 
-### 安装
-
-{{< tabs macOS Debian >}}
-{{< tab >}}
-
-```shell
-brew install openssl
-```
-
-{{< /tab >}}
-{{< tab >}}
-
-```shell
-sudo apt-get install openssl
-```
-
-{{< /tab >}}
-{{< /tabs >}}
-
-验证安装
-
-```shell
-openssl version
-```
-
-### 生成密码
-
-密码例子：`T1W+MDI0nf1d0XZyiJze1Q==`
+使用以下命令行生成的密码形如：`T1W+MDI0nf1d0XZyiJze1Q==`
 
 ```shell
 openssl rand -base64 16
 ```
 
+{{< expand "👇 未安装 OpenSSL 的看这里" >}}
+
+```shell
+# for macOS
+brew install openssl
+
+# for Debian
+sudo apt-get install openssl
+```
+
+{{< /expand >}}
+
 ## 使用 pwgen
 
-### 安装
-
-{{< tabs macOS Debian >}}
-{{< tab >}}
-
-```shell
-brew install pwgen
-```
-
-{{< /tab >}}
-{{< tab >}}
-
-```shell
-sudo apt-get install pwgen
-```
-
-{{< /tab >}}
-{{< /tabs >}}
-
-### 生成密码
-
-密码例子：`shohTh7zoYooRi9c`
+使用以下命令行生成的密码形如：`shohTh7zoYooRi9c`
 
 ```shell
 pwgen -c -n -B -1 16
@@ -91,3 +55,12 @@ pwgen -c -n -B -1 16
 <length>：指定生成密码的长度，默认为8。
 ```
 
+{{< expand "👇 未安装 pwgen 的看这里" >}}
+```shell
+# for macOS
+brew install pwgen
+
+# for Debian
+sudo apt-get install pwgen
+```
+{{< /expand >}}
