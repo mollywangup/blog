@@ -54,11 +54,8 @@ Adjust 称为 `activity_kind`，但本质上属于**事件**。对应的是触�
 
 ### 支持的事件参数
 
-<<<<<<< HEAD
 对应的是数据颗粒度。按照是否需要手动设置，共分为以下两类：
 
-=======
->>>>>>> cbeb73d (modify post and maboutme)
 - 内置参数：对应 `Placeholder`，支持的列表见 [Adjust Placeholders for Partners
 ](https://partners.adjust.com/placeholders)
 - 自定义参数：对应 `CallbackParameter`，支持的上报方式见：
