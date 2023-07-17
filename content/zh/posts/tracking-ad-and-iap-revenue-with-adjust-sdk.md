@@ -15,11 +15,28 @@ categories:
 - S2S
 ---
 
-## 背景信息
+本文旨在使用 Adjust SDK 追踪以下三类事件数据：
 
-两个目标：
-1. 需要在 Adjust 看板查看广告收入数据；
-2. 需要在 Adjust 看板查看内购收入数据；
+1. 普通事件（非收入事件）；
+2. 广告收入；
+3. 内购收入；
+
+## 追踪普通事件
+
+### 方法描述
+
+在 Adjust 后台创建为每个事件创建一个 event token，然后在代码中埋点即可。
+
+```C#
+AdjustEvent adjustEvent = new AdjustEvent("abc123");
+Adjust.trackEvent(adjustEvent);
+```
+
+### 参考文档
+
+1. Adjust：[Create an event token](https://help.adjust.com/en/article/basic-event-setup#create-an-event-token)
+2. GitHub：[Track an event](https://github.com/adjust/unity_sdk#track-an-event)
+
 
 ## 追踪广告收入
 
@@ -87,20 +104,20 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 
 1. 通过 Adjust SDK 手动统计一个内购事件如`purchase`，并为其设置金额和币种参数。
     ```C#
-    AdjustEvent adjustEvent = new AdjustEvent("8u8bek");
+    AdjustEvent adjustEvent = new AdjustEvent("abc123");
     adjustEvent.setRevenue(0.01, "USD");
     adjustEvent.setTransactionId("transactionId");
     Adjust.trackEvent(adjustEvent);
     ```
 2. 关于事件`purchase`的补充说明：
-   - **event token**: `8u8bek` （在 Adjust 后台创建）；
+   - **event token**: `abc123` （在 Adjust 后台创建）；
    - **`setRevenue`**：币种需要设置为`USD`，即默认币种；
    - **`setTransactionId`**：为了防止重复统计内购收入，可设置为`Google Transaction ID`；即使用谷歌支付时谷歌生成的订单唯一标识；
 
 #### 参考文档
 
-1. [Track revenue events (with the Adjust SDK)](https://help.adjust.com/en/article/revenue-events#track-revenue-events)
-2. [Unity SDK of Adjust](https://github.com/adjust/unity_sdk/blob/master/README.md#et-revenue)
+1. [Adjust]：[Track revenue events (with the Adjust SDK)](https://help.adjust.com/en/article/revenue-events#track-revenue-events)
+2. [GitHub]：[Ad revenue tracking](https://github.com/adjust/unity_sdk#ad-revenue-tracking)
 
 #### 优缺点
 
@@ -115,8 +132,8 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 
 #### 参考文档
 
-1. [Track revenue events (server-to-server)](https://help.adjust.com/en/article/revenue-events#track-revenue-events-sts)
-2. [Server-to-server (S2S) events](https://help.adjust.com/en/article/server-to-server-events#set-up-s2s-security)
+1. [Adjust]：[Track revenue events (server-to-server)](https://help.adjust.com/en/article/revenue-events#track-revenue-events-sts)
+2. [Adjust]：[Server-to-server (S2S) events](https://help.adjust.com/en/article/server-to-server-events#set-up-s2s-security)
 
 #### 优缺点
 

@@ -19,7 +19,7 @@ categories:
 几点说明：
 - 共两个阶段会对已有字段（以下称为列）进行加工：
   - Looker Studio 连接 BigQuery 时：加在原有列的基础上；
-  - Looker Studio 可视化查询时：加在已导入列的基础上；
+  - Looker Studio 可视化查询时：加在已导入列的基础上，即实时计算时；
 - 示例的 SQL 语句省略了除0的情况；
 - BigQuery 支持窗口函数；
 
@@ -79,6 +79,7 @@ CAST(TIMESTAMP_DIFF(TIMESTAMP_MICROS(event_timestamp), TIMESTAMP_MICROS(user_fir
 ### media_source
 
 用于区分流量来源（归因）。
+⚠ 需要按需修改：实际接入的流量源。
 
 👉 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/decrypt-facebook-campaigns-with-play-install-referrer-api/" target="_blank">使用 Play Install Referrer API 解密 Facebook Campaign</a>
 
@@ -91,7 +92,8 @@ END AS media_source
 
 ### revenue_kind
 
-用于区分收入类型。与自定义事件有关
+用于区分收入类型。
+⚠ 需要按需修改：收入事件名称。
 
 ```sql
 CASE event_name
@@ -105,6 +107,7 @@ END AS revenue_kind
 ### revenue
 
 用于统一计算所有类型的收入：广告、内购（一次性）、订阅。
+⚠ 需要按需修改：实际接入的聚合平台、收入事件名称。
 
 ```sql
 CASE 
@@ -135,9 +138,10 @@ COUNT(DISTINCT CASE WHEN event_name = 'first_open' THEN user_pseudo_id END)
 - Adjust：与应用发生互动，见 [What is an active user?](https://www.adjust.com/glossary/active-user/)；
 - Firebase：用户在应用前台互动，并记录了 `user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)；
 - BigQuery：至少发生了一个事件，且该事件的参数 `engagement_time_msec` > 0，见 [N-day active users](https://support.google.com/analytics/answer/9037342?hl=en#ndayactives&zippy=%2Cin-this-article)
+- 自行定义：至少发生了一次自定义的 `login` 事件；
 
 ```sql
--- Firebase定义的活跃
+-- Firebase 定义的活跃
 COUNT(DISTINCT CASE WHEN event_name = 'user_engagement' THEN user_pseudo_id END)
 
 -- 自定义的活跃

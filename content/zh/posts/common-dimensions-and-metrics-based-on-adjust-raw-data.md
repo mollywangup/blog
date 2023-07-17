@@ -18,8 +18,8 @@ categories:
 
 几点说明：
 - 共两个阶段会对已有字段（以下称为列）进行加工：
-  - 写入数仓前：在 S3 原有列的基础上；
-  - 写入数仓后：在 Druid 原有列的基础上，也可以称为查询；
+  - 写入数仓时：在 S3 原有列的基础上；
+  - 写入数仓后：在 Druid 原有列的基础上，也就是可视化查询时；
 - 示例的 SQL 语句省略了除0的情况；
 - Druid 不支持窗口函数；
 
@@ -90,6 +90,7 @@ END AS "event_name"
 ### media_source
 
 用于区分流量来源（归因）。
+⚠ 需要按需修改：实际接入的流量源。
 
 ```sql
 CASE
@@ -101,6 +102,7 @@ END AS "media_source"
 ### revenue_kind
 
 用于区分收入类型。
+⚠ 需要按需修改：收入事件名称。
 
 ```sql
 CASE
@@ -114,6 +116,7 @@ END AS "revenue_kind"
 ### revenue
 
 用于统一计算所有类型的收入：广告、内购（一次性）、订阅。
+⚠ 需要按需修改：实际接入的聚合平台、收入事件名称。
 
 ```sql
 CASE
@@ -156,8 +159,7 @@ COUNT(DISTINCT CASE WHEN activity_kind = 'install' THEN adid END)
 - Adjust：与应用发生互动，见 [What is an active user?](https://www.adjust.com/glossary/active-user/)；
 - Firebase：用户在应用前台互动，并记录了 `user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)；
 - BigQuery：至少发生了一个事件，且该事件的参数 `engagement_time_msec` > 0，见 [N-day active users](https://support.google.com/analytics/answer/9037342?hl=en#ndayactives&zippy=%2Cin-this-article)
-
-这里使用的是自定义的活跃：至少发生了一次自定义的 `login` 事件；
+- 自行定义：至少发生了一次自定义的 `login` 事件；
 
 ```sql
 COUNT(DISTINCT CASE WHEN event_name = 'login' THEN adid END)
