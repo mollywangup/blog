@@ -107,18 +107,18 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 
 创建一个普通事件如 `purchase`，在上报时，为其设置金额和币种参数，即可被 Adjust 识别为收入事件。
 
-{{< alert theme="info" >}}
-补充说明：
-**`setRevenue`**：币种需要设置为`USD`，即默认币种；
-**`setTransactionId`**：为了防止重复统计内购收入，可设置为订单唯一标识；
-{{< /alert >}}
-
 ```C#
 AdjustEvent adjustEvent = new AdjustEvent("abc123");
 adjustEvent.setRevenue(0.01, "USD");
 adjustEvent.setTransactionId("transactionId");
 Adjust.trackEvent(adjustEvent);
 ```
+
+{{< alert theme="info" >}}
+补充说明：
+**`setRevenue`**：币种需要设置为`USD`，即默认币种；
+**`setTransactionId`**：为了防止重复统计内购收入，可设置为订单唯一标识；
+{{< /alert >}}
 
 #### 参考文档
 
