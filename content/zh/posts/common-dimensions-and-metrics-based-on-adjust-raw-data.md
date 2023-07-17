@@ -15,19 +15,22 @@ categories:
 - MMP
 ---
 
-本文基于 Adjust（原始数据） -> S3（云存储）-> Druid（数仓）。几点说明：
+本文基于 Adjust（原始数据） -> S3（云存储）-> Druid（数仓）。
 
-- 原 `created_at` 在数仓中为 `__time`；（Druid 需要）
-- 省略了除法运算中的分母为0的情况；
+几点说明：
+- 共两个阶段会对已有字段（以下称为列）进行加工：
+  - 写入数仓前：在 S3 原有列的基础上；
+  - 写入数仓后：在 Druid 原有列的基础上，也可以称为查询；
+- 示例的 SQL 语句省略了除0的情况；
 - Druid 不支持窗口函数；
 
 ## 统计原则
 
 ### 一个 ID，两个时间戳
 
-- adid：用户唯一标识；
-- installed_at：首次打开的时间戳；
-- created_at：事件发生的时间戳；
+- `adid`：用户唯一标识；
+- `installed_at`：首次打开的时间戳；
+- `created_at`：事件发生的时间戳，在数仓中为`__time`；（Druid 需要）；
 
 ### 统计次数
 
@@ -224,7 +227,7 @@ COUNT(DISTINCT CASE WHEN activity_kind = 'ad_revenue' THEN adid END)
 ### eCPM
 
 ```sql
-SUM(CASE WHEN revenue_kind = 'Ad' THEN revenue END) / COUNT(DISTINCT CASE WHEN activity_kind = 'ad_revenue' THEN __time END) * 1000
+SUM(CASE WHEN revenue_kind = 'Ad' THEN revenue END) / Imps * 1000
 ```
 
 ### Imps per DAU
