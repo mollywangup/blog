@@ -109,8 +109,8 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 
 {{< alert theme="info" >}}
 补充说明：
-- **`setRevenue`**：币种需要设置为`USD`，即默认币种；
-- **`setTransactionId`**：为了防止重复统计内购收入，可设置为`Google Transaction ID`，即使用谷歌支付时谷歌生成的订单唯一标识；
+**`setRevenue`**：币种需要设置为`USD`，即默认币种；
+**`setTransactionId`**：为了防止重复统计内购收入，可设置为订单唯一标识；
 {{< /alert >}}
 
 ```C#
