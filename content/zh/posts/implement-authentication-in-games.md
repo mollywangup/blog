@@ -1,6 +1,6 @@
 ---
 title: "接入各种登录方式"
-date: 2023-03-02T15:03:42Z
+date: 2022-03-02T15:03:42Z
 draft: false
 description: 可直接接入，可间接接入。常见登录方式有 Facebook/Google/Play Games.
 hideToc: false

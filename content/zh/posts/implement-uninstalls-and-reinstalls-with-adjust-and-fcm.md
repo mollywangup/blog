@@ -1,6 +1,6 @@
 ---
 title: "使用 Adjust + FCM 追踪卸载和重装"
-date: 2023-05-04T09:41:20Z
+date: 2023-02-02T09:41:20Z
 draft: false
 description: Adjust SDK 无法独自实现，需要借助 FCM SDK 的消息推送功能来实现。
 hideToc: false

@@ -1,6 +1,6 @@
 ---
 title: "通用：上架 GP 常用 SDK/Service 集成需求"
-date: 2023-03-29T09:35:45Z
+date: 2022-07-01T09:35:45Z
 draft: false
 description: Firebase, Facebook, MAX, Adjust, Helpshift, APT
 hideToc: false

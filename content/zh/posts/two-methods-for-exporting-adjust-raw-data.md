@@ -1,6 +1,6 @@
 ---
 title: "将 Adjust 原始数据导出的两种方法"
-date: 2023-04-04T16:01:08Z
+date: 2023-02-04T16:01:08Z
 draft: false
 description: 共两种方法，实时回传和每小时上传 CSV 至云储存。
 hideToc: false
