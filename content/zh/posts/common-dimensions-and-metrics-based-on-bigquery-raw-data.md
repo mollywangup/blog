@@ -19,7 +19,7 @@ categories:
 几点说明：
 - 共两个阶段会对已有字段（以下称为列）进行加工：
   - Looker Studio 连接 BigQuery 时：加在原有列的基础上；
-  - Looker Studio 可视化查询时：在 Looker 已导入列的基础上；
+  - Looker Studio 可视化查询时：加在已导入列的基础上；
 - 示例的 SQL 语句省略了除0的情况；
 - BigQuery 支持窗口函数；
 
@@ -76,27 +76,30 @@ CAST(TIMESTAMP_DIFF(TIMESTAMP_MICROS(event_timestamp), TIMESTAMP_MICROS(user_fir
 CAST(TIMESTAMP_DIFF(TIMESTAMP_MICROS(event_timestamp), TIMESTAMP_MICROS(user_first_touch_timestamp), MINUTE) AS INT64) AS minutes_x
 ```
 
-### revenue_kind
-
-用于区分收入类型。
-
-```sql
-CASE event_name
-    WHEN 'ad_play_ok' THEN 'AD'
-    WHEN 'purchase_gold_ok' THEN 'IAP'
-    ELSE 'unknown'
-END AS revenue_kind
-```
-
 ### media_source
 
 用于区分流量来源（归因）。
 
+👉 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/decrypt-facebook-campaigns-with-play-install-referrer-api/" target="_blank">使用 Play Install Referrer API 解密 Facebook Campaign</a>
+
 ```sql
-CASE
-    WHEN "{fb_install_referrer_campaign_group_id}" IS NOT NULL THEN 'Facebook Ads'
+CASE traffic_source.source
+    WHEN 'apps.facebook.com' THEN 'Facebook Ads'
     ELSE 'Organic'
-END AS "media_source"
+END AS media_source
+```
+
+### revenue_kind
+
+用于区分收入类型。与自定义事件有关
+
+```sql
+CASE event_name
+    WHEN 'ad_revenue' THEN 'Ad'
+    WHEN 'purchase' THEN 'IAP'
+    WHEN 'subscription' THEN 'Subscription'
+    ELSE 'unknown'
+END AS revenue_kind
 ```
 
 ### revenue
@@ -104,11 +107,11 @@ END AS "media_source"
 用于统一计算所有类型的收入：广告、内购（一次性）、订阅。
 
 ```sql
-CASE
-    WHEN "{event_name}" IN ('purchase', 'subscription') THEN "[price]"
-    WHEN "{activity_kind}" = 'ad_revenue' AND "{ad_mediation_platform}" = 'applovin_max_sdk' THEN "{reporting_revenue}"
-    ELSE 0
-END AS "revenue"
+CASE 
+    WHEN event_name = 'ad_revenue' AND event_params.key = 'ad_revenue' THEN event_params.value.double_value
+    WHEN event_name IN ('purchase', 'subscription') AND event_params.key = 'price' THEN event_params.value.float_value 
+    ELSE 0 
+END AS revenue
 ```
 
 ## 基础指标
@@ -161,7 +164,7 @@ SUM(revenue) / newUser
 
 ### RR
 
-留存率。与上述活跃定义取齐，留存率计算方式：`Rx = Dx活跃 / D0活跃`。
+留存率。与上述活跃定义取齐，留存率计算公式：`Rx = Dx活跃 / D0活跃`。
 
 ```sql
 -- 0D

@@ -87,6 +87,17 @@ CASE
 END AS "event_name"
 ```
 
+### media_source
+
+用于区分流量来源（归因）。
+
+```sql
+CASE
+    WHEN "{fb_install_referrer_campaign_group_id}" IS NOT NULL THEN 'Facebook Ads'
+    ELSE 'Organic'
+END AS "media_source"
+```
+
 ### revenue_kind
 
 用于区分收入类型。
@@ -98,17 +109,6 @@ CASE
     WHEN "{event_name}" = 'subscription' THEN 'Subscription'
     ELSE 'Unknown'
 END AS "revenue_kind"
-```
-
-### media_source
-
-用于区分流量来源（归因）。
-
-```sql
-CASE
-    WHEN "{fb_install_referrer_campaign_group_id}" IS NOT NULL THEN 'Facebook Ads'
-    ELSE 'Organic'
-END AS "media_source"
 ```
 
 ### revenue
@@ -183,14 +183,23 @@ SUM(revenue) / newUser
 
 ### RR
 
-留存率。与上述活跃定义取齐，留存率计算方式：`Rx = Dx活跃 / D0活跃`。
+留存率。与上述活跃定义取齐，留存率计算公式：`Rx = Dx活跃 / D0活跃`。
 
 ```sql
+-- 0D
+COUNT(DISTINCT CASE WHEN event_name = 'login' AND days_x = 0 THEN adid END)
+
+-- 1D
+COUNT(DISTINCT CASE WHEN event_name = 'login' AND days_x = 1 THEN adid END)
+
+-- 7D
+COUNT(DISTINCT CASE WHEN event_name = 'login' AND days_x = 7 THEN adid END)
+
 -- R1
-CAST(COUNT(DISTINCT CASE WHEN event_name = 'login' AND days_x = 1 THEN adid END) AS FLOAT) / COUNT(DISTINCT CASE WHEN event_name = 'login' AND days_x = 0 THEN adid END)
+1D / 0D
 
 -- R7
-CAST(COUNT(DISTINCT CASE WHEN event_name = 'login' AND days_x = 7 THEN adid END) AS FLOAT) / COUNT(DISTINCT CASE WHEN event_name = 'login' AND days_x = 0 THEN adid END)
+7D / 0D
 ```
 
 ### LTV
