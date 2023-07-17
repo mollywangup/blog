@@ -39,21 +39,19 @@ categories:
 
 ## Step1. 收集原始数据
 
-👇 指路我的另外两篇文章：
-- <a href="" target="_blank"></a>
-- <a href="" target="_blank"></a>
+👇 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/tracking-logevent-and-setuserproperty-with-firebase-sdk/" target="_blank">使用 Firebase 统计事件&设置用户属性</a>
 
 ## Step2. 原始数据至数仓
 
 本文使用的是 **GCS + BigQuery**.
 
-👉 指路我的另外一篇文章 <a href="" target="_blank"></a>
+仅需在 GA 后台设置导出至 BigQuery，即可实现自动将原始数据存储在 GCS 并存储至 BigQuery.
 
 ## Step3. 可视化
 
 本文使用的是 **Looker Studio**.
 
-- [Looker Studio]：[Connect to Data](https://lookerstudio.google.com/data)
+傻瓜式操作，见 [Connect to Data](https://lookerstudio.google.com/data)
 
 ## 附：原始数据清洗 SQL
 
