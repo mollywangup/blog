@@ -83,7 +83,7 @@ TIMESTAMPDIFF(MINUTE, MILLIS_TO_TIMESTAMP("{installed_at}" * 1000), MILLIS_TO_TI
 2. 过了零点就是次日了;
 
 <br>
-⚠ 注意 Adjust 和这里计算 days_x 的方式，都属于**第一种**。
+⚠ Adjust 和这里计算 days_x 的方式，都属于第一种。
 {{< /alert >}}
 
 ### event_name
