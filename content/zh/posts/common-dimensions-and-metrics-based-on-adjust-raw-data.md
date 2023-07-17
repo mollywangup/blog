@@ -29,7 +29,7 @@ categories:
 
 - `adid`：用户唯一标识；
 - `installed_at`：首次打开的时间戳；
-- `created_at`：事件发生的时间戳，在数仓中为`__time`；（Druid 需要）；
+- `created_at`：事件发生的时间戳，在数仓中为`__time`；（Druid 需要）
 
 ### 统计次数
 
@@ -75,6 +75,15 @@ TIMESTAMPDIFF(HOUR, MILLIS_TO_TIMESTAMP("{installed_at}" * 1000), MILLIS_TO_TIME
 -- minutes_x
 TIMESTAMPDIFF(MINUTE, MILLIS_TO_TIMESTAMP("{installed_at}" * 1000), MILLIS_TO_TIMESTAMP("{created_at}" * 1000)) AS "minutes_x"
 ```
+
+{{< alert theme="info" >}}
+📌 关于次日，有两种可能的定义：
+
+1. 严格间隔 24h 为次日；
+2. 过了零点就是次日了;
+
+注意 Adjust 和这里计算 days_x 的方式，都属于**第一种**。
+{{< /alert >}}
 
 ### event_name
 
