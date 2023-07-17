@@ -9,10 +9,13 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - MySQL
+- SQL
 - OLTP
 categories:
 - DB
 ---
+
+✍ 本文作为学习笔记。
 
 ## 初始化
 
@@ -78,15 +81,15 @@ SHOW GRANTS FOR admin;
 ### 修改权限
 
 ```sql
-# 授权所有权限
+-- 授权所有权限
 GRANT ALL PRIVILEGES ON *.* TO 'wangli'@'%';
 FLUSH PRIVILEGES;
 
-# 移除所有权限
+-- 移除所有权限
 REVOKE ALL PRIVILEGES ON *.* FROM 'wangli'@'%';
 FLUSH PRIVILEGES;
 
-# 授权指定数据库
+-- 授权指定数据库
 GRANT ALL PRIVILEGES ON <database_name>.* TO 'admin'@'%';
 FLUSH PRIVILEGES;
 ```
@@ -119,11 +122,11 @@ USE <database_name>;
 ### 创建数据表
 
 ```sql
-# 复制已有数据库表
+-- 复制已有数据库表
 CREATE TABLE `new_table` AS (SELECT * FROM `old_table`);
 
-# 直接创建数据库表: 
-CREATE TABLE IF NOT EXISTS `mytable `(
+-- 直接创建数据库表 
+CREATE TABLE IF NOT EXISTS `mytable`(
    `id` INT UNSIGNED AUTO_INCREMENT,
    `account_id` VARCHAR(25) NOT NULL COMMENT '广告账户ID',
    `account_name` VARCHAR(50),
