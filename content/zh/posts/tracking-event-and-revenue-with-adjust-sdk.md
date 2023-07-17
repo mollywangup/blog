@@ -26,7 +26,7 @@ categories:
 
 ### 方法描述
 
-在 Adjust 后台创建为每个事件创建一个 event token，然后在代码中埋点即可。
+在 Adjust 后台为每个事件创建一个 event token，然后在代码中埋点即可。
 
 ```C#
 AdjustEvent adjustEvent = new AdjustEvent("abc123");
@@ -35,11 +35,13 @@ Adjust.trackEvent(adjustEvent);
 
 ### 参考文档
 
-1. Adjust：[Create an event token](https://help.adjust.com/en/article/basic-event-setup#create-an-event-token)
-2. GitHub：[Track an event](https://github.com/adjust/unity_sdk#track-an-event)
+1. [Adjust]：[Create an event token](https://help.adjust.com/en/article/basic-event-setup#create-an-event-token)
+2. [GitHub]：[Track an event](https://github.com/adjust/unity_sdk#track-an-event)
 
 
 ## 追踪广告收入
+
+共两种方式，推荐 SDK-to-SDK 方式。
 
 ### 方式一（SDK-to-SDK方式）（推荐）
 
@@ -72,8 +74,8 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 
 #### 参考文档
 
-1. Adjust: [Get real-time data using SDK postbacks](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
-2. GitHub: [Track AppLovin MAX ad revenue with Adjust SDK](https://github.com/adjust/unity_sdk/blob/master/doc/english/sdk-to-sdk/applovin-max.md)
+1. [Adjust]：[Get real-time data using SDK postbacks](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
+2. [GitHub]：[Track AppLovin MAX ad revenue with Adjust SDK](https://github.com/adjust/unity_sdk/blob/master/doc/english/sdk-to-sdk/applovin-max.md)
 
 <!-- #### 优缺点
 
@@ -88,7 +90,7 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 
 #### 参考文档
 
-Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
+[Adjust]：[Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
 
 <img src='/images/posts/connect-adjust-to-your-applovin-MAX-account.png' alt='Connect Adjust to your AppLovin MAX account'>
 
@@ -99,7 +101,7 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 
 ## 追踪内购收入
 
-### 方式一（SDK方式）（推荐）
+### 方式一（SDK方式）
 
 #### 方法描述
 
@@ -143,7 +145,7 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 
 ## 追踪订阅收入
 
-#### 方法描述
+### 方法描述
 
 构造 subscription 对象，直接在代码中埋点即可。
 
@@ -164,7 +166,7 @@ subscription.setPurchaseTime(purchaseTime);
 Adjust.trackPlayStoreSubscription(subscription);
 ```
 
-#### 参考文档
+### 参考文档
 
 1. [Adjust]：[Measure subscriptions](https://help.adjust.com/en/article/measure-subscriptions-react-native-sdk)
 2. [GitHub]：[Subscription tracking](https://github.com/adjust/unity_sdk#subscription-tracking)
