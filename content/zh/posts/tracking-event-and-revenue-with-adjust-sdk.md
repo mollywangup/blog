@@ -1,5 +1,5 @@
 ---
-title: "使用 Adjust 追踪事件和收入收据"
+title: "使用 Adjust 追踪事件和收入数据"
 date: 2023-02-02T06:06:12Z
 draft: false
 description: 广告收入通过聚合 SDK 转发而来（额外收费），内购收入通过设置带有金额和币种参数的普通事件而来，订阅收入有专门的 subscription API（额外收费）。

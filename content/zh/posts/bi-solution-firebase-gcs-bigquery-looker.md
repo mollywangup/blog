@@ -21,7 +21,7 @@ categories:
 - BASS
 ---
 
-## 背景信息
+🙇‍♀️ 本文是个地图索引。
 
 本文旨在将来自 Firebase 的原始数据可视化在 Looker Studio. 其中，不同的工具分工如下：
 
@@ -37,12 +37,24 @@ categories:
   - Google 生态的可视化工具；
   - 可直接连接 BigQuery，Google 生态；
 
-## 原始字段
+## Step1. 收集原始数据
 
+👇 指路我的另外两篇文章：
+- <a href="" target="_blank"></a>
+- <a href="" target="_blank"></a>
 
+## Step2. 原始数据至数仓
 
-## 加工字段的SQL语句
+本文使用的是 **GCS + BigQuery**.
 
-### 数据源级别（在作为数据源的Query中）
+👉 指路我的另外一篇文章 <a href="" target="_blank"></a>
 
-### 数理统计级别（在Looker Studio中）
+## Step3. 可视化
+
+本文使用的是 **Looker Studio**.
+
+- [Looker Studio]：[Connect to Data](https://lookerstudio.google.com/data)
+
+## 附：原始数据清洗 SQL
+
+👉 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/common-dimensions-and-metrics-based-on-bigquery-raw-data/" target="_blank">基于 BigQuery 原始数据的指标体系</a>

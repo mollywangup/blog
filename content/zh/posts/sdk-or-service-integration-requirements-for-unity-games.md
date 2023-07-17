@@ -142,7 +142,7 @@ categories:
 
 ### 常用功能
 
-👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-event-and-revenue-with-adjust-sdk/" target="_blank">使用 Adjust 追踪事件和收入收据</a>
+👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-event-and-revenue-with-adjust-sdk/" target="_blank">使用 Adjust 追踪事件和收入数据</a>
 
 1. 事件统计功能（Log Events）；
 2. 手动统计广告收入（Ad Revenue）：方法是将MAX SDK的广告收入转发给Adjust SDK；
