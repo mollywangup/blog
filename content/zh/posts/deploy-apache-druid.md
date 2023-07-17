@@ -1,7 +1,7 @@
 ---
 title: "部署 Apache Druid"
 date: 2023-07-03T10:58:13Z
-draft: false
+draft: true
 description: Deploy Apache Druid on a Linux system.
 hideToc: false
 enableToc: true

@@ -15,3 +15,29 @@ categories:
 - DB
 ---
 
+本文旨在将来自 S3 的 .csv.gz 数据，批量摄取至 Druid. 其中：
+
+- Apache Druid: `26.0.0`
+- 参考文档：
+  - <a href="https://druid.apache.org/docs/latest/multi-stage-query/index.html" target="_blank">SQL-based ingestion</a>
+  - <a href="https://druid.apache.org/docs/latest/ingestion/native-batch-input-sources.html#s3-input-source" target="_blank">S3 input source</a>
+
+## REPLACE all data
+
+```sql
+REPLACE INTO <target table>
+OVERWRITE ALL
+< SELECT query >
+PARTITIONED BY <time granularity>
+[ CLUSTERED BY <column list> ]
+```
+
+## REPLACE specific time ranges
+
+```sql
+REPLACE INTO <target table>
+OVERWRITE WHERE __time >= TIMESTAMP '<lower bound>' AND __time < TIMESTAMP '<upper bound>'
+< SELECT query >
+PARTITIONED BY <time granularity>
+[ CLUSTERED BY <column list> ]
+```
