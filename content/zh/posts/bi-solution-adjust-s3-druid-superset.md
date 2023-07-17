@@ -23,6 +23,8 @@ categories:
 
 ## 背景信息
 
+🙇‍♀️ 本文是个地图索引。
+
 本文旨在将来自 Adjust 的原始数据可视化在 Superset. 其中，不同的工具分工如下：
 
 - **Adjust**：
@@ -55,13 +57,15 @@ categories:
 
 本文使用的是 **Apache Druid**.
 
+👉 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/ingest-s3-data-with-druid-sql-based-ingestion-task/" target="_blank">使用 Druid SQL-based ingestion 批量摄取 S3 数据</a>
 
 ## Step4. 可视化
 
+本文使用的是 **Apache Superset**.
 
-
+- Docker 部署：[apache/superset](https://hub.docker.com/r/apache/superset)
+- 支持的数据库：[Supported Databases](https://superset.apache.org/docs/databases/installing-database-drivers)
 
 ## 附：原始数据清洗 SQL
 
-
-
+👉 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/common-dimensions-and-metrics-based-on-adjust-raw-data/" target="_blank">基于 Adjust 原始数据的指标体系</a>
