@@ -1,5 +1,5 @@
 ---
-title: "使用 Adjust 追踪广告&内购收入"
+title: "使用 Adjust 追踪事件和收入收据"
 date: 2023-02-02T06:06:12Z
 draft: false
 description: 广告收入通过聚合 SDK 转发而来（额外收费服务），一次性购买的内购收入通过设置带有货币金额属性的事件而来，订阅性质的内购收入有专门的 subscription API（额外收费服务）。
@@ -15,11 +15,12 @@ categories:
 - S2S
 ---
 
-本文旨在使用 Adjust SDK 追踪以下三类事件数据：
+本文旨在使用 Adjust SDK 追踪以下四类事件数据：
 
-1. 普通事件（非收入事件）；
+1. 普通事件（指非收入事件）；
 2. 广告收入；
 3. 内购收入；
+4. 订阅收入；
 
 ## 追踪普通事件
 
@@ -74,10 +75,10 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 1. Adjust: [Get real-time data using SDK postbacks](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
 2. GitHub: [Track AppLovin MAX ad revenue with Adjust SDK](https://github.com/adjust/unity_sdk/blob/master/doc/english/sdk-to-sdk/applovin-max.md)
 
-#### 优缺点
+<!-- #### 优缺点
 
 - 优点：实时；
-- 缺点：需要开发且发版；
+- 缺点：需要开发且发版； -->
 
 ### 方式二（API Key）
 
@@ -91,10 +92,10 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 
 <img src='/images/posts/connect-adjust-to-your-applovin-MAX-account.png' alt='Connect Adjust to your AppLovin MAX account'>
 
-#### 优缺点
+<!-- #### 优缺点
 
 - 优点：快速，成本低；
-- 缺点：非实时；
+- 缺点：非实时； -->
 
 ## 追踪内购收入
 
@@ -119,10 +120,10 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 1. [Adjust]：[Track revenue events (with the Adjust SDK)](https://help.adjust.com/en/article/revenue-events#track-revenue-events)
 2. [GitHub]：[Ad revenue tracking](https://github.com/adjust/unity_sdk#ad-revenue-tracking)
 
-#### 优缺点
+<!-- #### 优缺点
 
 - 优点：快速，开发成本低；
-- 缺点：断网延迟等；
+- 缺点：断网延迟等； -->
 
 ### 方式二（S2S方式）
 
@@ -135,7 +136,36 @@ Adjust: [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en
 1. [Adjust]：[Track revenue events (server-to-server)](https://help.adjust.com/en/article/revenue-events#track-revenue-events-sts)
 2. [Adjust]：[Server-to-server (S2S) events](https://help.adjust.com/en/article/server-to-server-events#set-up-s2s-security)
 
-#### 优缺点
+<!-- #### 优缺点
 
 - 优点：效率和准确性更高；
-- 缺点：需要自备服务器； 
+- 缺点：需要自备服务器；  -->
+
+## 追踪订阅收入
+
+#### 方法描述
+
+构造 subscription 对象，直接在代码中埋点即可。
+
+{{< alert theme="warning" >}}
+⚠ 注意：`price` 为 long 类型，假定订阅价格是 $9.99，则需要上报为 `9.99 * 1000000 = 9990000`，详见 [getPriceAmountMicros](https://developer.android.com/reference/com/android/billingclient/api/ProductDetails.PricingPhase#getPriceAmountMicros())
+{{< /alert >}}
+
+```C#
+AdjustPlayStoreSubscription subscription = new AdjustPlayStoreSubscription(
+    price,
+    currency,
+    sku,
+    orderId,
+    signature,
+    purchaseToken);
+subscription.setPurchaseTime(purchaseTime);
+
+Adjust.trackPlayStoreSubscription(subscription);
+```
+
+#### 参考文档
+
+1. [Adjust]：[Measure subscriptions](https://help.adjust.com/en/article/measure-subscriptions-react-native-sdk)
+2. [GitHub]：[Subscription tracking](https://github.com/adjust/unity_sdk#subscription-tracking)
+
