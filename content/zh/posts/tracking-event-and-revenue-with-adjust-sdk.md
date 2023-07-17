@@ -22,11 +22,15 @@ categories:
 3. 内购收入；
 4. 订阅收入；
 
+{{< notice info >}}
+💡 理论上，收入事件 = 设置了金额和币种参数的普通事件，所以额外收费的**广告收入**和**订阅收入**服务，是可以作为一个普通的收入事件上报的（此方法本文已略）。
+{{< /notice >}}
+
 ## 追踪普通事件
 
 ### 方法描述
 
-在 Adjust 后台为每个事件创建一个 event token，然后在代码中埋点即可。
+在 Adjust 后台为每个事件创建一个 event token，然后直接上报即可。
 
 ```C#
 AdjustEvent adjustEvent = new AdjustEvent("abc123");
@@ -150,7 +154,7 @@ Adjust.trackEvent(adjustEvent);
 
 ### 方法描述
 
-构造 subscription 对象，直接在代码中埋点即可。
+构造 subscription 对象，直接上报即可。
 
 {{< alert theme="warning" >}}
 ⚠ 注意：`price` 为 long 类型，假定订阅价格是 $9.99，则需要上报为 `9.99 * 1000000 = 9990000`，详见 [getPriceAmountMicros](https://developer.android.com/reference/com/android/billingclient/api/ProductDetails.PricingPhase#getPriceAmountMicros())
@@ -173,4 +177,3 @@ Adjust.trackPlayStoreSubscription(subscription);
 
 1. [Adjust]：[Measure subscriptions](https://help.adjust.com/en/article/measure-subscriptions-react-native-sdk)
 2. [GitHub]：[Subscription tracking](https://github.com/adjust/unity_sdk#subscription-tracking)
-
