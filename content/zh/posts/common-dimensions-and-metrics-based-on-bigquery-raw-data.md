@@ -58,7 +58,7 @@ COUNT(DISTINCT event_timestamp) / COUNT(DISTINCT user_pseudo_id)
 ## 新增计算列
 
 {{< alert theme="warning" >}}
-⚠ 注意：写入数仓前的批量任务中新增，因此是基于 **** 的原始列。
+⚠ 注意：写入数仓前的批量任务中新增，因此是基于 **Firebase/BigQuery** 的原始列。
 {{< /alert >}}
 
 ### days_x
@@ -120,7 +120,7 @@ END AS revenue
 ## 基础指标
 
 {{< alert theme="warning" >}}
-⚠ 注意：写入数仓后计算的，因此是基于**数仓**的原始列。
+⚠ 注意：写入数仓后计算的，因此是基于 **数仓** 的原始列。
 {{< /alert >}}
 
 ### newUser
@@ -135,8 +135,8 @@ COUNT(DISTINCT CASE WHEN event_name = 'first_open' THEN user_pseudo_id END)
 
 关于活跃的定义：
 
-- Adjust：与应用发生互动，见 [What is an active user?](https://www.adjust.com/glossary/active-user/)；
-- Firebase：用户在应用前台互动，并记录了 `user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)；
+- Adjust：与应用发生互动，见 [What is an active user?](https://www.adjust.com/glossary/active-user/)
+- Firebase：用户在应用前台互动，并记录了 `user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)
 - BigQuery：至少发生了一个事件，且该事件的参数 `engagement_time_msec` > 0，见 [N-day active users](https://support.google.com/analytics/answer/9037342?hl=en#ndayactives&zippy=%2Cin-this-article)
 - 自行定义：至少发生了一次自定义的 `login` 事件；
 

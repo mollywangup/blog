@@ -18,7 +18,7 @@ categories:
 
 几点说明：
 - 共两个阶段会对已有字段（以下称为列）进行加工：
-  - 写入数仓时：在 S3 原有列的基础上；
+  - 写入数仓时：在 Adjust/S3 原有列的基础上；
   - 写入数仓后：在 Druid 原有列的基础上，也就是可视化查询时；
 - 示例的 SQL 语句省略了除0的情况；
 - Druid 不支持窗口函数；
@@ -58,7 +58,7 @@ COUNT(DISTINCT __time) / COUNT(DISTINCT adid)
 ## 新增计算列
 
 {{< alert theme="warning" >}}
-⚠ 注意：写入数仓前的批量任务中新增，因此是基于 **S3** 的原始列。
+⚠ 注意：写入数仓前的批量任务中新增，因此是基于 **Adjust/S3** 的原始列。
 {{< /alert >}}
 
 ### days_x
@@ -133,7 +133,7 @@ END AS "revenue"
 ```sql
 CASE 
     WHEN "{gps_adid}" IN ('83640d56-411c-46b2-9e2b-10ca1ad1abe1', 'af7f3092-445d-4db0-b682-297b5bb5fdc4') THEN 't'
-    WHEN REGEXP_LIKE("{device_name}", 'GrowthMobi') THEN 't'
+    WHEN REGEXP_LIKE("{device_name}", 'XXXMobi') THEN 't'
     ELSE 'f'
 END AS "is_test_device"
 ```
@@ -141,7 +141,7 @@ END AS "is_test_device"
 ## 基础指标
 
 {{< alert theme="warning" >}}
-⚠ 注意：写入数仓后计算的，因此是基于**数仓**的原始列。
+⚠ 注意：写入数仓后计算的，因此是基于 **Druid** 的原始列。
 {{< /alert >}}
 
 ### newUser
@@ -156,8 +156,8 @@ COUNT(DISTINCT CASE WHEN activity_kind = 'install' THEN adid END)
 
 关于活跃的定义：
 
-- Adjust：与应用发生互动，见 [What is an active user?](https://www.adjust.com/glossary/active-user/)；
-- Firebase：用户在应用前台互动，并记录了 `user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)；
+- Adjust：与应用发生互动，见 [What is an active user?](https://www.adjust.com/glossary/active-user/)
+- Firebase：用户在应用前台互动，并记录了 `user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)
 - BigQuery：至少发生了一个事件，且该事件的参数 `engagement_time_msec` > 0，见 [N-day active users](https://support.google.com/analytics/answer/9037342?hl=en#ndayactives&zippy=%2Cin-this-article)
 - 自行定义：至少发生了一次自定义的 `login` 事件；
 
