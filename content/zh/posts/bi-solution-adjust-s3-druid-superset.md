@@ -41,28 +41,19 @@ categories:
 
 ## Step1. 收集原始数据
 
-👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-ad-and-iap-revenue-with-adjust-sdk/" target="_blank">使用 Adjust 追踪广告&内购收入</a>
-
-### 事件分类
-
-使用 Adjust 收集原始数据，根据事件类型可分为两类：
-
-普通事件：
-
-收入事件：
-
-
-### 参数
-
+👇 指路我的另外两篇文章：
+- <a href="https://mollywangup.com/posts/tracking-ad-and-iap-revenue-with-adjust-sdk/" target="_blank">使用 Adjust 追踪广告&内购收入</a>
+- <a href="https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/" target="_blank">使用 Adjust + FCM 追踪卸载和重装</a>
 
 ## Step2. 存储原始数据
 
+本文使用的是 **S3**.
 
-
+👉 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/two-methods-for-exporting-adjust-raw-data/" target="_blank">将 Adjust 原始数据导出的两种方法</a>
 
 ## Step3. 转存至数仓
 
-
+本文使用的是 **Apache Druid**.
 
 
 ## Step4. 可视化
