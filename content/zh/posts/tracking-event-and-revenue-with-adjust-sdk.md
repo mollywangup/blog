@@ -2,7 +2,7 @@
 title: "使用 Adjust 追踪事件和收入收据"
 date: 2023-02-02T06:06:12Z
 draft: false
-description: 广告收入通过聚合 SDK 转发而来（额外收费服务），一次性购买的内购收入通过设置带有货币金额属性的事件而来，订阅性质的内购收入有专门的 subscription API（额外收费服务）。
+description: 广告收入通过聚合 SDK 转发而来（额外收费），内购收入通过设置带有货币金额属性的事件而来，订阅收入有专门的 subscription API（额外收费）。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -19,9 +19,10 @@ categories:
 
 1. 普通事件（指非收入事件）；
 2. 广告收入；
-3. 内购收入；
-4. 订阅收入；
+3. 内购收入（一次性）；
+4. 订阅收入（周期性）；
 
+<br>
 {{< notice info >}}
 💡 理论上，收入事件 = 设置了金额和币种参数的普通事件，所以额外收费的**广告收入**和**订阅收入**服务，是可以作为一个普通的收入事件上报的（此方法本文已略）。
 {{< /notice >}}
@@ -154,7 +155,7 @@ Adjust.trackEvent(adjustEvent);
 
 ### 方法描述
 
-构造 subscription 对象，直接上报即可。
+构造 `subscription` 对象，直接上报即可。
 
 {{< alert theme="warning" >}}
 ⚠ 注意：`price` 为 long 类型，假定订阅价格是 $9.99，则需要上报为 `9.99 * 1000000 = 9990000`，详见 [getPriceAmountMicros](https://developer.android.com/reference/com/android/billingclient/api/ProductDetails.PricingPhase#getPriceAmountMicros())
