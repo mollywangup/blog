@@ -86,7 +86,7 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 
 #### 方法描述
 
-将MAX后台的`report key`填到 Ajust 后台，本质是通过 API 的形式**每天从 MAX 下载一次数据**，然后同步至 Adjust 面板；
+将 MAX 后台的`report key`填到 Ajust 后台，本质是通过 API 的形式**每天从 MAX 下载一次数据**，然后同步至 Adjust 面板；
 
 #### 参考文档
 
@@ -105,17 +105,20 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 
 #### 方法描述
 
-1. 通过 Adjust SDK 手动统计一个内购事件如`purchase`，并为其设置金额和币种参数。
-    ```C#
-    AdjustEvent adjustEvent = new AdjustEvent("abc123");
-    adjustEvent.setRevenue(0.01, "USD");
-    adjustEvent.setTransactionId("transactionId");
-    Adjust.trackEvent(adjustEvent);
-    ```
-2. 关于事件`purchase`的补充说明：
-   - **event token**: `abc123` （在 Adjust 后台创建）；
-   - **`setRevenue`**：币种需要设置为`USD`，即默认币种；
-   - **`setTransactionId`**：为了防止重复统计内购收入，可设置为`Google Transaction ID`；即使用谷歌支付时谷歌生成的订单唯一标识；
+创建一个普通事件如 `purchase`，在上报时，为其设置金额和币种参数，即可被 Adjust 识别为收入事件。
+
+{{< alert theme="info" >}}
+补充说明：
+- **`setRevenue`**：币种需要设置为`USD`，即默认币种；
+- **`setTransactionId`**：为了防止重复统计内购收入，可设置为`Google Transaction ID`，即使用谷歌支付时谷歌生成的订单唯一标识；
+{{< /alert >}}
+
+```C#
+AdjustEvent adjustEvent = new AdjustEvent("abc123");
+adjustEvent.setRevenue(0.01, "USD");
+adjustEvent.setTransactionId("transactionId");
+Adjust.trackEvent(adjustEvent);
+```
 
 #### 参考文档
 
