@@ -78,6 +78,22 @@ adb logcat -v time -s FA FA-SVC
 ✍ 😱 emmm... 怎么不算竞品调研神器呢。
 {{< /alert >}}
 
+{{< notice success >}}
+✍ 😱 emmm... 怎么不算竞品调研神器呢。
+{{< /notice >}}
+
+{{< notice info >}}
+✍ 😱 emmm... 怎么不算竞品调研神器呢。
+{{< /notice >}}
+
+{{< notice warning >}}
+✍ 😱 emmm... 怎么不算竞品调研神器呢。
+{{< /notice >}}
+
+{{< notice error >}}
+✍ 😱 emmm... 怎么不算竞品调研神器呢。
+{{< /notice >}}
+
 ### 方式二：DebugView
 
 在 Firebase/GA 后台，打开 DebugView，如下图：
