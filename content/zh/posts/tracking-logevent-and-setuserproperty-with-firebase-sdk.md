@@ -14,12 +14,7 @@ categories:
 - BASS
 ---
 
-本文旨在使用 Firebase SDK 追踪事件数据。
-
-<br>
-{{< notice info >}}
-💡 理论上，收入事件 = 设置了金额和币种参数的普通事件，所以额外收费的**广告收入**和**订阅收入**服务，是可以作为一个普通的收入事件上报的（此方法本文已略）。
-{{< /notice >}}
+本文旨在使用 Firebase SDK 统计事件、设置用户属性。
 
 ## 统计事件
 
@@ -66,6 +61,22 @@ adb shell setprop log.tag.FA VERBOSE
 adb shell setprop log.tag.FA-SVC VERBOSE
 adb logcat -v time -s FA FA-SVC
 ```
+
+{{< alert theme="warning" >}}
+✍ 😱 emmm... 怎么不算竞品调研神器呢。
+{{< /alert >}}
+
+{{< alert theme="info" >}}
+✍ 😱 emmm... 怎么不算竞品调研神器呢。
+{{< /alert >}}
+
+{{< alert theme="success" >}}
+✍ 😱 emmm... 怎么不算竞品调研神器呢。
+{{< /alert >}}
+
+{{< alert theme="danger" >}}
+✍ 😱 emmm... 怎么不算竞品调研神器呢。
+{{< /alert >}}
 
 ### 方式二：DebugView
 
