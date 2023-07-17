@@ -81,6 +81,7 @@ TIMESTAMPDIFF(MINUTE, MILLIS_TO_TIMESTAMP("{installed_at}" * 1000), MILLIS_TO_TI
 
 1. 严格间隔 24h 为次日；
 2. 过了零点就是次日了;
+
 <br>
 ⚠ 注意 Adjust 和这里计算 days_x 的方式，都属于**第一种**。
 {{< /alert >}}
