@@ -1,6 +1,6 @@
 ---
-title: "基于 Adjust 原始数据的指标体系"
-date: 2023-04-16T08:39:46Z
+title: "基于 BigQuery 原始数据的指标体系"
+date: 2023-02-28T08:39:46Z
 draft: false
 description: newUser, DAU, ARPDAU, ARPU (New), DAV, eCPM, RR, LTV 等。
 hideToc: false
@@ -8,13 +8,13 @@ enableToc: true
 enableTocContent: false
 tocPosition: inner
 tags:
-- Adjust
+- BigQuery
 - SQL
 categories:
-- MMP
+- 
 ---
 
-本文基于 Adjust（原始数据） -> S3（云存储）-> Druid（数仓）。
+本文基于 BigQuery（原始数据） -> GCP（云存储）-> Druid（数仓）。
 
 几点说明：
 - 共两个阶段会对已有字段（以下称为列）进行加工：

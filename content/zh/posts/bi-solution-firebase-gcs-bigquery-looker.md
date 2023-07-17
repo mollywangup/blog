@@ -1,6 +1,6 @@
 ---
 title: "BI 方案：Firebase + GCS + BigQuery + Looker Studio"
-date: 2023-03-06T16:02:30Z
+date: 2023-02-28T16:02:30Z
 draft: false
 description: 【太贵弃之】将 Firebase 原始数据可视化至 Looker Studio.
 hideToc: false
