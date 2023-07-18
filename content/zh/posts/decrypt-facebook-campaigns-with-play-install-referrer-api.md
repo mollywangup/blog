@@ -15,7 +15,7 @@ categories:
 - Attribution
 ---
 
-本文旨在手动解析一手的 Referrer 信息，并设置为 Firebase 用户属性。如果已经接了 MMP，可直接略过。（🤝 感兴趣的话也可以了解下）
+本文旨在手动解析一手的 Referrer 信息，并设置为 Firebase 用户属性。如果已经接了 MMP，可直接略过。（🤝 感兴趣也可了解下）
 
 - 实现方法：
   - 工具：Play Install Referrer API；
@@ -140,25 +140,29 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
 #### 解析方法
 
 1. 先从 referrerUrl 中获取 utm_content；
-    注意：原始的 referrerUrl 和获取到的 utm_content，在进行下一步操作之前，都需要先decode；
+  {{< alert theme="warning" >}}
+  进行下一步之前，记得先 decode utm_content；
+  {{< /alert >}}
 2. 再解密 utm_content（最核心的一步）：
-    官方方法：[Example Decryption with PHP](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)
-    具体方法如下：
-    1. 加密方式：**AES256-GCM**；
-    2. 解密对象/密文：`utm_content` -> `source` -> `data`；
-    3. 解密共需以下3个信息：
+  官方方法：[Example Decryption with PHP](https://developers.facebook.com/docs/app-ads/install-referrer/#step-3--decrypt-your-data)
+  具体方法如下：
+      1. 加密方式：**AES256-GCM**；
+      2. 解密对象/密文：`utm_content` -> `source` -> `data`；
+      3. 解密共需以下3个信息：
          - **Facebook Decryption Key**：即密钥，来自Facebook开发者后台；
          - **data**：即解密对象/密文。
-            重要说明：data中包含了`tag`，因此处理时需要先忽略/截断。其中，关于tag：
-             - 对应上述例子：`7d13f2d7a3c738d37303b5080bdcb08a`；
-             - 位置：后缀；
-             - 长度：固定长度的32个16进制字符，即16个字节；
-                - https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html
-                <img src='/images/posts/tag-gcm.png' alt='MODE_GCM length'>
-                - https://developers.facebook.com/docs/app-ads/install-referrer/
-                  <img src='/images/posts/tag-gcm-16bytes.png' alt='Tag length 16 bytes'>
          - **nonce**：随机数，无实际意义，解密需要；
-    4. 最后，使用以上信息，解密；
+          {{< notice warning >}}
+          重要说明：data中包含了`tag`，因此处理时需要先忽略/截断。其中，关于tag：
+          - 对应上述例子：`7d13f2d7a3c738d37303b5080bdcb08a`；
+          - 位置：后缀；
+          - 长度：固定长度的32个16进制字符，即16个字节；
+            - https://pycryptodome.readthedocs.io/en/latest/src/cipher/aes.html
+            <img src='/images/posts/tag-gcm.png' alt='MODE_GCM length'>
+            - https://developers.facebook.com/docs/app-ads/install-referrer/
+            <img src='/images/posts/tag-gcm-16bytes.png' alt='Tag length 16 bytes'>
+          {{< /notice >}}
+      4. 最后，使用以上信息，解密；
       其中，解密后的明文见 ***utm_content 格式说明*** 中的 ***解密并decode最核心的`data`后的格式***；
 
 ### Step3. 处理解析结果
