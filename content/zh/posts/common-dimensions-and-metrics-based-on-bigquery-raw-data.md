@@ -2,7 +2,7 @@
 title: "基于 BigQuery 原始数据的指标体系"
 date: 2023-02-28T08:39:46Z
 draft: false
-description: newUser, DAU, ARPDAU, ARPU (New), DAV, eCPM, RR, LTV 等，附原始数据结构示例。
+description: newUser, DAU, ARPDAU, ARPU (New), DAV, eCPM, RR, LTV 等。
 hideToc: false
 enableToc: true
 enableTocContent: false

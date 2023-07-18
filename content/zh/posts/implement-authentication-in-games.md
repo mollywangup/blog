@@ -104,7 +104,8 @@ categories:
 
 通过 [Firebase Authentication](https://firebase.google.com/docs/auth) 接入。
 
-<img src='https://firebase.google.com/static/docs/auth/images/auth-providers.png' alt='（图源 Firebase）'>
+<!-- <img src='https://firebase.google.com/static/docs/auth/images/auth-providers.png' alt='（图源 Firebase）'> -->
+<img src='/images/posts/auth-providers.png' alt='auth-providers（图源 Firebase）'>
 
 ### 关于 Firebase Authentication
 

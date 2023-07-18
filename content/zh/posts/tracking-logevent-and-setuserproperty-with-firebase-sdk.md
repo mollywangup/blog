@@ -70,4 +70,5 @@ adb logcat -v time -s FA FA-SVC
 
 在 Firebase/GA 后台，打开 DebugView，如下图：
 
-<img src='https://firebase.google.com/static/docs/analytics/images/report.png' alt='DebugView report（图源 Firebase）'>
+<!-- <img src='https://firebase.google.com/static/docs/analytics/images/report.png' alt='DebugView report（图源 Firebase）'> -->
+<img src='/images/posts/debugview-report.png' alt='DebugView report（图源 Firebase）'>
