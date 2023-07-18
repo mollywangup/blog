@@ -1,6 +1,6 @@
 ---
 title: "GP 包签名管理（Release Key）"
-date: 2022-08-23T10:43:11Z
+date: 2022-06-23T10:43:11Z
 draft: false
 description: GP 包正式签名（Release Key）的创建、查看哈希值。
 hideToc: false
