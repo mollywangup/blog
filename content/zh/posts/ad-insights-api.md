@@ -15,11 +15,10 @@ categories:
 - API
 ---
 
-无论哪个广告平台，数据抓取整体可概括为以下三步：
+无论哪个广告平台，数据抓取整体可概括为以下两步：
 
 1. 申请接口；（访问令牌/密钥文件）
-2. 使用官方提供的 API 文档，测试接口请求；
-3. 统一指标字典，并写入数据库；
+2. 通过接口请求数据；
 
 ## Facebook Ads
 
@@ -32,7 +31,7 @@ categories:
 2. 在 BM 创建一个管理员权限的 `system_user`：
    - 方法见 [Create, Retrieve and Update a System User](https://developers.facebook.com/docs/marketing-api/system-users/create-retrieve-update)；
 3. 将上述应用绑定至 BM，注意该 BM 需要作为该应用的所有者；
-4. 在 BM 中，使用 system_user 生成访问令牌即 `access_token`，其中：
+4. 在 BM 中，使用 system_user 生成 `access_token` 即访问令牌，其中：
    - 点击`生成`按钮时，必须选择上述创建的那个应用； 
    - `勾选数据权限`时，必须至少包含以下两个权限：
      - ads_read
@@ -40,18 +39,16 @@ categories:
 
 {{< expand "Facebook Ads 接口举例" >}}
 
-- 注意：xxx 都是非必填项；
-
 ```yaml
-data_source: xxx # 为了标记数据源或者 Manager account  
-business_id: xxx     
-business_name: xxx  
-app_id: your_app_id # 必填项；Facebook app ID      
-app_name: xxx     
-app_secret: your_app_secret # 必填项；Facebook app secret 
-system_user_id:  xxx    
-system_user_name: xxx 
-system_user_access_token: your_access_token # 必填项；访问令牌
+data_source:  
+business_id:      
+business_name:   
+app_id: your_app_id # 必配置项；Facebook app ID      
+app_name:      
+app_secret: your_app_secret # 必配置项；Facebook app secret 
+system_user_id:      
+system_user_name:  
+system_user_access_token: your_access_token # 必配置项；访问令牌
 ```
 
 {{< /expand >}}
@@ -82,6 +79,20 @@ system_user_access_token: your_access_token # 必填项；访问令牌
 ### 接口申请方法
 
 见官方保姆级教程 <a href="https://mollywangup.com/pdf/Google%20Ads%20API%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%8C%87%E5%8D%97%20%5B2019%5D.pdf" target="_blank">Google Ads API快速上手指南 [2019]</a>
+
+{{< expand "Google Ads 接口举例" >}}
+
+```yaml
+data_source: 
+manager_account: 
+developer_token: your_developer_token # 必配置项；
+user_agent:
+client_id: your_client_id # 必配置项；
+client_secret: your_client_secret # 必配置项；
+refresh_token: your_refresh_token # 必配置项；
+```
+
+{{< /expand >}}
 
 ### 官方文档
 
