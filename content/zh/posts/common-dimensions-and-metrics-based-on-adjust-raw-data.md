@@ -31,7 +31,7 @@ categories:
 - `installed_at`：首次打开的时间戳；
 - `created_at`：事件发生的时间戳，在数仓中为`__time`；（Druid 需要）
 
-{{< notice warning >}}
+{{< notice info >}}
 ⚠ 时区说明：时间戳类型全部为 UTC 时区；
 {{< /notice >}}
 

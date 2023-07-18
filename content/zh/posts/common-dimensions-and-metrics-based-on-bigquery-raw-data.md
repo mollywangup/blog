@@ -31,7 +31,7 @@ categories:
 - `user_first_touch_timestamp`：首次打开的时间戳；
 - `event_timestamp`：事件发生的时间戳；
 
-{{< notice warning >}}
+{{< notice info>}}
 ⚠ 时区说明：
 - `event_date`：导出至 BigQuery 设置中的时区；
 - `event_timestamp`：默认UTC时区；
