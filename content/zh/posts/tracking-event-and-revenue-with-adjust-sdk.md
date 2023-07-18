@@ -40,8 +40,8 @@ Adjust.trackEvent(adjustEvent);
 
 ### 参考文档
 
-1. [Adjust]：[Create an event token](https://help.adjust.com/en/article/basic-event-setup#create-an-event-token)
-2. [GitHub]：[Track an event](https://github.com/adjust/unity_sdk#track-an-event)
+1. [Adjust] [Create an event token](https://help.adjust.com/en/article/basic-event-setup#create-an-event-token)
+2. [GitHub] [Track an event](https://github.com/adjust/unity_sdk#track-an-event)
 
 
 ## 追踪广告收入
@@ -79,8 +79,8 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 
 #### 参考文档
 
-1. [Adjust]：[Get real-time data using SDK postbacks](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
-2. [GitHub]：[Track AppLovin MAX ad revenue with Adjust SDK](https://github.com/adjust/unity_sdk/blob/master/doc/english/sdk-to-sdk/applovin-max.md)
+1. [Adjust] [Get real-time data using SDK postbacks](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
+2. [GitHub] [Track AppLovin MAX ad revenue with Adjust SDK](https://github.com/adjust/unity_sdk/blob/master/doc/english/sdk-to-sdk/applovin-max.md)
 
 <!-- #### 优缺点
 
@@ -95,7 +95,7 @@ public static void OnInterstitialAdRevenuePaidEvent(string adUnitId)
 
 #### 参考文档
 
-[Adjust]：[Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
+[Adjust] [Connect Adjust to your AppLovin MAX account](https://help.adjust.com/en/article/applovin-max#set-up-tracking-with-applovin)
 
 <img src='/images/posts/connect-adjust-to-your-applovin-MAX-account.png' alt='Connect Adjust to your AppLovin MAX account'>
 
@@ -127,8 +127,8 @@ Adjust.trackEvent(adjustEvent);
 
 #### 参考文档
 
-1. [Adjust]：[Track revenue events (with the Adjust SDK)](https://help.adjust.com/en/article/revenue-events#track-revenue-events)
-2. [GitHub]：[Ad revenue tracking](https://github.com/adjust/unity_sdk#ad-revenue-tracking)
+1. [Adjust] [Track revenue events (with the Adjust SDK)](https://help.adjust.com/en/article/revenue-events#track-revenue-events)
+2. [GitHub] [Ad revenue tracking](https://github.com/adjust/unity_sdk#ad-revenue-tracking)
 
 <!-- #### 优缺点
 
@@ -143,8 +143,8 @@ Adjust.trackEvent(adjustEvent);
 
 #### 参考文档
 
-1. [Adjust]：[Track revenue events (server-to-server)](https://help.adjust.com/en/article/revenue-events#track-revenue-events-sts)
-2. [Adjust]：[Server-to-server (S2S) events](https://help.adjust.com/en/article/server-to-server-events#set-up-s2s-security)
+1. [Adjust] [Track revenue events (server-to-server)](https://help.adjust.com/en/article/revenue-events#track-revenue-events-sts)
+2. [Adjust] [Server-to-server (S2S) events](https://help.adjust.com/en/article/server-to-server-events#set-up-s2s-security)
 
 <!-- #### 优缺点
 
@@ -176,5 +176,5 @@ Adjust.trackPlayStoreSubscription(subscription);
 
 ### 参考文档
 
-1. [Adjust]：[Measure subscriptions](https://help.adjust.com/en/article/measure-subscriptions-react-native-sdk)
-2. [GitHub]：[Subscription tracking](https://github.com/adjust/unity_sdk#subscription-tracking)
+1. [Adjust] [Measure subscriptions](https://help.adjust.com/en/article/measure-subscriptions-react-native-sdk)
+2. [GitHub] [Subscription tracking](https://github.com/adjust/unity_sdk#subscription-tracking)
