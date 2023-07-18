@@ -60,15 +60,6 @@ system_user_access_token: your_access_token # 必配置项；访问令牌
 
 {{< /notice >}}
 
-### 请求方法
-
-1. 请求每个 BM 下的`所有广告账户`；
-2. 对于每个 BM 下的每个广告账户，请求 `campaign` 层级的原始数据；
-3. 所有 BM 的原始数据写入同一张数据库表如 `sources_adplatform`;
-4. 注意事项：
-   - 由于广告平台归因窗口的存在，且一般是28天或30天，因此`每天需要跑last 30天`的数据；
-   - 存在数据覆写，需注意`组合键的确定`以为了数据的不重不漏原则；
-
 ### 官方文档
 
 - [Facebook] [Marketing API](https://developers.facebook.com/docs/marketing-apis)
