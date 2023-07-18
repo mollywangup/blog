@@ -32,20 +32,25 @@ categories:
 - [Create, Retrieve and Update a System User](https://developers.facebook.com/docs/marketing-api/system-users/create-retrieve-update)
 - [GitHub] [Facebook Business SDK for Python](https://github.com/facebook/facebook-python-business-sdk)
 
-- 请求BM下的广告账户列表：[Ad Account](https://developers.facebook.com/docs/marketing-api/reference/ad-account)
+- 请求 BM 下的广告账户列表：[Ad Account](https://developers.facebook.com/docs/marketing-api/reference/ad-account)
 - 请求一个广告账户的原始数据：[Campaign Insights](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/insights/)
+- 创建 App：[Create an app](https://developers.facebook.com/apps/creation/)
 
-### 申请接口
+### 接口申请方法
 
-1. 在 Facebook 开发者后台，创建一个 `Business` 类型的app，且无需填写额外的app信息「就是这么好用」;
-2. 在 BM 创建一个 admin `system_user`；
-3. 在 BM 将上述创建的app `claim过来`，即该BM是app owner；
-4. 在 BM 用上述的 system_user 去生成一个 access_token，点击`生成`按钮后，需先选择一个app，这时选择上述claim过来的那个app；
-5. 为上述 access_token `勾选数据权限`，即可生成最终的`access_token`；
-   - ads_read
-   - ads_management
-6. 只有`授权给 system_user` 的广告账户，access_token 才能访问到对应的广告账户的数据。因此当有新广告账户绑定至该BM时，需要手动授权该广告账户给 system_user；
-7. 每个BM对应一个 access_token，有几个BM就需要几个 access_token;
+1. 创建应用：在 Facebook 开发者后台，创建一个 `Business` 类型的 app，见 [Create an app](https://developers.facebook.com/apps/creation/) ；
+2. 创建 System User：在 BM 创建一个管理员权限的 `system_user`，见 [Create, Retrieve and Update a System User](https://developers.facebook.com/docs/marketing-api/system-users/create-retrieve-update)；
+3. 应用绑定 BM：将上述应用绑定至 BM，注意该 BM 需要作为 owner；
+4. 使用 System User 生成访问令牌：
+   1. 在 BM 中生成，点击`生成`按钮时，需要选择上述创建的那个应用； 
+   2. 为上述 access_token `勾选数据权限`，即可生成最终的`access_token`；
+      - ads_read
+      - ads_management
+  
+{{< alert theme="warning" >}}
+1. 只有`授权给 system_user` 的广告账户，access_token 才能访问到对应的广告账户的数据。因此当有新广告账户绑定至该BM时，需要手动授权该广告账户给 system_user；
+2. 每个BM对应一个 access_token，有几个BM就需要几个 access_token;
+{{< /alert >}}
 
 {{< expand "接口例子" >}}
 
@@ -65,11 +70,12 @@ system_user_access_token: # 必填项；申请的最终的access_token
 
 ### 请求方法
 
-1. 请求其中一个 BM 下的所有`广告账户的列表`；
-2. 对广告账户列表，异步请求（`is_async=True`）每个广告账户下的`campaign`（广告推广计划）层级的原始数据；
-3. 其他BM重复上述3步操作；
-4. 所有BM的原始数据写入同一张数据库表`sources_adplatform`;
-5. 注意事项：
+以单个 BM 为例：
+
+1. 请求该 BM 下的`所有广告账户`；
+2. 对于每个广告账户，请求 `campaign` 层级的原始数据；
+3. 所有 BM 的原始数据写入同一张数据库表 `sources_adplatform`;
+4. 注意事项：
    - 由于广告平台归因窗口的存在，且一般是28天或30天，因此`每天需要跑last 30天`的数据；
    - 存在数据覆写，需注意`组合键的确定`以为了数据的不重不漏原则；
 
