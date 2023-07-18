@@ -32,7 +32,7 @@ categories:
 - `created_at`：事件发生的时间戳，在数仓中为`__time`；（Druid 需要）
 
 {{< notice info >}}
-⚠ 时区说明：时间戳类型全部为 UTC 时区；
+时区说明：时间戳类型全部为 UTC 时区；
 {{< /notice >}}
 
 ### 统计次数
@@ -269,3 +269,80 @@ Imps / DAU
 ```sql
 Imps / DAV
 ```
+
+## 附：原始数据结构
+
+以下为自定义事件 `login` 的原始数据，有助于理解数据结构。
+
+{{< expand "Adjust/S3 原始数据举例（已脱敏）" >}}
+```plaintext
+__time	fashion	environment	activity_kind	installed_at	timezone	app_name	app_version_short	country	city	os_name	os_version	device_type	device_manufacturer	device_name	gps_adid	adid	android_id	language	tracker	tracker_name	is_organic	is_reattributed	reporting_currency	reporting_cost	reporting_revenue	event	event_name2	level	id	price	subscription_type	transaction_id	error_code	ad_mediation_platform	ad_revenue_network	ad_format	ad_space	ad_network_name	ad_revenue	ad_error_code	is_vip	trial_state	fb_network_name	fb_campaign_name	fb_campaign_id	fb_adgroup_name	fb_adgroup_id	fb_creative_name	fb_creative_id	phase	update_at	days_x	hours_x	minutes_x	event_name	revenue_kind	media_source	revenue	test_device
+2023-07-14T07:28:54.000Z	fashion	production	event	1.68932E+12	UTC-0700	PACKAGE_NAME	1.1.2	us	Los Angeles	android	12	phone	Motorola	motogstylus5G(2022)	1af0adeb-5f20-4b13-a7c7-ae11cbf55947	b82355d7d28c623bf918156c8f7486b1		en	11n573m9	Organic	1	0		0	0	mbvbnw	login			0						Unknown	Unknown	Unknown	0		f	never	instagram	Ê¨ßÁæéÊç¢Ë£Ö-ÁæéÂõΩ	2.38553E+16	ÁæéÂõΩ	2.38553E+16	ËÄ≥Êúµ	2.38553E+16		1.68933E+12	0	0	0	login	Unknown	Facebook Ads	0	f
+```
+{{< /expand >}}
+
+{{< expand "Druid 原始数据举例（已脱敏）" >}}
+```json
+{
+    "__time":"2023-07-14T07:28:54.000Z",
+    "environment":"production",
+    "activity_kind":"event",
+    "installed_at":1689319730000,
+    "timezone":"UTC-0700",
+    "app_name":"PACKAGE_NAME",
+    "app_version_short":"1.1.2",
+    "country":"us",
+    "city":"Los Angeles",
+    "os_name":"android",
+    "os_version":"12",
+    "device_type":"phone",
+    "device_manufacturer":"Motorola",
+    "device_name":"motogstylus5G(2022)",
+    "gps_adid":"1af0adeb-5f20-4b13-a7c7-ae11cbf55947",
+    "adid":"b82355d7d28c623bf918156c8f7486b1",
+    "android_id":"",
+    "language":"en",
+    "tracker":"11n573m9",
+    "tracker_name":"Organic",
+    "is_organic":1,
+    "is_reattributed":0,
+    "reporting_currency":"",
+    "reporting_cost":0,
+    "reporting_revenue":0,
+    "event":"mbvbnw",
+    "event_name2":"login",
+    "level":"",
+    "id":"",
+    "price":0,
+    "subscription_type":"",
+    "transaction_id":"",
+    "error_code":"",
+    "ad_mediation_platform":"",
+    "ad_revenue_network":"",
+    "ad_format":"Unknown",
+    "ad_space":"Unknown",
+    "ad_network_name":"Unknown",
+    "ad_revenue":0,
+    "ad_error_code":"",
+    "is_vip":"f",
+    "trial_state":"never",
+    "fb_network_name":"instagram",
+    "fb_campaign_name":"欧美换装-美国",
+    "fb_campaign_id":"23855267775170453",
+    "fb_adgroup_name":"美国",
+    "fb_adgroup_id":"23855267775220453",
+    "fb_creative_name":"耳朵",
+    "fb_creative_id":"23855268033500453",
+    "phase":"",
+    "update_at":1689328800513,
+    "days_x":0,
+    "hours_x":0,
+    "minutes_x":0,
+    "event_name":"login",
+    "revenue_kind":"Unknown",
+    "media_source":"Facebook Ads",
+    "revenue":0,
+    "is_test_device":"f"
+}
+```
+{{< /expand >}}
