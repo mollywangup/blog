@@ -1,6 +1,6 @@
 ---
 title: "广告风控指南：隐私政策"
-date: 2022-09-29T07:14:58Z
+date: 2021-09-29T07:14:58Z
 draft: false
 description: COPPA/CCPA/GDPR/LGPD
 hideToc: false

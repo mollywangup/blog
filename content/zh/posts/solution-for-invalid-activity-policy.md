@@ -1,6 +1,6 @@
 ---
 title: "广告风控指南：无效流量"
-date: 2022-10-18T09:43:43Z
+date: 2021-10-18T09:43:43Z
 draft: false
 description: 使用测试广告，遵守广告格式植入指南，基于 CTR 的优化，使用最新的变现 SDK.
 hideToc: false
