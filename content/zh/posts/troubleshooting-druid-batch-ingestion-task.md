@@ -99,7 +99,7 @@ PARTITIONED BY <time granularity>
 
 以下清理内存的一些常用方法。
 
-👉 定期清除日志文件，指路我的另一篇文章 <a href="https://mollywangup.com/posts/add-crontab-task-on-linux/" target="_blank">在 Linux 上添加定时任务</a>
+👉 定期清除日志文件，指路我的另一篇文章 <a href="https://mollywangup.com/posts/add-crontab-task-on-linux/" target="_blank">使用 Crontab 添加定时任务</a>
 
 {{< tabs Linux >}}
 {{< tab >}}

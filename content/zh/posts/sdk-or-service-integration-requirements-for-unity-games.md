@@ -216,7 +216,7 @@ categories:
 
 获取用户来源，仅限安卓；（主要通过解析`referrerUrl`）
 
-👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/how-to-use-play-install-referrer-api-to-retrieve-traffic-source/" target="_blank">使用 Play Install Referrer API 解析 Facebook Campaign</a>
+👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/decrypt-facebook-campaigns-with-play-install-referrer-api/" target="_blank">使用 Play Install Referrer API 解密 Facebook Campaign</a>
 
 ### 官方文档
 1. [Android] [Play Install Referrer Library](https://developer.android.com/google/play/installreferrer/library)
