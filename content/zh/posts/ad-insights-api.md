@@ -2,7 +2,7 @@
 title: "数据抓取方法论"
 date: 2021-01-18T06:08:30Z
 draft: false
-description: Facebook Ads/Google Ads/Apple Search Ads/Adjust/AdMob/GA4
+description: Facebook Ads/Google Ads/Apple Search Ads.
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -23,7 +23,7 @@ categories:
 
 ## Facebook Ads
 
-总结概括起来：一个 BM 对应一个访问令牌，访问令牌由该 BM 下管理员权限的 system_user 生成，只要授权给该 system_user 的广告账户，其数据都可以通过该访问令牌请求。
+每个 BM 对应一个访问令牌，访问令牌由该 BM 下管理员权限的 system_user 生成，只有授权给该 system_user 的广告账户，其数据都可以通过该访问令牌请求。
 
 ### 接口申请方法
 
@@ -38,7 +38,7 @@ categories:
 
 {{< expand "Facebook Ads 接口举例" >}}
 
-注意：xxx 都是非必填项；
+- 注意：xxx 都是非必填项；
 
 ```yaml
 data_source: xxx # 为了标记数据源或者 Manager account  
@@ -49,15 +49,15 @@ app_name: xxx
 app_secret: your_app_secret # 必填项；Facebook app secret 
 system_user_id:  xxx    
 system_user_name: xxx 
-system_user_access_token: your_access_token # 必填项；申请的最终的access_token
+system_user_access_token: your_access_token # 必填项；访问令牌
 ```
 
 {{< /expand >}}
 
 {{< notice warning >}}
 
-1. 只有`授权给 system_user` 的广告账户，access_token 才能访问到对应的广告账户的数据；
-2. 每个 BM 对应一个 access_token，有几个 BM 就需要申请几个 access_token；
+1. 只有已授权给 system_user 的广告账户，访问令牌才能访问到对应广告账户的数据；
+2. 每个 BM 对应一个访问令牌，有几个 BM 就需要申请几个访问令牌；
 
 {{< /notice >}}
 
@@ -97,44 +97,29 @@ system_user_access_token: your_access_token # 必填项；申请的最终的acce
 
 - [Apple] [Apple Search Ads API](https://developer.apple.com/documentation/apple_search_ads)
 
-## Adjust
-
-- 官方文档: https://help.adjust.com/zh/article/kpi-service
-
-
-
-## AdMob
-
-- 官方文档: https://developers.google.com/admob/api/v1/report-metrics-dimensions
-
-## GA4
-
-- 官方文档: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema
-
 ## 附：指标字典参考
 
-| 编号  | 字段 | 定义 | 数据类型 | 数据来源 | API字段 |
-| --- | --- | --- | --- | --- | --- | 
-| 1 | app_name | App标识 | varchar | 通过AdSet层级的AdPromotedObject对象的object_store_url或者application_id间接获得 |  |
-| 2 | os_name | 设备类型，如android/ios | varchar  | 通过AdSet层级的AdPromotedObject对象的object_store_url或者application_id间接获得 |  |
-| 3 | store_type | 应用商店，如google/itunes/huawei/apkpure等 | varchar(10) | 通过AdSet层级的AdPromotedObject对象的object_store_url或者application_id间接获得 |  |
-| 4 | media_source | 流量来源，如facebook_ads, google_ads, organic等 | varchar | 通过请求时的access_token确定 | / |
-| 5 | account_id | 广告账户ID | varchar | API | account_id |
-| 6 | account_name | 广告账户名称 | varchar | API | account_name |
-| 7 | campaign_id | 广告推广计划ID | varchar | API | 'level': 'campaign', campaign_id |
-| 8 | campaign_name | 广告推广计划名称 | varchar | API | 'level': 'campaign', campaign_name |
-| 9 | date | 日期 | date | API | 由date_start + date_stop + time_increment确定，理论上我们应该是分天请求 |
-| 10 | country | 国家，ISO 3166标准 | varchar | API | 'breakdowns': ['country'] |
-| 11 | impressions | 广告展示量 | int | API | impressions |
-| 12 | clicks | 广告点击量 | int | API | clicks |
-| 13 | install_adplatform | 广告安装量 | int | API | actions, 这个字段返回一个json格式的，需要使用'filtering'，       |
-| 14 | cost | 广告花费 | float | API | spend |
-| 15 | purchase_value | 广告带来的收入 | float | API | actions, 这个字段返回一个json格式的，需要使用'filtering'，       |
-| 16 | purchase | 付费次数 | int | API | actions, 这个字段返回一个json格式的，需要使用'filtering'，       |
-| 17 | purchase_unique | 付费人数 | int | API | actions, 这个字段返回一个json格式的，需要使用'filtering'，       |
-| 18 | optimizer | 优化师编号 | varchar | 通过正则表达式确定，具体方法见find.py | / |
-| 19 | data_source | 所属BM/MCC | varchar | 通过请求时的access_token确定 | / |
-| 20 | currency | 货币单位，目前全部是USD | varchar | API | account_currency |
-| 21 | is_organic | 布尔值 | varchar | 通过maps.yaml中的映射关系确定 |  |
-| 22 | geographic | 国家的全称 | varchar | 临时的字段，为了配合google_ads的本地.csv性质的数据源 | / |
-| 23 | attribution_setting | 归因设置，如：1d_click | varchar | API | attribution_setting  |
+| 编号  | 字段 | 定义 | 数据类型 | 数据来源 |
+| --- | --- | --- | --- | --- |
+| 1 | app_name | App标识 | varchar | 通过AdSet层级的AdPromotedObject对象的object_store_url或者application_id间接获得 |
+| 2 | os_name | 设备类型，如android/ios | varchar  | 通过AdSet层级的AdPromotedObject对象的object_store_url或者application_id间接获得 |
+| 3 | store_type | 应用商店，如google/itunes/huawei/apkpure等 | varchar(10) | 通过AdSet层级的AdPromotedObject对象的object_store_url或者application_id间接获得 |
+| 4 | media_source | 流量来源，如facebook_ads, google_ads, organic等 | varchar | 通过请求时的access_token确定 |
+| 5 | account_id | 广告账户ID | varchar | API |
+| 6 | account_name | 广告账户名称 | varchar | API |
+| 7 | campaign_id | 广告推广计划ID | varchar | API |
+| 8 | campaign_name | 广告推广计划名称 | varchar | API |
+| 9 | date | 日期 | date | API |
+| 10 | country | 国家，ISO 3166标准 | varchar | API |
+| 11 | impressions | 广告展示量 | int | API |
+| 12 | clicks | 广告点击量 | int | API |
+| 13 | install_adplatform | 广告安装量 | int | API |
+| 14 | cost | 广告花费 | float | API |
+| 15 | purchase_value | 广告带来的收入 | float | API | 
+| 16 | purchase | 付费次数 | int | API | 
+| 17 | purchase_unique | 付费人数 | int | API | 
+| 18 | optimizer | 优化师编号 | varchar | 通过正则 |
+| 19 | data_source | 所属BM/MCC | varchar | 通过 Token 配置 |
+| 20 | currency | 货币单位，目前全部是USD | varchar | API |
+| 21 | is_organic | 布尔值 | varchar | 通过maps.yaml中的映射关系确定 |
+| 22 | attribution_setting | 归因设置，如：1d_click | varchar | API |
