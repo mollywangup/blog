@@ -19,67 +19,96 @@ categories:
 - MMP
 ---
 
-无论哪种广告平台，数据抓取整体可概括为以下两步：
+无论哪种广告平台，数据抓取整体可概括为以下三步：
 
-1. 申请接口；（访问令牌/access_token）
-2. 使用官方提供的 API 文档，通过接口访问即可。
+1. 申请接口；（访问令牌/access_token/密钥）
+2. 使用官方提供的 API 文档，通过接口请求；
+3. 统一指标字典，并写入数据库；
 
 ## Facebook Ads
 
-### 参考文档
-
-- [Facebook] [Marketing API](https://developers.facebook.com/docs/marketing-apis)
-- [Create, Retrieve and Update a System User](https://developers.facebook.com/docs/marketing-api/system-users/create-retrieve-update)
-- [GitHub] [Facebook Business SDK for Python](https://github.com/facebook/facebook-python-business-sdk)
-
-- 请求 BM 下的广告账户列表：[Ad Account](https://developers.facebook.com/docs/marketing-api/reference/ad-account)
-- 请求一个广告账户的原始数据：[Campaign Insights](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group/insights/)
-- 创建 App：[Create an app](https://developers.facebook.com/apps/creation/)
+总结概括起来：一个 BM 对应一个访问令牌，访问令牌由该 BM 下管理员权限的 system_user 生成，只要授权给该 system_user 的广告账户，其数据都可以通过该访问令牌请求。
 
 ### 接口申请方法
 
-1. 创建应用：在 Facebook 开发者后台，创建一个 `Business` 类型的 app，见 [Create an app](https://developers.facebook.com/apps/creation/) ；
-2. 创建 System User：在 BM 创建一个管理员权限的 `system_user`，见 [Create, Retrieve and Update a System User](https://developers.facebook.com/docs/marketing-api/system-users/create-retrieve-update)；
-3. 应用绑定 BM：将上述应用绑定至 BM，注意该 BM 需要作为 owner；
-4. 使用 System User 生成访问令牌：
-   1. 在 BM 中生成，点击`生成`按钮时，需要选择上述创建的那个应用； 
-   2. 为上述 access_token `勾选数据权限`，即可生成最终的`access_token`；
-      - ads_read
-      - ads_management
-  
-{{< alert theme="warning" >}}
-1. 只有`授权给 system_user` 的广告账户，access_token 才能访问到对应的广告账户的数据。因此当有新广告账户绑定至该BM时，需要手动授权该广告账户给 system_user；
-2. 每个BM对应一个 access_token，有几个BM就需要几个 access_token;
-{{< /alert >}}
+1. 在 Facebook 开发者后台，创建一个 `Business` 类型的应用，见 [Create an app](https://developers.facebook.com/apps/creation/) ；
+2. 在 BM 创建一个管理员权限的 `system_user`，见 [Create, Retrieve and Update a System User](https://developers.facebook.com/docs/marketing-api/system-users/create-retrieve-update)；
+3. 将上述应用绑定至 BM，注意该 BM 需要作为该应用的所有者；
+4. 在 BM 中，使用 system_user 生成访问令牌即 `access_token`，其中：
+   - 点击`生成`按钮时，必须选择上述创建的那个应用； 
+   - `勾选数据权限`时，必须至少包含以下两个权限：
+     - ads_read
+     - ads_management
 
-{{< expand "接口例子" >}}
+{{< expand "Facebook Ads 接口举例" >}}
+
+注意：xxx 都是非必填项；
 
 ```yaml
-data_source: 'bm_xxx' # 非必填项；为了标记数据源或者manager_account  
-business_id: 3064441080294895 # 非必填项     
-business_name: Tentacles overseas projects # 非必填项；bm名称      
-app_id: # 必填项；claim过来的那个app对应的facebook开发者后台的app_id      
-app_name: Hala # 非必填项；claim过来的那个app的名称      
-app_secret: # 必填项；claim过来的那个app对应的facebook开发者后台的app_secret 
-system_user_id:  # 非必填项；可通过'/me?'请求获得      
-system_user_name: system_user_tentacles # 非必填项；system_user名称
-system_user_access_token: # 必填项；申请的最终的access_token
+data_source: xxx # 为了标记数据源或者 Manager account  
+business_id: xxx     
+business_name: xxx  
+app_id: your_app_id # 必填项；Facebook app ID      
+app_name: xxx     
+app_secret: your_app_secret # 必填项；Facebook app secret 
+system_user_id:  xxx    
+system_user_name: xxx 
+system_user_access_token: your_access_token # 必填项；申请的最终的access_token
 ```
 
 {{< /expand >}}
 
+{{< notice warning >}}
+
+1. 只有`授权给 system_user` 的广告账户，access_token 才能访问到对应的广告账户的数据；
+2. 每个 BM 对应一个 access_token，有几个 BM 就需要申请几个 access_token；
+
+{{< /notice >}}
+
 ### 请求方法
 
-以单个 BM 为例：
-
-1. 请求该 BM 下的`所有广告账户`；
-2. 对于每个广告账户，请求 `campaign` 层级的原始数据；
-3. 所有 BM 的原始数据写入同一张数据库表 `sources_adplatform`;
+1. 请求每个 BM 下的`所有广告账户`；
+2. 对于每个 BM 下的每个广告账户，请求 `campaign` 层级的原始数据；
+3. 所有 BM 的原始数据写入同一张数据库表如 `sources_adplatform`;
 4. 注意事项：
    - 由于广告平台归因窗口的存在，且一般是28天或30天，因此`每天需要跑last 30天`的数据；
    - 存在数据覆写，需注意`组合键的确定`以为了数据的不重不漏原则；
 
-### 指标字典
+### 官方文档
+
+- [Facebook] [Marketing API](https://developers.facebook.com/docs/marketing-apis)
+- [GitHub] [Facebook Business SDK for Python](https://github.com/facebook/facebook-python-business-sdk)
+
+## Google Ads
+
+线下PDF版：<a href="https://mollywangup.com/pdf/" target="_blank">Google Ads API快速上手指南 [2019]</a>
+
+
+## Apple Search Ads
+
+### 接口申请方法
+
+不是访问令牌的形式，是物理的文件形式的密钥，见官方保姆级教程 [Implementing OAuth for the Apple Search Ads API](https://developer.apple.com/documentation/apple_search_ads/implementing_oauth_for_the_apple_search_ads_api)
+
+### 官方文档
+
+- [Apple] [Apple Search Ads](https://developer.apple.com/documentation/apple_search_ads)
+
+## Adjust
+
+- 官方文档: https://help.adjust.com/zh/article/kpi-service
+
+
+
+## AdMob
+
+- 官方文档: https://developers.google.com/admob/api/v1/report-metrics-dimensions
+
+## GA4
+
+- 官方文档: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema
+
+## 附：指标字典参考
 
 | 编号  | 字段 | 定义 | 数据类型 | 数据来源 | API字段 |
 | --- | --- | --- | --- | --- | --- | 
@@ -106,25 +135,3 @@ system_user_access_token: # 必填项；申请的最终的access_token
 | 21 | is_organic | 布尔值 | varchar | 通过maps.yaml中的映射关系确定 |  |
 | 22 | geographic | 国家的全称 | varchar | 临时的字段，为了配合google_ads的本地.csv性质的数据源 | / |
 | 23 | attribution_setting | 归因设置，如：1d_click | varchar | API | attribution_setting  |
-
-## Google Ads
-
-
-## Apple Search Ads
-
-- 官方文档: https://developer.apple.com/documentation/apple_search_ads
-
-
-## Adjust
-
-- 官方文档: https://help.adjust.com/zh/article/kpi-service
-
-
-
-## AdMob
-
-- 官方文档: https://developers.google.com/admob/api/v1/report-metrics-dimensions
-
-## GA4
-
-- 官方文档: https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema
