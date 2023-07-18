@@ -9,9 +9,11 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Adjust
+- Apache Druid
 - SQL
 categories:
 - MMP
+- OLAP
 ---
 
 本文基于 Adjust（原始数据） -> S3（云存储）-> Druid（数仓）-> Superset（可视化）。
@@ -80,15 +82,12 @@ TIMESTAMPDIFF(HOUR, MILLIS_TO_TIMESTAMP("{installed_at}" * 1000), MILLIS_TO_TIME
 TIMESTAMPDIFF(MINUTE, MILLIS_TO_TIMESTAMP("{installed_at}" * 1000), MILLIS_TO_TIMESTAMP("{created_at}" * 1000)) AS "minutes_x"
 ```
 
-{{< alert theme="info" >}}
-📌 关于次日，有两种可能的定义：
-
-1. 严格间隔 24h 为次日；
-2. 过了零点就是次日了;
-
-<br>
+{{< notice info >}}
+关于次日，有两种可能的定义：
+第一种：严格间隔 24h 为次日；
+第二种：过了零点就是次日了;
 ⚠ Adjust 和这里计算 days_x 的方式，都属于第一种。
-{{< /alert >}}
+{{< /notice >}}
 
 ### event_name
 

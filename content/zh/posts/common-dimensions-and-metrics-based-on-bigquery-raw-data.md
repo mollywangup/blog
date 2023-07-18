@@ -11,7 +11,7 @@ tags:
 - BigQuery
 - SQL
 categories:
-- 
+- OLAP
 ---
 
 本文基于 Firebase（原始数据）-> GCS（云存储）-> BigQuery（数仓）-> Looker Studio（可视化）。
