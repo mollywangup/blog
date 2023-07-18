@@ -170,7 +170,7 @@ COUNT(DISTINCT CASE WHEN activity_kind = 'install' THEN adid END)
 关于活跃的定义：
 
 - Adjust：与应用发生互动，见 [What is an active user?](https://www.adjust.com/glossary/active-user/)
-- Firebase：用户在应用前台互动，并记录了 `user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)
+- Firebase：`user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)
 - BigQuery：至少发生了一个事件，且该事件的参数 `engagement_time_msec` > 0，见 [N-day active users](https://support.google.com/analytics/answer/9037342?hl=en#ndayactives&zippy=%2Cin-this-article)
 - 自行定义：至少发生了一次自定义的 `login` 事件；
 

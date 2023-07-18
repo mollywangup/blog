@@ -18,8 +18,8 @@ categories:
 
 几点说明：
 - 共两个阶段会对已有字段（以下称为列）进行加工：
-  - Looker Studio 连接 BigQuery 时：加在原有列的基础上；
-  - Looker Studio 可视化查询时：加在已导入列的基础上，即实时计算时；
+  - 在 Looker Studio 连接 BigQuery 数据源时：加在原有列的基础上；
+  - 在 Looker Studio 可视化查询时：加在已导入列的基础上，即实时可视化查询时；
 - 示例的 SQL 语句省略了除0的情况；
 - BigQuery 支持窗口函数；
 
@@ -64,7 +64,7 @@ COUNT(DISTINCT event_timestamp) / COUNT(DISTINCT user_pseudo_id)
 ## 新增计算列
 
 {{< alert theme="warning" >}}
-⚠️ 注意：写入数仓前的批量任务中新增，因此是基于 **Firebase/BigQuery** 的原始列。
+⚠️ 注意：在 Looker Studio 连接 BigQuery 数据源时新增，因此是基于 **Firebase/BigQuery** 的原始列。
 {{< /alert >}}
 
 ### days_x
@@ -126,7 +126,7 @@ END AS revenue
 ## 基础指标
 
 {{< alert theme="warning" >}}
-⚠️ 注意：写入数仓后计算的，因此是基于 **数仓** 的原始列。
+⚠️ 注意：在 Looker Studio 的可视化查询时实时计算的。
 {{< /alert >}}
 
 ### newUser
@@ -142,7 +142,7 @@ COUNT(DISTINCT CASE WHEN event_name = 'first_open' THEN user_pseudo_id END)
 关于活跃的定义：
 
 - Adjust：与应用发生互动，见 [What is an active user?](https://www.adjust.com/glossary/active-user/)
-- Firebase：用户在应用前台互动，并记录了 `user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)
+- Firebase：`user_engagement` 事件，见 [User activity over time](https://support.google.com/firebase/answer/6317517?hl=en#active-users&zippy=%2Cin-this-article)
 - BigQuery：至少发生了一个事件，且该事件的参数 `engagement_time_msec` > 0，见 [N-day active users](https://support.google.com/analytics/answer/9037342?hl=en#ndayactives&zippy=%2Cin-this-article)
 - 自行定义：至少发生了一次自定义的 `login` 事件；
 
