@@ -90,7 +90,7 @@ categories:
 
 需要测试以下三种可能的情形：
 
-1. 设备上无谷歌服务框架，直接跳过；
+1. 设备上无谷歌服务框架，无需测试；
 2. 设备上有谷歌服务框架，但未创建 Play 游戏账号，引导创建 Play 游戏账号；
    - 未登录 Google 账号，未创建 Play 游戏账号；
    - 已登录 Google 账号，未创建 Play 游戏账号；
@@ -108,11 +108,9 @@ categories:
 
 ### 关于 Firebase Authentication
 
-1. 支持的登录方式
+1. 支持的登录方式见 [Firebase Authentication](https://firebase.google.com/docs/auth)
   结论：**支持第三方登录如 Facebook/Google/Play Games 等，也支持直接注册如邮件/电话/匿名**；
-  <img src='/images/posts/firebase-authentication-sign-in-providers.png' alt='Firebase Authentication: sign-in providers'>
-
-2. 收费标准
+2. 收费标准：
   结论：**月活5W以内免费，超过部分每个$0.0025-$0.0055**；
    1. Firebase全产品线：[Pricing plans](https://firebase.google.com/pricing)
    2. Firebase Authenticate：[No cost and Pay as you go](https://firebase.google.com/docs/auth#identity-platform-limits)
@@ -128,10 +126,12 @@ categories:
 2. [Facebook] Facebook SDK for Unity：
    - [Facebook Login Examples](https://developers.facebook.com/docs/unity/examples#login)
    - [Facebook Login Permissions](https://developers.facebook.com/docs/permissions/reference#login_permissions)
-    关于权限范围：
-     - 默认可向玩家申请：`email`和`public_profile`；
-     - 如需核心的社交功能，则需要额外的权限：`user_friends`，具体申请路径是：
-       - Facebook开发者后台 -> App Review；
+      {{< alert theme="info" >}}
+关于权限范围：
+- 默认可向玩家申请：`email`和`public_profile`；
+- 如需核心的社交功能，则需要额外的权限：`user_friends`，具体申请路径是：
+  - Facebook开发者后台 -> App Review；
+      {{< /alert >}}
 3. [GitHub] Google Play Games plugin for Unity：
    - [Sign in](https://github.com/playgameservices/play-games-plugin-for-unity#sign-in)
    - [Add Achievements and Leaderboards](https://github.com/playgameservices/play-games-plugin-for-unity#add-achievements-and-leaderboards)
