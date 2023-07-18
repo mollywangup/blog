@@ -231,7 +231,7 @@ mysql -uroot -p<password> <database_name> < /path/xxx.sql
 
 #### sudo: netstat: command not found
 
-解决方案: https://www.linuxandubuntu.com/home/fixed-bash-netstat-command-not-found-error
+> [[Fixed] Bash: Netstat: Command Not Found](https://www.linuxandubuntu.com/home/fixed-bash-netstat-command-not-found-error)
 
 ```shell
 # Ubuntu
