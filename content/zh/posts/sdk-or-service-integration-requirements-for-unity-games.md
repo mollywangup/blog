@@ -23,6 +23,9 @@ categories:
 
 本文适用于侧重广告变现的 Unity 游戏。
 
+涉及到隐私政策，👉 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/solution-for-ad-privacy/" target="_blank">广告风控指南：隐私政策</a>
+
+
 ## Firebase SDK
 
 理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；

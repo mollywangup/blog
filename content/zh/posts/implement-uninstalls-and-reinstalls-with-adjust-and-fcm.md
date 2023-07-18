@@ -15,8 +15,6 @@ categories:
 - MMP
 ---
 
-## 背景信息
-
 Adjust SDK 无法独自实现追踪卸载和重装，需要借助 FCM SDK 的消息推送功能。
 
 ## 实现原理
