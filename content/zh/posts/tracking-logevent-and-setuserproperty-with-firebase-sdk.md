@@ -54,7 +54,7 @@ adb shell setprop debug.firebase.analytics.app PACKAGE_NAME
 
 ### 方式一：ADB
 
-在终端打印日志，见 [View events in the log output](https://firebase.google.com/docs/analytics/unity/events#view_events_in_the_log_output)：
+在终端打印日志，见 [View events in the log output](https://firebase.google.com/docs/analytics/unity/events#view_events_in_the_log_output)
 
 ```shell
 adb shell setprop log.tag.FA VERBOSE
