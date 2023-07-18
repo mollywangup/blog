@@ -1,5 +1,5 @@
 ---
-title: "接入各种登录方式"
+title: "为 Unity 游戏接入各种登录方式"
 date: 2022-03-02T15:03:42Z
 draft: false
 description: 可直接接入，可间接接入。常见登录方式有 Facebook/Google/Play Games.
@@ -19,7 +19,6 @@ categories:
 
 {{< expand "1. 提高用户标识的唯一性" >}}
 
-建议做法：
 1. 首次打开时：强行匿名注册，并生成唯一标识`user_id`；
 2. 首次非匿名登录时：取该登录方式对应的唯一标识，并与`user_id`进行关联；
 3. 每次登录游戏时：指点击`开始游戏`按钮时，需确保有`user_id`信息；
@@ -28,10 +27,8 @@ categories:
 
 {{< expand "2. 保存游戏进度" >}}
 
-建议做法：
-
 - **非匿名登录**：将与之关联的游戏进度上传至服务端；
- - 主要用途：清除全部数据、卸载重装、跨设备，非匿名登录后可直接下载游戏进度；
+  - 主要用途：清除全部数据、卸载重装、跨设备，非匿名登录后可直接下载游戏进度；
 - **匿名登录**：不用管；
 
 {{< /expand >}}
@@ -47,14 +44,13 @@ categories:
 
 ## 方式一：直接接入
 
-### 接入 Facebook 登录方式
+### 接入 Facebook 登录
 
 #### 官方文档
  
-[Facebook]：
-   - [Facebook SDK for Unity Reference](https://developers.facebook.com/docs/unity/reference/current)
-   - [Facebook Login Best Practices](https://developers.facebook.com/docs/facebook-login/best-practices)
-   - [User Experience Design](https://developers.facebook.com/docs/facebook-login/userexperience)
+1. [Facebook] [Facebook SDK for Unity Reference](https://developers.facebook.com/docs/unity/reference/current)
+2. [Facebook] [Facebook Login Best Practices](https://developers.facebook.com/docs/facebook-login/best-practices)
+3. [Facebook] [User Experience Design](https://developers.facebook.com/docs/facebook-login/userexperience)
   
 #### 流程概述
 
@@ -71,7 +67,7 @@ categories:
 2. 设备上已安装Facebook但未登录，跳转至Facebook app登录界面；
 3. 设备上已安装Facebook且已登录，直接原地申请获取玩家权限；
 
-### 接入 Play Games 登录方式
+### 接入 Play Games 登录
 
 #### 官方文档
 
@@ -80,16 +76,15 @@ categories:
 
 #### 流程概述
 
-{{< notice info >}}
-仅需登入，无登出入口（因为方法已被官方删除）；
-{{< /notice >}}
-
-以下是登入流程：
 1. 设备无谷歌服务框架的，**直接跳过**，不作任何处理；
 2. 已创建 Play 游戏账号的，**系统自动登录**；
 3. 未创建 Play 游戏账号的，**需要手动处理**（ManuallyAuthenticate）：
    - 可直接放弃集成；
    - 可强制引导登录，引导玩家以当前谷歌账号创建 Play 游戏账号；
+
+{{< alert theme="warning" >}}
+仅需登入，无登出入口（因为方法已被官方删除）；
+{{< /alert >}}
 
 #### 测试方法
 
@@ -101,9 +96,9 @@ categories:
    - 已登录 Google 账号，未创建 Play 游戏账号；
 3. 设备上有谷歌服务框架，且已创建 Play 游戏账号，直接自动登录；
 
-{{< notice info >}}
-补充说明：创建和删除 Play 游戏账号，直接在系统设置里操作，相对容易操作；
-{{< /notice >}}
+{{< alert theme="info" >}}
+补充说明：创建和删除 Play 游戏账号，直接在设备层级操作；
+{{< /alert >}}
 
 ## 方式二：间接接入
 
@@ -112,17 +107,13 @@ categories:
 ### 关于 Firebase Authentication
 
 1. 支持的登录方式
-
   结论：**支持第三方登录如 Facebook/Google/Play Games 等，也支持直接注册如邮件/电话/匿名**；
-
   <img src='/images/posts/firebase-authentication-sign-in-providers.png' alt='Firebase Authentication: sign-in providers'>
 
 2. 收费标准
-
   结论：**月活5W以内免费，超过部分每个$0.0025-$0.0055**；
-
-  1. Firebase全产品线：[Pricing plans](https://firebase.google.com/pricing)
-  2. Firebase Authenticate：[No cost and Pay as you go](https://firebase.google.com/docs/auth#identity-platform-limits)
+   1. Firebase全产品线：[Pricing plans](https://firebase.google.com/pricing)
+   2. Firebase Authenticate：[No cost and Pay as you go](https://firebase.google.com/docs/auth#identity-platform-limits)
 
 ### 官方文档
 
