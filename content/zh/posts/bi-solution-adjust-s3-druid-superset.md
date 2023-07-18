@@ -41,6 +41,8 @@ categories:
 
 ## Step1. 收集原始数据
 
+本文使用的是 **Adjust**.
+
 👇 指路我的另外两篇文章：
 - <a href="https://mollywangup.com/posts/tracking-event-and-revenue-with-adjust-sdk/" target="_blank">使用 Adjust 追踪事件和收入数据</a>
 - <a href="https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/" target="_blank">使用 Adjust + FCM 追踪卸载和重装</a>

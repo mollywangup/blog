@@ -39,6 +39,8 @@ categories:
 
 ## Step1. 收集原始数据
 
+本文使用的是 **Firebase**.
+
 👇 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/tracking-logevent-and-setuserproperty-with-firebase-sdk/" target="_blank">使用 Firebase 统计事件&设置用户属性</a>
 
 ## Step2. 原始数据至数仓
