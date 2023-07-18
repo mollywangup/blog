@@ -274,16 +274,12 @@ Imps / DAV
 
 原始数据示例，有助于理解数据结构。
 
-以下为 `claim_rewarded_ad` 事件：
-
 {{< expand "Adjust/S3 原始数据举例（已脱敏）" >}}
 ```plaintext
 {environment}	{activity_kind}	{created_at}	{installed_at}	{timezone}	{app_name}	{app_version_short}	{country}	{city}	{os_name}	{os_version}	{device_type}	{device_manufacturer}	{device_name}	{gps_adid}	{adid}	{android_id}	{language}	{tracker}	{tracker_name}	{is_organic}	{is_reattributed}	{reporting_currency}	{reporting_cost}	{reporting_revenue}	{event}	{event_name}	[level]	[id]	[price]	[subscription_type]	[transaction_id]	[error_code]	{ad_mediation_platform}	{ad_revenue_network}	[ad_format]	[ad_space]	[ad_network_name]	[ad_revenue]	[ad_error_code]	[is_vip]	[trial_state]	{fb_install_referrer_publisher_platform}	{fb_install_referrer_campaign_group_name}	{fb_install_referrer_campaign_group_id}	{fb_install_referrer_campaign_name}	{fb_install_referrer_campaign_id}	{fb_install_referrer_adgroup_name}	{fb_install_referrer_adgroup_id}	
 production	event	1687957195	1687956440	UTC-0600	PACKAGE_NAME	1.1.1	us	Nampa	android	13	phone	Samsung	GalaxyA715G	21d01e91-1338-44ba-94c1-9a392d832d5b	df50cd2988ddf1f78b6116c22389c557		en	unattr	Unattributed	0	0				71cxx6	claim_rewarded_ad									Rewarded	1110004				f	never	unknown	CAMPAIGN_NAME	23855267775170400	ADSET_NAME	23855267775220400	AD_NAME	23855268033500400	
 ```
 {{< /expand >}}
-
-以下为 `login` 事件：
 
 {{< expand "Druid 原始数据举例（已脱敏）" >}}
 ```json
