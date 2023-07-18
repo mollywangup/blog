@@ -63,9 +63,9 @@ categories:
 
 需要测试以下三种可能的情形：
 
-1. 设备上未安装Facebook，跳转至设备浏览器的Facebook web登录界面（m.facebook.com）；
-2. 设备上已安装Facebook但未登录，跳转至Facebook app登录界面；
-3. 设备上已安装Facebook且已登录，直接原地申请获取玩家权限；
+1. 设备上未安装 Facebook，跳转至设备浏览器的 Facebook web 登录界面（m.facebook.com）；
+2. 设备上已安装 Facebook 但未登录，跳转至 Facebook app 登录界面；
+3. 设备上已安装 Facebook 且已登录，直接原地申请获取玩家权限；
 
 ### 接入 Play Games 登录
 
@@ -83,14 +83,14 @@ categories:
    - 可强制引导登录，引导玩家以当前谷歌账号创建 Play 游戏账号；
 
 {{< alert theme="warning" >}}
-仅需登入，无登出入口（因为方法已被官方删除）；
+⚠️ 仅需登入，无登出入口（因为方法已被官方删除）；
 {{< /alert >}}
 
 #### 测试方法
 
 需要测试以下三种可能的情形：
 
-1. 设备上无谷歌服务框架，直接跳过，不作任何处理；
+1. 设备上无谷歌服务框架，直接跳过；
 2. 设备上有谷歌服务框架，但未创建 Play 游戏账号，引导创建 Play 游戏账号；
    - 未登录 Google 账号，未创建 Play 游戏账号；
    - 已登录 Google 账号，未创建 Play 游戏账号；
@@ -102,7 +102,9 @@ categories:
 
 ## 方式二：间接接入
 
-使用 **Firebase Authentication** 接入。
+通过 [Firebase Authentication](https://firebase.google.com/docs/auth) 接入。
+
+<img src='https://firebase.google.com/static/docs/auth/images/auth-providers.png' alt='（图源 Firebase）'>
 
 ### 关于 Firebase Authentication
 
