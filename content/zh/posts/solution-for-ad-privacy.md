@@ -40,7 +40,7 @@ categories:
 
 2. 如何确定该遵守哪些隐私政策：
    - 如果受众包含儿童，则必须遵守《儿童在线隐私保护法》(COPPA)；
-   - 如果受众包含美国加州，则必须遵守《加利福尼亚隐私权法案》(CPRA)；
+   - 如果受众包含美国加州，则必须遵守《加利福尼亚消费者隐私法》(CCPA)；
    - 如果受众包含欧盟、英国，则必须遵守《欧盟通用数据保护条例》(GDPR)；
    - 如果受众包含巴西，则必须遵守《巴西通用数据保护法》(LGPD)；
 
@@ -56,7 +56,7 @@ categories:
 
 <a href="https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info#public-string-getid" target="_blank">Remove ADID权限</a>
 
-亦可参考同行做法 https://jinyoung.dev/posts/android_ads_policy/
+亦可参考同行做法：https://jinyoung.dev/posts/android_ads_policy/
 
 ```Java
 <uses-permission android:name="com.google.android.gms.permission.AD_ID"
