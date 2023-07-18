@@ -31,11 +31,11 @@ categories:
 
 ### 常用功能
 
-1. 分析功能：事件统计和设置用户属性（Log Events & setUserProperty）；
-2. 统计bug/崩溃等（Firebase Crashlytics），且支持自定义 key 细化发生场景；
-3. 远程控制（Remote Config）；
-4. 收集启动时长，监控网络请求等性能数据（Performance）；
-5. 接入多种登录方式如Facebook/PlayGames等（Firebase Authentication功能）；
+1. 事件统计和设置用户属性；（Log Events & setUserProperty）
+2. 统计bug/崩溃等，且支持自定义 key 细化发生场景；（Firebase Crashlytics）
+3. 云端配置控制；（Remote Config）
+4. 收集启动时长，监控网络请求等性能数据；（Performance）
+5. 接入多种登录方式如 Facebook/PlayGames 等；（Firebase Authentication）
 
 ### 官方文档
 
@@ -85,14 +85,15 @@ categories:
 
 面向运营：
 - 方法一：App Ads Helper
-  https://developers.facebook.com/tools/app-ads-helper/?id=790833925449113
+  https://developers.facebook.com/tools/app-ads-helper/?id={replace_your_app_id}
 - 方法二：Events Manager
-  https://business.facebook.com/events_manager2/list/app/790833925449113/overview?act=518122528886487&date=2022-08-22_2022-09-04
+  https://business.facebook.com/events_manager2/list/app/{replace_your_app_id}/overview
 
 ### 注意事项
 
 创建 Facebook 开发者账号时，需要以下两个信息（由研发反馈）：
 1. GP 正式包的 key 的哈希值；
+   👉 方法指路 <a href="https://mollywangup.com/posts/solution-for-gp-release-key-management/" target="_blank">GP 包签名管理（Release Key）</a>
 2. 启动 Facebook SDK 的类名；
 
 ## MAX SDK
@@ -144,12 +145,10 @@ categories:
 
 👉 指路我的另一篇文章 <a href="https://mollywangup.com/posts/tracking-event-and-revenue-with-adjust-sdk/" target="_blank">使用 Adjust 追踪事件和收入数据</a>
 
-1. 事件统计功能（Log Events）；
-2. 手动统计广告收入（Ad Revenue）：方法是将MAX SDK的广告收入转发给Adjust SDK；
-3. 手动统计内购收入（IAP）：方法是自定义一个内购收入事件，然后将收入上报至该事件；
-   - 本质上属于手动统计的一个事件。区别于普通事件，收入事件：
-     - 有货币单位，一律需要换算为USD；
-     - 可通过交易ID进行去重；
+1. 事件统计功能；（Log Events）
+2. 手动统计广告收入；（Ad Revenue）
+3. 手动统计内购收入；（Purchase）
+4. 手动统计订阅收入；（Subscription）
 
 ### 官方文档
 

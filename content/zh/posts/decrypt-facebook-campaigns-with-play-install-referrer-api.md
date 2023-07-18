@@ -153,7 +153,7 @@ utm_source=utm_source_xxx&utm_campaign=utm_campaign_xxx&utm_medium=utm_medium_xx
          - **data**：即解密对象/密文。
          - **nonce**：随机数，无实际意义，解密需要；
           {{< notice warning >}}
-重要说明：data中包含了`tag`，因此处理时需要先忽略/截断。其中，关于tag：
+重要说明：data 中包含了 `tag`，因此处理时需要先忽略/截断。其中，关于 tag：
 - 对应上述例子：`7d13f2d7a3c738d37303b5080bdcb08a`；
 - 位置：后缀；
 - 长度：固定长度的32个16进制字符，即16个字节；
