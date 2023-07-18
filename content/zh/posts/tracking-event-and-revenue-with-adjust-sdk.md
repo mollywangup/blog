@@ -158,7 +158,7 @@ Adjust.trackEvent(adjustEvent);
 构造 `subscription` 对象，直接上报即可。
 
 {{< alert theme="warning" >}}
-⚠ 注意：`price` 为 long 类型，假定订阅价格是 $9.99，则需要上报为 `9.99 * 1000000 = 9990000`，详见 [getPriceAmountMicros](https://developer.android.com/reference/com/android/billingclient/api/ProductDetails.PricingPhase#getPriceAmountMicros())
+⚠️ 注意：`price` 为 long 类型，假定订阅价格是 $9.99，则需要上报为 `9.99 * 1000000 = 9990000`，详见 [getPriceAmountMicros](https://developer.android.com/reference/com/android/billingclient/api/ProductDetails.PricingPhase#getPriceAmountMicros())
 {{< /alert >}}
 
 ```C#

@@ -64,7 +64,7 @@ COUNT(DISTINCT event_timestamp) / COUNT(DISTINCT user_pseudo_id)
 ## 新增计算列
 
 {{< alert theme="warning" >}}
-⚠ 注意：写入数仓前的批量任务中新增，因此是基于 **Firebase/BigQuery** 的原始列。
+⚠️ 注意：写入数仓前的批量任务中新增，因此是基于 **Firebase/BigQuery** 的原始列。
 {{< /alert >}}
 
 ### days_x
@@ -85,7 +85,7 @@ CAST(TIMESTAMP_DIFF(TIMESTAMP_MICROS(event_timestamp), TIMESTAMP_MICROS(user_fir
 ### media_source
 
 用于区分流量来源（归因）。
-⚠ 需要按需修改：实际接入的流量源。
+⚠️ 需要按需修改：实际接入的流量源。
 
 👉 指路我的另外一篇文章 <a href="https://mollywangup.com/posts/decrypt-facebook-campaigns-with-play-install-referrer-api/" target="_blank">使用 Play Install Referrer API 解密 Facebook Campaign</a>
 
@@ -99,7 +99,7 @@ END AS media_source
 ### revenue_kind
 
 用于区分收入类型。
-⚠ 需要按需修改：收入事件名称。
+⚠️ 需要按需修改：收入事件名称。
 
 ```sql
 CASE event_name
@@ -113,7 +113,7 @@ END AS revenue_kind
 ### revenue
 
 用于统一计算所有类型的收入：广告、内购（一次性）、订阅。
-⚠ 需要按需修改：实际接入的聚合平台、收入事件名称。
+⚠️ 需要按需修改：实际接入的聚合平台、收入事件名称。
 
 ```sql
 CASE 
@@ -126,7 +126,7 @@ END AS revenue
 ## 基础指标
 
 {{< alert theme="warning" >}}
-⚠ 注意：写入数仓后计算的，因此是基于 **数仓** 的原始列。
+⚠️ 注意：写入数仓后计算的，因此是基于 **数仓** 的原始列。
 {{< /alert >}}
 
 ### newUser

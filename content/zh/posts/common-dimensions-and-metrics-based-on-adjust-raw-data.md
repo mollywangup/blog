@@ -64,7 +64,7 @@ COUNT(DISTINCT __time) / COUNT(DISTINCT adid)
 ## 新增计算列
 
 {{< alert theme="warning" >}}
-⚠ 注意：写入数仓前的批量任务中新增，因此是基于 **Adjust/S3** 的原始列。
+⚠️ 注意：写入数仓前的批量任务中新增，因此是基于 **Adjust/S3** 的原始列。
 {{< /alert >}}
 
 ### days_x
@@ -86,7 +86,7 @@ TIMESTAMPDIFF(MINUTE, MILLIS_TO_TIMESTAMP("{installed_at}" * 1000), MILLIS_TO_TI
 关于次日，有两种可能的定义：
 1.严格间隔 24h 为次日；
 2.过了零点就是次日了;
-⚠ Adjust 和这里计算 days_x 的方式，都属于第一种。
+⚠️ Adjust 和这里计算 days_x 的方式，都属于第一种。
 {{< /notice >}}
 
 ### event_name
@@ -103,7 +103,7 @@ END AS "event_name"
 ### media_source
 
 用于区分流量来源（归因）。
-⚠ 需要按需修改：实际接入的流量源。
+⚠️ 需要按需修改：实际接入的流量源。
 
 ```sql
 CASE
@@ -115,7 +115,7 @@ END AS "media_source"
 ### revenue_kind
 
 用于区分收入类型。
-⚠ 需要按需修改：收入事件名称。
+⚠️ 需要按需修改：收入事件名称。
 
 ```sql
 CASE
@@ -129,7 +129,7 @@ END AS "revenue_kind"
 ### revenue
 
 用于统一计算所有类型的收入：广告、内购（一次性）、订阅。
-⚠ 需要按需修改：实际接入的聚合平台、收入事件名称。
+⚠️ 需要按需修改：实际接入的聚合平台、收入事件名称。
 
 ```sql
 CASE
@@ -154,7 +154,7 @@ END AS "is_test_device"
 ## 基础指标
 
 {{< alert theme="warning" >}}
-⚠ 注意：写入数仓后计算的，因此是基于 **Druid** 的原始列。
+⚠️ 注意：写入数仓后计算的，因此是基于 **Druid** 的原始列。
 {{< /alert >}}
 
 ### newUser

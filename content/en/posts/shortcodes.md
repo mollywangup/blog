@@ -59,7 +59,7 @@ Make it easy to switch between different code
   console.log('Hello World!');
   ```
 
-  ⚠️Becareful that the content in the tab should be different from each other. The tab makes unique id hashes depending on the tab contents. So, If you just copy-paste the tabs with multiple times, since it has the same contents, the tab will not work.
+  ⚠️️Becareful that the content in the tab should be different from each other. The tab makes unique id hashes depending on the tab contents. So, If you just copy-paste the tabs with multiple times, since it has the same contents, the tab will not work.
 
   {{< /tab >}}
   {{< tab >}}
