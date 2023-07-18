@@ -11,17 +11,13 @@ tags:
 - Facebook Ads
 - Google Ads
 - Apple Search Ads
-- Adjust
-- AdMob
-- GA4
 categories:
 - API
-- MMP
 ---
 
 无论哪种广告平台，数据抓取整体可概括为以下三步：
 
-1. 申请接口；（访问令牌/access_token/密钥）
+1. 申请接口；（访问令牌/密钥文件）
 2. 使用官方提供的 API 文档，通过接口请求；
 3. 统一指标字典，并写入数据库；
 
@@ -81,7 +77,14 @@ system_user_access_token: your_access_token # 必填项；申请的最终的acce
 
 ## Google Ads
 
-线下PDF版：<a href="https://mollywangup.com/pdf/" target="_blank">Google Ads API快速上手指南 [2019]</a>
+### 接口申请方法
+
+
+
+### 官方文档
+
+- [Google] [Google Ads API](https://developers.google.com/google-ads/api/docs/first-call/overview?hl=en)
+- 线下PDF版：<a href="https://mollywangup.com/pdf/Google%20Ads%20API%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%8C%87%E5%8D%97%20%5B2019%5D.pdf" target="_blank">Google Ads API快速上手指南 [2019]</a>
 
 
 ## Apple Search Ads
@@ -92,7 +95,7 @@ system_user_access_token: your_access_token # 必填项；申请的最终的acce
 
 ### 官方文档
 
-- [Apple] [Apple Search Ads](https://developer.apple.com/documentation/apple_search_ads)
+- [Apple] [Apple Search Ads API](https://developer.apple.com/documentation/apple_search_ads)
 
 ## Adjust
 
