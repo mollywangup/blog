@@ -18,7 +18,7 @@ categories:
 - BI
 - DB
 - Columnar
-- BASS
+- BAAS
 ---
 
 🙇‍♀️ 本文是个文章地图索引。
@@ -26,7 +26,7 @@ categories:
 本文旨在将来自 Firebase/BigQuery 的原始数据可视化在 Looker Studio. 其中，不同的工具分工如下：
 
 - **Firebase**：
-  - BASS；
+  - BAAS；
   - 用于收集原始数据；
 - **GCS**：
   - 云存储，Google 生态；

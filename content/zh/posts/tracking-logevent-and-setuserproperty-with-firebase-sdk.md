@@ -11,7 +11,7 @@ tags:
 - Firebase
 categories:
 - SDK
-- BASS
+- BAAS
 ---
 
 本文旨在使用 Firebase SDK 统计事件、设置用户属性，并提供测试方法。
