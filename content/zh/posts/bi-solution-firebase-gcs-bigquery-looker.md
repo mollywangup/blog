@@ -21,7 +21,7 @@ categories:
 - BASS
 ---
 
-🙇‍♀️ 本文是个地图索引。
+🙇‍♀️ 本文是个文章地图索引。
 
 本文旨在将来自 Firebase/BigQuery 的原始数据可视化在 Looker Studio. 其中，不同的工具分工如下：
 
