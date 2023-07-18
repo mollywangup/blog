@@ -42,16 +42,16 @@ categories:
 
 ```yaml
 businesses_manager_tentacles:
-	-
-		data_source: 'bm_tentacles' # 非必填项；为了标记数据源或者manager_account
-		business_id: 3064441080294895 # 非必填项；bm id
-		business_name: Tentacles overseas projects # 非必填项；bm名称
-		app_id: # 必填项；claim过来的那个app对应的facebook开发者后台的app_id
-		app_name: Hala # 非必填项；claim过来的那个app的名称
-		app_secret: # 必填项；claim过来的那个app对应的facebook开发者后台的app_secret
-		system_user_id:  # 非必填项；可通过'/me?'请求获得
-		system_user_name: system_user_tentacles # 非必填项；system_user名称
-		system_user_access_token: # 必填项；申请的最终的access_token
+   -
+      data_source: 'bm_tentacles' # 非必填项；为了标记数据源或者manager_account  
+      business_id: 3064441080294895 # 非必填项；bm id      
+      business_name: Tentacles overseas projects # 非必填项；bm名称      
+      app_id: # 必填项；claim过来的那个app对应的facebook开发者后台的app_id      
+      app_name: Hala # 非必填项；claim过来的那个app的名称      
+      app_secret: # 必填项；claim过来的那个app对应的facebook开发者后台的app_secret 
+      system_user_id:  # 非必填项；可通过'/me?'请求获得      
+      system_user_name: system_user_tentacles # 非必填项；system_user名称
+      system_user_access_token: # 必填项；申请的最终的access_token
 ```
 
 ### 请求方法
