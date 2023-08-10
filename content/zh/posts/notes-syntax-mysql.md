@@ -247,7 +247,7 @@ type_of_join table_2 t2
   ON (t2.key = t1.key)
 ```
 
-| Type of join | Illustration | 
+| type_of_join | Illustration | 
 | ---------- | --------- | 
 | INNER JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' alt='INNER JOIN（图源Shervine Amidi）' width='60%'> |
 | LEFT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/002.png?59960a43a2bcff0bb51fe2daf608602e' alt='LEFT JOIN（图源Shervine Amidi）' width='60%'> |
