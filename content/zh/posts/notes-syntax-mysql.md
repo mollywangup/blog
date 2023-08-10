@@ -249,10 +249,10 @@ type_of_join table_2 t2
 
 | Type of join | Illustration | 
 | ---------- | --------- | 
-| INNER JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' width='60%'> |
-| LEFT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/002.png?59960a43a2bcff0bb51fe2daf608602e' width='60%'> |
-| RIGHT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' width='60%'> |
-| FULL JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/004.png?5a9a038972fdd9cf0d3beccf03f02db9' width='60%'> |
+| INNER JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' alt='INNER JOIN（图源Shervine Amidi）' width='60%'> |
+| LEFT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/002.png?59960a43a2bcff0bb51fe2daf608602e' alt='LEFT JOIN（图源Shervine Amidi）' width='60%'> |
+| RIGHT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' alt='RIGHT JOIN（图源Shervine Amidi）' width='60%'> |
+| FULL JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/004.png?5a9a038972fdd9cf0d3beccf03f02db9' alt='FULL JOIN（图源Shervine Amidi）' width='60%'> |
 
 ### Aggregations
 
