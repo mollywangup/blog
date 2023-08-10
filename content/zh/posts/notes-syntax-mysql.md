@@ -206,7 +206,53 @@ UPDATE <table_name> SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERV
 
 ## 常用查询
 
+### 整体常用
 
+```sql
+-- Select columns                    
+SELECT
+    col_1,
+    col_2,
+     ... ,
+    col_n
+
+-- Source of data                    
+FROM table t
+
+-- Gather info from other sources    optional
+JOIN other_table ot
+  ON (t.key = ot.key)
+
+-- Conditions                        optional
+WHERE some_condition(s)
+
+-- Aggregating                       optional
+GROUP BY col_group_list
+
+-- Restricting aggregated values     optional
+HAVING some_condition(s)
+
+-- Sorting values                    optional
+ORDER BY col_order_list
+
+-- Limiting number of rows           optional
+LIMIT some_value
+```
+
+### JOIN
+
+```sql
+FROM table_1 t1
+type_of_join table_2 t2
+  ON (t2.key = t1.key)
+```
+
+| Type of join | Illustration | 
+| ---------- | --------- | 
+| INNER JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2'> |
+| LEFT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/002.png?59960a43a2bcff0bb51fe2daf608602e'> |
+| RIGHT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2'> |
+| FULL JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/004.png?5a9a038972fdd9cf0d3beccf03f02db9'> |
 
 ## 其他
 
