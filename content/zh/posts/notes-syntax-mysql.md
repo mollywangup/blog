@@ -206,7 +206,7 @@ UPDATE <table_name> SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERV
 
 ## 常用查询
 
-### 整体常用
+### Query structure
 
 ```sql
 -- Select columns                    
@@ -249,10 +249,14 @@ type_of_join table_2 t2
 
 | Type of join | Illustration | 
 | ---------- | --------- | 
-| INNER JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2'> |
-| LEFT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/002.png?59960a43a2bcff0bb51fe2daf608602e'> |
-| RIGHT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2'> |
-| FULL JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/004.png?5a9a038972fdd9cf0d3beccf03f02db9'> |
+| INNER JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' width="60%"> |
+| LEFT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/002.png?59960a43a2bcff0bb51fe2daf608602e' width="70%"> |
+| RIGHT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' width="80%"> |
+| FULL JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/004.png?5a9a038972fdd9cf0d3beccf03f02db9' width="90%"> |
+
+### Aggregations
+
+### Window functions
 
 ## 其他
 
