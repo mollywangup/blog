@@ -34,12 +34,12 @@ categories:
 监督学习。从正确答案中（有标记数据集）学习；
 根据带有标记的数据集，训练一个数据模型，解决给定特征值，预测的问题；
 
-### Regression（回归）
+### Regression / 回归
 
 输出值是连续值。
 
 
-### Classification（分类）
+### Classification/分类
 
 输出值是离散值。
 
@@ -47,11 +47,11 @@ categories:
 - 决策树：
 - Nbayes（朴素贝叶斯）：
 
-## Unsupervised Learning
+## Unsupervised Learning/无监督学习
 
 无监督学习。发现规律（无标记数据集）
 
-### Clustering（聚类）
+### Clustering/聚类
 
 - K-means：将 n 个点分为 k 个簇，使得簇内具有较高的相似度，簇间具有较低的相似度；（欧氏距离）
 - DBSCAN（密度聚类）：将 n 个点分为三类，然后删除噪音点；（曼哈顿距离）
@@ -59,7 +59,7 @@ categories:
   - 边界点：在半径 eps 内的点的个数不超过 min_samples，但落在核心点的邻域内；
   - 噪音点：既不是核心点，也不是边界点；
 
-### Dimensionality reduction（降维）
+### Dimensionality reduction/降维
 
 - PCA：主成分分析；
 
