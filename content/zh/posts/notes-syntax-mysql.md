@@ -204,7 +204,7 @@ UPDATE <table_name> SET minute_x = (SELECT TIMESTAMPDIFF(MINUTE, first_open_time
 UPDATE <table_name> SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERVAL -8 hour));
 ```
 
-## 常用查询
+## 查询操作
 
 ### Query structure
 
@@ -247,7 +247,7 @@ type_of_join table_2 t2
   ON (t2.key = t1.key)
 ```
 
-| type_of_join | Illustration | 
+| type_of_join | illustration | 
 | ---------- | --------- | 
 | INNER JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' alt='INNER JOIN（图源Shervine Amidi）' width='60%'> |
 | LEFT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/002.png?59960a43a2bcff0bb51fe2daf608602e' alt='LEFT JOIN（图源Shervine Amidi）' width='60%'> |
@@ -255,6 +255,26 @@ type_of_join table_2 t2
 | FULL JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/004.png?5a9a038972fdd9cf0d3beccf03f02db9' alt='FULL JOIN（图源Shervine Amidi）' width='60%'> |
 
 ### Aggregations
+
+```sql
+SELECT
+    col_1,
+    agg_function(col_2)
+FROM table
+GROUP BY col_1
+
+SELECT
+    col_1,
+    col_2,
+    agg_function(col_3)
+FROM table
+GROUP BY col_1, col_2
+GROUPING SETS (
+    (col_1),
+    (col_2),
+    (col_1, col_2)
+)
+```
 
 ### Window functions
 
