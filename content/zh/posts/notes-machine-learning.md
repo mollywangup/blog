@@ -13,15 +13,34 @@ categories:
 - 
 ---
 
+✍ 持续更新。
+
+统一口径：
+自变量：(features, labels)
+
+
 ## 机器学习分类
 
-- 有监督学习（supervised learning）：从正确答案中学习 -> 预测；
-- 无监督学习（unsupervised learning）：发现规律 -> 聚类；
-- 半监督学习（Reinforcement Learning）
+可分为以下4类，但本文以常见的前2类为主：
 
+- **Supervised Learning**：监督学习。从正确答案中（有标记数据集）学习；
+- Unsupervised Learning：无监督学习。发现规律（无标记数据集）；
+- Semi-Supervised Learning：半监督学习；
+- Reinforcement Learning：强化学习。奖惩机制互动式学习；
+
+### Supervised Learning
+
+监督学习。解决
+
+
+### Unsupervised Learning
+
+无监督学习。
+
+## 常用算法
 
 机器学习算法
-- 有监督学习：
+- 监督学习：
   - 分类（classification）：输出值是离散值；
     - KNN (K-Nearest Neighbors)：K近邻算法；
     - 决策树：
@@ -44,7 +63,7 @@ categories:
 
 
 效果评估
-- 针对有监督学习：
+- 针对监督学习：
   - 偏差（bias）：偏离程度；
   - 方差（variance）：分散程度；
 - 针对分类：
