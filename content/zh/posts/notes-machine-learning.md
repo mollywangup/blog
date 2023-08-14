@@ -1,7 +1,7 @@
 ---
 title: "吴恩达机器学习笔记"
 date: 2023-08-04T08:09:47Z
-draft: true
+draft: false
 description: 
 hideToc: false
 enableToc: true
@@ -13,6 +13,7 @@ categories:
 - 
 ---
 
+
 ✍ 持续更新。
 
 统一口径：
@@ -21,46 +22,46 @@ categories:
 
 ## 机器学习分类
 
-可分为以下4类，但本文以常见的前2类为主：
+可分为以下四类，本文以常见的前两类为主：
 
-- **Supervised Learning**：监督学习。从正确答案中（有标记数据集）学习；
-- Unsupervised Learning：无监督学习。发现规律（无标记数据集）；
+- Supervised Learning：监督学习
+- Unsupervised Learning：无监督学习
 - Semi-Supervised Learning：半监督学习；
 - Reinforcement Learning：强化学习。奖惩机制互动式学习；
 
-### Supervised Learning
+## Supervised Learning / 监督学习
 
-监督学习。根据带有标记的数据集，训练一个数据模型，解决给定特征值，预测的问题；
+监督学习。从正确答案中（有标记数据集）学习；
+根据带有标记的数据集，训练一个数据模型，解决给定特征值，预测的问题；
 
+### Regression（回归）
 
-
-### Unsupervised Learning
-
-无监督学习。
-
-## 常用算法
-
-机器学习算法
-- 监督学习：
-  - 分类（classification）：输出值是离散值；
-    - KNN (K-Nearest Neighbors)：K近邻算法；
-    - 决策树：
-    - Nbayes（朴素贝叶斯）：
-  - 回归（regression）：输出值是连续值；
-
-- 无监督学习：
-  - 聚类（clustering）：通过相似性度量方法把一些观测值分成同一类，常用于分析数据集；
-    - K-means：将 n 个点分为 k 个簇，使得簇内具有较高的相似度，簇间具有较低的相似度；（欧氏距离）
-    - DBSCAN（密度聚类）：将 n 个点分为三类，然后删除噪音点；（曼哈顿距离）
-      - 核心点：在半径 eps（两个样本被看做邻域的最大举例） 内的点的个数超过 min_samples（簇的样本数）；
-      - 边界点：在半径 eps 内的点的个数不超过 min_samples，但落在核心点的邻域内；
-      - 噪音点：既不是核心点，也不是边界点；
-  - 降维（Dimensionality reduction）：变量降噪，更利于可视化；
-    - PCA：主成分分析；
+输出值是连续值。
 
 
-训练集和测试集
-交叉验证时：将数据集分成 N 块，使用 N-1 块进行训练，再用最后一块进行测试；
+### Classification（分类）
+
+输出值是离散值。
+
+- KNN (K-Nearest Neighbors)：K近邻算法；
+- 决策树：
+- Nbayes（朴素贝叶斯）：
+
+## Unsupervised Learning
+
+无监督学习。发现规律（无标记数据集）
+
+### Clustering（聚类）
+
+- K-means：将 n 个点分为 k 个簇，使得簇内具有较高的相似度，簇间具有较低的相似度；（欧氏距离）
+- DBSCAN（密度聚类）：将 n 个点分为三类，然后删除噪音点；（曼哈顿距离）
+  - 核心点：在半径 eps（两个样本被看做邻域的最大举例） 内的点的个数超过 min_samples（簇的样本数）；
+  - 边界点：在半径 eps 内的点的个数不超过 min_samples，但落在核心点的邻域内；
+  - 噪音点：既不是核心点，也不是边界点；
+
+### Dimensionality reduction（降维）
+
+- PCA：主成分分析；
 
 
 效果评估
@@ -75,6 +76,11 @@ categories:
   - F1是一个综合考虑查准率与查全率的度量，其基于查准率与查全率的调和平均定义：即：F1度量的一般形式-Fβ，能让我们表达出对查准率、查全率的不同偏好
   
 
+
+训练集和测试集
+交叉验证时：将数据集分成 N 块，使用 N-1 块进行训练，再用最后一块进行测试；
+
+## 附
 
 两点之间距离的计算方式（相似度衡量）：
 - 欧氏距离：差的平方和的平方根；
