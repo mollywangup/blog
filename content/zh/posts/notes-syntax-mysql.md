@@ -243,32 +243,34 @@ LIMIT some_value
 
 ### 表连接
 
-JOIN
-
 ```sql
+-- 方式一
 FROM table_1 t1
 type_of_join table_2 t2
   ON (t2.key = t1.key)
+
+-- 方式二
+FROM table_1 t1, table_2 t2
+WHERE t2.key = t1.key
 ```
 
-| type_of_join&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | illustration | 
-| ---------- | --------- | 
-| INNER JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' alt='INNER JOIN（图源Shervine Amidi）' width='60%'> |
-| LEFT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/002.png?59960a43a2bcff0bb51fe2daf608602e' alt='LEFT JOIN（图源Shervine Amidi）' width='60%'> |
-| RIGHT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' alt='RIGHT JOIN（图源Shervine Amidi）' width='60%'> |
-| FULL JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/004.png?5a9a038972fdd9cf0d3beccf03f02db9' alt='FULL JOIN（图源Shervine Amidi）' width='60%'> |
+其中 `type_of_join` 共四种：
+- INNER JOIN
+- LEFT JOIN
+- RIGHT JOIN
+- FULL JOIN
 
 ### 聚合函数
 
-Aggregations
-
 ```sql
+-- 简单聚合
 SELECT
     col_1,
     agg_function(col_2)
 FROM table
 GROUP BY col_1
 
+-- 单次执行多次聚合
 SELECT
     col_1,
     col_2,
@@ -284,11 +286,19 @@ GROUPING SETS (
 
 ### 窗口函数
 
-Window functions
-
 ```sql
-some_window_function() OVER(PARTITION BY some_col ORDER BY another_col)
+<window_function> OVER(PARTITION BY <分组的列> ORDER BY <排序的列>)
 ```
+
+其中，常见窗口函数如下：
+
+| 窗口函数&nbsp;&nbsp;&nbsp; | 描述&nbsp;&nbsp;&nbsp; |
+| ---------- | --------- | 
+| FIRST_VALUE(col) | 取第一个值 |
+| LAST_VALUE(col) | 取最后一个值 |
+| NTH_VALUE(col, n) | 取第 n 个值（$n^{th}$） |
+| LAG(col, n) | 取前 n 个值 |
+| LEAD(col, n) | 取后 n 个值 |
 
 ### WITH AS
 
