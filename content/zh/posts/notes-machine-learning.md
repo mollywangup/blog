@@ -1,7 +1,7 @@
 ---
 title: "吴恩达机器学习笔记"
 date: 2023-08-04T08:09:47Z
-draft: true
+draft: false
 description: 
 hideToc: false
 enableToc: true
