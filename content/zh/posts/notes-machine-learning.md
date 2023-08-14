@@ -17,45 +17,47 @@ categories:
 
 统一口径：
 
-- features/特征/输入值
-- labels/标签/输出值
+- 特征（features）：指输入值；
+- 标签（labels）：指输出值，可以是实际输出值，也可以是预测输出值；
 
 ## 机器学习分类
 
-可分为以下四类，本文以常见的前两类为主：
+机器学习解决的是：给定训练集 -> 生成训练模型 -> 根据训练模型预测，即 training set -> model -> predict
 
-- Supervised Learning / 监督学习
-- Unsupervised Learning / 无监督学习
-- Semi-Supervised Learning / 半监督学习
-- Reinforcement Learning / 强化学习
+根据训练集中是否包含标签，可分为以下四类（本文仅涉及前两类）：
 
-## Supervised Learning / 监督学习
+- 包含标签：监督学习（Supervised Learning）
+- 不包含标签：无监督学习（Unsupervised Learning）
+- 部分包含标签：半监督学习（Semi-Supervised Learning）
+- 强化学习（Reinforcement Learning）
 
-训练集中**包含标签**的学习任务，则属于监督学习，即 (features, labels) -> model.
+## 监督学习
+
+训练集中**包含标签**，则属于监督学习，即 (features, labels) -> model.
 
 按照标签的数据类型，监督学习任务可分为以下两类：
 
-- Regression / 回归
-- Classification / 分类
+- 连续值：Regression / 回归
+- 离散值：Classification / 分类
 
-### Regression / 回归
+### 回归（Regression）
 
-输出值是连续值。
+标签是连续值。
 
 
-### Classification / 分类
+### 分类（Classification）
 
-输出值是离散值。
+标签是离散值。
 
 - KNN (K-Nearest Neighbors)：K近邻算法；
 - 决策树：
 - Nbayes（朴素贝叶斯）：
 
-## Unsupervised Learning / 无监督学习
+## 无监督学习（Unsupervised Learning）
 
-训练集中**不包含标签**的学习任务，则属于无监督学习，即 (features) -> model.
+训练集中**不包含标签**，则属于无监督学习，即 (features) -> model.
 
-### Clustering / 聚类
+### 聚类（Clustering）
 
 - K-means：将 n 个点分为 k 个簇，使得簇内具有较高的相似度，簇间具有较低的相似度；（欧氏距离）
 - DBSCAN（密度聚类）：将 n 个点分为三类，然后删除噪音点；（曼哈顿距离）
@@ -63,7 +65,7 @@ categories:
   - 边界点：在半径 eps 内的点的个数不超过 min_samples，但落在核心点的邻域内；
   - 噪音点：既不是核心点，也不是边界点；
 
-### Dimensionality reduction / 降维
+### 降维（Dimensionality reduction）
 
 - PCA：主成分分析；
 
