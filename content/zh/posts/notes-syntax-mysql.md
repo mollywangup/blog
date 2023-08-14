@@ -206,7 +206,9 @@ UPDATE <table_name> SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERV
 
 ## 查询操作
 
-### Query structure
+### 基本查询结构
+
+Query structure
 
 ```sql
 -- Select columns                    
@@ -239,7 +241,9 @@ ORDER BY col_order_list
 LIMIT some_value
 ```
 
-### JOIN
+### 表连接
+
+JOIN
 
 ```sql
 FROM table_1 t1
@@ -247,14 +251,16 @@ type_of_join table_2 t2
   ON (t2.key = t1.key)
 ```
 
-| type_of_join | illustration | 
+| type_of_join&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | illustration | 
 | ---------- | --------- | 
 | INNER JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' alt='INNER JOIN（图源Shervine Amidi）' width='60%'> |
 | LEFT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/002.png?59960a43a2bcff0bb51fe2daf608602e' alt='LEFT JOIN（图源Shervine Amidi）' width='60%'> |
 | RIGHT JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/003.png?f1ac039e0897d82dd87ddb134d3acca2' alt='RIGHT JOIN（图源Shervine Amidi）' width='60%'> |
 | FULL JOIN | <img src='https://www.mit.edu/~amidi/teaching/data-science-tools/illustrations/join-sql/004.png?5a9a038972fdd9cf0d3beccf03f02db9' alt='FULL JOIN（图源Shervine Amidi）' width='60%'> |
 
-### Aggregations
+### 聚合函数
+
+Aggregations
 
 ```sql
 SELECT
@@ -276,7 +282,30 @@ GROUPING SETS (
 )
 ```
 
-### Window functions
+### 窗口函数
+
+Window functions
+
+```sql
+some_window_function() OVER(PARTITION BY some_col ORDER BY another_col)
+```
+
+### WITH AS
+
+```sql
+WITH cte_1 AS (
+SELECT ...
+),
+
+...
+
+cte_n AS (
+SELECT ...
+)
+
+SELECT ...
+FROM ...
+```
 
 ## 其他
 
