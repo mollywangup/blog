@@ -19,6 +19,7 @@ categories:
 
 - 特征（features）：指输入值；
 - 标签（labels）：指输出值，可以是实际输出值，也可以是预测输出值；
+- 训练集（training set）：指参与模型训练的数据集；
 
 ## 机器学习分类
 
@@ -26,9 +27,9 @@ categories:
 
 根据训练集中是否包含标签，可分为以下四类（本文仅涉及前两类）：
 
-- 包含标签：监督学习（Supervised Learning）
-- 不包含标签：无监督学习（Unsupervised Learning）
-- 部分包含标签：半监督学习（Semi-Supervised Learning）
+- 监督学习（Supervised Learning）：包含标签；
+- 无监督学习（Unsupervised Learning）：不包含标签；
+- 半监督学习（Semi-Supervised Learning）：部分包含标签；
 - 强化学习（Reinforcement Learning）
 
 ## 监督学习
@@ -37,8 +38,8 @@ categories:
 
 按照标签的数据类型，监督学习任务可分为以下两类：
 
-- 连续值：回归（Regression）
-- 离散值：分类（Classification）
+- 回归（Regression）：连续值；
+- 分类（Classification）：离散值；
 
 ### 回归
 
