@@ -1,7 +1,7 @@
 ---
 title: "吴恩达机器学习笔记"
 date: 2023-08-04T08:09:47Z
-draft: false
+draft: true
 description: 
 hideToc: false
 enableToc: true
@@ -30,7 +30,8 @@ categories:
 
 ### Supervised Learning
 
-监督学习。解决
+监督学习。根据带有标记的数据集，训练一个数据模型，解决给定特征值，预测的问题；
+
 
 
 ### Unsupervised Learning
