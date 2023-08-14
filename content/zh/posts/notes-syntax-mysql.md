@@ -287,7 +287,7 @@ GROUPING SETS (
 ### 窗口函数
 
 ```sql
-<window_function> OVER(PARTITION BY <分组的列> ORDER BY <排序的列>)
+some_window_function() OVER(PARTITION BY some_col ORDER BY another_col)
 ```
 
 其中，常见窗口函数如下：
@@ -306,10 +306,7 @@ GROUPING SETS (
 WITH cte_1 AS (
 SELECT ...
 ),
-
-...
-
-cte_n AS (
+cte_2 AS (
 SELECT ...
 )
 
@@ -333,7 +330,6 @@ mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /pa
 -- 如果是.zip格式需先解压，解压后后缀为.sql
 -- 恢复整个数据库
 mysql -uroot -p<password> <database_name> < /path/xxx.sql
-
 ```
 
 ### 报错解决
