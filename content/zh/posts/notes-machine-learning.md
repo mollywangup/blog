@@ -33,19 +33,19 @@ categories:
 
 ## 监督学习
 
-训练集中**包含标签**，则属于监督学习，即 (features, labels) -> model.
+训练集中**包含标签**，则属于监督学习，即 `(features, labels) -> model`.
 
 按照标签的数据类型，监督学习任务可分为以下两类：
 
-- 连续值：Regression / 回归
-- 离散值：Classification / 分类
+- 连续值：回归（Regression）
+- 离散值：分类（Classification）
 
-### 回归（Regression）
+### 回归
 
 标签是连续值。
 
 
-### 分类（Classification）
+### 分类
 
 标签是离散值。
 
@@ -53,9 +53,9 @@ categories:
 - 决策树：
 - Nbayes（朴素贝叶斯）：
 
-## 无监督学习（Unsupervised Learning）
+## 无监督学习
 
-训练集中**不包含标签**，则属于无监督学习，即 (features) -> model.
+训练集中**不包含标签**，则属于无监督学习，即 `(features) -> model`.
 
 ### 聚类（Clustering）
 
