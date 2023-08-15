@@ -263,22 +263,22 @@ WHERE t2.key = t1.key
 ```sql
 -- 简单聚合
 SELECT
-    col_1,
-    agg_function(col_2)
+  col_1,
+  agg_function(col_2)
 FROM table
 GROUP BY col_1
 
 -- 单次执行多次聚合
 SELECT
-    col_1,
-    col_2,
-    agg_function(col_3)
+  col_1,
+  col_2,
+  agg_function(col_3)
 FROM table
 GROUP BY col_1, col_2
 GROUPING SETS (
-    (col_1),
-    (col_2),
-    (col_1, col_2)
+  (col_1),
+  (col_2),
+  (col_1, col_2)
 )
 ```
 
@@ -320,10 +320,10 @@ some_window_function() OVER (
 
 ```sql
 WITH cte_1 AS (
-SELECT ...
+  SELECT ...
 ),
 cte_2 AS (
-SELECT ...
+  SELECT ...
 )
 
 SELECT ...
@@ -340,27 +340,25 @@ WITH cte AS (
 SELECT * FROM cte
 ```
 
-## 其他
+## 数据库备份
 
-### 备份数据库
+### 备份
 
-#### 备份
-
-```sql
+```shell
 mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /path/xxx.sql
 ```
 
-#### 恢复
+### 恢复
 
-```sql
--- 如果是.zip格式需先解压，解压后后缀为.sql
--- 恢复整个数据库
+```shell
+# 如果是.zip格式需先解压，解压后后缀为.sql
+# 恢复整个数据库
 mysql -uroot -p<password> <database_name> < /path/xxx.sql
 ```
 
-### 报错解决
+## 报错解决
 
-#### sudo: netstat: command not found
+sudo: netstat: command not found
 
 > [[Fixed] Bash: Netstat: Command Not Found](https://www.linuxandubuntu.com/home/fixed-bash-netstat-command-not-found-error)
 
@@ -375,20 +373,20 @@ sudo apt install net-tools
 service mysql restart
 ```
 
-### 其他查看
+## 其他查看
 
-#### 查看Host
+### 查看Host
 ```sql
 SELECT SUBSTRING_INDEX(host,':',1) AS ip , COUNT(*) FROM information_schema.processlist GROUP BY ip;
 ```
 
-#### 查看Port
+### 查看Port
 
 ```sql
 SHOW VARIABLES WHERE Variable_name = 'port';
 ```
 
-#### 查看用户
+### 查看用户
 
 ```sql
 USE mysql;
