@@ -268,7 +268,7 @@ SELECT
 FROM table
 GROUP BY col_1;
 
--- 包含小计行
+-- ROLLUP (包含小计行)
 SELECT
   col_1,
   col_2,
@@ -305,9 +305,9 @@ some_window_function() OVER (
 
 | 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp;&nbsp; | 
 | ---------- | --------- |
-| ROW_NUMBER() | 排序，结果形如 `1, 2, 3, 4` |
-| RANK() | 排序，结果形如 `1, 2, 2, 4` |
-| DENSE_RANK() | 排序，结果形如 `1, 2, 2, 3` |
+| ROW_NUMBER() | 排序，如 `1, 2, 3, 4` |
+| RANK() | 排序，如 `1, 2, 2, 4` |
+| DENSE_RANK() | 排序，如 `1, 2, 2, 3` |
 | FIRST_VALUE(col) | 取第一个值 |
 | LAST_VALUE(col) | 取最后一个值 |
 | NTH_VALUE(col, n) | 取第 n 个值 |
