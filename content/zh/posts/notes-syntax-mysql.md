@@ -252,7 +252,7 @@ FROM table_1 t1, table_2 t2
 WHERE t2.key = t1.key
 ```
 
-其中 `type_of_join` 共四种：
+其中 `type_of_join` 共 5 种：
 - INNER JOIN
 - LEFT JOIN
 - RIGHT JOIN
