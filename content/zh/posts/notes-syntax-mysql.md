@@ -287,7 +287,50 @@ GROUPING SETS (
 ### 窗口函数
 
 ```sql
-some_window_function() OVER(PARTITION BY some_col ORDER BY another_col)
+some_window_function() OVER (
+  [PARTITION BY partition_expression]
+  ORDER BY sort_expression [ASC|DESC]
+)
+
+-- 例子
+WITH cte AS (
+  SELECT 
+  salary,
+  RANK() OVER (ORDER BY salary DESC) AS salary_rank
+  FROM Employee
+) 
+
+SELECT 
+  (CASE 
+    WHEN MAX(salary_rank) >= 2 THEN salary
+    ELSE NULL END
+  ) AS SecondHighestSalary
+FROM cte 
+WHERE salary_rank = 2
+```
+#### ROW_NUMBER
+
+#### RANK
+
+#### DENSE_RANK
+
+#### FIRST_VALUE
+
+#### LAST_VALUE
+
+#### NTH_VALUE
+
+#### LAG
+
+#### LEAD
+
+#### NTILE
+
+```sql
+NTILE(number_expression) OVER (
+  [PARTITION BY partition_expression]
+  ORDER BY sort_expression [ASC|DESC]
+)
 ```
 
 其中，常见窗口函数如下：
@@ -296,9 +339,17 @@ some_window_function() OVER(PARTITION BY some_col ORDER BY another_col)
 | ---------- | --------- | 
 | FIRST_VALUE(col) | 取第一个值 |
 | LAST_VALUE(col) | 取最后一个值 |
-| NTH_VALUE(col, n) | 取第 n 个值（$n^{th}$） |
+| NTH_VALUE(col, n) | 取第 n 个值 |
 | LAG(col, n) | 取前 n 个值 |
 | LEAD(col, n) | 取后 n 个值 |
+
+排序函数
+
+| 排序函数&nbsp; | 描述&nbsp; | 例子&nbsp;&nbsp; |
+| ---------- | --------- | --------- |
+| ROW_NUMBER() | 序号不重复且连续 | 1, 2, 3, 4 |
+| RANK() | 序号可重复，不连续 | 1, 2, 2, 4 |
+| DENSE_RANK() | 序号可重复，但连续 | 1, 2, 2, 3 |
 
 ### WITH AS
 
@@ -312,6 +363,13 @@ SELECT ...
 
 SELECT ...
 FROM ...
+
+-- 例子
+WITH cte AS (
+  SELECT COUNT(*) AS num FROM Product
+)
+
+SELECT * FROM cte
 ```
 
 ## 其他
