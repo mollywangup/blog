@@ -293,7 +293,7 @@ some_window_function() OVER (
 
 #### 排序
 
-| 函数&nbsp; | 用法&nbsp; | 结果举例&nbsp;&nbsp; |
+| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp;&nbsp; | 结果举例&nbsp;&nbsp;&nbsp;&nbsp; |
 | ---------- | --------- | --------- |
 | ROW_NUMBER() | 序号不重复且连续 | 1, 2, 3, 4 |
 | RANK() | 序号可重复，不连续 | 1, 2, 2, 4 |
@@ -301,7 +301,7 @@ some_window_function() OVER (
 
 #### 平滑
 
-| 函数&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp; |
+| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp;&nbsp; |
 | ---------- | --------- | 
 | FIRST_VALUE(col) | 取第一个值 |
 | LAST_VALUE(col) | 取最后一个值 |
@@ -311,7 +311,7 @@ some_window_function() OVER (
 
 #### 分组
 
-| 函数&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp; |
+| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp;&nbsp; |
 | ---------- | --------- | 
 | NTILE(n) | 分成 n 组 |
 |  |  |
