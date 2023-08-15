@@ -204,11 +204,9 @@ UPDATE <table_name> SET minute_x = (SELECT TIMESTAMPDIFF(MINUTE, first_open_time
 UPDATE <table_name> SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERVAL -8 hour));
 ```
 
-## 查询操作
+## 基本查询操作
 
-### 基本查询结构
-
-Query structure
+### 查询结构
 
 ```sql
 -- Select columns                    
@@ -288,68 +286,35 @@ GROUPING SETS (
 
 ```sql
 some_window_function() OVER (
-  [PARTITION BY partition_expression]
-  ORDER BY sort_expression [ASC|DESC]
-)
-
--- 例子
-WITH cte AS (
-  SELECT 
-  salary,
-  RANK() OVER (ORDER BY salary DESC) AS salary_rank
-  FROM Employee
-) 
-
-SELECT 
-  (CASE 
-    WHEN MAX(salary_rank) >= 2 THEN salary
-    ELSE NULL END
-  ) AS SecondHighestSalary
-FROM cte 
-WHERE salary_rank = 2
-```
-#### ROW_NUMBER
-
-#### RANK
-
-#### DENSE_RANK
-
-#### FIRST_VALUE
-
-#### LAST_VALUE
-
-#### NTH_VALUE
-
-#### LAG
-
-#### LEAD
-
-#### NTILE
-
-```sql
-NTILE(number_expression) OVER (
-  [PARTITION BY partition_expression]
-  ORDER BY sort_expression [ASC|DESC]
+  PARTITION BY some_col
+  ORDER BY another_col
 )
 ```
 
-其中，常见窗口函数如下：
+#### 排序
 
-| 窗口函数&nbsp;&nbsp;&nbsp; | 描述&nbsp;&nbsp;&nbsp; |
-| ---------- | --------- | 
-| FIRST_VALUE(col) | 取第一个值 |
-| LAST_VALUE(col) | 取最后一个值 |
-| NTH_VALUE(col, n) | 取第 n 个值 |
-| LAG(col, n) | 取前 n 个值 |
-| LEAD(col, n) | 取后 n 个值 |
-
-排序函数
-
-| 排序函数&nbsp; | 描述&nbsp; | 例子&nbsp;&nbsp; |
+| 函数&nbsp; | 用法&nbsp; | 结果举例&nbsp;&nbsp; |
 | ---------- | --------- | --------- |
 | ROW_NUMBER() | 序号不重复且连续 | 1, 2, 3, 4 |
 | RANK() | 序号可重复，不连续 | 1, 2, 2, 4 |
 | DENSE_RANK() | 序号可重复，但连续 | 1, 2, 2, 3 |
+
+#### 平滑
+
+| 函数&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp; |
+| ---------- | --------- | 
+| FIRST_VALUE(col) | 取第一个值 |
+| LAST_VALUE(col) | 取最后一个值 |
+| NTH_VALUE(col, n) | 取第 n 个值 |
+| LAG(col, n) | 取前第 n 个值 |
+| LEAD(col, n) | 取后第 n 个值 |
+
+#### 分组
+
+| 函数&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp; |
+| ---------- | --------- | 
+| NTILE(n) | 分成 n 组 |
+|  |  |
 
 ### WITH AS
 
@@ -366,7 +331,10 @@ FROM ...
 
 -- 例子
 WITH cte AS (
-  SELECT COUNT(*) AS num FROM Product
+  SELECT 
+  salary,
+  RANK() OVER (ORDER BY salary DESC) AS rk
+  FROM Employee
 )
 
 SELECT * FROM cte
@@ -399,12 +367,6 @@ mysql -uroot -p<password> <database_name> < /path/xxx.sql
 ```shell
 # Ubuntu
 sudo apt install net-tools
-```
-
-### Linux MySQL 配置路径
-
-```shell
-cat /etc/mysql/mysql.conf.d/mysqld.cnf
 ```
 
 ### 服务重启
