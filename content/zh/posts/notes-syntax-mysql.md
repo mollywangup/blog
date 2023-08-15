@@ -160,26 +160,26 @@ SHOW TABLES;
 
 ### 修改数据表
 
-#### DELETE语句
+#### DELETE
 
 ```sql
-DELETE FROM <table_name> WHERE `date` BETWEEN '2021-02-01' AND '2021-02-01';
+DELETE FROM <table_name> WHERE conditions;
 ```
 
-#### INSERT语句
+#### INSERT
 
 ```sql
 INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)
 ```
 
-#### ALTER语句
+#### ALTER
 
 ```sql
 -- 新增字段
 ALTER TABLE <table_name> ADD `new_int_col` INT DEFAULT 0;
 
 -- 修改字段定义
-ALTER TABLE <table_name> MODIFY `optimizer` VARCHAR(20);
+ALTER TABLE <table_name> MODIFY `old_str_col` VARCHAR(20);
 
 -- 删除UNIQUE KEY后并新增
 SHOW KEYS FROM <table_name>;
@@ -196,7 +196,7 @@ ALTER TABLE <table_name> ADD `event_time_hour` INT;
 ALTER TABLE <table_name> ADD `update_time_utc` DATETIME;
 ```
 
-#### UPDATE语句
+#### UPDATE
 
 ```sql
 UPDATE <table_name> SET event_time_hour = (SELECT HOUR(`Event Time`));
@@ -258,7 +258,7 @@ WHERE t2.key = t1.key
 - RIGHT JOIN
 - FULL JOIN
 
-### 聚合函数
+### 聚合
 
 ```sql
 -- 简单聚合
@@ -275,12 +275,21 @@ SELECT
   agg_function(col_3)
 FROM table
 GROUP BY col_1, col_2
+WITH ROLLUP
+```
+
+{{< alert theme="warning" >}}
+⚠️ 注意：MySQL中无法使用 `GROUPING SETS` 的以下用法：
+
+```sql
+GROUP BY col_1, col_2
 GROUPING SETS (
   (col_1),
   (col_2),
   (col_1, col_2)
 )
 ```
+{{< /alert >}}
 
 ### 窗口函数
 
@@ -291,30 +300,19 @@ some_window_function() OVER (
 )
 ```
 
-#### 排序
+其中，常见窗口函数如下：
 
-| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp;&nbsp; | 结果举例&nbsp;&nbsp;&nbsp;&nbsp; |
-| ---------- | --------- | --------- |
-| ROW_NUMBER() | 序号不重复且连续 | 1, 2, 3, 4 |
-| RANK() | 序号可重复，不连续 | 1, 2, 2, 4 |
-| DENSE_RANK() | 序号可重复，但连续 | 1, 2, 2, 3 |
-
-#### 平滑
-
-| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp;&nbsp; |
-| ---------- | --------- | 
+| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp;&nbsp; | 
+| ---------- | --------- |
+| ROW_NUMBER() | 排序，结果形如 `1, 2, 3, 4` |
+| RANK() | 排序，结果形如 `1, 2, 2, 4` |
+| DENSE_RANK() | 排序，结果形如 `1, 2, 2, 3` |
 | FIRST_VALUE(col) | 取第一个值 |
 | LAST_VALUE(col) | 取最后一个值 |
 | NTH_VALUE(col, n) | 取第 n 个值 |
 | LAG(col, n) | 取前第 n 个值 |
 | LEAD(col, n) | 取后第 n 个值 |
-
-#### 分组
-
-| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp;&nbsp; |
-| ---------- | --------- | 
 | NTILE(n) | 分成 n 组 |
-|  |  |
 
 ### WITH AS
 
@@ -356,24 +354,7 @@ mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /pa
 mysql -uroot -p<password> <database_name> < /path/xxx.sql
 ```
 
-## 报错解决
-
-sudo: netstat: command not found
-
-> [[Fixed] Bash: Netstat: Command Not Found](https://www.linuxandubuntu.com/home/fixed-bash-netstat-command-not-found-error)
-
-```shell
-# Ubuntu
-sudo apt install net-tools
-```
-
-### 服务重启
-
-```shell
-service mysql restart
-```
-
-## 其他查看
+## 其他
 
 ### 查看Host
 ```sql
