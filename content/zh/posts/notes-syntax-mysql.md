@@ -258,7 +258,7 @@ WHERE t2.key = t1.key
 - RIGHT JOIN
 - FULL JOIN
 
-### 聚合
+### 分组聚合
 
 ```sql
 -- 简单聚合
@@ -266,28 +266,29 @@ SELECT
   col_1,
   agg_function(col_2)
 FROM table
-GROUP BY col_1
+GROUP BY col_1;
 
--- 单次执行多次聚合
+-- 包含小计行
 SELECT
   col_1,
   col_2,
   agg_function(col_3)
 FROM table
-GROUP BY col_1, col_2
-WITH ROLLUP
+GROUP BY col_1, col_2 WITH ROLLUP;
+-- GROUP BY ROLLUP(col_1, col_2);
 ```
 
 {{< alert theme="warning" >}}
-⚠️ 注意：MySQL中无法使用 `GROUPING SETS` 的以下用法：
+⚠️ 注意：MySQL中无法使用以下 `GROUPING SETS`：
 
 ```sql
-GROUP BY col_1, col_2
-GROUPING SETS (
-  (col_1),
-  (col_2),
-  (col_1, col_2)
-)
+GROUP BY
+  GROUPING SETS (
+    (col_1, col_2),
+    (col_1),
+    (col_2),
+    ()
+  )
 ```
 {{< /alert >}}
 
