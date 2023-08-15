@@ -257,6 +257,7 @@ WHERE t2.key = t1.key
 - LEFT JOIN
 - RIGHT JOIN
 - FULL JOIN
+- CROSS JOIN（笛卡尔连接）
 
 ### 分组聚合
 
