@@ -366,15 +366,62 @@ SELECT * FROM cte;
 
 ```sql
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
-
 SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 ```
 
 ### 字符串函数
 
+#### 常用函数
 
+- 长度及大小写：
+  - `LENGTH(string)`：求长度
+  - `UPPER(string)`：转大写
+  - `LOWER(string)`：转小写
+
+- 删空格：
+  - `LTRIM(string)`：删左/头部空格
+  - `RTRIM(string)`：删右/尾部空格
+  - `TRIM(string)`：删左右空格
+
+- 提取子字符串：
+  - `LEFT(string, number)`：自左边取
+  - `RIGHT(string, number)`：自右边取
+  - `MID(string, start, length)`：自指定位置取
+    - or `SUBSTR(string, start, length)`
+    - or `SUBSTRING(string, start, length)`
+
+- 替换和拼接
+  - `REPLACE(string, old_string, new_string)`：替换
+  - `CONCAT(expression1, expression2, expression3, ...)`：拼接
+
+- 填充：
+  - `LPAD(string, length, lpad_string)`：使用 lpad_string 左填充字符串，以达到指定长度
+  - `RPAD(string, length, rpad_string)`：使用 rpad_string 右填充字符串，以达到指定长度
+
+- 其他
+  - `LOCATE(substring, string)`：子字符串第一次出现的位置。不区分大小写，未找到时返回0
+    - or `POSITION(substring IN string)`
+  - `REPEAT(string, number)`：重复字符串指定次数
+  - `REVERSE(string)`：反转字符串
+
+#### 测试例子
+
+```sql
+SELECT CONCAT('first_name', ' ', 'last_name');
+
+SELECT LPAD('molly', 10, '_'), RPAD('molly', 10, '_');
+
+SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
+SELECT REPEAT('SQL', 3);
+SELECT REVERSE('SQL');
+```
 
 ### 日期函数
+
+#### 常用函数
+
+
+#### 测试例子
 
 ```sql
 
