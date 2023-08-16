@@ -364,25 +364,31 @@ SELECT * FROM cte;
 ### 数值函数
 
 1. 保留小数：
-   - `ROUND(number, decimals)`: 四舍五入
-   - `TRUNCATE(number, decimals)`: 直接截取
+   - `ROUND(number, decimals)`：四舍五入
+   - `TRUNCATE(number, decimals)`：直接截取
+   - `CEILING(number)`：向上取整，即 MIN({>=number})
+   - `FLOOR(number)`：向下取整，即 MAX({<=number})
 
+2. 统计计算：
+   - `MIN(expression)`：求最小值
+   - `MAX(expression)`：求最大值
+   - `AVG(expression)`：求平均值
+   - `SUM(expression)`：求和
+   - `COUNT(expression)`：求次数
+
+3. 数学计算：
+   - `MOD(x, y)`：求余
+     - `x MOD y`
+     - `x % y`
+   - `SQRT(number)`：求平方根
+   - `POWER(x, y)`：求 x 的 y 幂次方
+
+测试例子：
 
 ```sql
--- 四舍五入保留小数
-ROUND(number, decimals)
-
--- 直接截取
-TRUNCATE(number, decimals)
-
--- 向上取整                         MIN({>=number})
-CEILING(number)
-
--- 向下取整                         MAX({<=number})
-FLOOR(number)
-
--- 例子
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
+
+SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 ```
 
 ### 字符串函数
