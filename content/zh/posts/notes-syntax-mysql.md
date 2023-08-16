@@ -338,7 +338,7 @@ SELECT * FROM cte;
 
 以下为常用函数，完整列表见 **[MySQL Functions](https://www.w3schools.com/sql/sql_ref_mysql.asp)**
 
-### 数值函数
+### 数字函数
 
 #### 常用函数
 
@@ -348,14 +348,7 @@ SELECT * FROM cte;
    - `CEILING(number)`：向上取整，即 MIN({>=number})
    - `FLOOR(number)`：向下取整，即 MAX({<=number})
 
-2. 聚合统计：
-   - `MAX(expression)`：求最大值
-   - `MIN(expression)`：求最小值
-   - `AVG(expression)`：求平均值
-   - `SUM(expression)`：求和
-   - `COUNT(expression)`：求次数
-
-3. 数学计算：
+2. 数学运算：
    - `MOD(x, y)`：求余
      - or `x MOD y`
      - or `x % y`
@@ -374,31 +367,31 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 #### 常用函数
 
 - 高频使用：
-  - `LENGTH(string)`：求长度
-  - `UPPER(string)`：转大写
-  - `LOWER(string)`：转小写
-  - `REPLACE(string, old_string, new_string)`：替换
-  - `CONCAT(string1, string2, ...)`：拼接
+  - `LENGTH(str)`：求长度
+  - `UPPER(str)`：转大写
+  - `LOWER(str)`：转小写
+  - `REPLACE(str, from_str, to_str)`：替换
+  - `CONCAT(str1, str2, ...)`：拼接
 
 - 左右处理：
-  - `LTRIM(string)`：删左/头部空格
-  - `RTRIM(string)`：删右/尾部空格
-  - `TRIM(string)`：删左右空格
-  - `LPAD(string, length, lpad_string)`：左填充，以达到指定长度
-  - `RPAD(string, length, rpad_string)`：右填充，以达到指定长度
+  - `LTRIM(str)`：删左/头部空格
+  - `RTRIM(str)`：删右/尾部空格
+  - `TRIM(str)`：删左右空格
+  - `LPAD(str, len, padstr)`：左填充，以达到指定长度
+  - `RPAD(str, len, padstr)`：右填充，以达到指定长度
 
 - 字符串提取：
-  - `LEFT(string, number)`：自左边取
-  - `RIGHT(string, number)`：自右边取
-  - `MID(string, start, length)`：自指定位置取
-    - or `SUBSTR(string, start, length)`
-    - or `SUBSTRING(string, start, length)`
+  - `LEFT(str, len)`：自左边取
+  - `RIGHT(str, len)`：自右边取
+  - `MID(str, pos, len)`：自指定位置取
+    - or `SUBSTR(str, pos, len)`
+    - or `SUBSTRING(str, pos, len)`
 
 - 其他
-  - `LOCATE(substring, string)`：子字符串第一次出现的位置。不区分大小写，未找到时返回0
-    - or `POSITION(substring IN string)`
-  - `REPEAT(string, number)`：重复字符串指定次数
-  - `REVERSE(string)`：反转字符串
+  - `LOCATE(substr, str)`：子字符串第一次出现的位置。不区分大小写，未找到时返回0
+    - or `POSITION(substr IN str)`
+  - `REPEAT(str, count)`：重复字符串指定次数
+  - `REVERSE(str)`：反转字符串
 
 #### 测试例子
 
@@ -408,8 +401,7 @@ SELECT CONCAT('first_name', ' ', 'last_name');
 SELECT LPAD('molly', 10, '_'), RPAD('molly', 10, '_');
 
 SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
-SELECT REPEAT('SQL', 3);
-SELECT REVERSE('SQL');
+SELECT REPEAT('MySQL', 3);
 ```
 
 ### 日期函数
@@ -442,6 +434,7 @@ SELECT REVERSE('SQL');
 
 3. 格式化：
    - `DATE_FORMAT(date, format)`：format 取值详见 [MySQL 8.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
+   - `CONVERT_TZ(dt, from_tz, to_tz)`：转时区
 
 4. 日期运算（不同 DBMS 相差较大）
    - `DATE_ADD(date, INTERVAL expr unit)`：增加时间间隔。unit 同 EXTRACT() 函数
@@ -462,9 +455,18 @@ SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(NOW(), '%W %M %d %Y 
 SELECT DATE_ADD(NOW(), INTERVAL -1 DAY);
 SELECT DATEDIFF('2017-01-01', '2016-12-24');
 
-
 SELECT TO_DAYS('2017-06-20'), TO_DAYS('2017-06-20 09:34:00'), FROM_DAYS(736865);
 ```
+
+### 聚合函数
+
+#### 常用函数
+
+- `MAX(expr)`：求最大值
+- `MIN(expr)`：求最小值
+- `AVG(expr)`：求平均值
+- `SUM(expr)`：求和
+- `COUNT(expr)`：求次数
 
 ### 窗口函数
 
@@ -475,11 +477,19 @@ some_window_function OVER (
   PARTITION BY some_col
   ORDER BY another_col
 )
+
+SELECT
+  val,
+  ROW_NUMBER() OVER w AS 'row_number',
+  RANK()       OVER w AS 'rank',
+  DENSE_RANK() OVER w AS 'dense_rank'
+FROM numbers
+WINDOW w AS (ORDER BY val);
 ```
 
 #### 常用函数
 
-1. 聚合函数：上述 数值函数 -> 聚合统计 中的都适用；
+1. 聚合函数：上述 聚合函数 中的都适用；
 
 2. 排序函数：
    - 排名：
@@ -489,10 +499,10 @@ some_window_function OVER (
      - `NTILE(n)`：分成 n 组，返回组别
    - 排名分布：
      - `PERCENT_RANK()`：返回排名的百分比
-       - 计算公式：*(rank - 1) / (分区内的总行数 - 1)*
+       - 计算公式：*(rank - 1) / (rows - 1)*
         <!-- <img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'> -->
      - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
-       - 计算公式：*小于或大于等于当前值的行数 / 分区内的总行数*
+       - 计算公式：*小于或大于等于当前值的行数 / rows*
 
 3. 值函数/偏移函数：
    - `FIRST_VALUE(col)`：取第一行值
@@ -503,6 +513,7 @@ some_window_function OVER (
 
 #### 宝藏参考
 
+- MySQL 官方手册：[Window Functions](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html)
 - [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
 - [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
 - [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
