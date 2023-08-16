@@ -393,7 +393,7 @@ some_window_function OVER (
 
 #### 常用函数
 
-1. 聚合函数：上述 `数值函数` -> `聚合统计` 中的都适用；
+1. 聚合函数：上述 数值函数 -> 聚合统计 中的都适用；
 
 2. 排序函数：
    - 排名：
@@ -408,12 +408,12 @@ some_window_function OVER (
      - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
        - 计算公式：*小于或大于等于当前值的行数 / 分区内的总行数*
 
-3. 值函数：
-   - `FIRST_VALUE(col)`：返回第一个值
-   - `LAST_VALUE(col)`：返回最后一个值
-   - `NTH_VALUE(col, offset)`：返回距离当前行，偏移指定 offset 的值
-   - `LAG(col, offset)`：返回距离当前行，**向前**偏移 offset 的值
-   - `LEAD(col, offset)`：返回距离当前行，**向后**偏移 offset 的值
+3. 值函数/偏移函数：
+   - `FIRST_VALUE(col)`：取第一行值
+   - `LAST_VALUE(col)`：取最后一行值
+   - `NTH_VALUE(col, n)`：取第 n 行值
+   - `LAG(col, n, defaut)`：取向**前**偏移 n 行的值，若不存在则取 defaut
+   - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
 
 #### 宝藏参考
 
