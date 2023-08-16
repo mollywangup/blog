@@ -395,8 +395,8 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
   - `CONCAT(expression1, expression2, expression3, ...)`：拼接
 
 - 填充：
-  - `LPAD(string, length, lpad_string)`：使用 lpad_string 左填充字符串，以达到指定长度
-  - `RPAD(string, length, rpad_string)`：使用 rpad_string 右填充字符串，以达到指定长度
+  - `LPAD(string, length, lpad_string)`：左填充字符串，以达到指定长度
+  - `RPAD(string, length, rpad_string)`：右填充字符串，以达到指定长度
 
 - 其他
   - `LOCATE(substring, string)`：子字符串第一次出现的位置。不区分大小写，未找到时返回0
@@ -420,11 +420,49 @@ SELECT REVERSE('SQL');
 
 #### 常用函数
 
+- 当下日期时间
+  - `NOW()`：返回当前日期和时间
+  - `CURDATE()`：返回当前日期
+    - or `CURRENT_DATE()`
+  - `CURTIME()`：返回当前时间
+    - or `CURRENT_TIME()`
+
+- 提取年月日时分秒
+  - `EXTRACT(part FROM date)`：（建议）通用的提取函数
+    - 其中 part 可取值: YEAR/QUARTER/MONTH/DAY/HOUR/MINUTE/SECOND 等
+  - `YEAR(date)`：年份
+  - `QUARTER(date)`：季度
+  - `MONTH(date)`：月份
+  - `DAY(date)`：该月份的天数
+  - `HOUR(datetime)`：小时数
+  - `MINUTE(datetime)`：分钟数
+  - `SECOND(datetime)`：秒数
+  - `MONTHNAME(date)`：字符串格式的月份，如 August
+  - `DAYNAME(date)`：：字符串格式的星期数，如 Thursday
+
+  {{< alert theme="warning" >}}
+⚠️ 注意：建议优先使用 EXTRACT() 函数，因为属于标准 SQL 语言，适配性更高。
+  {{< /alert >}}
+
+- 日期运算和其他（这部分不同 DBMS 相差较大）
+  - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
+  - `DATE_ADD(date, INTERVAL value addunit)`：添加时间间隔，其中 addunit 同 EXTRACT() 函数中的 part
+  - `DATE_FORMAT(date, format)`：调整格式
+  - `TO_DAYS(date)`：日期转？？
+  - `FROM_DAYS(number)`：？？转日期
 
 #### 测试例子
 
 ```sql
+SELECT NOW(), CURDATE(), CURRENT_DATE(), CURTIME(), CURRENT_TIME();
 
+SELECT NOW(), YEAR(NOW()), QUARTER(NOW()), MONTH(NOW()), DAY(NOW()), HOUR(NOW()), MINUTE(NOW()), SECOND(NOW()), MONTHNAME(NOW()), DAYNAME(NOW());
+
+SELECT NOW(), EXTRACT(DAY FROM NOW());
+
+SELECT DATEDIFF('2017-01-01', '2016-12-24');
+SELECT DATE_ADD(NOW(), INTERVAL -3 HOUR);
+SELECT TO_DAYS('2017-06-20'), TO_DAYS('2017-06-20 09:34:00'), FROM_DAYS(736865);
 ```
 
 ### 窗口函数
