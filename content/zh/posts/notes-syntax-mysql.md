@@ -126,7 +126,7 @@ USE <database_name>;
 CREATE TABLE `new_table` AS (SELECT * FROM `old_table`);
 
 -- 直接创建数据库表 
-CREATE TABLE IF NOT EXISTS `mytable`(
+CREATE TABLE IF NOT EXISTS `table_name`(
    `id` INT UNSIGNED AUTO_INCREMENT,
    `account_id` VARCHAR(25) NOT NULL COMMENT '广告账户ID',
    `account_name` VARCHAR(50),
@@ -181,13 +181,13 @@ ALTER TABLE <table_name> ADD `new_int_col` INT DEFAULT 0;
 -- 修改字段定义
 ALTER TABLE <table_name> MODIFY `old_str_col` VARCHAR(20);
 
--- 删除UNIQUE KEY后并新增
+-- 删除 UNIQUE KEY 后并新增
 SHOW KEYS FROM <table_name>;
 ALTER TABLE <table_name> DROP INDEX `app_name`;
-ALTER TABLE <table_name> ADD UNIQUE KEY (`app_name`, `os_name`, `store_type`,  `channel_id`, `channel`, `login_type_code`,  `login_type`, `date_paying`, `country`,  `timezone`);
+ALTER TABLE <table_name> ADD UNIQUE KEY (`app_name`, `os_name`, `store_type`,  `channel_id`,`login_type_code`, `date_paying`, `country`,  `timezone`);
 
 -- 删除字段
-ALTER TABLE <table_name> DROP `days_after_register`;
+ALTER TABLE <table_name> DROP `days_x`;
 
 -- 新增并来源于已有字段的处理
 ALTER TABLE <table_name> ADD `event_time_hour` INT;
@@ -204,7 +204,7 @@ UPDATE <table_name> SET minute_x = (SELECT TIMESTAMPDIFF(MINUTE, first_open_time
 UPDATE <table_name> SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERVAL -8 hour));
 ```
 
-## 基本查询操作
+## 查询操作
 
 ### 查询结构
 
@@ -276,17 +276,17 @@ SELECT
 FROM table_2;
 ```
 
-### 分组聚合
+### 聚合
 
 ```sql
--- 简单聚合
+-- 普通聚合
 SELECT
   col_1,
   agg_function(col_2)
 FROM table
 GROUP BY col_1;
 
--- ROLLUP (包含小计行)
+-- 包含小计和总计的聚合                   ROLLUP
 SELECT
   col_1,
   col_2,
@@ -297,7 +297,7 @@ GROUP BY col_1, col_2 WITH ROLLUP;
 ```
 
 {{< alert theme="warning" >}}
-⚠️ 注意：MySQL中无法使用以下 `GROUPING SETS`：
+⚠️ 注意：MySQL 中无法使用以下 `GROUPING SETS`：
 
 ```sql
 GROUP BY
@@ -354,7 +354,40 @@ WITH cte AS (
   FROM Employee
 )
 
-SELECT * FROM cte
+SELECT * FROM cte;
+```
+
+### 函数
+
+#### 数值函数
+
+```sql
+-- 四舍五入保留小数
+ROUND(number, decimals)
+
+-- 直接截取
+TRUNCATE(number, decimals)
+
+-- 向上取整                         MIN({>=number})
+CEILING(number)
+
+-- 向下取整                         MAX({<=number})
+FLOOR(number)
+
+-- 例子
+SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456), ABS(-3.1456);
+
+-- +------------------+---------------------+-----------------+---------------+
+-- | ROUND(3.1456, 2) | TRUNCATE(3.1456, 2) | CEILING(3.1456) | FLOOR(3.1456) |
+-- +------------------+---------------------+-----------------+---------------+
+-- |             3.15 |                3.14 |               4 |             3 |
+-- +------------------+---------------------+-----------------+---------------+
+```
+
+#### 字符串函数
+
+```sql
+
 ```
 
 ## 数据库备份
