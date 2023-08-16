@@ -373,30 +373,26 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 #### 常用函数
 
-- 长度及大小写：
+- 高频使用：
   - `LENGTH(string)`：求长度
   - `UPPER(string)`：转大写
   - `LOWER(string)`：转小写
+  - `REPLACE(string, old_string, new_string)`：替换
+  - `CONCAT(expression1, expression2, expression3, ...)`：拼接
 
-- 删空格：
+- 左右处理：
   - `LTRIM(string)`：删左/头部空格
   - `RTRIM(string)`：删右/尾部空格
   - `TRIM(string)`：删左右空格
+  - `LPAD(string, length, lpad_string)`：左填充字符串，以达到指定长度
+  - `RPAD(string, length, rpad_string)`：右填充字符串，以达到指定长度
 
-- 提取子字符串：
+- 字符串提取：
   - `LEFT(string, number)`：自左边取
   - `RIGHT(string, number)`：自右边取
   - `MID(string, start, length)`：自指定位置取
     - or `SUBSTR(string, start, length)`
     - or `SUBSTRING(string, start, length)`
-
-- 替换和拼接
-  - `REPLACE(string, old_string, new_string)`：替换
-  - `CONCAT(expression1, expression2, expression3, ...)`：拼接
-
-- 填充：
-  - `LPAD(string, length, lpad_string)`：左填充字符串，以达到指定长度
-  - `RPAD(string, length, rpad_string)`：右填充字符串，以达到指定长度
 
 - 其他
   - `LOCATE(substring, string)`：子字符串第一次出现的位置。不区分大小写，未找到时返回0
@@ -420,7 +416,7 @@ SELECT REVERSE('SQL');
 
 #### 常用函数
 
-- 当下日期时间
+- 获取当下日期时间
   - `NOW()`：返回当前日期和时间
   - `CURDATE()`：返回当前日期
     - or `CURRENT_DATE()`
@@ -428,8 +424,11 @@ SELECT REVERSE('SQL');
     - or `CURRENT_TIME()`
 
 - 提取年月日时分秒
-  - `EXTRACT(part FROM date)`：（建议）通用的提取函数
+  - `EXTRACT(part FROM date)`：通用的提取函数
     - 其中 part 可取值: YEAR/QUARTER/MONTH/DAY/HOUR/MINUTE/SECOND 等
+      {{< alert theme="warning" >}}
+⚠️ 建议使用 EXTRACT() 函数，因为属于标准 SQL 语言，适配性更高。
+      {{< /alert >}}
   - `YEAR(date)`：年份
   - `QUARTER(date)`：季度
   - `MONTH(date)`：月份
@@ -440,11 +439,7 @@ SELECT REVERSE('SQL');
   - `MONTHNAME(date)`：字符串格式的月份，如 August
   - `DAYNAME(date)`：：字符串格式的星期数，如 Thursday
 
-  {{< alert theme="warning" >}}
-⚠️ 注意：建议优先使用 EXTRACT() 函数，因为属于标准 SQL 语言，适配性更高。
-  {{< /alert >}}
-
-- 日期运算和其他（这部分不同 DBMS 相差较大）
+- 日期运算和其他（不同 DBMS 相差较大）
   - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
   - `DATE_ADD(date, INTERVAL value addunit)`：添加时间间隔，其中 addunit 同 EXTRACT() 函数中的 part
   - `DATE_FORMAT(date, format)`：调整格式
