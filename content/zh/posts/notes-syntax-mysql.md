@@ -310,29 +310,6 @@ GROUP BY
 ```
 {{< /alert >}}
 
-### 窗口函数
-
-```sql
-some_window_function() OVER (
-  PARTITION BY some_col
-  ORDER BY another_col
-)
-```
-
-其中，常见窗口函数如下：
-
-| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用途&nbsp;&nbsp;&nbsp;&nbsp; | 
-| --------------- | --------------- |
-| ROW_NUMBER() | 排序，如 `1, 2, 3, 4` |
-| RANK() | 排序，如 `1, 2, 2, 4` |
-| DENSE_RANK() | 排序，如 `1, 2, 2, 3` |
-| FIRST_VALUE(col) | 取第一个值 |
-| LAST_VALUE(col) | 取最后一个值 |
-| NTH_VALUE(col, n) | 取第 n 个值 |
-| LAG(col, n) | 取前第 n 个值 |
-| LEAD(col, n) | 取后第 n 个值 |
-| NTILE(n) | 分成 n 组 |
-
 ### WITH AS
 
 ```sql
@@ -369,21 +346,21 @@ SELECT * FROM cte;
    - `CEILING(number)`：向上取整，即 MIN({>=number})
    - `FLOOR(number)`：向下取整，即 MAX({<=number})
 
-2. 统计计算：
-   - `MIN(expression)`：求最小值
+2. 聚合统计：
    - `MAX(expression)`：求最大值
+   - `MIN(expression)`：求最小值
    - `AVG(expression)`：求平均值
    - `SUM(expression)`：求和
    - `COUNT(expression)`：求次数
 
 3. 数学计算：
    - `MOD(x, y)`：求余
-     - `x MOD y`
-     - `x % y`
+     - or `x MOD y`
+     - or `x % y`
    - `SQRT(number)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-测试例子：
+#### 测试例子
 
 ```sql
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
@@ -393,9 +370,37 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 ### 字符串函数
 
+
+
+### 日期函数
+
 ```sql
 
 ```
+
+### 窗口函数
+
+```sql
+some_window_function() OVER (
+  PARTITION BY some_col
+  ORDER BY another_col
+)
+```
+
+用法如上，其中常用的窗口函数如下：
+
+1. 排序：
+   - `ROW_NUMBER()`：排序结果形如 1, 2, 3, 4, ...
+   - `RANK()`：排序结果形如 1, 2, 2, 4, ...
+   - `DENSE_RANK()`：排序结果形如 1, 2, 2, 3, ...
+
+2. ：
+   - `FIRST_VALUE(col)`：取第一个值
+   - `LAST_VALUE(col)`：取最后一个值
+   - `NTH_VALUE(col, n)`：取第 n 个值
+   - `LAG(col, n)`：取前第 n 个值 
+   - `LEAD(col, n)`：取后第 n 个值
+   - `NTILE(n)`：分成 n 组
 
 ## 数据库备份
 
