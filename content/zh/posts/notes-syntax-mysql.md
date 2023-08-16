@@ -340,6 +340,8 @@ SELECT * FROM cte;
 
 ### 数值函数
 
+#### 常用函数
+
 1. 保留小数：
    - `ROUND(number, decimals)`：四舍五入
    - `TRUNCATE(number, decimals)`：直接截取
@@ -380,9 +382,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 ### 窗口函数
 
-窗口函数基于**分区和排序后的查询结果的行数据**进行计算。
-
-语法如下：
+窗口函数基于**分区和排序后的查询结果的行数据**进行计算。语法如下：
 
 ```sql
 some_window_function OVER (
@@ -391,7 +391,7 @@ some_window_function OVER (
 )
 ```
 
-常用窗口函数如下：
+#### 常用函数
 
 1. 聚合函数：上述 `数值函数` -> `聚合统计` 中的都适用；
 
@@ -401,21 +401,22 @@ some_window_function OVER (
      - `RANK()`：返回排名，如 1, 2, 2, 4, ...
      - `DENSE_RANK()`：返回排名，如 1, 2, 2, 3, ...
      - `NTILE(n)`：分成 n 组，返回组别
-   - 百分比排名：
-     - `PERCENT_RANK()`：返回百分比排名，如 0.1 表示 top 10%
-       - 计算公式：(rank - 1) / (n - 1)
+   - 排名分布：
+     - `PERCENT_RANK()`：返回排名的百分比
+       - 计算公式：*(rank - 1) / (分区内的总行数 - 1)*
         <!-- <img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'> -->
-     - `CUME_DIST()`：返回累计分布
-       - 计算公式：rank / n
+     - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
+       - 计算公式：*小于或大于等于当前值的行数 / 分区内的总行数*
 
 3. 值函数：
    - `FIRST_VALUE(col)`：返回第一个值
    - `LAST_VALUE(col)`：返回最后一个值
-   - `NTH_VALUE(col, offset)`：返回偏移指定 offset 的值
-   - `LAG(col, offset)`：返回**向前**偏移 offset 的值
-   - `LEAD(col, offset)`：返回**向后**偏移 offset 的值
+   - `NTH_VALUE(col, offset)`：返回距离当前行，偏移指定 offset 的值
+   - `LAG(col, offset)`：返回距离当前行，**向前**偏移 offset 的值
+   - `LEAD(col, offset)`：返回距离当前行，**向后**偏移 offset 的值
 
-【宝藏】理解及示例可参考：
+#### 宝藏参考
+
 - [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
 - [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
 - [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
