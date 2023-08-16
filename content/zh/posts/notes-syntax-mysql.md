@@ -243,17 +243,16 @@ LIMIT some_value
 
 #### JOIN
 
-
-
 ```sql
--- 方式一
+-- 方式一                             explicit join
 FROM table_1 t1
 type_of_join table_2 t2
-  ON (t2.key = t1.key)
+  ON t2.key = t1.key
+  -- USING (key)
 
--- 方式二
+-- 方式二                             implicit join
 FROM table_1 t1, table_2 t2
-WHERE t2.key = t1.key
+WHERE t2.key = t1.key 
 ```
 
 其中，常见 `type_of_join` 如下：
@@ -261,11 +260,21 @@ WHERE t2.key = t1.key
 - LEFT JOIN
 - RIGHT JOIN
 - FULL JOIN
-- CROSS JOIN（笛卡尔连接）
+- CROSS JOIN（笛卡尔连接，交叉连接）
 
 #### UNION
 
+要求合并的两张表，至少有一个相同列，且自动去重。
 
+```sql
+SELECT
+  col_1
+FROM table_1
+UNION
+SELECT
+  col_1
+FROM table_2;
+```
 
 ### 分组聚合
 
