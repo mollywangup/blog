@@ -336,7 +336,7 @@ SELECT * FROM cte;
 
 ## 函数
 
-以下为高频常用函数，完整列表见 **[MySQL Functions](https://www.w3schools.com/sql/sql_ref_mysql.asp)**
+以下为常用函数，完整列表见 **[MySQL Functions](https://www.w3schools.com/sql/sql_ref_mysql.asp)**
 
 ### 数值函数
 
@@ -378,14 +378,14 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
   - `UPPER(string)`：转大写
   - `LOWER(string)`：转小写
   - `REPLACE(string, old_string, new_string)`：替换
-  - `CONCAT(expression1, expression2, expression3, ...)`：拼接
+  - `CONCAT(string1, string2, ...)`：拼接
 
 - 左右处理：
   - `LTRIM(string)`：删左/头部空格
   - `RTRIM(string)`：删右/尾部空格
   - `TRIM(string)`：删左右空格
-  - `LPAD(string, length, lpad_string)`：左填充字符串，以达到指定长度
-  - `RPAD(string, length, rpad_string)`：右填充字符串，以达到指定长度
+  - `LPAD(string, length, lpad_string)`：左填充，以达到指定长度
+  - `RPAD(string, length, rpad_string)`：右填充，以达到指定长度
 
 - 字符串提取：
   - `LEFT(string, number)`：自左边取
@@ -416,35 +416,37 @@ SELECT REVERSE('SQL');
 
 #### 常用函数
 
-- 获取当下日期时间
-  - `NOW()`：返回当前日期和时间
-  - `CURDATE()`：返回当前日期
-    - or `CURRENT_DATE()`
-  - `CURTIME()`：返回当前时间
-    - or `CURRENT_TIME()`
+1. 获取当下日期时间
+   - `NOW()`：返回当前日期和时间
+   - `CURDATE()`：返回当前日期
+     - or `CURRENT_DATE()`
+   - `CURTIME()`：返回当前时间
+     - or `CURRENT_TIME()`
 
-- 提取年月日时分秒
-  - `EXTRACT(part FROM date)`：通用的提取函数
-    - 其中 part 可取值: YEAR/QUARTER/MONTH/DAY/HOUR/MINUTE/SECOND 等
+2. 提取年月日时分秒
+   - `EXTRACT(unit FROM date)`：通用的提取函数
+     - unit 可取值 YEAR/MONTH/DAY 等，详见 [Temporal Intervals
+](https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals)
       {{< alert theme="warning" >}}
 ⚠️ 建议使用 EXTRACT() 函数，因为属于标准 SQL 语言，适配性更高。
       {{< /alert >}}
-  - `YEAR(date)`：年份
-  - `QUARTER(date)`：季度
-  - `MONTH(date)`：月份
-  - `DAY(date)`：该月份的天数
-  - `HOUR(datetime)`：小时数
-  - `MINUTE(datetime)`：分钟数
-  - `SECOND(datetime)`：秒数
-  - `MONTHNAME(date)`：字符串格式的月份，如 August
-  - `DAYNAME(date)`：：字符串格式的星期数，如 Thursday
+   - `YEAR(date)`：年份
+   - `QUARTER(date)`：季度
+   - `MONTH(date)`：月份
+   - `DAY(date)`：该月份的天数
+   - `HOUR(datetime)`：小时数
+   - `MINUTE(datetime)`：分钟数
+   - `SECOND(datetime)`：秒数
+   - `MONTHNAME(date)`：字符串格式的月份，如 August
+   - `DAYNAME(date)`：字符串格式的星期数，如 Thursday
 
-- 日期运算和其他（不同 DBMS 相差较大）
-  - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
-  - `DATE_ADD(date, INTERVAL value addunit)`：添加时间间隔，其中 addunit 同 EXTRACT() 函数中的 part
-  - `DATE_FORMAT(date, format)`：调整格式
-  - `TO_DAYS(date)`：日期转？？
-  - `FROM_DAYS(number)`：？？转日期
+3. 格式化：
+   - `DATE_FORMAT(date, format)`：format 取值详见 [MySQL 8.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
+
+4. 日期运算（不同 DBMS 相差较大）
+   - `DATE_ADD(date, INTERVAL expr unit)`：增加时间间隔。unit 同 EXTRACT() 函数
+     - or `DATE_SUB(date,INTERVAL -expr unit)`
+   - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
 
 #### 测试例子
 
@@ -455,8 +457,12 @@ SELECT NOW(), YEAR(NOW()), QUARTER(NOW()), MONTH(NOW()), DAY(NOW()), HOUR(NOW())
 
 SELECT NOW(), EXTRACT(DAY FROM NOW());
 
+SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(NOW(), '%W %M %d %Y %l:%i:%s %p'), DATE_FORMAT(NOW(), '%a %b %d %Y %l:%i:%s %p'), DATE_FORMAT(NOW(), '%r'), DATE_FORMAT(NOW(), '%T');
+
+SELECT DATE_ADD(NOW(), INTERVAL -1 DAY);
 SELECT DATEDIFF('2017-01-01', '2016-12-24');
-SELECT DATE_ADD(NOW(), INTERVAL -3 HOUR);
+
+
 SELECT TO_DAYS('2017-06-20'), TO_DAYS('2017-06-20 09:34:00'), FROM_DAYS(736865);
 ```
 
