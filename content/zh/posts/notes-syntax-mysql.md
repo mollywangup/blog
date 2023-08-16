@@ -241,6 +241,10 @@ LIMIT some_value
 
 ### 表连接
 
+#### JOIN
+
+
+
 ```sql
 -- 方式一
 FROM table_1 t1
@@ -252,12 +256,16 @@ FROM table_1 t1, table_2 t2
 WHERE t2.key = t1.key
 ```
 
-其中 `type_of_join` 共 5 种：
+其中，常见 `type_of_join` 如下：
 - INNER JOIN
 - LEFT JOIN
 - RIGHT JOIN
 - FULL JOIN
 - CROSS JOIN（笛卡尔连接）
+
+#### UNION
+
+
 
 ### 分组聚合
 
@@ -304,8 +312,8 @@ some_window_function() OVER (
 
 其中，常见窗口函数如下：
 
-| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用法&nbsp;&nbsp;&nbsp;&nbsp; | 
-| ---------- | --------- |
+| 函数&nbsp;&nbsp;&nbsp;&nbsp; | 用途&nbsp;&nbsp;&nbsp;&nbsp; | 
+| --------------- | --------------- |
 | ROW_NUMBER() | 排序，如 `1, 2, 3, 4` |
 | RANK() | 排序，如 `1, 2, 2, 4` |
 | DENSE_RANK() | 排序，如 `1, 2, 2, 3` |
