@@ -516,7 +516,7 @@ WINDOW w AS (PARTITION BY country);
      - 计算公式：*(rank - 1) / (rows~分区总行数~ - 1)*
       <!-- <img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'> -->
    - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
-     - 计算公式：*rows~小于或大于等于当前值~ / rows~分区总行数~*
+     - 计算公式：*$rows_{小于或大于等于当前值}$ / $rows_{分区总行数}$*
 
 3. 值函数/偏移函数：
    - `FIRST_VALUE(col)`：取第一行值
