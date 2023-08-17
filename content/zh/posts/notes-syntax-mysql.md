@@ -336,26 +336,28 @@ SELECT * FROM cte;
 
 ## 函数
 
-以下为常用函数，完整列表见 **[MySQL Functions](https://www.w3schools.com/sql/sql_ref_mysql.asp)**
+以下为常用函数，完整列表见 **[MySQL 8.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/built-in-function-reference.html)**
 
-### 数字函数
+### 数值函数
+
+官方手册见 [Numeric Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html)
 
 #### 常用函数
 
-1. 保留小数：
+- 保留小数：
    - `ROUND(number, decimals)`：四舍五入
    - `TRUNCATE(number, decimals)`：直接截取
    - `CEILING(number)`：向上取整，即 MIN({>=number})
    - `FLOOR(number)`：向下取整，即 MAX({<=number})
 
-2. 数学运算：
+- 数学运算：
    - `MOD(x, y)`：求余
      - or `x MOD y`
      - or `x % y`
    - `SQRT(number)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-#### 测试例子
+#### 使用举例
 
 ```sql
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
@@ -363,6 +365,8 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 ```
 
 ### 字符串函数
+
+官方手册见 [String Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
 
 #### 常用函数
 
@@ -393,7 +397,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
   - `REPEAT(str, count)`：重复字符串指定次数
   - `REVERSE(str)`：反转字符串
 
-#### 测试例子
+#### 使用举例
 
 ```sql
 SELECT CONCAT('first_name', ' ', 'last_name');
@@ -406,9 +410,11 @@ SELECT REPEAT('MySQL', 3);
 
 ### 日期函数
 
+官方手册见 [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
+
 #### 常用函数
 
-1. 获取当下日期时间
+1. 获取当前日期时间
    - `NOW()`：返回当前日期和时间
    - `CURDATE()`：返回当前日期
      - or `CURRENT_DATE()`
@@ -416,49 +422,49 @@ SELECT REPEAT('MySQL', 3);
      - or `CURRENT_TIME()`
 
 2. 提取年月日时分秒
-   - `EXTRACT(unit FROM date)`：通用的提取函数
-     - unit 可取值 YEAR/MONTH/DAY 等，详见 [Temporal Intervals
+   - `EXTRACT(unit FROM date)`：通用的提取函数。unit 详见 [Temporal Intervals
 ](https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals)
-      {{< alert theme="warning" >}}
+    {{< alert theme="warning" >}}
 ⚠️ 建议使用 EXTRACT() 函数，因为属于标准 SQL 语言，适配性更高。
-      {{< /alert >}}
+    {{< /alert >}}
    - `YEAR(date)`：年份
    - `QUARTER(date)`：季度
    - `MONTH(date)`：月份
    - `DAY(date)`：该月份的天数
-   - `HOUR(datetime)`：小时数
-   - `MINUTE(datetime)`：分钟数
-   - `SECOND(datetime)`：秒数
+   - `HOUR(time)`：小时数
+   - `MINUTE(time)`：分钟数
+   - `SECOND(time)`：秒数
    - `MONTHNAME(date)`：字符串格式的月份，如 August
    - `DAYNAME(date)`：字符串格式的星期数，如 Thursday
 
-3. 格式化：
-   - `DATE_FORMAT(date, format)`：format 取值详见 [MySQL 8.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
+1. 格式化：
+   - `DATE_FORMAT(date, format)`：format 详见 [MySQL 8.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
    - `CONVERT_TZ(dt, from_tz, to_tz)`：转时区
 
-4. 日期运算（不同 DBMS 相差较大）
-   - `DATE_ADD(date, INTERVAL expr unit)`：增加时间间隔。unit 同 EXTRACT() 函数
+2. 日期运算
+   - `DATE_ADD(date, INTERVAL expr unit)`：unit 同 EXTRACT() 函数
      - or `DATE_SUB(date,INTERVAL -expr unit)`
    - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
+    {{< alert theme="warning" >}}
+⚠️ 注意，这里不同 DBMS 相差较大
+    {{< /alert >}}
 
-#### 测试例子
+#### 使用举例
 
 ```sql
 SELECT NOW(), CURDATE(), CURRENT_DATE(), CURTIME(), CURRENT_TIME();
 
-SELECT NOW(), YEAR(NOW()), QUARTER(NOW()), MONTH(NOW()), DAY(NOW()), HOUR(NOW()), MINUTE(NOW()), SECOND(NOW()), MONTHNAME(NOW()), DAYNAME(NOW());
-
-SELECT NOW(), EXTRACT(DAY FROM NOW());
+SELECT NOW(), EXTRACT(YEAR FROM NOW()), YEAR(NOW()), QUARTER(NOW()), MONTH(NOW()), DAY(NOW()), HOUR(NOW()), MINUTE(NOW()), SECOND(NOW()), MONTHNAME(NOW()), DAYNAME(NOW());
 
 SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(NOW(), '%W %M %d %Y %l:%i:%s %p'), DATE_FORMAT(NOW(), '%a %b %d %Y %l:%i:%s %p'), DATE_FORMAT(NOW(), '%r'), DATE_FORMAT(NOW(), '%T');
 
-SELECT DATE_ADD(NOW(), INTERVAL -1 DAY);
+SELECT DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_SUB(NOW(), INTERVAL -1 DAY);
 SELECT DATEDIFF('2017-01-01', '2016-12-24');
-
-SELECT TO_DAYS('2017-06-20'), TO_DAYS('2017-06-20 09:34:00'), FROM_DAYS(736865);
 ```
 
 ### 聚合函数
+
+官方手册见 [Aggregate Functions](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html)
 
 #### 常用函数
 
@@ -470,14 +476,17 @@ SELECT TO_DAYS('2017-06-20'), TO_DAYS('2017-06-20 09:34:00'), FROM_DAYS(736865);
 
 ### 窗口函数
 
+官方手册见 [Window Functions](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html)
+
 窗口函数基于**分区和排序后的查询结果的行数据**进行计算。语法如下：
 
 ```sql
-some_window_function OVER (
+window_function OVER (
   PARTITION BY some_col
   ORDER BY another_col
 )
 
+-- window_name
 SELECT
   val,
   ROW_NUMBER() OVER w AS 'row_number',
@@ -485,6 +494,13 @@ SELECT
   DENSE_RANK() OVER w AS 'dense_rank'
 FROM numbers
 WINDOW w AS (ORDER BY val);
+
+SELECT
+  DISTINCT year, country,
+  FIRST_VALUE(year) OVER (w ORDER BY year ASC) AS first,
+  FIRST_VALUE(year) OVER (w ORDER BY year DESC) AS last
+FROM sales
+WINDOW w AS (PARTITION BY country);
 ```
 
 #### 常用函数
@@ -492,17 +508,15 @@ WINDOW w AS (ORDER BY val);
 1. 聚合函数：上述 聚合函数 中的都适用；
 
 2. 排序函数：
-   - 排名：
-     - `ROW_NUMBER()`：返回排名，如 1, 2, 3, 4, ...
-     - `RANK()`：返回排名，如 1, 2, 2, 4, ...
-     - `DENSE_RANK()`：返回排名，如 1, 2, 2, 3, ...
-     - `NTILE(n)`：分成 n 组，返回组别
-   - 排名分布：
-     - `PERCENT_RANK()`：返回排名的百分比
-       - 计算公式：*(rank - 1) / (rows - 1)*
-        <!-- <img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'> -->
-     - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
-       - 计算公式：*小于或大于等于当前值的行数 / rows*
+   - `ROW_NUMBER()`：返回排名，如 1, 2, 3, 4, ...
+   - `RANK()`：返回排名，如 1, 2, 2, 4, ...
+   - `DENSE_RANK()`：返回排名，如 1, 2, 2, 3, ...
+   - `NTILE(n)`：分成 n 组，返回组别
+   - `PERCENT_RANK()`：返回排名的百分比
+     - 计算公式：*(rank - 1) / (rows~分区总行数~ - 1)*
+      <!-- <img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'> -->
+   - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
+     - 计算公式：*rows~小于或大于等于当前值~ / rows~分区总行数~*
 
 3. 值函数/偏移函数：
    - `FIRST_VALUE(col)`：取第一行值
@@ -511,12 +525,12 @@ WINDOW w AS (ORDER BY val);
    - `LAG(col, n, defaut)`：取向**前**偏移 n 行的值，若不存在则取 defaut
    - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
 
-#### 宝藏参考
+#### 使用举例
 
-- MySQL 官方手册：[Window Functions](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html)
-- [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
-- [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
-- [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
+- 带图理解【宝藏】：
+  - [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
+  - [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
+  - [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
 
 ## 数据库备份
 
