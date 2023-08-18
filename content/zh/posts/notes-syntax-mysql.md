@@ -357,38 +357,6 @@ SELECT * FROM cte;
    - `SQRT(x)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-#### ROUND(x, decimals)
-
-#### TRUNCATE(x, decimals)
-
-#### CEILING(x)
-
-#### FLOOR(x)
-
-#### MOD(x, y)
-
-#### SQRT(x)
-
-#### POWER(x, y)
-
-- ROUND(x, decimals)
-
-四舍五入
-
-- TRUNCATE(x, decimals)
-
-直接截取
-
-- CEILING(x)
-
-- FLOOR(x)
-
-- MOD(x, y)
-
-- SQRT(x)
-
-- POWER(x, y)
-
 #### 练习
 
 ```sql
@@ -608,8 +576,6 @@ WINDOW w AS (PARTITION BY country);
 
 官方手册见 [Flow Control Functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) 和 [Comparison Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)
 
-#### CASE
-
 CASE 属于运算符，支持多条件，语法如下：
 
 ```sql
@@ -617,55 +583,43 @@ CASE WHEN condition THEN expr1 ELSE expr2 END
 CASE value WHEN compare_value THEN expr1 ELSE expr2 END
 ```
 
-#### IF(condition, expr1, expr2)
+#### 概况
 
-如果条件为真，则返回 expr1，否则返回 expr2
 
-#### IFNULL(expr1, expr2)
 
-如果 expr1 不为 null 则返回 expr1，否则返回 expr2
+- `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
+- `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
+  ```sql
+  -- IFNULL(expr1, expr2)
+  CASE 
+    WHEN expr1 IS NOT NULL THEN expr1 
+    ELSE expr2
+  END
+  ```
+- `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
+  ```sql
+  -- NULLIF(expr1, expr2)
+  CASE 
+    WHEN expr1 = expr2 THEN NULL
+    ELSE expr1 
+  END  
+  ```
+- `COALESCE(expr1, expr2, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
+  ```sql
+  -- COALESCE(expr1, expr2, expr3)
+  CASE 
+    WHEN expr1 IS NOT NULL THEN expr1 
+    WHEN expr2 IS NOT NULL THEN expr2
+    WHEN expr3 IS NOT NULL THEN expr3
+    ELSE NULL
+  END
+  ```
 
-使用 `CASE` 解语句释如下：
-
-```sql
--- IFNULL(expr1, expr2)
-CASE 
-  WHEN expr1 IS NOT NULL THEN expr1 
-  ELSE expr2
-END
-```
-
-#### NULLIF(expr1, expr2)
-
-如果相等，则返回 null，否则返回 expr1
-
-```sql
--- NULLIF(expr1, expr2)
-CASE 
-  WHEN expr1 = expr2 THEN NULL
-  ELSE expr1 
-END  
-```
-
-#### COALESCE(expr1, expr2, ...)
-
-返回第一个不为 null 的值，若都为 null 则返回 null
-
-```sql
--- COALESCE(expr1, expr2, expr3)
-CASE 
-  WHEN expr1 IS NOT NULL THEN expr1 
-  WHEN expr2 IS NOT NULL THEN expr2
-  WHEN expr3 IS NOT NULL THEN expr3
-  ELSE NULL
-END
-```
-
-{{< alert theme="warning" >}}
+  {{< alert theme="warning" >}}
 👏 `COALESCE()` 很巧妙很好用，以下两个表达式具有相同的作用：
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
-{{< /alert >}}
+  {{< /alert >}}
 
 #### 练习
 
