@@ -537,42 +537,37 @@ CASE 运算符支持多条件，语法如下：
 - `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
 - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
   ```sql
+  -- IFNULL(expr1, expr2)
   CASE 
     WHEN expr1 IS NOT NULL THEN expr1 
     ELSE expr2
   END
   ```
 - `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
+  ```sql
+  -- NULLIF(expr1, expr2)
+  CASE 
+    WHEN expr1 = expr2 THEN NULL
+    ELSE expr1 
+  END  
+  ```
 - `COALESCE(expr1, expr2, expr3, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
+  ```sql
+  -- COALESCE(expr1, expr2, expr3)
+  CASE 
+    WHEN expr1 IS NOT NULL THEN expr1 
+    WHEN expr2 IS NOT NULL THEN expr2
+    WHEN expr3 IS NOT NULL THEN expr3
+    ELSE NULL
+  END
+  ```
 
-{{< alert theme="warning" >}}
+  {{< alert theme="warning" >}}
 👏 `COALESCE()` 很巧妙很好用，以下两个表达式具有相同的作用：
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
-
-<br>👇 使用 `CASE` 解释 `IFNULL()/NULLIF()/COALESCE()` 这三个异常值处理函数：
-```sql
--- IFNULL(expr1, expr2)
-CASE 
-  WHEN expr1 IS NOT NULL THEN expr1 
-  ELSE expr2
-END
-
--- NULLIF(expr1, expr2)
-CASE 
-  WHEN expr1 = expr2 THEN NULL
-  ELSE expr1 
-END 
-
--- COALESCE(expr1, expr2, expr3)
-CASE 
-  WHEN expr1 IS NOT NULL THEN expr1 
-  WHEN expr2 IS NOT NULL THEN expr2
-  WHEN expr3 IS NOT NULL THEN expr3
-  ELSE NULL
-END
 ```
-{{< /alert >}}
+  {{< /alert >}}
 
 #### 练习
 
