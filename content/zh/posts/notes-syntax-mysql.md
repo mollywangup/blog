@@ -342,7 +342,7 @@ SELECT * FROM cte;
 
 官方手册见 [Numeric Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html)
 
-常用函数：
+#### 列表
 
 - 保留小数：
    - `ROUND(number, decimals)`：四舍五入
@@ -357,7 +357,7 @@ SELECT * FROM cte;
    - `SQRT(number)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-<br>练习一下：
+#### 练习
 
 ```sql
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
@@ -367,6 +367,8 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 ### 字符串函数
 
 官方手册见 [String Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
+
+#### 列表
 
 - 常用：
   - `LENGTH(str)`：求长度
@@ -395,7 +397,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
   - `REPEAT(str, count)`：重复字符串指定次数
   - `REVERSE(str)`：反转字符串
 
-<br>练习一下：
+#### 练习
 
 ```sql
 SELECT CONCAT('first_name', ' ', 'last_name');
@@ -409,6 +411,8 @@ SELECT REPEAT('MySQL', 3);
 ### 日期函数
 
 官方手册见 [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
+
+#### 列表
 
 - 获取当前日期时间：
   - `NOW()`：返回当前日期和时间
@@ -445,7 +449,7 @@ SELECT REPEAT('MySQL', 3);
 ⚠️ 注意，这里不同 DBMS 相差较大
     {{< /alert >}}
 
-<br>练习一下：
+#### 练习
 
 ```sql
 SELECT NOW(), CURDATE(), CURRENT_DATE(), CURTIME(), CURRENT_TIME();
@@ -497,7 +501,7 @@ FROM sales
 WINDOW w AS (PARTITION BY country);
 ```
 
-常用函数：
+#### 列表
 
 1. 聚合函数：上述 聚合函数 中的都适用；
 
@@ -519,7 +523,7 @@ WINDOW w AS (PARTITION BY country);
    - `LAG(col, n, defaut)`：取向**前**偏移 n 行的值，若不存在则取 defaut
    - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
 
-<br>练习一下：
+#### 练习
 
 - 带图理解【宝藏】：
   - [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
