@@ -445,9 +445,9 @@ SELECT REPEAT('MySQL', 3);
    - `DATE_ADD(date, INTERVAL expr unit)`：unit 同 EXTRACT() 函数
      - or `DATE_SUB(date,INTERVAL -expr unit)`
    - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
-    {{< alert theme="warning" >}}
+  {{< alert theme="warning" >}}
 ⚠️ 注意，这里不同 DBMS 相差较大
-    {{< /alert >}}
+  {{< /alert >}}
 
 #### 练习
 
