@@ -373,7 +373,11 @@ SELECT * FROM cte;
 
 - ROUND(x, decimals)
 
+四舍五入
+
 - TRUNCATE(x, decimals)
+
+直接截取
 
 - CEILING(x)
 
