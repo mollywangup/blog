@@ -368,14 +368,14 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 官方手册见 [String Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
 
-==常用函数：==
+常用函数：
 
 - `LENGTH(str)`：求长度
 - `UPPER(str)`：转大写
 - `LOWER(str)`：转小写
 - `REPLACE(str, from_str, to_str)`：替换
 - `CONCAT(str1, str2, ...)`：拼接
-
+----
 - `LEFT(str, len)`：自左边提取子串
 - `RIGHT(str, len)`：自右边提取子串
 - `MID(str, pos, len)`：自指定位置提取子串
@@ -393,7 +393,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 - `REPEAT(str, count)`：重复字符串指定次数
 - `REVERSE(str)`：反转字符串
 
-练习一下：
+<br>练习一下：
 
 ```sql
 SELECT CONCAT('first_name', ' ', 'last_name');
@@ -408,16 +408,15 @@ SELECT REPEAT('MySQL', 3);
 
 官方手册见 [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
 
-#### 常用函数
+常用函数：
 
-1. 获取当前日期时间
-   - `NOW()`：返回当前日期和时间
-   - `CURDATE()`：返回当前日期
-     - or `CURRENT_DATE()`
-   - `CURTIME()`：返回当前时间
-     - or `CURRENT_TIME()`
+- `NOW()`：返回当前日期和时间
+- `CURDATE()`：返回当前日期
+  - or `CURRENT_DATE()`
+- `CURTIME()`：返回当前时间
+  - or `CURRENT_TIME()`
 
-2. 提取年月日时分秒
+1. 提取年月日时分秒
    - `EXTRACT(unit FROM date)`：通用的提取函数。unit 详见 [Temporal Intervals
 ](https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals)
    - `YEAR(date)`：年份
