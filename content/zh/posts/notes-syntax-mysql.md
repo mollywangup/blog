@@ -345,31 +345,45 @@ SELECT * FROM cte;
 #### 概况
 
 - 保留小数
-   - `ROUND(number, decimals)`：四舍五入
-   - `TRUNCATE(number, decimals)`：直接截取
-   - `CEILING(number)`：向上取整，即 MIN({>=number})
-   - `FLOOR(number)`：向下取整，即 MAX({<=number})
+   - `ROUND(x, decimals)`：四舍五入
+   - `TRUNCATE(x, decimals)`：直接截取
+   - `CEILING(x)`：向上取整，即 MIN({>=number})
+   - `FLOOR(x)`：向下取整，即 MAX({<=number})
 
 - 数学运算
    - `MOD(x, y)`：求余
      - or `x MOD y`
      - or `x % y`
-   - `SQRT(number)`：求平方根
+   - `SQRT(x)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-#### ROUND(number, decimals)
+#### ROUND(x, decimals)
 
-#### TRUNCATE(number, decimals)`
+#### TRUNCATE(x, decimals)
 
-#### CEILING(number)
+#### CEILING(x)
 
-#### FLOOR(number)
+#### FLOOR(x)
 
 #### MOD(x, y)
 
-#### SQRT(number)
+#### SQRT(x)
 
 #### POWER(x, y)
+
+- ROUND(x, decimals)
+
+- TRUNCATE(x, decimals)
+
+- CEILING(x)
+
+- FLOOR(x)
+
+- MOD(x, y)
+
+- SQRT(x)
+
+- POWER(x, y)
 
 #### 练习
 
@@ -382,7 +396,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 官方手册见 [String Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
 
-#### 列表
+#### 概况
 
 - 常用
   - `LENGTH(str)`：求长度
@@ -424,7 +438,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 
 官方手册见 [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
 
-#### 列表
+#### 概况
 
 - 获取当前日期时间
   - `NOW()`：返回当前日期和时间
@@ -615,9 +629,6 @@ CASE
   WHEN expr1 IS NOT NULL THEN expr1 
   ELSE expr2
 END
-
--- try
-SELECT IFNULL(1/0, 'yes'), IFNULL(1/1, 'yes'), IFNULL(NULL, NULL);
 ```
 
 #### NULLIF(expr1, expr2)
@@ -646,21 +657,24 @@ CASE
 END
 ```
 
-```sql
-SELECT COALESCE(NULL, 1), COALESCE(NULL, NULL, NULL), COALESCE(NULL, NULL, NULL, 'Unknown');
-SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
-```
-
 {{< alert theme="warning" >}}
 👏 `COALESCE()` 很巧妙很好用，以下两个表达式具有相同的作用：
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
 {{< /alert >}}
 
+#### 练习
+
+```sql
+SELECT IFNULL(1/0, 'yes'), IFNULL(1/1, 'yes'), IFNULL(NULL, NULL);
+
+SELECT COALESCE(NULL, 1), COALESCE(NULL, NULL, NULL), COALESCE(NULL, NULL, NULL, 'Unknown');
+SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
+```
 
 ### 其他函数
 
-#### 列表
+#### 概况
 
 - `CAST(expr AS type)`：值类型转换，详见 [type](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)，如 CHAR/SIGNED/FLOAT/DOUBLE/DATE/DATETIME
 
