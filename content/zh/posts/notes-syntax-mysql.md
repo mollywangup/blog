@@ -528,11 +528,11 @@ WINDOW w AS (PARTITION BY country);
 
 官方手册见 [Flow Control Functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) 和 [Comparison Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)
 
-#### 列表
+CASE 运算符支持多条件，语法如下：
+- `CASE WHEN condition THEN expr1 ELSE expr2 END`
+- `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`
 
-- CASE 运算符
-  - `CASE WHEN condition THEN expr1 ELSE expr2 END`：支持多条件
-  - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`：支持多条件
+#### 列表
 
 - `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
 - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
