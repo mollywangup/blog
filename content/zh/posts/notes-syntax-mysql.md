@@ -357,7 +357,7 @@ SELECT * FROM cte;
    - `SQRT(number)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-#### 使用举例
+#### 练习
 
 ```sql
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
@@ -397,7 +397,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
   - `REPEAT(str, count)`：重复字符串指定次数
   - `REVERSE(str)`：反转字符串
 
-#### 使用举例
+#### 练习
 
 ```sql
 SELECT CONCAT('first_name', ' ', 'last_name');
@@ -424,9 +424,6 @@ SELECT REPEAT('MySQL', 3);
 2. 提取年月日时分秒
    - `EXTRACT(unit FROM date)`：通用的提取函数。unit 详见 [Temporal Intervals
 ](https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals)
-    {{< alert theme="warning" >}}
-⚠️ 建议使用 EXTRACT() 函数，因为属于标准 SQL 语言，适配性更高。
-    {{< /alert >}}
    - `YEAR(date)`：年份
    - `QUARTER(date)`：季度
    - `MONTH(date)`：月份
@@ -436,12 +433,15 @@ SELECT REPEAT('MySQL', 3);
    - `SECOND(time)`：秒数
    - `MONTHNAME(date)`：字符串格式的月份，如 August
    - `DAYNAME(date)`：字符串格式的星期数，如 Thursday
+    {{< alert theme="warning" >}}
+⚠️ 建议使用 EXTRACT() 函数，因为属于标准 SQL 语言，适配性更高。
+    {{< /alert >}}
 
 1. 格式化：
    - `DATE_FORMAT(date, format)`：format 详见 [MySQL 8.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
    - `CONVERT_TZ(dt, from_tz, to_tz)`：转时区
 
-2. 日期运算
+2. 日期运算：
    - `DATE_ADD(date, INTERVAL expr unit)`：unit 同 EXTRACT() 函数
      - or `DATE_SUB(date,INTERVAL -expr unit)`
    - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
@@ -449,7 +449,7 @@ SELECT REPEAT('MySQL', 3);
 ⚠️ 注意，这里不同 DBMS 相差较大
     {{< /alert >}}
 
-#### 使用举例
+#### 练习
 
 ```sql
 SELECT NOW(), CURDATE(), CURRENT_DATE(), CURTIME(), CURRENT_TIME();
@@ -513,10 +513,10 @@ WINDOW w AS (PARTITION BY country);
    - `DENSE_RANK()`：返回排名，如 1, 2, 2, 3, ...
    - `NTILE(n)`：分成 n 组，返回组别
    - `PERCENT_RANK()`：返回排名的百分比
-     - 计算公式：*(rank - 1) / (rows~分区总行数~ - 1)*
+     - 计算公式：*(rank - 1) / (rows - 1)*
       <!-- <img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'> -->
    - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
-     - 计算公式：*$rows_{小于或大于等于当前值}$ / $rows_{分区总行数}$*
+     - 计算公式：*rows(小于或大于等于当前值的) / rows*
 
 3. 值函数/偏移函数：
    - `FIRST_VALUE(col)`：取第一行值
@@ -525,7 +525,7 @@ WINDOW w AS (PARTITION BY country);
    - `LAG(col, n, defaut)`：取向**前**偏移 n 行的值，若不存在则取 defaut
    - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
 
-#### 使用举例
+#### 练习
 
 - 带图理解【宝藏】：
   - [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
