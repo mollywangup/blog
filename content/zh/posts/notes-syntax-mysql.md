@@ -517,6 +517,37 @@ WINDOW w AS (PARTITION BY country);
    - `LAG(col, n, defaut)`：取向**前**偏移 n 行的值，若不存在则取 defaut
    - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
 
+#### ROW_NUMBER()
+
+返回排名，如 1, 2, 3, 4, ...
+
+```sql
+```
+
+#### RANK()
+
+返回排名，如 1, 2, 2, 4, ...
+
+#### DENSE_RANK()
+
+返回排名，如 1, 2, 2, 3, ...
+
+#### NTILE(n)
+
+#### PERCENT_RANK()
+
+#### CUME_DIST()
+
+#### FIRST_VALUE(col)
+
+#### LAST_VALUE(col)
+
+#### NTH_VALUE(col, n)
+
+#### LEAD(col, n, defaut)
+
+
+
 #### 练习
 
 带图理解【宝藏】：
@@ -528,18 +559,24 @@ WINDOW w AS (PARTITION BY country);
 
 官方手册见 [Flow Control Functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) 和 [Comparison Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)
 
-CASE 运算符支持多条件，语法如下：
-- `CASE WHEN condition THEN expr1 ELSE expr2 END`
-- `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`
+#### CASE
 
-#### IF
+CASE 属于运算符，支持多条件，语法如下：
 
-`IF(condition, expr1, expr2)`
+```sql
+CASE WHEN condition THEN expr1 ELSE expr2 END
+CASE value WHEN compare_value THEN expr1 ELSE expr2 END
+```
+
+#### IF(condition, expr1, expr2)
+
 如果条件为真，则返回 expr1，否则返回 expr2
 
 #### IFNULL(expr1, expr2)
 
 如果 expr1 不为 null 则返回 expr1，否则返回 expr2
+
+使用 `CASE` 解语句释如下：
 
 ```sql
 -- IFNULL(expr1, expr2)
@@ -552,9 +589,9 @@ END
 SELECT IFNULL(1/0, 'yes'), IFNULL(1/1, 'yes'), IFNULL(NULL, NULL);
 ```
 
-#### NULLIF
+#### NULLIF(expr1, expr2)
 
-`NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
+如果相等，则返回 null，否则返回 expr1
 
 ```sql
 -- NULLIF(expr1, expr2)
@@ -564,9 +601,9 @@ CASE
 END  
 ```
 
-#### COALESCE
+#### COALESCE(expr1, expr2, ...)
 
-`COALESCE(expr1, expr2, expr3, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
+返回第一个不为 null 的值，若都为 null 则返回 null
 
 ```sql
 -- COALESCE(expr1, expr2, expr3)
