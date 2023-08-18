@@ -368,36 +368,32 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 官方手册见 [String Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
 
-#### 常用函数
+==常用函数：==
 
-- 高频使用：
-  - `LENGTH(str)`：求长度
-  - `UPPER(str)`：转大写
-  - `LOWER(str)`：转小写
-  - `REPLACE(str, from_str, to_str)`：替换
-  - `CONCAT(str1, str2, ...)`：拼接
+- `LENGTH(str)`：求长度
+- `UPPER(str)`：转大写
+- `LOWER(str)`：转小写
+- `REPLACE(str, from_str, to_str)`：替换
+- `CONCAT(str1, str2, ...)`：拼接
 
-- 左右处理：
-  - `LTRIM(str)`：删左/头部空格
-  - `RTRIM(str)`：删右/尾部空格
-  - `TRIM(str)`：删左右空格
-  - `LPAD(str, len, padstr)`：左填充，以达到指定长度
-  - `RPAD(str, len, padstr)`：右填充，以达到指定长度
+- `LEFT(str, len)`：自左边提取子串
+- `RIGHT(str, len)`：自右边提取子串
+- `MID(str, pos, len)`：自指定位置提取子串
+  - or `SUBSTR(str, pos, len)`
+  - or `SUBSTRING(str, pos, len)`
 
-- 字符串提取：
-  - `LEFT(str, len)`：自左边取
-  - `RIGHT(str, len)`：自右边取
-  - `MID(str, pos, len)`：自指定位置取
-    - or `SUBSTR(str, pos, len)`
-    - or `SUBSTRING(str, pos, len)`
+- `LTRIM(str)`：删左/头部空格
+- `RTRIM(str)`：删右/尾部空格
+- `TRIM(str)`：删左右空格
+- `LPAD(str, len, padstr)`：左填充，以达到指定长度
+- `RPAD(str, len, padstr)`：右填充，以达到指定长度
 
-- 其他
-  - `LOCATE(substr, str)`：子字符串第一次出现的位置。不区分大小写，未找到时返回0
-    - or `POSITION(substr IN str)`
-  - `REPEAT(str, count)`：重复字符串指定次数
-  - `REVERSE(str)`：反转字符串
+- `LOCATE(substr, str)`：子字符串第一次出现的位置。不区分大小写，未找到时返回0
+  - or `POSITION(substr IN str)`
+- `REPEAT(str, count)`：重复字符串指定次数
+- `REVERSE(str)`：反转字符串
 
-#### 练习
+练习一下：
 
 ```sql
 SELECT CONCAT('first_name', ' ', 'last_name');
@@ -445,9 +441,9 @@ SELECT REPEAT('MySQL', 3);
    - `DATE_ADD(date, INTERVAL expr unit)`：unit 同 EXTRACT() 函数
      - or `DATE_SUB(date,INTERVAL -expr unit)`
    - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
-{{< alert theme="warning" >}}
+    {{< alert theme="warning" >}}
 ⚠️ 注意，这里不同 DBMS 相差较大
-{{< /alert >}}
+    {{< /alert >}}
 
 #### 练习
 
