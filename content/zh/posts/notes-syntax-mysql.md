@@ -500,70 +500,21 @@ WINDOW w AS (PARTITION BY country);
 1. 聚合函数：上述 聚合函数 中的都适用；
 
 2. 排序函数
-   - `ROW_NUMBER()`
-   - `RANK()`
-   - `DENSE_RANK()`
-   - `NTILE(n)`
-   - `PERCENT_RANK()`
-   - `CUME_DIST()`
+   - `ROW_NUMBER()`：返回排名，如 1, 2, 3, 4, ...
+   - `RANK()`：返回排名，如 1, 2, 2, 4, ...
+   - `DENSE_RANK()`：返回排名，如 1, 2, 2, 3, ...
+   - `NTILE(n)`：分成 n 组，返回组别
+   - `PERCENT_RANK()`：返回排名的百分比
+     - 计算公式：*(rank - 1) / (rows - 1)*
+   - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
+     - 计算公式：*rows(小于或大于等于当前值) / rows*
 
 3. 值函数/偏移函数
-   - `FIRST_VALUE(col)`
-   - `LAST_VALUE(col)`
-   - `NTH_VALUE(col, n)`
-   - `LAG(col, n, defaut)`
-   - `LEAD(col, n, defaut)`
-
-#### ROW_NUMBER()
-
-返回排名，如 1, 2, 3, 4, ...
-
-```sql
-```
-
-#### RANK()
-
-返回排名，如 1, 2, 2, 4, ...
-
-#### DENSE_RANK()
-
-返回排名，如 1, 2, 2, 3, ...
-
-#### NTILE(n)
-
-分成 n 组，返回组别
-
-#### PERCENT_RANK()
-
-返回排名的百分比
-- 计算公式：*(rank - 1) / (rows - 1)*
-
-<img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'>
-
-#### CUME_DIST()
-
-返回值累计分布的百分比，如 top 10%
-- 计算公式：*rows(小于或大于等于当前值) / rows*
-
-#### FIRST_VALUE(col)
-
-取第一行值
-
-#### LAST_VALUE(col)
-
-取最后一行值
-
-#### NTH_VALUE(col, n)
-
-取第 n 行值
-
-#### LAG(col, n, defaut)
-
-取向**前**偏移 n 行的值，若不存在则取 defaut
-
-#### LEAD(col, n, defaut)
-
-取向**后**偏移 n 行的值，若不存在则取 defaut
+   - `FIRST_VALUE(col)`：取第一行值
+   - `LAST_VALUE(col)`：取最后一行值
+   - `NTH_VALUE(col, n)`：取第 n 行值
+   - `LAG(col, n, defaut)`：取向**前**偏移 n 行的值，若不存在则取 defaut
+   - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
 
 #### 练习
 
@@ -587,12 +538,11 @@ CASE 属于运算符，支持多条件，语法如下：
 - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
 - `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
 - `COALESCE(expr1, expr2, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
-
-{{< alert theme="warning" >}}
+  {{< alert theme="warning" >}}
 👏 `COALESCE()` 很巧妙很好用，以下两个表达式具有相同的作用：
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
-{{< /alert >}}
+  {{< /alert >}}
 
 使用 `CASE` 解释三个异常值处理函数 `IFNULL()/NULLIF()/COALESCE()`：
 
