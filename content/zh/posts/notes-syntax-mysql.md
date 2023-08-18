@@ -527,7 +527,7 @@ WINDOW w AS (PARTITION BY country);
 
 ### 其他函数
 
-官方手册见 [Flow Control Functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif)
+官方手册见 [Flow Control Functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) 和 [Comparison Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)
 
 #### 列表
 
@@ -539,12 +539,13 @@ WINDOW w AS (PARTITION BY country);
 - 异常值处理
   - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
   - `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
-  - `COALESCE(expr1, expr2, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
+  - `COALESCE(expr1, expr2, expr3, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
   {{< alert theme="warning" >}}
 👏 `COALESCE()` 是一个很巧妙的函数，以下两个表达式的作用是相同的：
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
-<br>👇 使用 CASE 解释 IFNULL/NULLIF/COALESCE：
+
+👇 使用 `CASE` 语句 解释 `IFNULL()/NULLIF()/COALESCE()`：
 ```sql
 -- IFNULL(expr1, expr2)
 CASE 
