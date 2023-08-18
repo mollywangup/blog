@@ -525,7 +525,7 @@ WINDOW w AS (PARTITION BY country);
 - [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
 - [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
 
-#### 其他函数
+### 其他函数
 
 官方手册见 [Flow Control Functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif)
 
@@ -533,8 +533,8 @@ WINDOW w AS (PARTITION BY country);
 
 - 条件判断
   - `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
-  - `CASE WHEN condition THEN expr1 ELSE expr2 END`：更灵活，支持多个条件
-  - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`：更灵活，支持多个条件
+  - `CASE WHEN condition THEN expr1 ELSE expr2 END`：更灵活，支持多条件
+  - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`：更灵活，支持多条件
 
 - 异常值处理
   - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
@@ -544,6 +544,7 @@ WINDOW w AS (PARTITION BY country);
 👏 `COALESCE()` 是一个很巧妙的函数，以下两个表达式的作用是相同的：
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
+<br>👇 使用 CASE 解释 IFNULL/NULLIF/COALESCE：
 ```sql
 -- IFNULL(expr1, expr2)
 CASE 
