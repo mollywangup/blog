@@ -342,7 +342,7 @@ SELECT * FROM cte;
 
 官方手册见 [Numeric Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html)
 
-#### 常用函数
+常用函数：
 
 - 保留小数：
    - `ROUND(number, decimals)`：四舍五入
@@ -357,7 +357,7 @@ SELECT * FROM cte;
    - `SQRT(number)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-#### 练习
+<br>练习一下：
 
 ```sql
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
@@ -375,7 +375,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 - `LOWER(str)`：转小写
 - `REPLACE(str, from_str, to_str)`：替换
 - `CONCAT(str1, str2, ...)`：拼接
-----
+<!-- ---- -->
 - `LEFT(str, len)`：自左边提取子串
 - `RIGHT(str, len)`：自右边提取子串
 - `MID(str, pos, len)`：自指定位置提取子串
@@ -444,7 +444,7 @@ SELECT REPEAT('MySQL', 3);
 ⚠️ 注意，这里不同 DBMS 相差较大
     {{< /alert >}}
 
-#### 练习
+<br>练习一下：
 
 ```sql
 SELECT NOW(), CURDATE(), CURRENT_DATE(), CURTIME(), CURRENT_TIME();
@@ -461,7 +461,7 @@ SELECT DATEDIFF('2017-01-01', '2016-12-24');
 
 官方手册见 [Aggregate Functions](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html)
 
-#### 常用函数
+常用函数：
 
 - `MAX(expr)`：求最大值
 - `MIN(expr)`：求最小值
@@ -498,7 +498,7 @@ FROM sales
 WINDOW w AS (PARTITION BY country);
 ```
 
-#### 常用函数
+常用函数：
 
 1. 聚合函数：上述 聚合函数 中的都适用；
 
@@ -520,7 +520,7 @@ WINDOW w AS (PARTITION BY country);
    - `LAG(col, n, defaut)`：取向**前**偏移 n 行的值，若不存在则取 defaut
    - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
 
-#### 练习
+<br>练习一下：
 
 - 带图理解【宝藏】：
   - [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
