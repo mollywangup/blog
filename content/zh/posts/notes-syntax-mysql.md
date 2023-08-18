@@ -524,27 +524,27 @@ WINDOW w AS (PARTITION BY country);
 - [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
 - [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
 
-### 其他函数
+### 控制流函数
 
 官方手册见 [Flow Control Functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) 和 [Comparison Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)
 
 #### 列表
 
-- 控制流
-  - `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
+- CASE 运算符
   - `CASE WHEN condition THEN expr1 ELSE expr2 END`：更灵活，支持多条件
   - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`：更灵活，支持多条件
 
-- 异常值处理
-  - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
-  - `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
-  - `COALESCE(expr1, expr2, expr3, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
-  {{< alert theme="warning" >}}
-👏 `COALESCE()` 很巧妙很好用，以下两个表达式的作用是相同的：
+- `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
+- `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
+- `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
+- `COALESCE(expr1, expr2, expr3, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
+
+{{< alert theme="warning" >}}
+👏 `COALESCE()` 很巧妙很好用，以下两个表达式具有相同的作用：
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
 
-👇 使用 `CASE` 语句解释 `IFNULL()/NULLIF()/COALESCE()`：
+👇 使用 `CASE` 语句解释 `IFNULL()/NULLIF()/COALESCE()` 这三个异常值处理函数：
 ```sql
 -- IFNULL(expr1, expr2)
 CASE 
@@ -566,10 +566,7 @@ CASE
   ELSE NULL
 END
 ```
-  {{< /alert >}}
-  
-- 值类型转换
-  - `CAST(expr AS type)`：详见 [type](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)，如 CHAR/SIGNED/FLOAT/DOUBLE/DATE/DATETIME
+{{< /alert >}}
 
 #### 练习
 
@@ -578,7 +575,17 @@ SELECT IFNULL(1/0, 'yes'), IFNULL(1/1, 'yes'), IFNULL(NULL, NULL);
 SELECT COALESCE(NULL, 1), COALESCE(NULL, NULL, NULL), COALESCE(NULL, NULL, NULL, 'Unknown');
 
 SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
+```
 
+### 其他函数
+
+#### 列表
+
+- `CAST(expr AS type)`：值类型转换，详见 [type](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)，如 CHAR/SIGNED/FLOAT/DOUBLE/DATE/DATETIME
+
+#### 练习
+
+```sql
 SELECT CAST(3.1415 AS SIGNED);
 ```
 
