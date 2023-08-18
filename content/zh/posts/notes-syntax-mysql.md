@@ -531,8 +531,8 @@ WINDOW w AS (PARTITION BY country);
 #### 列表
 
 - CASE 运算符
-  - `CASE WHEN condition THEN expr1 ELSE expr2 END`：更灵活，支持多条件
-  - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`：更灵活，支持多条件
+  - `CASE WHEN condition THEN expr1 ELSE expr2 END`：支持多条件
+  - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`：支持多条件
 
 - `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
 - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
@@ -544,7 +544,7 @@ WINDOW w AS (PARTITION BY country);
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
 
-👇 使用 `CASE` 语句解释 `IFNULL()/NULLIF()/COALESCE()` 这三个异常值处理函数：
+<br>👇 使用 `CASE` 解释 `IFNULL()/NULLIF()/COALESCE()` 这三个异常值处理函数：
 ```sql
 -- IFNULL(expr1, expr2)
 CASE 
