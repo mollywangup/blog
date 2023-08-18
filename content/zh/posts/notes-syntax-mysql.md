@@ -342,7 +342,7 @@ SELECT * FROM cte;
 
 官方手册见 [Numeric Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html)
 
-#### 列表
+#### 概况
 
 - 保留小数
    - `ROUND(number, decimals)`：四舍五入
@@ -356,6 +356,20 @@ SELECT * FROM cte;
      - or `x % y`
    - `SQRT(number)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
+
+#### ROUND(number, decimals)
+
+#### TRUNCATE(number, decimals)`
+
+#### CEILING(number)
+
+#### FLOOR(number)
+
+#### MOD(x, y)
+
+#### SQRT(number)
+
+#### POWER(x, y)
 
 #### 练习
 
@@ -495,27 +509,24 @@ FROM sales
 WINDOW w AS (PARTITION BY country);
 ```
 
-#### 列表
+#### 概况
 
 1. 聚合函数：上述 聚合函数 中的都适用；
 
 2. 排序函数
-   - `ROW_NUMBER()`：返回排名，如 1, 2, 3, 4, ...
-   - `RANK()`：返回排名，如 1, 2, 2, 4, ...
-   - `DENSE_RANK()`：返回排名，如 1, 2, 2, 3, ...
-   - `NTILE(n)`：分成 n 组，返回组别
-   - `PERCENT_RANK()`：返回排名的百分比
-     - 计算公式：*(rank - 1) / (rows - 1)*
-      <!-- <img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'> -->
-   - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
-     - 计算公式：*rows(小于或大于等于当前值) / rows*
+   - `ROW_NUMBER()`
+   - `RANK()`
+   - `DENSE_RANK()`
+   - `NTILE(n)`
+   - `PERCENT_RANK()`
+   - `CUME_DIST()`
 
 3. 值函数/偏移函数
-   - `FIRST_VALUE(col)`：取第一行值
-   - `LAST_VALUE(col)`：取最后一行值
-   - `NTH_VALUE(col, n)`：取第 n 行值
-   - `LAG(col, n, defaut)`：取向**前**偏移 n 行的值，若不存在则取 defaut
-   - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
+   - `FIRST_VALUE(col)`
+   - `LAST_VALUE(col)`
+   - `NTH_VALUE(col, n)`
+   - `LAG(col, n, defaut)`
+   - `LEAD(col, n, defaut)`
 
 #### ROW_NUMBER()
 
@@ -534,19 +545,39 @@ WINDOW w AS (PARTITION BY country);
 
 #### NTILE(n)
 
+分成 n 组，返回组别
+
 #### PERCENT_RANK()
+
+返回排名的百分比
+- 计算公式：*(rank - 1) / (rows - 1)*
+
+<img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'>
 
 #### CUME_DIST()
 
+返回值累计分布的百分比，如 top 10%
+- 计算公式：*rows(小于或大于等于当前值) / rows*
+
 #### FIRST_VALUE(col)
+
+取第一行值
 
 #### LAST_VALUE(col)
 
+取最后一行值
+
 #### NTH_VALUE(col, n)
+
+取第 n 行值
+
+#### LAG(col, n, defaut)
+
+取向**前**偏移 n 行的值，若不存在则取 defaut
 
 #### LEAD(col, n, defaut)
 
-
+取向**后**偏移 n 行的值，若不存在则取 defaut
 
 #### 练习
 
