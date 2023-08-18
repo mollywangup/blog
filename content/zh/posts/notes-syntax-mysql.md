@@ -420,8 +420,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
     - or `CURRENT_TIME()`
 
 - 提取年月日时分秒
-   - `EXTRACT(unit FROM date)`：通用的提取函数。unit 详见 [Temporal Intervals
-](https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals)
+   - `EXTRACT(unit FROM date)`：通用的提取函数。详见 [unit](https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals)
    - `YEAR(date)`：年份
    - `QUARTER(date)`：季度
    - `MONTH(date)`：月份
@@ -433,7 +432,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
    - `DAYNAME(date)`：字符串格式的星期数，如 Thursday
 
 - 格式化
-   - `DATE_FORMAT(date, format)`：format 详见 [MySQL 8.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
+   - `DATE_FORMAT(date, format)`：详见 [format](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
    - `CONVERT_TZ(dt, from_tz, to_tz)`：转时区
 
 - 日期运算
@@ -531,7 +530,7 @@ WINDOW w AS (PARTITION BY country);
 
 #### 列表
 
-- 条件判断
+- 控制流
   - `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
   - `CASE WHEN condition THEN expr1 ELSE expr2 END`：更灵活，支持多条件
   - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`：更灵活，支持多条件
@@ -541,11 +540,11 @@ WINDOW w AS (PARTITION BY country);
   - `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
   - `COALESCE(expr1, expr2, expr3, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
   {{< alert theme="warning" >}}
-👏 `COALESCE()` 是一个很巧妙的函数，以下两个表达式的作用是相同的：
+👏 `COALESCE()` 很巧妙很好用，以下两个表达式的作用是相同的：
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
 
-👇 使用 `CASE` 语句 解释 `IFNULL()/NULLIF()/COALESCE()`：
+👇 使用 `CASE` 语句解释 `IFNULL()/NULLIF()/COALESCE()`：
 ```sql
 -- IFNULL(expr1, expr2)
 CASE 
@@ -570,8 +569,7 @@ END
   {{< /alert >}}
   
 - 值类型转换
-  - `CAST(expr AS type)`：type 详见 [](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)
-    - CHAR/SIGNED/FLOAT/DOUBLE/DATE/DATETIME
+  - `CAST(expr AS type)`：详见 [type](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)，如 CHAR/SIGNED/FLOAT/DOUBLE/DATE/DATETIME
 
 #### 练习
 
@@ -583,7 +581,7 @@ SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
 
 SELECT CAST(3.1415 AS SIGNED);
 
-CASE WHEN NULL IS NOT NULL THEN NULL ELSE NULL END
+CASE WHEN NULL IS NOT NULL THEN NULL ELSE NULL END;
 ```
 
 ## 数据库备份
