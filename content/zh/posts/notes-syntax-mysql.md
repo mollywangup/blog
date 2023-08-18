@@ -534,11 +534,13 @@ CASE 运算符支持多条件，语法如下：
 
 #### IF
 
-`IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
+`IF(condition, expr1, expr2)`
+如果条件为真，则返回 expr1，否则返回 expr2
 
 #### IFNULL
 
-`IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
+`IFNULL(expr1, expr2)`
+如果 expr1 不为 null 则返回 expr1，否则返回 expr2
 
 ```sql
 -- IFNULL(expr1, expr2)
