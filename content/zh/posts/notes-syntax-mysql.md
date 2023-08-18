@@ -344,13 +344,13 @@ SELECT * FROM cte;
 
 #### 列表
 
-- 保留小数：
+- 保留小数
    - `ROUND(number, decimals)`：四舍五入
    - `TRUNCATE(number, decimals)`：直接截取
    - `CEILING(number)`：向上取整，即 MIN({>=number})
    - `FLOOR(number)`：向下取整，即 MAX({<=number})
 
-- 数学运算：
+- 数学运算
    - `MOD(x, y)`：求余
      - or `x MOD y`
      - or `x % y`
@@ -370,31 +370,30 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 #### 列表
 
-- 常用：
+- 常用
   - `LENGTH(str)`：求长度
   - `UPPER(str)`：转大写
   - `LOWER(str)`：转小写
   - `REPLACE(str, from_str, to_str)`：替换
   - `CONCAT(str1, str2, ...)`：拼接
 
-- 子串提取：
+- 子串提取
   - `LEFT(str, len)`：自左边取
   - `RIGHT(str, len)`：自右边取
   - `MID(str, pos, len)`：自指定位置取
     - or `SUBSTR(str, pos, len)`
     - or `SUBSTRING(str, pos, len)`
 
-- 左右处理：
+- 左右处理
   - `LTRIM(str)`：删左/头部空格
   - `RTRIM(str)`：删右/尾部空格
   - `TRIM(str)`：删左右空格
   - `LPAD(str, len, padstr)`：左填充，以达到指定长度
   - `RPAD(str, len, padstr)`：右填充，以达到指定长度
 
-- 其他：
-  - `LOCATE(substr, str)`：子字符串第一次出现的位置。不区分大小写，未找到时返回0
+- 其他
+  - `LOCATE(substr, str)`：子串第一次出现的位置。不区分大小写
     - or `POSITION(substr IN str)`
-  - `REPEAT(str, count)`：重复字符串指定次数
   - `REVERSE(str)`：反转字符串
 
 #### 练习
@@ -405,7 +404,6 @@ SELECT CONCAT('first_name', ' ', 'last_name');
 SELECT LPAD('molly', 10, '_'), RPAD('molly', 10, '_');
 
 SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
-SELECT REPEAT('MySQL', 3);
 ```
 
 ### 日期函数
@@ -414,7 +412,7 @@ SELECT REPEAT('MySQL', 3);
 
 #### 列表
 
-- 获取当前日期时间：
+- 获取当前日期时间
   - `NOW()`：返回当前日期和时间
   - `CURDATE()`：返回当前日期
     - or `CURRENT_DATE()`
@@ -433,15 +431,12 @@ SELECT REPEAT('MySQL', 3);
    - `SECOND(time)`：秒数
    - `MONTHNAME(date)`：字符串格式的月份，如 August
    - `DAYNAME(date)`：字符串格式的星期数，如 Thursday
-    {{< alert theme="warning" >}}
-⚠️ 建议使用 EXTRACT() 函数，因为属于标准 SQL 语言，适配性更高。
-    {{< /alert >}}
 
-- 格式化：
+- 格式化
    - `DATE_FORMAT(date, format)`：format 详见 [MySQL 8.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
    - `CONVERT_TZ(dt, from_tz, to_tz)`：转时区
 
-- 日期运算：
+- 日期运算
    - `DATE_ADD(date, INTERVAL expr unit)`：unit 同 EXTRACT() 函数
      - or `DATE_SUB(date,INTERVAL -expr unit)`
    - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
@@ -476,7 +471,7 @@ SELECT DATEDIFF('2017-01-01', '2016-12-24');
 
 官方手册见 [Window Functions](https://dev.mysql.com/doc/refman/8.0/en/window-function-descriptions.html)
 
-窗口函数基于**分区和排序后的查询结果的行数据**进行计算。语法如下：
+窗口函数基于**分区和排序后的查询结果的每行数据**进行计算。语法如下：
 
 ```sql
 window_function OVER (
@@ -505,7 +500,7 @@ WINDOW w AS (PARTITION BY country);
 
 1. 聚合函数：上述 聚合函数 中的都适用；
 
-2. 排序函数：
+2. 排序函数
    - `ROW_NUMBER()`：返回排名，如 1, 2, 3, 4, ...
    - `RANK()`：返回排名，如 1, 2, 2, 4, ...
    - `DENSE_RANK()`：返回排名，如 1, 2, 2, 3, ...
@@ -514,9 +509,9 @@ WINDOW w AS (PARTITION BY country);
      - 计算公式：*(rank - 1) / (rows - 1)*
       <!-- <img src='https://www.sqlshack.com/wp-content/uploads/2019/08/sql-percentile-function.png' alt='n = 11'> -->
    - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
-     - 计算公式：*rows(小于或大于等于当前值的) / rows*
+     - 计算公式：*rows(小于或大于等于当前值) / rows*
 
-3. 值函数/偏移函数：
+3. 值函数/偏移函数
    - `FIRST_VALUE(col)`：取第一行值
    - `LAST_VALUE(col)`：取最后一行值
    - `NTH_VALUE(col, n)`：取第 n 行值
@@ -525,10 +520,69 @@ WINDOW w AS (PARTITION BY country);
 
 #### 练习
 
-- 带图理解【宝藏】：
-  - [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
-  - [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
-  - [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
+带图理解【宝藏】：
+- [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
+- [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
+- [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
+
+#### 其他函数
+
+官方手册见 [Flow Control Functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif)
+
+#### 列表
+
+- 条件判断
+  - `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
+  - `CASE WHEN condition THEN expr1 ELSE expr2 END`：更灵活，支持多个条件
+  - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`：更灵活，支持多个条件
+
+- 异常值处理
+  - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
+  - `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
+  - `COALESCE(expr1, expr2, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
+  {{< alert theme="warning" >}}
+👏 `COALESCE()` 是一个很巧妙的函数，以下两个表达式的作用是相同的：
+- COALESCE(expr1, expr2, expr3) 
+- IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
+```sql
+-- IFNULL(expr1, expr2)
+CASE 
+  WHEN expr1 IS NOT NULL THEN expr1 
+  ELSE expr2
+END
+
+-- NULLIF(expr1, expr2)
+CASE 
+  WHEN expr1 = expr2 THEN NULL
+  ELSE expr1 
+END 
+
+-- COALESCE(expr1, expr2, expr3)
+CASE 
+  WHEN expr1 IS NOT NULL THEN expr1 
+  WHEN expr2 IS NOT NULL THEN expr2
+  WHEN expr3 IS NOT NULL THEN expr3
+  ELSE NULL
+END
+```
+  {{< /alert >}}
+  
+- 值类型转换
+  - `CAST(expr AS type)`：type 详见 [](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)
+    - CHAR/SIGNED/FLOAT/DOUBLE/DATE/DATETIME
+
+#### 练习
+
+```sql
+SELECT IFNULL(1/0, 'yes'), IFNULL(1/1, 'yes'), IFNULL(NULL, NULL);
+SELECT COALESCE(NULL, 1), COALESCE(NULL, NULL, NULL), COALESCE(NULL, NULL, NULL, 'Unknown');
+
+SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
+
+SELECT CAST(3.1415 AS SIGNED);
+
+CASE WHEN NULL IS NOT NULL THEN NULL ELSE NULL END
+```
 
 ## 数据库备份
 
