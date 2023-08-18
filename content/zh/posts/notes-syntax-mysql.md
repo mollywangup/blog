@@ -532,51 +532,62 @@ CASE 运算符支持多条件，语法如下：
 - `CASE WHEN condition THEN expr1 ELSE expr2 END`
 - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`
 
-#### 列表
+#### IF
 
-- `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
-- `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
-  ```sql
-  -- IFNULL(expr1, expr2)
-  CASE 
-    WHEN expr1 IS NOT NULL THEN expr1 
-    ELSE expr2
-  END
-  ```
-- `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
-  ```sql
-  -- NULLIF(expr1, expr2)
-  CASE 
-    WHEN expr1 = expr2 THEN NULL
-    ELSE expr1 
-  END  
-  ```
-- `COALESCE(expr1, expr2, expr3, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
-  ```sql
-  -- COALESCE(expr1, expr2, expr3)
-  CASE 
-    WHEN expr1 IS NOT NULL THEN expr1 
-    WHEN expr2 IS NOT NULL THEN expr2
-    WHEN expr3 IS NOT NULL THEN expr3
-    ELSE NULL
-  END
-  ```
+`IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
 
-  {{< alert theme="warning" >}}
+#### IFNULL
+
+`IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
+
+```sql
+-- IFNULL(expr1, expr2)
+CASE 
+  WHEN expr1 IS NOT NULL THEN expr1 
+  ELSE expr2
+END
+
+-- try
+SELECT IFNULL(1/0, 'yes'), IFNULL(1/1, 'yes'), IFNULL(NULL, NULL);
+```
+
+#### NULLIF
+
+`NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
+
+```sql
+-- NULLIF(expr1, expr2)
+CASE 
+  WHEN expr1 = expr2 THEN NULL
+  ELSE expr1 
+END  
+```
+
+#### COALESCE
+
+`COALESCE(expr1, expr2, expr3, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
+
+```sql
+-- COALESCE(expr1, expr2, expr3)
+CASE 
+  WHEN expr1 IS NOT NULL THEN expr1 
+  WHEN expr2 IS NOT NULL THEN expr2
+  WHEN expr3 IS NOT NULL THEN expr3
+  ELSE NULL
+END
+```
+
+```sql
+SELECT COALESCE(NULL, 1), COALESCE(NULL, NULL, NULL), COALESCE(NULL, NULL, NULL, 'Unknown');
+SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
+```
+
+{{< alert theme="warning" >}}
 👏 `COALESCE()` 很巧妙很好用，以下两个表达式具有相同的作用：
 - COALESCE(expr1, expr2, expr3) 
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
-```
-  {{< /alert >}}
+{{< /alert >}}
 
-#### 练习
-
-```sql
-SELECT IFNULL(1/0, 'yes'), IFNULL(1/1, 'yes'), IFNULL(NULL, NULL);
-SELECT COALESCE(NULL, 1), COALESCE(NULL, NULL, NULL), COALESCE(NULL, NULL, NULL, 'Unknown');
-
-SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
-```
 
 ### 其他函数
 
