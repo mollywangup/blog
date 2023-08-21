@@ -37,7 +37,7 @@ categories:
 
 ## 监督学习
 
-训练集中**包含标签**，则属于监督学习，即 `(features, labels) -> model`.
+训练集中**包含标签**，则属于监督学习，即 `(features, targets) -> model`.
 
 监督学习分类及常见模型如下：
 
@@ -53,13 +53,12 @@ categories:
 #### 线性回归模型
 
 {{< boxmd >}}
-y = wx + b
-{{< /boxmd >}}
+f<sub>w,b</sub>(x) = wx + b
 
-其中：
+共包含两个参数（parameters）：
 - w: weight，即权重；
 - b: bias，即偏差；
-
+{{< /boxmd >}}
 
 ### 分类
 
@@ -92,6 +91,14 @@ y = wx + b
 ### 降维
 
 - PCA：主成分分析；
+
+
+## 成本函数
+
+Cost function
+
+
+
 
 
 效果评估
