@@ -26,7 +26,7 @@ categories:
 
 ## 机器学习分类
 
-机器学习解决的是：给定训练集 -> 生成训练模型 -> 根据训练模型进行预测。
+机器学习解决的是：给定训练集 -> 生成最佳拟合模型 -> 根据拟合模型进行预测。
 
 根据训练集中是否包含标签，可分为以下四类（本文仅涉及前两类）：
 
@@ -54,11 +54,11 @@ categories:
 
 {{< boxmd >}}
 f<sub>w,b</sub>(x) = wx + b
+{{< /boxmd >}}
 
 共包含两个参数（parameters）：
-- w: weight，即权重；
+- w: weight，即权重，也是斜率（slope）；
 - b: bias，即偏差；
-{{< /boxmd >}}
 
 ### 分类
 
@@ -97,8 +97,22 @@ f<sub>w,b</sub>(x) = wx + b
 
 Cost function
 
+成本函数 $J$ 通常用于评估模型的性能。
 
+用于衡量**拟合程度**，通过预测值与实际值之间的差异：
 
+Squared error cost function:
+
+$$
+J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (\hat y^{(i)} - y^{(i)})^2 
+$$
+即
+$$ 
+J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 
+$$
+
+其中 `m` 为训练集中训练示例数量。
+注意：除以 `2m` 而不是 ~~`m`~~
 
 
 效果评估
