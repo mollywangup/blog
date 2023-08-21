@@ -52,6 +52,9 @@ categories:
 
 #### 线性回归模型
 
+{{< boxmd >}}
+y = wx + b
+{{< /boxmd >}}
 
 其中：
 - w: weight，即权重；
