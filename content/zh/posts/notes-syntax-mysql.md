@@ -386,7 +386,7 @@ SELECT host, user, authentication_string, plugin FROM user;
 
 官方手册见 [Numeric Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html)
 
-<br>保留小数：
+保留小数：
 - `ROUND(x, decimals)`：四舍五入
 - `TRUNCATE(x, decimals)`：直接截取
 - `CEILING(x)`：向上取整，即 MIN({>=number})
@@ -412,7 +412,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 官方手册见 [String Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
 
-<br>常用：
+常用：
 - `LENGTH(str)`：求长度
 - `UPPER(str)`：转大写
 - `LOWER(str)`：转小写
@@ -454,7 +454,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 
 官方手册见 [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
 
-<br>获取当前日期时间：
+获取当前日期时间：
 - `NOW()`：返回当前日期和时间
 - `CURDATE()`：返回当前日期
   - or `CURRENT_DATE()`
