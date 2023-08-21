@@ -10,7 +10,7 @@ tocPosition: inner
 tags:
 - Machine Learning
 categories:
-- 
+- Notes
 ---
 
 ✍ 持续更新 ing

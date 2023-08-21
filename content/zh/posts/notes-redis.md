@@ -11,6 +11,7 @@ tags:
 - Redis
 categories:
 - DB
+- Notes
 ---
 
 ✍ 本文作为学习笔记。
