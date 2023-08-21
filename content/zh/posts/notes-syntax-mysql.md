@@ -10,7 +10,6 @@ tocPosition: inner
 tags:
 - MySQL
 - SQL
-- OLTP
 categories:
 - DB
 ---
@@ -255,7 +254,7 @@ LIMIT some_value
 
 ### 表连接
 
-共两种连接方式，左右连接 `JOIN`、上下连接 `UNION`.
+共包含 `JOIN`（左右连接）、`UNION`（上下连接）两种连接方式。
 
 #### JOIN
 
@@ -266,7 +265,6 @@ LIMIT some_value
 FROM table_1 t1
 type_of_join table_2 t2
   ON t2.key = t1.key
-  -- USING (key)
 
 -- 方式二                             implicit join
 FROM table_1 t1, table_2 t2
@@ -279,6 +277,13 @@ WHERE t2.key = t1.key
 - RIGHT JOIN
 - FULL JOIN
 - CROSS JOIN（笛卡尔连接，交叉连接）
+
+{{< alert theme="info" >}}
+💡 显示连接中，当连接的两张表的**所有 key** 完全一致时，使用 `USING` 相较于 `ON` 更为简洁。
+即以下两个表达式具有相同的作用：
+- `ON t2.key1 = t1.key1 AND t2.key2 = t1.key2`
+- `USING (key1, key2)`
+{{< /alert >}}
 
 #### UNION
 
