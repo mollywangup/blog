@@ -1,5 +1,5 @@
 ---
-title: "MySQL 基本语法"
+title: "学习笔记：MySQL"
 date: 2021-01-28T06:48:47Z
 draft: false
 description: 用户及权限管理，常用数据库和数据表操作，窗口函数，表连接等。
@@ -21,6 +21,7 @@ categories:
 ### 安装
 
 ```shell
+# macOS
 brew install mysql
 ```
 
