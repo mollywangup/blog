@@ -296,15 +296,21 @@ FROM table_2;
 
 ### 分组聚合
 
+#### GROUP BY
+
 ```sql
--- 普通聚合
 SELECT
   col_1,
   agg_function(col_2)
 FROM table
 GROUP BY col_1;
+```
 
--- 包含小计和总计的聚合                   ROLLUP
+#### ROLLUP
+
+`ROLLUP` 用于在分组聚合时，包含小计和总计。
+
+```sql
 SELECT
   col_1,
   col_2,
@@ -354,12 +360,12 @@ SELECT * FROM cte;
 
 ### 高级查询
 
-#### 查看Host
+#### 查看 Host
 ```sql
 SELECT SUBSTRING_INDEX(host,':',1) AS ip , COUNT(*) FROM information_schema.processlist GROUP BY ip;
 ```
 
-#### 查看Port
+#### 查看 Port
 
 ```sql
 SHOW VARIABLES WHERE Variable_name = 'port';
@@ -448,28 +454,28 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 
 官方手册见 [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
 
-- 获取当前日期时间
-  - `NOW()`：返回当前日期和时间
-  - `CURDATE()`：返回当前日期
-    - or `CURRENT_DATE()`
-  - `CURTIME()`：返回当前时间
-    - or `CURRENT_TIME()`
+获取当前日期时间：
+- `NOW()`：返回当前日期和时间
+- `CURDATE()`：返回当前日期
+  - or `CURRENT_DATE()`
+- `CURTIME()`：返回当前时间
+  - or `CURRENT_TIME()`
 
-- 提取年月日时分秒
-   - `EXTRACT(unit FROM date)`：通用的提取函数。详见 [unit](https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals)
-   - `YEAR(date)`：年份
-   - `QUARTER(date)`：季度
-   - `MONTH(date)`：月份
-   - `DAY(date)`：该月份的天数
-   - `HOUR(time)`：小时数
-   - `MINUTE(time)`：分钟数
-   - `SECOND(time)`：秒数
-   - `MONTHNAME(date)`：字符串格式的月份，如 August
-   - `DAYNAME(date)`：字符串格式的星期数，如 Thursday
+提取年月日时分秒：
+ - `EXTRACT(unit FROM date)`：通用的提取函数（建议）。详见 [unit](https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals)
+ - `YEAR(date)`：年份
+ - `QUARTER(date)`：季度
+ - `MONTH(date)`：月份
+ - `DAY(date)`：该月份的天数
+ - `HOUR(time)`：小时数
+ - `MINUTE(time)`：分钟数
+ - `SECOND(time)`：秒数
+ - `MONTHNAME(date)`：字符串格式的月份，如 August
+ - `DAYNAME(date)`：字符串格式的星期数，如 Thursday
 
-- 格式化
-   - `DATE_FORMAT(date, format)`：详见 [format](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
-   - `CONVERT_TZ(dt, from_tz, to_tz)`：转时区
+<br>格式化：
+- `DATE_FORMAT(date, format)`：详见 [format](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
+- `CONVERT_TZ(dt, from_tz, to_tz)`：转时区
 
 - 日期运算
    - `DATE_ADD(date, INTERVAL expr unit)`：unit 同 EXTRACT() 函数
