@@ -44,14 +44,14 @@ mysqladmin -u root -p password <password>
 
 ### 连接数据库
 
-#### 命令行方式
+方式一：命令行方式
 
 ```shell
-ssh <sshuser>@<sshhost>              # optional
+ssh <sshuser>@<sshhost>                   # optional
 mysql -h <host> -P <port> -u <username> -p
 ```
 
-#### URI 方式
+方式二：URI 方式
 
 ```plaintext
 mysql://<username>:<password>@<host>:<port>/<database_name>
@@ -59,9 +59,9 @@ mysql://<username>:<password>@<host>:<port>/<database_name>
 
 ### 权限管理
 
-#### 新增用户
+以下以用户`wangli`为例。
 
-以下以用户`wangli`为例：
+#### 新增用户
 
 ```sql
 CREATE USER 'wangli'@'%' IDENTIFIED WITH mysql_native_password BY '12345678';
@@ -108,9 +108,23 @@ SHOW DATABASES;
 USE <database_name>;
 ```
 
-## 数据表
+### 备份与恢复
 
-### CURD
+#### 备份
+
+```shell
+mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /path/xxx.sql
+```
+
+#### 恢复
+
+```shell
+# 如果是.zip格式需先解压，解压后后缀为.sql
+# 恢复整个数据库
+mysql -uroot -p<password> <database_name> < /path/xxx.sql
+```
+
+## 数据表
 
 ### 创建数据表
 
@@ -139,12 +153,15 @@ CREATE TABLE IF NOT EXISTS `table_name`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
+### 删除数据表
 
 ```sql
--- 删除数据表
 DROP TABLE <table_name>;
+```
 
--- 显示数据表
+### 显示数据表
+
+```sql
 SHOW TABLES;
 ```
 
@@ -194,7 +211,7 @@ UPDATE <table_name> SET minute_x = (SELECT TIMESTAMPDIFF(MINUTE, first_open_time
 UPDATE <table_name> SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERVAL -8 hour));
 ```
 
-## 查询操作
+## 查询
 
 ### 查询结构
 
@@ -231,7 +248,11 @@ LIMIT some_value
 
 ### 表连接
 
+共两种连接方式，左右连接 `JOIN`、上下连接 `UNION`.
+
 #### JOIN
+
+可显示连接，也可隐式连接。前者更灵活。
 
 ```sql
 -- 方式一                             explicit join
@@ -266,7 +287,7 @@ SELECT
 FROM table_2;
 ```
 
-### 聚合
+### 分组聚合
 
 ```sql
 -- 普通聚合
@@ -332,8 +353,6 @@ SELECT * FROM cte;
 
 官方手册见 [Numeric Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html)
 
-#### 常用
-
 - 保留小数
    - `ROUND(x, decimals)`：四舍五入
    - `TRUNCATE(x, decimals)`：直接截取
@@ -347,12 +366,14 @@ SELECT * FROM cte;
    - `SQRT(x)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-#### 练习
+{{< expand "练习一下">}}
 
 ```sql
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
 SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 ```
+
+{{< /expand >}}
 
 ### 字符串函数
 
@@ -386,7 +407,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
     - or `POSITION(substr IN str)`
   - `REVERSE(str)`：反转字符串
 
-#### 练习
+{{< expand "练习一下">}}
 
 ```sql
 SELECT CONCAT('first_name', ' ', 'last_name');
@@ -396,11 +417,11 @@ SELECT LPAD('molly', 10, '_'), RPAD('molly', 10, '_');
 SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 ```
 
+{{< /expand >}}
+
 ### 日期函数
 
 官方手册见 [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
-
-#### 常用
 
 - 获取当前日期时间
   - `NOW()`：返回当前日期和时间
@@ -433,7 +454,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 ⚠️ 注意，这里不同 DBMS 相差较大
     {{< /alert >}}
 
-#### 练习
+{{< expand "练习一下">}}
 
 ```sql
 SELECT NOW(), CURDATE(), CURRENT_DATE(), CURTIME(), CURRENT_TIME();
@@ -445,6 +466,7 @@ SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(NOW(), '%W %M %d %Y 
 SELECT DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_SUB(NOW(), INTERVAL -1 DAY);
 SELECT DATEDIFF('2017-01-01', '2016-12-24');
 ```
+{{< /expand >}}
 
 ### 聚合函数
 
@@ -485,7 +507,7 @@ FROM sales
 WINDOW w AS (PARTITION BY country);
 ```
 
-#### 常用
+共分为以下三类：
 
 1. 聚合函数：上述 聚合函数 中的都适用；
 
@@ -534,7 +556,7 @@ CASE 属于运算符，支持多条件，语法如下：
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
   {{< /alert >}}
 
-使用 `CASE` 解释三个异常值处理函数 `IFNULL()/NULLIF()/COALESCE()`：
+{{< expand "使用 `CASE` 解释三个异常值处理函数 `IFNULL()/NULLIF()/COALESCE()`" >}}
 
 ```sql
 -- IFNULL(expr1, expr2)
@@ -558,6 +580,8 @@ CASE
 END
 ```
 
+{{< /expand >}}
+
 #### 练习
 
 ```sql
@@ -577,22 +601,6 @@ SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
 
 ```sql
 SELECT CAST(3.1415 AS SIGNED);
-```
-
-## 数据库备份
-
-### 备份
-
-```shell
-mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /path/xxx.sql
-```
-
-### 恢复
-
-```shell
-# 如果是.zip格式需先解压，解压后后缀为.sql
-# 恢复整个数据库
-mysql -uroot -p<password> <database_name> < /path/xxx.sql
 ```
 
 ## 其他
