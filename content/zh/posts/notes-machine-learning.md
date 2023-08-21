@@ -11,6 +11,8 @@ tags:
 - Machine Learning
 categories:
 - Notes
+libraries:
+- mathjax
 ---
 
 ✍ 持续更新 ing
