@@ -27,7 +27,7 @@ brew install mysql
 
 ### 首次登录
 
-方式一：先登录再设置密码
+#### 方式一：先登录后设置密码
 
 ```shell
 mysql -u root
@@ -36,7 +36,7 @@ mysql -u root
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <password>;
 ```
 
-方式二：登录并设置密码
+#### 方式二：直接登录并设置密码
 
 ```shell
 mysqladmin -u root -p password <password>
@@ -44,14 +44,14 @@ mysqladmin -u root -p password <password>
 
 ### 连接数据库
 
-方式一：命令行方式
+#### 命令行方式
 
 ```shell
 ssh <sshuser>@<sshhost>                   # optional
 mysql -h <host> -P <port> -u <username> -p
 ```
 
-方式二：URI 方式
+#### URI 方式
 
 ```plaintext
 mysql://<username>:<password>@<host>:<port>/<database_name>
@@ -92,19 +92,26 @@ FLUSH PRIVILEGES;
 
 ## 数据库
 
-### CURD
+### 创建数据库
 
 ```sql
--- 创建数据库
 CREATE DATABASE <database_name>;
+```
 
--- 删除数据库
+### 删除数据库
+
+```sql
 DROP DATABASE <database_name>;
+```
 
--- 显示数据库
+### 显示数据库
+
+```sql
 SHOW DATABASES;
+```
 
--- 切换数据库
+### 切换数据库
+```sql
 USE <database_name>;
 ```
 
@@ -343,6 +350,26 @@ WITH cte AS (
 )
 
 SELECT * FROM cte;
+```
+
+### 高级查询
+
+#### 查看Host
+```sql
+SELECT SUBSTRING_INDEX(host,':',1) AS ip , COUNT(*) FROM information_schema.processlist GROUP BY ip;
+```
+
+#### 查看Port
+
+```sql
+SHOW VARIABLES WHERE Variable_name = 'port';
+```
+
+#### 查看用户
+
+```sql
+USE mysql;
+SELECT host, user, authentication_string, plugin FROM user;
 ```
 
 ## 函数
@@ -597,23 +624,3 @@ SELECT CAST(3.1415 AS SIGNED);
 ```
 
 {{< /expand >}}
-
-## 其他
-
-### 查看Host
-```sql
-SELECT SUBSTRING_INDEX(host,':',1) AS ip , COUNT(*) FROM information_schema.processlist GROUP BY ip;
-```
-
-### 查看Port
-
-```sql
-SHOW VARIABLES WHERE Variable_name = 'port';
-```
-
-### 查看用户
-
-```sql
-USE mysql;
-SELECT host, user, authentication_string, plugin FROM user;
-```
