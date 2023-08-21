@@ -366,7 +366,7 @@ SELECT * FROM cte;
    - `SQRT(x)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-{{< 👇 expand "练习一下">}}
+{{< '👇' expand "练习一下">}}
 
 ```sql
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
@@ -405,7 +405,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
     - or `POSITION(substr IN str)`
   - `REVERSE(str)`：反转字符串
 
-{{< 👇 expand "练习一下">}}
+{{< '👇' expand "练习一下">}}
 
 ```sql
 SELECT CONCAT('first_name', ' ', 'last_name');
@@ -452,7 +452,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 ⚠️ 注意，这里不同 DBMS 相差较大
     {{< /alert >}}
 
-{{< 👇 expand "练习一下">}}
+{{< '👇' expand "练习一下">}}
 
 ```sql
 SELECT NOW(), CURDATE(), CURRENT_DATE(), CURTIME(), CURRENT_TIME();
@@ -549,7 +549,7 @@ WINDOW w AS (PARTITION BY country);
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
   {{< /alert >}}
 
-{{< expand "💡 使用 CASE 解释三个异常值处理函数 IFNULL()/NULLIF()/COALESCE()" >}}
+{{< expand "'💡' 使用 CASE 解释三个异常值处理函数 IFNULL()/NULLIF()/COALESCE()" >}}
 
 ```sql
 -- IFNULL(expr1, expr2)
@@ -575,7 +575,7 @@ END
 
 {{< /expand >}}
 
-{{< 👇 expand "练习一下">}}
+{{< '👇' expand "练习一下">}}
 
 ```sql
 SELECT IFNULL(1/0, 'yes'), IFNULL(1/1, 'yes'), IFNULL(NULL, NULL);
@@ -590,7 +590,7 @@ SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
 
 - `CAST(expr AS type)`：值类型转换，详见 [type](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)，如 CHAR/SIGNED/FLOAT/DOUBLE/DATE/DATETIME
 
-{{< 👇 expand "练习一下">}}
+{{< '👇' expand "练习一下">}}
 
 ```sql
 SELECT CAST(3.1415 AS SIGNED);
