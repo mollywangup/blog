@@ -2,7 +2,7 @@
 title: "MySQL 基本语法"
 date: 2021-01-28T06:48:47Z
 draft: false
-description: CURD, 用户及权限管理，常用数据库和数据表操作等。
+description: 用户及权限管理，常用数据库和数据表操作，窗口函数，表连接等。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -17,53 +17,49 @@ categories:
 
 ✍ 本文作为学习笔记。
 
-## 初始化
+## 安装及配置
 
-### 首次仅登录
+### 安装
 
 ```shell
-mysql -uroot
+brew install mysql
 ```
 
-### 首次登录并设置密码
+### 首次登录
+
+方式一：先登录再设置密码
+
+```shell
+mysql -u root
+```
+```sql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <password>;
+```
+
+方式二：登录并设置密码
 
 ```shell
 mysqladmin -u root -p password <password>
 ```
 
-### 设置/修改密码
+### 连接数据库
 
-```sql
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <password>;
-```
-
-### 数据库连接
-
-#### 普通登录
+#### 命令行方式
 
 ```shell
-mysql -u root  -p
-mysql -h <host> -P <port> -u <username> -p 
+ssh <sshuser>@<sshhost>              # optional
+mysql -h <host> -P <port> -u <username> -p
 ```
 
-#### SSH登录
+#### URI 方式
 
-和普通登录一个道理，只是需要提前登录SSH;
-
-```shell
-ssh <sshuser>@<sshhost>
-mysql -h <host> -u <username> -p
-```
-
-#### URI连接
-
-```
+```plaintext
 mysql://<username>:<password>@<host>:<port>/<database_name>
 ```
 
-## 权限管理
+### 权限管理
 
-### 新增用户
+#### 新增用户
 
 以下以用户`wangli`为例：
 
@@ -71,14 +67,14 @@ mysql://<username>:<password>@<host>:<port>/<database_name>
 CREATE USER 'wangli'@'%' IDENTIFIED WITH mysql_native_password BY '12345678';
 ```
 
-### 查看权限
+#### 查看权限
 
 ```sql
 SHOW GRANTS FOR root@localhost;
 SHOW GRANTS FOR admin;
 ```
 
-### 修改权限
+#### 修改权限
 
 ```sql
 -- 授权所有权限
@@ -94,30 +90,27 @@ GRANT ALL PRIVILEGES ON <database_name>.* TO 'admin'@'%';
 FLUSH PRIVILEGES;
 ```
 
-## 数据库操作
+## 数据库
 
-### 创建数据库
+### CURD
 
 ```sql
+-- 创建数据库
 CREATE DATABASE <database_name>;
-```
 
-### 删除数据库
-```sql
+-- 删除数据库
 DROP DATABASE <database_name>;
-```
 
-### 显示数据库
-```sql
+-- 显示数据库
 SHOW DATABASES;
-```
 
-### 切换数据库
-```sql
+-- 切换数据库
 USE <database_name>;
 ```
 
-## 数据表操作
+## 数据表
+
+### CURD
 
 ### 创建数据表
 
@@ -146,15 +139,12 @@ CREATE TABLE IF NOT EXISTS `table_name`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-### 删除数据表
 
 ```sql
+-- 删除数据表
 DROP TABLE <table_name>;
-```
 
-### 显示数据表
-
-```sql
+-- 显示数据表
 SHOW TABLES;
 ```
 
@@ -342,7 +332,7 @@ SELECT * FROM cte;
 
 官方手册见 [Numeric Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html)
 
-#### 概况
+#### 常用
 
 - 保留小数
    - `ROUND(x, decimals)`：四舍五入
@@ -368,9 +358,9 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 官方手册见 [String Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
 
-#### 概况
+#### 常用
 
-- 常用
+- 高频
   - `LENGTH(str)`：求长度
   - `UPPER(str)`：转大写
   - `LOWER(str)`：转小写
@@ -410,7 +400,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 
 官方手册见 [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
 
-#### 概况
+#### 常用
 
 - 获取当前日期时间
   - `NOW()`：返回当前日期和时间
@@ -495,7 +485,7 @@ FROM sales
 WINDOW w AS (PARTITION BY country);
 ```
 
-#### 概况
+#### 常用
 
 1. 聚合函数：上述 聚合函数 中的都适用；
 
@@ -532,7 +522,7 @@ CASE 属于运算符，支持多条件，语法如下：
 - `CASE WHEN condition THEN expr1 ELSE expr2 END`
 - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`
 
-#### 概况
+#### 常用
 
 - `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
 - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
@@ -579,7 +569,7 @@ SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
 
 ### 其他函数
 
-#### 概况
+#### 常用
 
 - `CAST(expr AS type)`：值类型转换，详见 [type](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)，如 CHAR/SIGNED/FLOAT/DOUBLE/DATE/DATETIME
 
