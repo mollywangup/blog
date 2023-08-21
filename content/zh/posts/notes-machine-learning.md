@@ -17,28 +17,16 @@ categories:
 
 统一口径：
 
-- `features`: 指输入值，常称作特征值；$ (x^{(1i)}, x^{(2i)}, ..., x^{(mi)}) $
+- `features`: 指输入值，常称作特征值；
 - `labels`: 指输出值，可以是实际值，也可以是预测值；
-  - `targets`: 指实际输出值；$ y^{(i)} $
-  - `predictions`: 指预测输出值；$ \hat y^{(i)} $
+  - `targets`: 指实际输出值；
+  - `predictions`: 指预测输出值；
 - `Training set`: 训练集，指用于训练模型的数据集；
 - `Single training example`: 训练示例，指训练集中的一组数据；
 
 ## 机器学习分类
 
-机器学习解决的是：给定训练集 -> 生成训练模型 -> 根据训练模型进行预测。其中：
-
-<!-- [math syntax](https://medium.com/analytics-vidhya/writing-math-equations-in-jupyter-notebook-a-naive-introduction-a5ce87b9a214) -->
-
-训练集形如：
-  <!-- - 监督学习：$ (x_{1i}, x_{2i}, ..., x_{mi}, y^{(i)}) $
-  - 无监督学习：$ (x_{1i}, x_{2i}, ..., x_{mi}) $ -->
-  - 监督学习：$ ((x^{(1i)}, x^{(2i)}, ..., x^{(mi)}), (y^{(i)})) $ 或者 $ (x^{(i)}, y^{(i)}) $
-  - 无监督学习：$ (x^{(1i)}, x^{(2i)}, ..., x^{(mi)}) $ 或者 $ (x^{(i)}) $
-
-模型结果形如：
-
-$$ \hat y = f(x_{1}, x_{2}, ..., x_{m}) $$
+机器学习解决的是：给定训练集 -> 生成训练模型 -> 根据训练模型进行预测。
 
 根据训练集中是否包含标签，可分为以下四类（本文仅涉及前两类）：
 
@@ -64,7 +52,6 @@ $$ \hat y = f(x_{1}, x_{2}, ..., x_{m}) $$
 
 #### 线性回归模型
 
-$$ f_{w, b}(x) = wx + b $$ or $$ f(x) = wx + b $$
 
 其中：
 - w: weight，即权重；
@@ -83,7 +70,15 @@ $$ f_{w, b}(x) = wx + b $$ or $$ f(x) = wx + b $$
 
 训练集中**不包含标签**，则属于无监督学习，即 `(features) -> model`.
 
-### 聚类（Clustering）
+无监督学习分类及常见模型如下：
+
+- 聚类（Clustering）
+  - K-means
+  - DBSCAN
+- 降维（Dimensionality reduction）
+  - PCA
+
+### 聚类
 
 - K-means：将 n 个点分为 k 个簇，使得簇内具有较高的相似度，簇间具有较低的相似度；（欧氏距离）
 - DBSCAN（密度聚类）：将 n 个点分为三类，然后删除噪音点；（曼哈顿距离）
@@ -91,7 +86,7 @@ $$ f_{w, b}(x) = wx + b $$ or $$ f(x) = wx + b $$
   - 边界点：在半径 eps 内的点的个数不超过 min_samples，但落在核心点的邻域内；
   - 噪音点：既不是核心点，也不是边界点；
 
-### 降维（Dimensionality reduction）
+### 降维
 
 - PCA：主成分分析；
 
