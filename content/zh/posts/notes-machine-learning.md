@@ -17,13 +17,28 @@ categories:
 
 统一口径：
 
-- 特征（features）：指输入值；
-- 标签（labels）：指输出值，可以是实际输出值，也可以是预测输出值；
-- 训练集（training set）：指参与模型训练的数据集；
+- features: 指输入值，常称作特征值；$ (x^{(1i)}, x^{(2i)}, ..., x^{(mi)}) $
+- labels: 指输出值，可以是实际值，也可以是预测值；
+  - targets: 指实际输出值；$ y^{(i)} $
+  - predictions: 指预测输出值；$ \hat y^{(i)} $
+- Training set: 训练集，指用于训练模型的数据集；
+- Single training example: 训练示例，指训练集中的一组数据；
 
 ## 机器学习分类
 
-机器学习解决的是：给定训练集 -> 生成训练模型 -> 根据训练模型预测，即 training set -> model -> predict
+机器学习解决的是：给定训练集 -> 生成训练模型 -> 根据训练模型进行预测。其中：
+
+<!-- [math syntax](https://medium.com/analytics-vidhya/writing-math-equations-in-jupyter-notebook-a-naive-introduction-a5ce87b9a214) -->
+
+训练集形如：
+  <!-- - 监督学习：$ (x_{1i}, x_{2i}, ..., x_{mi}, y^{(i)}) $
+  - 无监督学习：$ (x_{1i}, x_{2i}, ..., x_{mi}) $ -->
+  - 监督学习：$ ((x^{(1i)}, x^{(2i)}, ..., x^{(mi)}), (y^{(i)})) $ 或者 $ (x^{(i)}, y^{(i)}) $
+  - 无监督学习：$ (x^{(1i)}, x^{(2i)}, ..., x^{(mi)}) $ 或者 $ (x^{(i)}) $
+
+模型结果形如：
+
+$$ \hat y = f(x_{1}, x_{2}, ..., x_{m}) $$
 
 根据训练集中是否包含标签，可分为以下四类（本文仅涉及前两类）：
 
@@ -36,19 +51,29 @@ categories:
 
 训练集中**包含标签**，则属于监督学习，即 `(features, labels) -> model`.
 
-按照标签的数据类型，监督学习任务可分为以下两类：
+监督学习分类及常见模型如下：
 
-- 回归（Regression）：连续值；
-- 分类（Classification）：离散值；
+- 回归（Regression）：
+  - 线性回归（Linear Regression）
+  - 
+- 分类（Classification）：
 
 ### 回归
 
-标签是连续值。
+回归问题的输出值都是**连续型变量**。
+
+#### 线性回归模型
+
+$$ f_{w, b}(x) = wx + b $$ or $$ f(x) = wx + b $$
+
+其中：
+- w: weight，即权重；
+- b: bias，即偏差；
 
 
 ### 分类
 
-标签是离散值。
+分类问题的输出值都是**离散型变量**。
 
 - KNN (K-Nearest Neighbors)：K近邻算法；
 - 决策树：
