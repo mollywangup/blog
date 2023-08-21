@@ -366,7 +366,7 @@ SELECT * FROM cte;
    - `SQRT(x)`：求平方根
    - `POWER(x, y)`：求 x 的 y 幂次方
 
-{{< expand "练习一下">}}
+{{< 👇 expand "练习一下">}}
 
 ```sql
 SELECT ROUND(3.1456, 2), TRUNCATE(3.1456, 2), CEILING(3.1456), FLOOR(3.1456);
@@ -379,9 +379,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 
 官方手册见 [String Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
 
-#### 常用
-
-- 高频
+- 常用
   - `LENGTH(str)`：求长度
   - `UPPER(str)`：转大写
   - `LOWER(str)`：转小写
@@ -407,7 +405,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
     - or `POSITION(substr IN str)`
   - `REVERSE(str)`：反转字符串
 
-{{< expand "练习一下">}}
+{{< 👇 expand "练习一下">}}
 
 ```sql
 SELECT CONCAT('first_name', ' ', 'last_name');
@@ -454,7 +452,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 ⚠️ 注意，这里不同 DBMS 相差较大
     {{< /alert >}}
 
-{{< expand "练习一下">}}
+{{< 👇 expand "练习一下">}}
 
 ```sql
 SELECT NOW(), CURDATE(), CURRENT_DATE(), CURTIME(), CURRENT_TIME();
@@ -507,7 +505,7 @@ FROM sales
 WINDOW w AS (PARTITION BY country);
 ```
 
-共分为以下三类：
+<br>窗口函数可分为以下三类：
 
 1. 聚合函数：上述 聚合函数 中的都适用；
 
@@ -528,9 +526,7 @@ WINDOW w AS (PARTITION BY country);
    - `LAG(col, n, defaut)`：取向**前**偏移 n 行的值，若不存在则取 defaut
    - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
 
-#### 练习
-
-带图理解【宝藏】：
+<br>【宝藏】带图理解：
 - [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
 - [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
 - [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
@@ -539,13 +535,10 @@ WINDOW w AS (PARTITION BY country);
 
 官方手册见 [Flow Control Functions](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) 和 [Comparison Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)
 
-CASE 属于运算符，支持多条件，语法如下：
+说明：CASE 属于运算符且支持多条件，其余为函数。
 
 - `CASE WHEN condition THEN expr1 ELSE expr2 END`
 - `CASE value WHEN compare_value THEN expr1 ELSE expr2 END`
-
-#### 常用
-
 - `IF(condition, expr1, expr2)`：如果条件为真，则返回 expr1，否则返回 expr2
 - `IFNULL(expr1, expr2)`：如果 expr1 不为 null 则返回 expr1，否则返回 expr2
 - `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
@@ -556,7 +549,7 @@ CASE 属于运算符，支持多条件，语法如下：
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
   {{< /alert >}}
 
-{{< expand "使用 `CASE` 解释三个异常值处理函数 `IFNULL()/NULLIF()/COALESCE()`" >}}
+{{< expand "💡 使用 CASE 解释三个异常值处理函数 IFNULL()/NULLIF()/COALESCE()" >}}
 
 ```sql
 -- IFNULL(expr1, expr2)
@@ -582,7 +575,7 @@ END
 
 {{< /expand >}}
 
-#### 练习
+{{< 👇 expand "练习一下">}}
 
 ```sql
 SELECT IFNULL(1/0, 'yes'), IFNULL(1/1, 'yes'), IFNULL(NULL, NULL);
@@ -591,17 +584,19 @@ SELECT COALESCE(NULL, 1), COALESCE(NULL, NULL, NULL), COALESCE(NULL, NULL, NULL,
 SELECT COALESCE(1/0, 2/0, 3/1), IFNULL(1/0, IFNULL(2/0, IFNULL(3/1, NULL)));
 ```
 
-### 其他函数
+{{< /expand >}}
 
-#### 常用
+### 其他函数
 
 - `CAST(expr AS type)`：值类型转换，详见 [type](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)，如 CHAR/SIGNED/FLOAT/DOUBLE/DATE/DATETIME
 
-#### 练习
+{{< 👇 expand "练习一下">}}
 
 ```sql
 SELECT CAST(3.1415 AS SIGNED);
 ```
+
+{{< /expand >}}
 
 ## 其他
 
