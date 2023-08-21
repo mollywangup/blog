@@ -25,6 +25,7 @@ libraries:
   - `predictions`: 指预测输出值；
 - `Training set`: 训练集，指用于训练模型的数据集；
 - `Single training example`: 训练示例，指训练集中的一组数据；
+- `parameters`：指模型参数，调整模型的本质是调整模型参数；
 
 ## 机器学习分类
 
@@ -54,13 +55,15 @@ libraries:
 
 #### 线性回归模型
 
-{{< boxmd >}}
-f<sub>w,b</sub>(x) = wx + b
-{{< /boxmd >}}
+$$ f_{w,b}(x) = wx + b $$
 
-共包含两个参数（parameters）：
+{{< boxmd >}}
+
+共包含两个参数：
 - w: weight，即权重，也是斜率（slope）；
 - b: bias，即偏差；
+
+{{< /boxmd >}}
 
 ### 分类
 
@@ -97,9 +100,7 @@ f<sub>w,b</sub>(x) = wx + b
 
 ## 成本函数
 
-Cost function
-
-成本函数 $J$ 通常用于评估模型的性能。
+成本函数（Cost function）$J$ 通常用于评估模型的性能。
 
 用于衡量**拟合程度**，通过预测值与实际值之间的差异：
 
