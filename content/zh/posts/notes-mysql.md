@@ -28,11 +28,12 @@ brew install mysql
 
 ### 首次登录
 
-#### 方式一：先登录后设置密码
+##### 方式一：先登录后设置密码
 
 ```shell
 mysql -u root
 ```
+
 ```sql
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY <password>;
 ```
@@ -112,6 +113,7 @@ SHOW DATABASES;
 ```
 
 ### 切换数据库
+
 ```sql
 USE <db_name>;
 ```
@@ -224,14 +226,14 @@ UPDATE <table_name> SET `update_time_utc` = (SELECT DATE_ADD(update_time, INTERV
 ### 查询结构
 
 ```sql
--- Select columns                    
+-- Select columns                
 SELECT
     col_1,
     col_2,
      ... ,
     col_n
 
--- Source of data                    
+-- Source of data                
 FROM table t
 
 -- Gather info from other sources    optional
@@ -280,6 +282,7 @@ WHERE t2.key = t1.key
 {{< /alert >}}
 
 其中，常见 `type_of_join` 如下：
+
 - INNER JOIN
 - LEFT JOIN
 - RIGHT JOIN
@@ -338,6 +341,7 @@ GROUP BY
     ()
   )
 ```
+
 {{< /alert >}}
 
 ### CTE
@@ -374,6 +378,7 @@ SELECT * FROM cte;
 ### 其他
 
 #### 查看 Host
+
 ```sql
 SELECT SUBSTRING_INDEX(host,':',1) AS ip , COUNT(*) FROM information_schema.processlist GROUP BY ip;
 ```
@@ -400,12 +405,14 @@ SELECT host, user, authentication_string, plugin FROM user;
 官方手册见 [Numeric Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/numeric-functions.html)
 
 保留小数：
+
 - `ROUND(x, decimals)`：四舍五入
 - `TRUNCATE(x, decimals)`：直接截取
 - `CEILING(x)`：向上取整，即 MIN({>=number})
 - `FLOOR(x)`：向下取整，即 MAX({<=number})
 
 <br>数学运算：
+
 - `MOD(x, y)`：求余
   - or `x MOD y`
   - or `x % y`
@@ -426,6 +433,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 官方手册见 [String Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)
 
 常用：
+
 - `LENGTH(str)`：求长度
 - `UPPER(str)`：转大写
 - `LOWER(str)`：转小写
@@ -433,6 +441,7 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
 - `CONCAT(str1, str2, ...)`：拼接
 
 <br>子串提取：
+
 - `LEFT(str, len)`：自左边取
 - `RIGHT(str, len)`：自右边取
 - `MID(str, pos, len)`：自指定位置取
@@ -440,13 +449,15 @@ SELECT MOD(3, 2), SQRT(16), POWER(8, 2);
   - or `SUBSTRING(str, pos, len)`
 
 <br>左右处理：
-  - `LTRIM(str)`：删左/头部空格
-  - `RTRIM(str)`：删右/尾部空格
-  - `TRIM(str)`：删左右空格
-  - `LPAD(str, len, padstr)`：左填充，以达到指定长度
-  - `RPAD(str, len, padstr)`：右填充，以达到指定长度
+
+- `LTRIM(str)`：删左/头部空格
+- `RTRIM(str)`：删右/尾部空格
+- `TRIM(str)`：删左右空格
+- `LPAD(str, len, padstr)`：左填充，以达到指定长度
+- `RPAD(str, len, padstr)`：右填充，以达到指定长度
 
 <br>其他：
+
 - `LOCATE(substr, str)`：子串第一次出现的位置。不区分大小写
   - or `POSITION(substr IN str)`
 - `REVERSE(str)`：反转字符串
@@ -468,6 +479,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 官方手册见 [Date and Time Functions](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)
 
 获取当前日期时间：
+
 - `NOW()`：返回当前日期和时间
 - `CURDATE()`：返回当前日期
   - or `CURRENT_DATE()`
@@ -475,6 +487,7 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
   - or `CURRENT_TIME()`
 
 <br>提取年月日时分秒：
+
 - `EXTRACT(unit FROM date)`：通用的提取函数（建议）。详见 [unit](https://dev.mysql.com/doc/refman/8.0/en/expressions.html#temporal-intervals)
 - `YEAR(date)`：年份
 - `QUARTER(date)`：季度
@@ -487,16 +500,18 @@ SELECT LOCATE('com', 'google.com'), POSITION("COM" IN 'google.com');
 - `DAYNAME(date)`：字符串格式的星期数，如 Thursday
 
 <br>格式化：
+
 - `DATE_FORMAT(date, format)`：详见 [format](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format)
 - `CONVERT_TZ(dt, from_tz, to_tz)`：转时区
 
 <br>日期运算：
+
 - `DATE_ADD(date, INTERVAL expr unit)`：unit 同 EXTRACT() 函数
   - or `DATE_SUB(date,INTERVAL -expr unit)`
 - `DATEDIFF(date1, date2)`：计算相差天数，注意是 *date1 - date2*
-{{< alert theme="warning" >}}
-⚠️ 注意，这里不同 DBMS 相差较大
-{{< /alert >}}
+  {{< alert theme="warning" >}}
+  ⚠️ 注意，这里不同 DBMS 相差较大
+  {{< /alert >}}
 
 {{< expand "练习一下">}}
 
@@ -510,6 +525,7 @@ SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(NOW(), '%W %M %d %Y 
 SELECT DATE_ADD(NOW(), INTERVAL 1 DAY), DATE_SUB(NOW(), INTERVAL -1 DAY);
 SELECT DATEDIFF('2017-01-01', '2016-12-24');
 ```
+
 {{< /expand >}}
 
 ### 聚合函数
@@ -554,8 +570,8 @@ WINDOW w AS (PARTITION BY country);
 <br>窗口函数可分为以下三类：
 
 1. 聚合函数：上述 聚合函数 中的都适用；
-
 2. 排序函数
+
    - `ROW_NUMBER()`：返回排名，如 1, 2, 3, 4, ...
    - `RANK()`：返回排名，如 1, 2, 2, 4, ...
    - `DENSE_RANK()`：返回排名，如 1, 2, 2, 3, ...
@@ -564,8 +580,8 @@ WINDOW w AS (PARTITION BY country);
      - 计算公式：*(rank - 1) / (rows - 1)*
    - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
      - 计算公式：*rows(小于或大于等于当前值) / rows*
-
 3. 值函数/偏移函数
+
    - `FIRST_VALUE(col)`：取第一行值
    - `LAST_VALUE(col)`：取最后一行值
    - `NTH_VALUE(col, n)`：取第 n 行值
@@ -573,6 +589,7 @@ WINDOW w AS (PARTITION BY country);
    - `LEAD(col, n, defaut)`：取向**后**偏移 n 行的值，若不存在则取 defaut
 
 <br>【宝藏】带图理解：
+
 - [How to use Window functions in SQL Server](https://www.sqlshack.com/use-window-functions-sql-server/)
 - [Overview of SQL RANK functions](https://www.sqlshack.com/overview-of-sql-rank-functions/)
 - [Calculate SQL Percentile using the PERCENT_RANK function in SQL Server](https://www.sqlshack.com/calculate-sql-percentile-using-the-sql-server-percent_rank-function/)
@@ -590,8 +607,8 @@ WINDOW w AS (PARTITION BY country);
 - `NULLIF(expr1, expr2)`：如果相等，则返回 null，否则返回 expr1
 - `COALESCE(expr1, expr2, ...)`：返回第一个不为 null 的值，若都为 null 则返回 null
   {{< alert theme="warning" >}}
-👏 `COALESCE()` 很巧妙很好用，以下两个表达式具有相同的作用：
-- COALESCE(expr1, expr2, expr3) 
+  👏 `COALESCE()` 很巧妙很好用，以下两个表达式具有相同的作用：
+- COALESCE(expr1, expr2, expr3)
 - IFNULL(expr1, IFNULL(expr2, IFNULL(expr3, NULL)))
   {{< /alert >}}
 
