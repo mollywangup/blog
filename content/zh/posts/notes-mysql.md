@@ -55,7 +55,7 @@ mysql -h <host> -P <port> -u <username> -p
 #### URI 方式
 
 ```plaintext
-mysql://<username>:<password>@<host>:<port>/<database_name>
+mysql://<username>:<password>@<host>:<port>/<db_name>
 ```
 
 ### 权限管理
@@ -87,7 +87,7 @@ REVOKE ALL PRIVILEGES ON *.* FROM 'wangli'@'%';
 FLUSH PRIVILEGES;
 
 -- 授权指定数据库
-GRANT ALL PRIVILEGES ON <database_name>.* TO 'admin'@'%';
+GRANT ALL PRIVILEGES ON <db_name>.* TO 'admin'@'%';
 FLUSH PRIVILEGES;
 ```
 
@@ -96,13 +96,13 @@ FLUSH PRIVILEGES;
 ### 创建数据库
 
 ```sql
-CREATE DATABASE <database_name>;
+CREATE DATABASE <db_name>;
 ```
 
 ### 删除数据库
 
 ```sql
-DROP DATABASE <database_name>;
+DROP DATABASE <db_name>;
 ```
 
 ### 显示数据库
@@ -113,7 +113,7 @@ SHOW DATABASES;
 
 ### 切换数据库
 ```sql
-USE <database_name>;
+USE <db_name>;
 ```
 
 ### 备份与恢复
@@ -121,7 +121,7 @@ USE <database_name>;
 #### 备份
 
 ```shell
-mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /path/xxx.sql
+mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <db_name> > /path/xxx.sql
 ```
 
 #### 恢复
@@ -129,7 +129,7 @@ mysqldump -uroot -p<password> --log-error=/path/xxx.err -B <database_name> > /pa
 ```shell
 # 如果是.zip格式需先解压，解压后后缀为.sql
 # 恢复整个数据库
-mysql -uroot -p<password> <database_name> < /path/xxx.sql
+mysql -uroot -p<password> <db_name> < /path/xxx.sql
 ```
 
 ## 数据表
@@ -178,7 +178,7 @@ SHOW TABLES;
 #### DELETE
 
 ```sql
-DELETE FROM <table_name> WHERE conditions;
+DELETE FROM <table_name> WHERE some_condition(s);
 ```
 
 #### INSERT
@@ -340,7 +340,9 @@ GROUP BY
 ```
 {{< /alert >}}
 
-### WITH AS
+### CTE
+
+官方手册见 [Common Table Expressions](https://dev.mysql.com/doc/refman/8.0/en/with.html#common-table-expressions)
 
 ```sql
 WITH cte_1 AS (
@@ -352,19 +354,24 @@ cte_2 AS (
 
 SELECT ...
 FROM ...
+```
 
--- 例子
+{{< expand "例子" >}}
+
+```sql
 WITH cte AS (
   SELECT 
-  salary,
-  RANK() OVER (ORDER BY salary DESC) AS rk
+    salary,
+    RANK() OVER (ORDER BY salary DESC) AS rk
   FROM Employee
 )
 
 SELECT * FROM cte;
 ```
 
-### 高级查询
+{{< /expand >}}
+
+### 其他
 
 #### 查看 Host
 ```sql
