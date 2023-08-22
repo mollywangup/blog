@@ -13,7 +13,7 @@ categories:
 - Notes
 libraries:
 - mathjax
-tocLevels = ["h2", "h3", "h4", "h5"]
+tocLevels: ["h2", "h3", "h4", "h5"]
 ---
 
 ✍ 持续更新 ing
