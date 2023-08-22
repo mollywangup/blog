@@ -42,9 +42,15 @@ libraries:
 
 ## 成本函数
 
-成本函数（Cost function）也称作代价函数，用于评估模型的**拟合程度**。一般使用 $J$ 表示，通常使用预测值与实际值之间的差异进行衡量。
+损失函数（Loss function）用于衡量预测值与实际值之间的差异程度，一般使用 $L$ 表示：
 
-$$ J(w_1,w_2,...,w_n,b) $$
+$$ L(f_{w_1,w_2,...,w_n,b}(x^{(i)}), y^{(i)}) $$
+
+成本函数（Cost function）也称作代价函数，用于评估模型的**拟合程度**。一般使用 $J$ 表示：
+
+$$
+J(w_1,w_2,...,w_n,b) = \displaystyle\sum_{i=1}^{m} L(f_{w_1,w_2,...,w_n,b}(x^{(i)}), y^{(i)})
+$$
 
 ### Squared error cost function
 
@@ -63,7 +69,29 @@ $$
 
 ## 梯度下降
 
-梯度下降（Gradient Descent）是一种算法，用于解决：**给定成本函数 $J$，寻找出最优的一组 $(w_1,w_2,...,w_n,b)$，以使得 $$\min_{w_1,w_2,...,w_n,b} J(w_1,w_2,...,w_n,b)$$**
+梯度下降（Gradient Descent）是一种算法，用于解决给定成本函数 $J$，寻找出**局部最优**的一组 $(w_1,w_2,...,w_n,b)$，以使得
+$$ \min_{w_1,w_2,...,w_n,b} J(w_1,w_2,...,w_n,b) $$
+
+实现原理：
+
+给定一组初始值 $(w_1,w_2,...,w_n,b)$ 和 $\alpha$，重复以下步骤，直到达到局部最优。
+
+$$
+\begin{equation}
+\left\{
+\begin{aligned}
+  &tmp\_w_1 = w_1 - \alpha \frac{\partial }{\partial w_1} J(w_1,w_2,...,w_n,b) \\
+  &tmp\_w_2 = w_2 - \alpha \frac{\partial }{\partial w_2} J(w_1,w_2,...,w_n,b) \\
+  &... \\
+  &tmp\_w_n = w_n - \alpha \frac{\partial }{\partial w_n} J(w_1,w_2,...,w_n,b) \\
+  &tmp\_b = b - \alpha \frac{\partial }{\partial b} J(w_1,w_2,...,w_n,b)
+\end{aligned}
+\right.
+\tag{1}
+\end{equation}
+$$
+
+其中 $\alpha \in [0, 1]$，指学习率，更新参数的步长。
 
 适用于线性回归、神经网络（深度学习）等模型。
 
