@@ -23,9 +23,11 @@ libraries:
 - `labels`: 指输出值，可以是实际值，也可以是预测值；
   - `targets`: 指实际输出值 $ y^{(i)} $；
   - `predictions`: 指预测输出值 $ \hat y^{(i)} $；
-- `Training set`: 指训练集，指用于训练模型的数据集；
-- `Single training example`: 指训练示例，指训练集中的一组数据；
-- `parameters`：指模型参数，调整模型的本质是调整模型参数；
+- `training set`: 训练集，指用于训练模型的数据集；
+- `training example`: 训练示例，指训练集中的一组数据；
+- `Model`：训练模型，拟合函数
+- `Parameters`：模型参数，调整模型的本质是调整模型参数；
+- `Cost Function`: 成本函数，也称作代价函数，一般使用 $ J $ 表示；
 
 ## 机器学习分类
 
@@ -38,9 +40,36 @@ libraries:
 - 半监督学习（Semi-Supervised Learning）：部分包含标签；
 - 强化学习（Reinforcement Learning）
 
+## 成本函数
+
+成本函数（Cost function）也称作代价函数，用于评估模型的**拟合程度**。一般使用 $J$ 表示，通常使用预测值与实际值之间的差异进行衡量。
+
+$$ J(w_1,w_2,...,w_n,b) $$
+
+### Squared error cost function
+
+适用于线性回归模型。
+
+$$
+J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (\hat y^{(i)} - y^{(i)})^2 
+$$
+即
+$$ 
+J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 
+$$
+
+其中 `m` 为训练集中训练示例数量。
+注意：除以 `2m` 而不是 ~~`m`~~
+
+## 梯度下降
+
+梯度下降（Gradient Descent）是一种算法，用于解决：**给定成本函数 $J(w_1,w_2,...,w_n,b)$，寻找出最优的一组 $(w_1,w_2,...,w_n,b)$，以使得 $minimize J$**
+
+适用于线性回归、神经网络（深度学习）等模型。
+
 ## 监督学习
 
-训练集中**包含标签**，则属于监督学习，即 `(features, targets) -> model`.
+训练集中**包含标签**，则属于监督学习，即 `(features, targets) -> Model`.
 
 监督学习分类及常见模型如下：
 
@@ -55,14 +84,26 @@ libraries:
 
 #### 线性回归模型
 
-$$ \hat y =  f_{w,b}(x) = wx + b $$
+给定包含参数的训练模型，找到一组参数，使得成本函数最小化。
 
-{{< boxmd >}}
+Model: 
 
-共包含两个参数：
+$$ f_{w,b}(x) = wx + b $$
+
+Parameters:
+
 - w: weight，即权重，也是斜率（slope）；
 - b: bias，即偏差；
 
+Cost Function:
+
+$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}$$
+
+Goal:
+
+$$ minimize J(w,b) $$
+
+{{< boxmd >}}
 {{< /boxmd >}}
 
 ### 分类
@@ -75,7 +116,7 @@ $$ \hat y =  f_{w,b}(x) = wx + b $$
 
 ## 无监督学习
 
-训练集中**不包含标签**，则属于无监督学习，即 `(features) -> model`.
+训练集中**不包含标签**，则属于无监督学习，即 `(features) -> Model`.
 
 无监督学习分类及常见模型如下：
 
@@ -96,26 +137,6 @@ $$ \hat y =  f_{w,b}(x) = wx + b $$
 ### 降维
 
 - PCA：主成分分析；
-
-
-## 成本函数
-
-成本函数（Cost function）$J$ 通常用于评估模型的性能。
-
-用于衡量**拟合程度**，通过预测值与实际值之间的差异：
-
-Squared error cost function:
-
-$$
-J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (\hat y^{(i)} - y^{(i)})^2 
-$$
-即
-$$ 
-J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 
-$$
-
-其中 `m` 为训练集中训练示例数量。
-注意：除以 `2m` 而不是 ~~`m`~~
 
 
 效果评估
