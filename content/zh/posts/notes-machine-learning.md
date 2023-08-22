@@ -78,12 +78,12 @@ $$ \min_{w_1,w_2,...,w_n,b} J(w_1,w_2,...,w_n,b) $$
 
 $$
 \begin{equation}
-\left(
+\left\{
 \begin{aligned}
-  &tmp\_w_1 = w_1 - \alpha \frac{\partial }{\partial w_1} J(w_1,w_2,...,w_n,b) \\
-  &tmp\_w_2 = w_2 - \alpha \frac{\partial }{\partial w_2} J(w_1,w_2,...,w_n,b) \\
+  &tmp\_{w_1} = w_1 - \alpha \frac{\partial }{\partial w_1} J(w_1,w_2,...,w_n,b) \\
+  &tmp\_{w_2} = w_2 - \alpha \frac{\partial }{\partial w_2} J(w_1,w_2,...,w_n,b) \\
   &... \\
-  &tmp\_w_n = w_n - \alpha \frac{\partial }{\partial w_n} J(w_1,w_2,...,w_n,b) \\
+  &tmp\_{w_n} = w_n - \alpha \frac{\partial }{\partial w_n} J(w_1,w_2,...,w_n,b) \\
   &tmp\_b = b - \alpha \frac{\partial }{\partial b} J(w_1,w_2,...,w_n,b)
 \end{aligned}
 \right.
