@@ -86,7 +86,7 @@ $$
 重复以上步骤，直至收敛，得到最终的一组值，即局部最优解。
 
 其中：
-- $\frac{\partial J}{\partial w_i} = \frac{\mathrm{d}{J}}{\mathrm{d}{w_i}} = \frac{\Delta J}{\Delta w_i}$ 指成本函数 $J$ 的偏导数。数学意义是，当自变量 $w_i$ 变动 $\Delta w_i$ 或 $\mathrm{d}{w_i}$ 时，函数 $J$ 变动 $\Delta J$ 或 $\mathrm{d}{J}$，即`偏导数 = 切线的斜率`，反映的是在此处的单调情况；
+- $\displaystyle \frac{\partial J}{\partial w_i} = \frac{\mathrm{d}{J}}{\mathrm{d}{w_i}} = \lim_{{\Delta w_i} \to 0} \frac{\Delta J}{\Delta w_i} = \lim_{{\Delta w_i} \to 0} \frac{J(w_i + {\Delta w_i}, ...) - J(w_i, ...)}{\Delta w_i}$ 指成本函数 $J$ 的偏导数。数学意义是，当其余自变量保持不变，仅 $w_i$ 发生变动，且变动值 $\Delta w_i$ 趋向于零时，函数 $J$ 的变化率即`偏导数`；几何意义是，在`该点处切线的斜率`；
 - $\alpha$ 指学习率，可以理解为 $\Delta w_i$，即每次迭代调整的幅度；
   - 因此，变量 $w_i$ 每次调整的大小可以理解为：
   $$
