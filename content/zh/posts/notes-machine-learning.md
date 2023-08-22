@@ -19,12 +19,12 @@ libraries:
 
 统一口径：
 
-- `features`: 指输入值，常称作特征值；
+- `features`: 指输入值，常称作特征值 $ x^{(i)} $；
 - `labels`: 指输出值，可以是实际值，也可以是预测值；
-  - `targets`: 指实际输出值；
-  - `predictions`: 指预测输出值；
-- `Training set`: 训练集，指用于训练模型的数据集；
-- `Single training example`: 训练示例，指训练集中的一组数据；
+  - `targets`: 指实际输出值 $ y^{(i)} $；
+  - `predictions`: 指预测输出值 $ \hat y^{(i)} $；
+- `Training set`: 指训练集，指用于训练模型的数据集；
+- `Single training example`: 指训练示例，指训练集中的一组数据；
 - `parameters`：指模型参数，调整模型的本质是调整模型参数；
 
 ## 机器学习分类
@@ -55,7 +55,7 @@ libraries:
 
 #### 线性回归模型
 
-$$ f_{w,b}(x) = wx + b $$
+$$ \hat y =  f_{w,b}(x) = wx + b $$
 
 {{< boxmd >}}
 

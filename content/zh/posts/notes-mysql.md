@@ -13,6 +13,8 @@ tags:
 categories:
 - DB
 - Notes
+libraries:
+- mathjax
 ---
 
 ✍ 本文作为学习笔记。
@@ -570,18 +572,18 @@ WINDOW w AS (PARTITION BY country);
 <br>窗口函数可分为以下三类：
 
 1. 聚合函数：上述 聚合函数 中的都适用；
-2. 排序函数
 
+2. 排序函数
    - `ROW_NUMBER()`：返回排名，如 1, 2, 3, 4, ...
    - `RANK()`：返回排名，如 1, 2, 2, 4, ...
    - `DENSE_RANK()`：返回排名，如 1, 2, 2, 3, ...
    - `NTILE(n)`：分成 n 组，返回组别
    - `PERCENT_RANK()`：返回排名的百分比
-     - 计算公式：*(rank - 1) / (rows - 1)*
+     - 计算公式：$ (rank - 1) / (rows_{分区} - 1) $
    - `CUME_DIST()`：返回值累计分布的百分比，如 top 10%
-     - 计算公式：*rows(小于或大于等于当前值) / rows*
-3. 值函数/偏移函数
+     - 计算公式：$ rows_{小于或大于等于当前值} / rows_{分区} $
 
+3. 值函数/偏移函数
    - `FIRST_VALUE(col)`：取第一行值
    - `LAST_VALUE(col)`：取最后一行值
    - `NTH_VALUE(col, n)`：取第 n 行值
