@@ -13,6 +13,7 @@ categories:
 - Notes
 libraries:
 - mathjax
+tocLevels = ["h2", "h3", "h4", "h5"]
 ---
 
 ✍ 持续更新 ing
@@ -65,9 +66,13 @@ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2
 $$
 
 其中 `m` 为训练集中训练示例数量。
-注意：除以 `2m` 而不是 ~~`m`~~
+注意：除以 `2m` 而不是 ~~`m`~~，目的是使得求偏导数时结果更加简洁（仅此而已）；
 
 ## 梯度下降
+
+- 批量梯度下降（Batch Gradient Descent）：使用训练集中的所有数据
+- 随机梯度下降（SGD）：？？根据每个训练样本进行参数更新
+
 
 梯度下降（Gradient Descent）是一种算法，用于实现：给定成本函数 $J(w_1,w_2,...,w_n,b)$，求解一组 $(w_1,w_2,...,w_n)$，使得
 $$ \displaystyle\min_{w_1,w_2,...,w_n,b} J(w_1,w_2,...,w_n,b) $$
@@ -86,12 +91,10 @@ $$
 重复以上步骤，直至收敛，得到最终的一组值，即局部最优解。
 
 其中：
-- $\displaystyle \frac{\partial J}{\partial w_i} = \frac{\mathrm{d}{J}}{\mathrm{d}{w_i}} = \lim_{{\Delta w_i} \to 0} \frac{\Delta J}{\Delta w_i} = \lim_{{\Delta w_i} \to 0} \frac{J(w_i + {\Delta w_i}, ...) - J(w_i, ...)}{\Delta w_i}$ 指成本函数 $J$ 的偏导数。数学意义是，当其余自变量保持不变，仅 $w_i$ 发生变动，且变动值 $\Delta w_i$ 趋向于零时，函数 $J$ 的变化率即`偏导数`；几何意义是，在`该点处切线的斜率`；
+- $\displaystyle \frac{\partial J}{\partial w_i} = \frac{\mathrm{d}{J}}{\mathrm{d}{w_i}} = \lim_{{\Delta w_i} \to 0} \frac{\Delta J}{\Delta w_i} = \lim_{{\Delta w_i} \to 0} \frac{J(w_i + {\Delta w_i}, ...) - J(w_i, ...)}{\Delta w_i}$ 指成本函数 $J$ 的偏导数。数学意义是，当其余自变量保持不变，仅 $w_i$ 发生增量 $\Delta w_i$ 且趋向于零时，函数 $J$ 的`变化率`；几何意义是，在`该点处切线的斜率`；
+
 - $\alpha$ 指学习率，可以理解为 $\Delta w_i$，即每次迭代调整的幅度；
-  - 因此，变量 $w_i$ 每次调整的大小可以理解为：
-  $$
-  \alpha \frac{\partial}{\partial w_i} J(w_1,w_2,...,w_n,b) = \Delta w_i \cdot \frac{\partial}{\partial w_i} J(w_1,w_2,...,w_n,b)
-  $$
+  - 因此 $\displaystyle \alpha \frac{\partial}{\partial w_i} J(w_1,w_2,...,w_n,b)$ 可以理解为`增量 * 变化率`，即
 
 适用于线性回归、神经网络（深度学习）等模型。
 
@@ -111,6 +114,8 @@ $$
 回归问题的输出值都是**连续型变量**。
 
 #### 线性回归模型
+
+##### 一元线性回归
 
 给定包含参数的训练模型，找到一组参数，使得成本函数最小化。
 
@@ -133,6 +138,9 @@ $$ \min_{w,b} J(w,b) $$
 
 {{< boxmd >}}
 {{< /boxmd >}}
+
+##### 多元线性回归
+
 
 ### 分类
 
