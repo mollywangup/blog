@@ -63,7 +63,8 @@ $$
 
 ## 梯度下降
 
-梯度下降（Gradient Descent）是一种算法，用于解决：**给定成本函数 $J(w_1,w_2,...,w_n,b)$，寻找出最优的一组 $(w_1,w_2,...,w_n,b)$，以使得 $minimize J$**
+梯度下降（Gradient Descent）是一种算法，用于解决：**给定成本函数 $J$，寻找出最优的一组 $(w_1,w_2,...,w_n,b)$，以使得
+$$ \min_{w_1,w_2,...,w_n,b} J(w_1,w_2,...,w_n,b) $$**
 
 适用于线性回归、神经网络（深度学习）等模型。
 
@@ -101,7 +102,7 @@ $$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)}
 
 Goal:
 
-$$ minimize J(w,b) $$
+$$ \min_{w,b} J(w,b) $$
 
 {{< boxmd >}}
 {{< /boxmd >}}
