@@ -69,29 +69,29 @@ $$
 
 ## 梯度下降
 
-梯度下降（Gradient Descent）是一种算法，用于解决给定成本函数 $J$，寻找出**局部最优**的一组 $(w_1,w_2,...,w_n,b)$，以使得
-$$ \min_{w_1,w_2,...,w_n,b} J(w_1,w_2,...,w_n,b) $$
+梯度下降（Gradient Descent）是一种算法，用于实现：给定成本函数 $J(w_1,w_2,...,w_n,b)$，求解一组 $(w_1,w_2,...,w_n)$，使得
+$$ \displaystyle\min_{w_1,w_2,...,w_n,b} J(w_1,w_2,...,w_n,b) $$
 
 实现原理：
 
-给定一组初始值 $(w_1,w_2,...,w_n,b)$ 和 $\alpha$，重复以下步骤，直到达到局部最优。
+选定一组初始值 $(w_1,w_2,...,w_n,b)$，为了实现 $\min J$，对于变量 $w_i$：
+- 如果 $\frac{\partial J}{\partial w_i} > 0$，即 $J$ 在此处单调递增 $\uparrow$，那么此时应该 $\downarrow w_i$
+- 如果 $\frac{\partial J}{\partial w_i} < 0$，即 $J$ 在此处单调递减 $\downarrow$，那么此时应该 $\uparrow w_i$
 
+假定每个变量每次调整相同的幅度 $\alpha$（其中 $\alpha \geq 0$），则此时 $w_i$ 将迭代为以下值：
 $$
-\begin{equation}
-\left\{
-\begin{aligned}
-  &tmp\_{w_1} = w_1 - \alpha \frac{\partial }{\partial w_1} J(w_1,w_2,...,w_n,b) \\
-  &tmp\_{w_2} = w_2 - \alpha \frac{\partial }{\partial w_2} J(w_1,w_2,...,w_n,b) \\
-  &... \\
-  &tmp\_{w_n} = w_n - \alpha \frac{\partial }{\partial w_n} J(w_1,w_2,...,w_n,b) \\
-  &tmp\_b = b - \alpha \frac{\partial }{\partial b} J(w_1,w_2,...,w_n,b)
-\end{aligned}
-\right.
-\tag{1}
-\end{equation}
+w_i \rightarrow w_i - \alpha \frac{\partial}{\partial w_i} J(w_1,w_2,...,w_n,b)
 $$
 
-其中 $\alpha \in [0, 1]$，指学习率，更新参数的步长。
+重复以上步骤，直至收敛，得到最终的一组值，即局部最优解。
+
+其中：
+- $\frac{\partial J}{\partial w_i} = \frac{\mathrm{d}{J}}{\mathrm{d}{w_i}} = \frac{\Delta J}{\Delta w_i}$ 指成本函数 $J$ 的偏导数。数学意义是，当自变量 $w_i$ 变动 $\Delta w_i$ 或 $\mathrm{d}{w_i}$ 时，函数 $J$ 变动 $\Delta J$ 或 $\mathrm{d}{J}$，即`偏导数 = 切线的斜率`，反映的是在此处的单调情况；
+- $\alpha$ 指学习率，可以理解为 $\Delta w_i$，即每次迭代调整的幅度；
+  - 因此，变量 $w_i$ 每次调整的大小可以理解为：
+  $$
+  \alpha \frac{\partial}{\partial w_i} J(w_1,w_2,...,w_n,b) = \Delta w_i \cdot \frac{\partial}{\partial w_i} J(w_1,w_2,...,w_n,b)
+  $$
 
 适用于线性回归、神经网络（深度学习）等模型。
 
