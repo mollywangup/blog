@@ -78,7 +78,7 @@ $$ \min_{w_1,w_2,...,w_n,b} J(w_1,w_2,...,w_n,b) $$
 
 $$
 \begin{equation}
-\left\{
+\left(
 \begin{aligned}
   &tmp\_w_1 = w_1 - \alpha \frac{\partial }{\partial w_1} J(w_1,w_2,...,w_n,b) \\
   &tmp\_w_2 = w_2 - \alpha \frac{\partial }{\partial w_2} J(w_1,w_2,...,w_n,b) \\
