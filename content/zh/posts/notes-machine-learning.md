@@ -72,7 +72,7 @@ $$
 
 给定任意 $n$ 元**可微**函数 $$f(x_1, x_2,..., x_n)$$
 
-则 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
+$f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
 
 $$
 grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
@@ -93,15 +93,17 @@ $$
 
 ### 梯度下降算法
 
-梯度下降（Gradient Descent）是一种迭代优化算法，用于寻找任意一个可导函数的**局部最小值**。
+梯度下降（Gradient Descent）是一种迭代优化算法，用于寻找任意一个可微函数的**局部最小值**。
 
 在机器学习中，常用于**最小化成本函数**，即最大程度减小预测值与实际值之间的误差。即：
 
 <!-- <img src='https://upload.wikimedia.org/wikipedia/commons/7/79/Gradient_descent.png'> -->
 
 {{< boxmd >}}
+
 给定成本函数 $J(w_1,w_2,...,w_n)$，求解一组 $(w_1,w_2,...,w_n)$，使得
 $$ \min_{w_1,w_2,...,w_n} J(w_1,w_2,...,w_n) $$
+
 {{< /boxmd >}}
 
 实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
