@@ -135,8 +135,18 @@ $$
     \vdots \\\\
     \frac{\partial J}{\partial w_n} \\\\
   \end{pmatrix}
+    =
+  \begin{pmatrix}
+    w_1 \\\\
+    w_2 \\\\
+    \vdots \\\\
+    w_n \\\\
+  \end{pmatrix}
+    - \alpha \cdot grad J
 \end{equation}
 $$
+
+即 $\vec w - \alpha \cdot \nabla J$ 或 $\vec w - \alpha \cdot grad J$
 
 直至收敛，即得到局部最小值的解。
 
