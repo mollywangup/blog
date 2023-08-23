@@ -70,7 +70,7 @@ $$
 
 ### 梯度
 
-给定任意**可导**函数 $$f(x_1, x_2,..., x_n)$$
+给定任意 $n$ 元**可微**函数 $$f(x_1, x_2,..., x_n)$$
 
 则 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
 
@@ -78,14 +78,16 @@ $$
 grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
 $$
 
-梯度的几何意义是，**梯度方向**是函数值上升最快的方向，反方向为下降最快的方向。
+梯度的几何意义是，<mark>**梯度方向**是函数值上升最快的方向，反方向为下降最快的方向</mark>，因此可应用于求解多元函数的极值。
 
-{{< expand "偏导数的几何意义">}}
+{{< expand "偏导数">}}
 
-函数 $f$ 在 自变量 $x_i$ 处的偏导数，指保持其他自变量不变，当 $x_i$ 发生增量 $\Delta x_i$ 且趋向于零即 $\displaystyle \lim_{{\Delta x_i} \to 0} $ 时，函数 $f$ 的`瞬时变化率`：
+函数 $f$ 对自变量 $x_i$ 的偏导数，指保持其他自变量不变，当 $x_i$ 发生增量 $\Delta x_i$ 且趋向于零即 $\displaystyle \lim_{{\Delta x_i} \to 0} $ 时，函数 $f$ 的`瞬时变化率`：
 
 $$ \frac{\partial f}{\partial x_i} = \lim_{{\Delta x_i} \to 0} \frac{\Delta f}{\Delta x_i} = \lim_{{\Delta x_i} \to 0} \frac{f(x_i + {\Delta x_i}, ...) - f(x_i, ...)}{\Delta x_i}
 $$
+
+注意，可微一定可导，即任意给定点的邻域内所有偏导数存在且连续。
 
 {{< /expand >}}
 
