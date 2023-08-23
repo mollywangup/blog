@@ -106,10 +106,10 @@ $$ \min_{w_1,w_2,...,w_n} J(w_1,w_2,...,w_n) $$
 
 $$
 \begin{cases}
-w_1 \rightarrow w_1 - \alpha \frac{\partial J}{\partial w_1} \\
-w_2 \rightarrow w_2 - \alpha \frac{\partial J}{\partial w_2} \\
-... \\
-w_n \rightarrow w_n - \alpha \frac{\partial J}{\partial w_n} \\
+w_1 \rightarrow w_1 - \alpha \frac{\partial J}{\partial w_1} \\\\
+w_2 \rightarrow w_2 - \alpha \frac{\partial J}{\partial w_2} \\\\
+... \\\\
+w_n \rightarrow w_n - \alpha \frac{\partial J}{\partial w_n} \\\\
 \end{cases}
 $$
 
