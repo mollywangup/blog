@@ -27,7 +27,6 @@ libraries:
 - `training example`: 训练示例，指训练集中的一组数据；
 - `Model`：训练模型，拟合函数
 - `Parameters`：模型参数，调整模型的本质是调整模型参数；
-- `Cost Function`: 成本函数，也称作代价函数，一般使用 $ J $ 表示；
 
 ## 机器学习分类
 
@@ -64,23 +63,48 @@ $$
 J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 
 $$
 
-其中 `m` 为训练集中训练示例数量。
-注意：除以 `2m` 而不是 ~~`m`~~，目的是使得求偏导数时结果更加简洁（仅此而已）；
+其中 `m` 为训练集中训练示例数量，几何意义上指点的个数。
+注意：除以 `2m` 而不是 ~~`m`~~，目的是使得求偏导数时，在不影响结果的前提下，为了更加简洁（仅此而已）；
 
 ## 梯度下降
 
-- 批量梯度下降（Batch Gradient Descent）：使用训练集中的所有数据
-- 随机梯度下降（SGD）：？？根据每个训练样本进行参数更新
+### 梯度
 
+给定任意**可导**函数 $$f(x_1, x_2,..., x_n)$$
 
-梯度下降（Gradient Descent）是一种算法，用于实现：给定成本函数 $J(w_1,w_2,...,w_n,b)$，求解一组 $(w_1,w_2,...,w_n)$，使得
-$$ \displaystyle\min_{w_1,w_2,...,w_n,b} J(w_1,w_2,...,w_n,b) $$
+则 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
 
-实现原理：
+$$
+grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
+$$
 
-选定一组初始值 $(w_1,w_2,...,w_n,b)$，为了实现 $\min J$，对于变量 $w_i$：
-- 如果 $\frac{\partial J}{\partial w_i} > 0$，即 $J$ 在此处单调递增 $\uparrow$，那么此时应该 $\downarrow w_i$
-- 如果 $\frac{\partial J}{\partial w_i} < 0$，即 $J$ 在此处单调递减 $\downarrow$，那么此时应该 $\uparrow w_i$
+梯度的几何意义是，**梯度方向**是函数值上升最快的方向，反方向为下降最快的方向。
+
+{{< expand "偏导数的几何意义">}}
+
+函数 $f$ 在 自变量 $x_i$ 处的偏导数，指保持其他自变量不变，当 $x_i$ 发生增量 $\Delta x_i$ 且趋向于零即 $\displaystyle \lim_{{\Delta x_i} \to 0} $ 时，函数 $f$ 的`瞬时变化率`：
+
+$$ \frac{\partial f}{\partial x_i} = \lim_{{\Delta x_i} \to 0} \frac{\Delta f}{\Delta x_i} = \lim_{{\Delta x_i} \to 0} \frac{f(x_i + {\Delta x_i}, ...) - f(x_i, ...)}{\Delta x_i}
+$$
+
+{{< /expand >}}
+
+### 梯度下降算法
+
+梯度下降（Gradient Descent）是一种迭代优化算法，用于寻找任意一个可导函数的**局部最小值**。
+
+在机器学习中，常用于**最小化成本函数**，即最大程度减小预测值与实际值之间的误差。即：
+
+<!-- <img src='https://upload.wikimedia.org/wikipedia/commons/7/79/Gradient_descent.png'> -->
+
+{{< boxmd >}}
+给定成本函数 $J(w_1,w_2,...,w_n)$，求解一组 $(w_1,w_2,...,w_n)$，使得
+$$ \min_{w_1,w_2,...,w_n} J(w_1,w_2,...,w_n) $$
+{{< /boxmd >}}
+
+实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
+
+选定初始位置点 $(w_1,w_2,...,w_n)$，
 
 假定每个变量每次调整相同的幅度 $\alpha$（其中 $\alpha \geq 0$），则此时 $w_i$ 将迭代为以下值：
 $$
@@ -89,13 +113,13 @@ $$
 
 重复以上步骤，直至收敛，得到最终的一组值，即局部最优解。
 
-其中：
-- $\displaystyle \frac{\partial J}{\partial w_i} = \frac{\mathrm{d}{J}}{\mathrm{d}{w_i}} = \lim_{{\Delta w_i} \to 0} \frac{\Delta J}{\Delta w_i} = \lim_{{\Delta w_i} \to 0} \frac{J(w_i + {\Delta w_i}, ...) - J(w_i, ...)}{\Delta w_i}$ 指成本函数 $J$ 的偏导数。数学意义是，当其余自变量保持不变，仅 $w_i$ 发生增量 $\Delta w_i$ 且趋向于零时，函数 $J$ 的`变化率`；几何意义是，在`该点处切线的斜率`；
-
-- $\alpha$ 指学习率，可以理解为 $\Delta w_i$，即每次迭代调整的幅度；
-  - 因此 $\displaystyle \alpha \frac{\partial}{\partial w_i} J(w_1,w_2,...,w_n,b)$ 可以理解为`增量 * 变化率`，即
+其中 $\alpha$ 指学习率，也称作步长，决定了迭代的次数。
 
 适用于线性回归、神经网络（深度学习）等模型。
+
+分类：
+- 批量梯度下降（Batch Gradient Descent）：使用训练集中的所有数据
+- 随机梯度下降（SGD）：？？根据每个训练样本进行参数更新
 
 ## 监督学习
 
@@ -134,9 +158,6 @@ $$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)}
 Goal:
 
 $$ \min_{w,b} J(w,b) $$
-
-{{< boxmd >}}
-{{< /boxmd >}}
 
 ##### 多元线性回归
 
