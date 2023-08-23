@@ -102,16 +102,7 @@ $$ \min_{w_1,w_2,...,w_n} J(w_1,w_2,...,w_n) $$
 
 实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
 
-选定初始位置点 $(w_1,w_2,...,w_n)$，重复以下步骤：
-
-$$
-\begin{cases}
-w_1 \rightarrow w_1 - \alpha \frac{\partial J}{\partial w_1} \\\\
-w_2 \rightarrow w_2 - \alpha \frac{\partial J}{\partial w_2} \\\\
-... \\\\
-w_n \rightarrow w_n - \alpha \frac{\partial J}{\partial w_n} \\\\
-\end{cases}
-$$
+选定初始位置 $(w_1,w_2,...,w_n)$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
 
 $$
 \begin{equation} 
@@ -135,22 +126,15 @@ $$
     \vdots \\\\
     \frac{\partial J}{\partial w_n} \\\\
   \end{pmatrix}
-    =
-  \begin{pmatrix}
-    w_1 \\\\
-    w_2 \\\\
-    \vdots \\\\
-    w_n \\\\
-  \end{pmatrix}
-    - \alpha \cdot grad J
 \end{equation}
 $$
 
-即 $\vec w - \alpha \cdot \nabla J$ 或 $\vec w - \alpha \cdot grad J$
-
-直至收敛，即得到局部最小值的解。
-
-其中 $\alpha$ 指学习率，也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代。
+说明：
+- $\alpha$ 指学习率，也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
+- 假设 $w$ 表示点坐标对应的向量，则上述迭代步骤可使用梯度简写为：
+  $$
+  w \rightarrow w - \alpha \cdot \nabla J
+  $$
 
 适用于线性回归、神经网络（深度学习）等模型。
 
