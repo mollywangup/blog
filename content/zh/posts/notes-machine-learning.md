@@ -72,7 +72,7 @@ $$
 
 给定任意 $n$ 元**可微**函数 $$f(x_1, x_2,..., x_n)$$
 
-$f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
+函数 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
 
 $$
 grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
@@ -93,31 +93,29 @@ $$
 
 ### 梯度下降算法
 
-梯度下降（Gradient Descent）是一种迭代优化算法，用于寻找任意一个可微函数的**局部最小值**。
+梯度下降（Gradient Descent）是一种迭代优化算法，用于求解任意一个可微函数的**局部最小值**。
 
 在机器学习中，常用于**最小化成本函数**，即最大程度减小预测值与实际值之间的误差。即：
-
-<!-- <img src='https://upload.wikimedia.org/wikipedia/commons/7/79/Gradient_descent.png'> -->
-
-{{< boxmd >}}
 
 给定成本函数 $J(w_1,w_2,...,w_n)$，求解一组 $(w_1,w_2,...,w_n)$，使得
 $$ \min_{w_1,w_2,...,w_n} J(w_1,w_2,...,w_n) $$
 
-{{< /boxmd >}}
-
 实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
 
-选定初始位置点 $(w_1,w_2,...,w_n)$，
+选定初始位置点 $(w_1,w_2,...,w_n)$，重复以下步骤：
 
-假定每个变量每次调整相同的幅度 $\alpha$（其中 $\alpha \geq 0$），则此时 $w_i$ 将迭代为以下值：
 $$
-w_i \rightarrow w_i - \alpha \frac{\partial}{\partial w_i} J(w_1,w_2,...,w_n,b)
+\begin{cases}
+w_1 \rightarrow w_1 - \alpha \frac{\partial J}{\partial w_1} \\
+w_2 \rightarrow w_2 - \alpha \frac{\partial J}{\partial w_2} \\
+... \\
+w_n \rightarrow w_n - \alpha \frac{\partial J}{\partial w_n} \\
+\end{cases}
 $$
 
-重复以上步骤，直至收敛，得到最终的一组值，即局部最优解。
+直至收敛，即得到局部最小值的解。
 
-其中 $\alpha$ 指学习率，也称作步长，决定了迭代的次数。
+其中 $\alpha$ 指学习率，也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代。
 
 适用于线性回归、神经网络（深度学习）等模型。
 
