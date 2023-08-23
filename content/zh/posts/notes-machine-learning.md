@@ -113,6 +113,31 @@ w_n \rightarrow w_n - \alpha \frac{\partial J}{\partial w_n} \\\\
 \end{cases}
 $$
 
+$$
+\begin{equation} 
+  \begin{pmatrix}
+    w_1 \\\\
+    w_2 \\\\
+    \vdots \\\\
+    w_n \\\\
+  \end{pmatrix}
+    \rightarrow
+  \begin{pmatrix}
+    w_1 \\\\
+    w_2 \\\\
+    \vdots \\\\
+    w_n \\\\
+  \end{pmatrix}
+    - \alpha \cdot
+  \begin{pmatrix}
+    \frac{\partial J}{\partial w_1} \\\\
+    \frac{\partial J}{\partial w_2} \\\\
+    \vdots \\\\
+    \frac{\partial J}{\partial w_n} \\\\
+  \end{pmatrix}
+\end{equation}
+$$
+
 直至收敛，即得到局部最小值的解。
 
 其中 $\alpha$ 指学习率，也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代。
