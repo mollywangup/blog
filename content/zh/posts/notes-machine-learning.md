@@ -19,14 +19,18 @@ libraries:
 
 统一口径：
 
-- `features`: 指输入值，常称作特征值 $ x^{(i)} $；
+- `features`: 指输入变量，常称作特征；
+  - 一元对应 $x$，多元对应 $\vec x$
 - `labels`: 指输出值，可以是实际值，也可以是预测值；
-  - `targets`: 指实际输出值 $ y^{(i)} $；
-  - `predictions`: 指预测输出值 $ \hat y^{(i)} $；
+  - `targets`: 指实际输出值 $y$；
+  - `predictions`: 指预测输出值 $\hat y$；
 - `training set`: 训练集，指用于训练模型的数据集；
 - `training example`: 训练示例，指训练集中的一组数据；
+  - 一元对应 $x^{(i)}$，多元对应 $\vec x^{(i)}$
 - `Model`：训练模型，拟合函数
 - `Parameters`：模型参数，调整模型的本质是调整模型参数；
+- `feature engineering`：特征工程
+
 
 ## 机器学习分类
 
@@ -43,12 +47,12 @@ libraries:
 
 损失函数（Loss function）用于衡量预测值与实际值之间的差异程度，一般使用 $L$ 表示：
 
-$$ L(f_{w_1,w_2,...,w_n,b}(x^{(i)}), y^{(i)}) $$
+$$ L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) $$
 
 成本函数（Cost function）也称作代价函数，用于评估模型的**拟合程度**。一般使用 $J$ 表示：
 
 $$
-J(w_1,w_2,...,w_n,b) = \displaystyle\sum_{i=1}^{m} L(f_{w_1,w_2,...,w_n,b}(x^{(i)}), y^{(i)})
+J(\vec{w},b) = \displaystyle\sum_{i=1}^{m} L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)})
 $$
 
 ### Squared error cost function
@@ -65,6 +69,19 @@ $$
 
 其中 `m` 为训练集中训练示例数量，几何意义上指点的个数。
 注意：除以 `2m` 而不是 ~~`m`~~，目的是使得求偏导数时，在不影响结果的前提下，为了更加简洁（仅此而已）；
+
+### Logistic loss function
+
+适用于逻辑回归模型。
+
+$$
+L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) = 
+\begin{cases}
+-log(f_{\vec{w},b}(\vec{x}^{(i)})) & if\ y^{(i)} = 1 \\\\
+-log(1-f_{\vec{w},b}(\vec{x}^{(i)})) & if\ y^{(i)} = 0 \\\\
+\end{cases}
+$$
+
 
 ## 梯度下降
 
@@ -119,7 +136,7 @@ $$
     \vdots \\\\
     w_n \\\\
   \end{pmatrix}
-    - \alpha \cdot
+    - \alpha
   \begin{pmatrix}
     \frac{\partial J}{\partial w_1} \\\\
     \frac{\partial J}{\partial w_2} \\\\
@@ -130,15 +147,23 @@ $$
 $$
 
 说明：
-- $\alpha$ 指学习率，也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
+- $\alpha$ 指学习率（Learning rate），也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
 - 假设 $w$ 表示点坐标对应的向量，则上述迭代步骤可使用梯度简写为：
   $$
-  w \rightarrow w - \alpha \cdot \nabla J
+  \vec{w} \rightarrow \vec{w} - \alpha \nabla J
   $$
 
-适用于线性回归、神经网络（深度学习）等模型。
+#### 选择学习率
 
-分类：
+方法：给定不同 $\alpha$ 运行梯度下降时，绘制 $J$ 和 迭代次数的图，通过观察 $J$ **是否单调递减直至收敛**来判断 $\alpha$ 的选择是否合适；
+  - 单调递增或有增有减：$\alpha$ 太大，步子迈大了，应该降低 $\alpha$；
+  - 单调递减但未收敛：$\alpha$ 太小，学习太慢，应该提升 $\alpha$；
+
+经验值：[0.001, 0.01, 0.1, 1] 或者 [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1]
+
+
+#### 分类
+
 - 批量梯度下降（Batch Gradient Descent）：使用训练集中的所有数据
 - 随机梯度下降（SGD）：？？根据每个训练样本进行参数更新
 
@@ -169,8 +194,8 @@ $$ f_{w,b}(x) = wx + b $$
 
 Parameters:
 
-- w: weight，即权重，也是斜率（slope）；
-- b: bias，即偏差；
+- $w$：weight，即权重，也是斜率（slope）；
+- $b$：bias，即偏差；
 
 Cost Function:
 
@@ -182,10 +207,118 @@ $$ \min_{w,b} J(w,b) $$
 
 ##### 多元线性回归
 
+$x_j$ 表示第 $j$ 个特征
+$\vec x^{(i)}$ 表示第 $i$ 个训练示例的特征向量，一般为行向量
+
+$x_j^{(i)}$ 表示第 $i$ 个训练示例的第 $j$ 个特征的值
+
+Model: 
+
+$$ 
+f_{\vec{w}, b}(\vec{x}) = w_1 x_1 + ... + w_n x_n + b \\
+= \sum_{j=1}^{n} w_j x_j + b
+\tag{1}
+$$
+
+或者向量形式：
+
+$$ 
+f_{\vec{w}, b}(\vec{x}) = \vec{w} \cdot \vec{x} + b
+\tag{2}
+$$
+
+Parameters:
+
+- $\vec{w} = \begin{bmatrix} w_1 & ... & w_n\end{bmatrix}$
+- $b$：bias，即偏差
+
+Cost Function:
+
+$$ J(w_1,...,w_n,b) = J(\vec{w},b)$$
+
+
+```python
+import numpy as np
+
+w = np.array([])
+b = 1.1
+x = np.array([])
+
+# 点积
+f = np.dot(w, x) + b
+```
+
+？？向量乘积，矩阵乘积
+
+#### 特征缩放
+
+特征缩放（Feature Scaling）是一种用于**标准化自变量或特征范围**的方法。
+
+目标：为了使梯度下降运行的更快。
+
+不同特征之间的取值范围差异较大，导致梯度下降运行低效。
+特征缩放使得不同特征之间的取值范围差异，降低至可比较的范围。
+
+- 除上限，如 [200, 1000] -> [0.2, 1]
+
+
+##### 均值归一化（Mean Normalization）
+
+与均值的差异 / 上下限的整体差异：
+
+$$
+x^{\prime} = \frac{x - \mu}{max(x) - min(x)}
+$$
+
+##### Z 分数归一化（Z-score normalization）
+
+与均值的差异 / 标准差：
+
+$$
+x^{\prime} = \frac{x - \mu}{\sigma}
+$$
+
+其中标准差（Standard Deviation）$\sigma$ 计算公式如下：
+
+$$
+\sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
+$$
+
+经验值：
+- 太大或者太小都需要：如[-0.001, 0.001]、[-100, 100]；
+- 通常[-3, 3]范围内，不需要；
+
+### 多项式回归模型
+
+(Polynomial regression)
+
+$$
+f_{\vec{w},b}(x) = w_1x + w_2x^2 + b
+$$
 
 ### 分类
 
 分类问题的输出值都是**离散型变量**。
+
+#### 逻辑回归
+
+（logistic regression）
+
+（binary classification）
+
+true: 1, positive class
+false: 0, negative class
+
+logistic/sigmoid function
+
+$$
+z = \vec{w} \cdot \vec{x} + b \\\\
+g(z) = \frac{1}{1+e^{-z}}
+$$
+
+$$
+g(z) = g(\vec{w} \cdot \vec{x} + b) = \frac{1}{1+e^{-(\vec{w} \cdot \vec{x} + b)}} = P(y=1|x;\vec{w},b)
+$$
 
 - KNN (K-Nearest Neighbors)：K近邻算法；
 - 决策树：
