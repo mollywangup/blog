@@ -52,7 +52,7 @@ $$ L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) $$
 成本函数（Cost function）也称作代价函数，用于评估模型的**拟合程度**。一般使用 $J$ 表示：
 
 $$
-J(\vec{w},b) = \displaystyle\sum_{i=1}^{m} L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)})
+J(\vec{w},b) = \displaystyle \frac{1}{m} \sum_{i=1}^{m} L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)})
 $$
 
 ### Squared error cost function
@@ -77,11 +77,10 @@ $$
 $$
 L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) = 
 \begin{cases}
--log(f_{\vec{w},b}(\vec{x}^{(i)})) & if\ y^{(i)} = 1 \\\\
--log(1-f_{\vec{w},b}(\vec{x}^{(i)})) & if\ y^{(i)} = 0 \\\\
+-log\left(f_{\vec{w},b}(\vec{x}^{(i)})\right) & if\ y^{(i)} = 1 \\\\
+-log\left(1-f_{\vec{w},b}(\vec{x}^{(i)})\right) & if\ y^{(i)} = 0 \\\\
 \end{cases}
 $$
-
 
 ## 梯度下降
 
@@ -166,6 +165,13 @@ $$
 
 - 批量梯度下降（Batch Gradient Descent）：使用训练集中的所有数据
 - 随机梯度下降（SGD）：？？根据每个训练样本进行参数更新
+
+## 过拟合
+
+解决过拟合的方法：
+1. 收集更多的训练示例；
+2. 特征值选择；
+3. 正则化；
 
 ## 监督学习
 
@@ -349,18 +355,24 @@ $$
 - PCA：主成分分析；
 
 
+## 混淆矩阵
+
+用于二分类模型的效果评估。
+
+| 预测类别/真实类别&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
+| ---------- | ---------- | ---------- |
+| **Positive** | TP  | FP&nbsp;&nbsp;&nbsp; | 
+| **Negative** | FN  | TN&nbsp;&nbsp;&nbsp; | 
+
+- 准确率（accuracy）：指预测正确的比例，即 $\frac{TP+TN}{TP+TN+FP+FN}$
+- 精确率（precision）：也称作查准率，指预测为正中实际为正的比例，即 $\frac{TP}{TP+FP}$
+- 召回率（recall）：也称作查全率，指实际为正中预测为正的比例，即 $\frac{TP}{TP+FN}$
+- F1：$\frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率}$
+
 效果评估
 - 针对监督学习：
   - 偏差（bias）：偏离程度；
   - 方差（variance）：分散程度；
-- 针对分类：
-  - 错误率：分类错误的样本数占样本总数的比例。
-  - 精确率：分类正确的样本数占样本总数的比例。
-  - 查准率（也称准确率），即在检索后返回的结果中，真正正确的个数占你认为是正确的结果的比例。
-  - 查全率（也称召回率），即在检索结果中真正正确的个数，占整个数据集（检索到的和未检索到的）中真正正确个数的比例。
-  - F1是一个综合考虑查准率与查全率的度量，其基于查准率与查全率的调和平均定义：即：F1度量的一般形式-Fβ，能让我们表达出对查准率、查全率的不同偏好
-  
-
 
 训练集和测试集
 交叉验证时：将数据集分成 N 块，使用 N-1 块进行训练，再用最后一块进行测试；
