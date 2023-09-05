@@ -19,11 +19,11 @@ libraries:
 
 统一口径：
 
-- `features`: 指输入变量，常称作特征；
+- `feature`: 指输入变量，常称作特征；
   - 一元对应 $x$，多元对应 $\vec x$
-- `labels`: 指输出值，可以是实际值，也可以是预测值；
-  - `targets`: 指实际输出值 $y$；
-  - `predictions`: 指预测输出值 $\hat y$；
+- `label`: 指输出值，可以是实际值，也可以是预测值；
+  - `target`: 指实际输出值 $y$；
+  - `prediction`: 指预测输出值 $\hat y$；
 - `training set`: 训练集，指用于训练模型的数据集；
 - `training example`: 训练示例，指训练集中的一组数据；
   - 一元对应 $x^{(i)}$，多元对应 $\vec x^{(i)}$
@@ -166,6 +166,44 @@ $$
 - 批量梯度下降（Batch Gradient Descent）：使用训练集中的所有数据
 - 随机梯度下降（SGD）：？？根据每个训练样本进行参数更新
 
+## 特征缩放
+
+特征缩放（Feature Scaling）是一种用于**标准化自变量或特征范围**的方法。
+
+目标：为了使梯度下降运行的更快。
+
+不同特征之间的取值范围差异较大，导致梯度下降运行低效。
+特征缩放使得不同特征之间的取值范围差异，降低至可比较的范围。
+
+- 除上限，如 [200, 1000] -> [0.2, 1]
+
+
+### 均值归一化（Mean Normalization）
+
+与均值的差异 / 上下限的整体差异：
+
+$$
+x^{\prime} = \frac{x - \mu}{max(x) - min(x)}
+$$
+
+### Z 分数归一化（Z-score normalization）
+
+与均值的差异 / 标准差：
+
+$$
+x^{\prime} = \frac{x - \mu}{\sigma}
+$$
+
+其中标准差（Standard Deviation）$\sigma$ 计算公式如下：
+
+$$
+\sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
+$$
+
+经验值：
+- 太大或者太小都需要：如[-0.001, 0.001]、[-100, 100]；
+- 通常[-3, 3]范围内，不需要；
+
 ## 过拟合
 
 解决过拟合的方法：
@@ -256,45 +294,7 @@ f = np.dot(w, x) + b
 
 ？？向量乘积，矩阵乘积
 
-#### 特征缩放
-
-特征缩放（Feature Scaling）是一种用于**标准化自变量或特征范围**的方法。
-
-目标：为了使梯度下降运行的更快。
-
-不同特征之间的取值范围差异较大，导致梯度下降运行低效。
-特征缩放使得不同特征之间的取值范围差异，降低至可比较的范围。
-
-- 除上限，如 [200, 1000] -> [0.2, 1]
-
-
-##### 均值归一化（Mean Normalization）
-
-与均值的差异 / 上下限的整体差异：
-
-$$
-x^{\prime} = \frac{x - \mu}{max(x) - min(x)}
-$$
-
-##### Z 分数归一化（Z-score normalization）
-
-与均值的差异 / 标准差：
-
-$$
-x^{\prime} = \frac{x - \mu}{\sigma}
-$$
-
-其中标准差（Standard Deviation）$\sigma$ 计算公式如下：
-
-$$
-\sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
-$$
-
-经验值：
-- 太大或者太小都需要：如[-0.001, 0.001]、[-100, 100]；
-- 通常[-3, 3]范围内，不需要；
-
-### 多项式回归模型
+##### 多项式回归模型
 
 (Polynomial regression)
 
@@ -326,9 +326,45 @@ $$
 g(z) = g(\vec{w} \cdot \vec{x} + b) = \frac{1}{1+e^{-(\vec{w} \cdot \vec{x} + b)}} = P(y=1|x;\vec{w},b)
 $$
 
-- KNN (K-Nearest Neighbors)：K近邻算法；
-- 决策树：
-- Nbayes（朴素贝叶斯）：
+#### K近邻算法
+
+KNN (K-Nearest Neighbors)：
+
+#### 决策树
+
+- 根节点：无入多出
+- 内部节点：一入多出
+- 叶子结点：一入无出
+
+熵
+
+基尼系数
+
+#### 随机森林
+
+回归问题：求均值
+分列问题：求众数
+
+#### 神经网络
+
+
+
+#### SVM
+
+属于线性分类器。非线性问题，可通过 kernal SVM 解决（映射到高维）；
+
+超平面：
+- 决策分界面（decision boundary）
+- 边界分界面（margin boundary）
+
+Hard-margin SVM
+Soft-margin SVM：加入了容错率
+
+
+#### 朴素贝叶斯
+
+Nbayes
+
 
 ## 无监督学习
 
@@ -357,9 +393,11 @@ $$
 
 ## 混淆矩阵
 
-用于二分类模型的效果评估。
+（confusion matrix）
 
-| 预测类别/真实类别&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
+用于分类模型的效果评估。以下以二分类模型为例：
+
+| 预测/实际&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
 | ---------- | ---------- | ---------- |
 | **Positive** | TP  | FP&nbsp;&nbsp;&nbsp; | 
 | **Negative** | FN  | TN&nbsp;&nbsp;&nbsp; | 
@@ -368,6 +406,13 @@ $$
 - 精确率（precision）：也称作查准率，指预测为正中实际为正的比例，即 $\frac{TP}{TP+FP}$
 - 召回率（recall）：也称作查全率，指实际为正中预测为正的比例，即 $\frac{TP}{TP+FN}$
 - F1：$\frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率}$
+
+## ROC 曲线
+
+[深入介紹及比較ROC曲線及PR曲線](https://medium.com/nlp-tsupei/roc-pr-%E6%9B%B2%E7%B7%9A-f3faa2231b8c)
+
+用于分类模型的效果评估，以可视化的方式。
+
 
 效果评估
 - 针对监督学习：
