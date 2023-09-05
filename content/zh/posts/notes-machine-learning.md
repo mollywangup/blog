@@ -43,7 +43,7 @@ libraries:
 - 半监督学习（Semi-Supervised Learning）：部分包含标签；
 - 强化学习（Reinforcement Learning）
 
-## 成本函数
+## 损失函数
 
 损失函数（Loss function）用于衡量预测值与实际值之间的差异程度，一般使用 $L$ 表示：
 
@@ -213,22 +213,22 @@ $$
 
 ## 监督学习
 
+### 概述
+
 训练集中**包含标签**，则属于监督学习，即 `(features, targets) -> Model`.
 
-监督学习分类及常见模型如下：
+按照预测值的类型，监督学习可分为以下两类：
 
-- 回归（Regression）：
+- 回归（Regression）：预测值为**连续型变量**；
   - 线性回归（Linear Regression）
   - 
-- 分类（Classification）：
+- 分类（Classification）：**离散型变量**；
 
-### 回归
+### 线性回归
 
-回归问题的输出值都是**连续型变量**。
+Linear Regression，解决**回归**问题。
 
-#### 线性回归模型
-
-##### 一元线性回归
+#### 一元线性回归
 
 给定包含参数的训练模型，找到一组参数，使得成本函数最小化。
 
@@ -249,7 +249,7 @@ Goal:
 
 $$ \min_{w,b} J(w,b) $$
 
-##### 多元线性回归
+#### 多元线性回归
 
 $x_j$ 表示第 $j$ 个特征
 $\vec x^{(i)}$ 表示第 $i$ 个训练示例的特征向量，一般为行向量
@@ -294,21 +294,17 @@ f = np.dot(w, x) + b
 
 ？？向量乘积，矩阵乘积
 
-##### 多项式回归模型
+### 多项式回归
 
-(Polynomial regression)
+Polynomial regression，解决**回归**问题。
 
 $$
 f_{\vec{w},b}(x) = w_1x + w_2x^2 + b
 $$
 
-### 分类
+### 逻辑回归
 
-分类问题的输出值都是**离散型变量**。
-
-#### 逻辑回归
-
-（logistic regression）
+logistic regression，解决**分类**问题。
 
 （binary classification）
 
@@ -326,11 +322,13 @@ $$
 g(z) = g(\vec{w} \cdot \vec{x} + b) = \frac{1}{1+e^{-(\vec{w} \cdot \vec{x} + b)}} = P(y=1|x;\vec{w},b)
 $$
 
-#### K近邻算法
+### K近邻算法
 
-KNN (K-Nearest Neighbors)：
+KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
 
-#### 决策树
+### 决策树
+
+Decison tree，解决**分类**问题。
 
 - 根节点：无入多出
 - 内部节点：一入多出
@@ -340,16 +338,16 @@ KNN (K-Nearest Neighbors)：
 
 基尼系数
 
-#### 随机森林
+### 随机森林
+
+Random forest，解决**分类**问题。
 
 回归问题：求均值
 分列问题：求众数
 
-#### 神经网络
+### SVM
 
-
-
-#### SVM
+支持向量机，解决**分类**问题。
 
 属于线性分类器。非线性问题，可通过 kernal SVM 解决（映射到高维）；
 
@@ -360,38 +358,52 @@ KNN (K-Nearest Neighbors)：
 Hard-margin SVM
 Soft-margin SVM：加入了容错率
 
+### 朴素贝叶斯
 
-#### 朴素贝叶斯
+Nbayes，解决**分类**问题。
 
-Nbayes
+### K近邻算法
 
+KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
+
+### 神经网络
+
+Neural Network，解决**分类+回归**问题。
 
 ## 无监督学习
 
+### 概述
+
 训练集中**不包含标签**，则属于无监督学习，即 `(features) -> Model`.
 
-无监督学习分类及常见模型如下：
-
+共分为两大类任务：
 - 聚类（Clustering）
-  - K-means
-  - DBSCAN
 - 降维（Dimensionality reduction）
-  - PCA
 
-### 聚类
+### K-means
+
+解决**聚类**问题。
 
 - K-means：将 n 个点分为 k 个簇，使得簇内具有较高的相似度，簇间具有较低的相似度；（欧氏距离）
+- 
+### DBSCAN
+
+解决**聚类**问题。
+
 - DBSCAN（密度聚类）：将 n 个点分为三类，然后删除噪音点；（曼哈顿距离）
   - 核心点：在半径 eps（两个样本被看做邻域的最大举例） 内的点的个数超过 min_samples（簇的样本数）；
   - 边界点：在半径 eps 内的点的个数不超过 min_samples，但落在核心点的邻域内；
   - 噪音点：既不是核心点，也不是边界点；
 
-### 降维
+### PCA
+
+解决**降维**问题。
 
 - PCA：主成分分析；
 
+## 模型评估
 
-## 混淆矩阵
+### 混淆矩阵
 
 （confusion matrix）
 
@@ -407,17 +419,12 @@ Nbayes
 - 召回率（recall）：也称作查全率，指实际为正中预测为正的比例，即 $\frac{TP}{TP+FN}$
 - F1：$\frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率}$
 
-## ROC 曲线
+### ROC 曲线
 
 [深入介紹及比較ROC曲線及PR曲線](https://medium.com/nlp-tsupei/roc-pr-%E6%9B%B2%E7%B7%9A-f3faa2231b8c)
 
 用于分类模型的效果评估，以可视化的方式。
 
-
-效果评估
-- 针对监督学习：
-  - 偏差（bias）：偏离程度；
-  - 方差（variance）：分散程度；
 
 训练集和测试集
 交叉验证时：将数据集分成 N 块，使用 N-1 块进行训练，再用最后一块进行测试；
