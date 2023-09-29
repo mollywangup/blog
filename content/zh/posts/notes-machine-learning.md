@@ -48,9 +48,11 @@ libraries:
 
 #### 对于监督学习
 
-Step1：确定训练模型，其中模型包括若干个特征和若干个模型参数；
-Step2：确定成本函数，用于衡量预测值与实际值之间的差异程度，是关于若干个模型参数的函数；
-Step3：求解**使得成本函数最小化**的一组参数值，可使用梯度下降算法；
+划重点：**确定训练模型和成本函数，找到一组模型参数，使得成本函数最小化**。
+
+Step1：确定训练模型（Model），其中模型包括若干个特征和若干个模型参数；
+Step2：确定成本函数（Cost function），用于衡量预测值与实际值之间的差异程度，是关于若干个模型参数的函数；
+Step3：求解**使得成本函数最小化**（Goal）的一组参数值，可使用梯度下降算法；
 
 关于损失函数和梯度下降的具体数学原理，详见结尾的附录部分。
 
@@ -71,56 +73,51 @@ Linear Regression，解决**回归**问题。
 
 #### 一元线性回归
 
-给定包含参数的训练模型，找到一组参数，使得成本函数最小化。
+##### 原理
 
-Model: 
+目标：求解一组 $(w,b)$ 使得成本函数最小化。
 
-$$ f_{w,b}(x) = wx + b $$
+$$ f_{w,b}(x) = wx + b \tag{Model} $$
 
-Parameters:
+$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{Cost function} $$
 
+$$ \min_{w,b} J(w,b) \tag{Goal} $$
+
+其中，模型参数如下:
 - $w$：weight，即权重，也是斜率（slope）；
 - $b$：bias，即偏差；
 
-Cost Function:
+##### 应用
 
-$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{Cost Function}$$
+```python
 
-Goal:
-
-$$ \min_{w,b} J(w,b) $$
+```
 
 #### 多元线性回归
+
+##### 原理
+
+目标：求解一组 $(\vec{w},b)$ 使得成本函数最小化。
 
 $x_j$ 表示第 $j$ 个特征
 $\vec x^{(i)}$ 表示第 $i$ 个训练示例的特征向量，一般为行向量
 
 $x_j^{(i)}$ 表示第 $i$ 个训练示例的第 $j$ 个特征的值
 
-Model: 
-
 $$ 
-f_{\vec{w}, b}(\vec{x}) = w_1 x_1 + ... + w_n x_n + b \\
-= \sum_{j=1}^{n} w_j x_j + b
-\tag{1}
+f_{\vec{w}, b}(\vec{x}) = w_1 x_1 + ... + w_n x_n + b 
+= \sum_{j=1}^{n} w_j x_j + b \\\\
+= \vec{w} \cdot \vec{x} + b \\\\
+\tag{Model}
 $$
 
-或者向量形式：
+$$ J(w_1,...,w_n,b) = J(\vec{w},b) \tag{Cost function}$$
 
-$$ 
-f_{\vec{w}, b}(\vec{x}) = \vec{w} \cdot \vec{x} + b
-\tag{2}
-$$
-
-Parameters:
-
+其中，模型参数如下:
 - $\vec{w} = \begin{bmatrix} w_1 & ... & w_n\end{bmatrix}$
-- $b$：bias，即偏差
+- $b$：bias，即偏差；
 
-Cost Function:
-
-$$ J(w_1,...,w_n,b) = J(\vec{w},b)$$
-
+##### 应用
 
 ```python
 import numpy as np
@@ -137,11 +134,19 @@ f = np.dot(w, x) + b
 
 ### 多项式回归
 
+##### 原理
+
 Polynomial regression，解决**回归**问题。
 
 $$
 f_{\vec{w},b}(x) = w_1x + w_2x^2 + b
 $$
+
+##### 应用
+
+```python
+
+```
 
 ### 逻辑回归
 
