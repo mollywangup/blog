@@ -109,23 +109,21 @@ $$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import datasets
+from sklearn.datasets import load_diabetes
 from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
-X, y = datasets.load_diabetes(return_X_y=True)
+features, target = load_diabetes(return_X_y=True)
 
-print(X.shape, y.shape)
+print(features.shape, target.shape)
 
 # 仅使用其中一个特征
-X = X[:, np.newaxis, 2]
-print(X.shape)
+features = features[:, np.newaxis, 2]
+print(features.shape)
 
-# 拆分训练集和测试集
-X_train = X[:-20]
-X_test = X[-20:]
-y_train = y[:-20]
-y_test = y[-20:]
+# 使用30％的测试大小进行训练/测试拆分
+X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.3, random_state=RANDOM_STATE)
 
 # 训练模型
 reg = LinearRegression().fit(X_train, y_train)
@@ -150,7 +148,7 @@ plt.yticks(())
 plt.savefig('LinearRegression.pdf')
 ```
 
-上述模型结果是 $y = 938.24x + 152.92$
+上述模型结果是 $y = 952.24x + 151.92$
 
 ##### 多元线性回归
 
