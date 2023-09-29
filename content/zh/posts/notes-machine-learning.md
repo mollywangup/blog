@@ -74,7 +74,7 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 
 Linear Regression，解决**回归**问题。包含一元线性回归和多元线性回归两类情况。
 
-<img src='/images/posts/LinearRegression.png' alt='LinearRegression'>
+<img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png' alt='Linear Regression Example'>
 
 #### 原理
 
@@ -141,15 +141,13 @@ mse = mean_squared_error(y_test, y_pred)
 r2_score = r2_score(y_test, y_pred) # The coefficient of determination: 1 is perfect prediction
 
 # 绘图
-plt.xlabel('X')
-plt.ylabel('y')
-plt.xticks(())
-plt.yticks(())
-
 plt.scatter(X_test, y_test, color='red', marker='X')
 plt.plot(X_test, y_pred, color='blue', linewidth=3)
 
-plt.savefig('LinearRegression.png')
+plt.xticks(())
+plt.yticks(())
+
+plt.savefig('LinearRegression.pdf')
 ```
 
 上述模型结果是 $y = 938.24x + 152.92$
