@@ -185,19 +185,25 @@ reg.predict(np.array([[3, 5]]))
 
 Polynomial regression，解决**回归**问题。
 
-##### 原理
+#### 原理
 
 目标：求解一组 $(\vec{w},b)$ 使得成本函数最小化。
 
-$$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + b \tag{Model: 一元二次} $$
-$$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{Model: 一元三次} $$
-$$ f_{\vec{w},b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{Model: 二元二次} $$
+$$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + b \tag{Model1} $$
+$$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{Model2} $$
+$$ f_{\vec{w},b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{Model:3} $$
 
 $$ J(\vec{w},b) =  \tag{Cost function}$$
 
 $$ \min_{w,b} J(\vec{w},b) \tag{Goal} $$
 
-##### 示例
+其中，模型参数如下:
+- $\vec{w}$：分别对应各项的权重；
+- $b$：bias，即偏差，也是截距（intercept）；
+
+说明：上述 Model1、Model2、Model3 依次是一元二次多项式、一元三次多项式、二元二次多项式。
+
+#### 示例
 
 以下示例来源于 Python 源码。
 
