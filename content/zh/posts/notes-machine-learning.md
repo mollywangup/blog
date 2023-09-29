@@ -37,12 +37,11 @@ libraries:
 
 ### 分类
 
-根据训练集中是否包含标签，可分为以下四类（本文仅涉及前两类）：
+根据训练集中包含标签的情况，可分为以下三类（本文仅涉及前两类）：
 
-- 监督学习（Supervised Learning）：包含标签；
-- 无监督学习（Unsupervised Learning）：不包含标签；
-- 半监督学习（Semi-Supervised Learning）：部分包含标签；
-- 强化学习（Reinforcement Learning）
+- 监督学习（Supervised Learning）：训练集中包含标签，学习方式有**分类**和**回归**；
+- 无监督学习（Unsupervised Learning）：训练集中不包含标签，学习方式有**聚类**和**降维**；
+- 强化学习（Reinforcement Learning）：有延迟反馈标签的学习方式；
 
 ### 核心思路
 
@@ -85,24 +84,33 @@ $$ \min_{w,b} J(w,b) \tag{Goal} $$
 
 其中，模型参数如下:
 - $w$：weight，即权重，也是斜率（slope）；
-- $b$：bias，即偏差；
+- $b$：bias，即偏差，也是截距（intercept）；
 
 ##### 应用
 
-```python
+直接使用向量的**点积**。
 
+```python
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+X = np.array([[1], [2], [3], [4]])
+y = np.dot(X, np.array([2])) + 5
+
+reg = LinearRegression().fit(X, y)
+reg.score(X, y)
+w = reg.coef_
+b = reg.intercept_
+reg.predict(np.array([[5]]))
 ```
+
+上述模型结果是 $y = 2x + 5$
 
 #### 多元线性回归
 
 ##### 原理
 
 目标：求解一组 $(\vec{w},b)$ 使得成本函数最小化。
-
-$x_j$ 表示第 $j$ 个特征
-$\vec x^{(i)}$ 表示第 $i$ 个训练示例的特征向量，一般为行向量
-
-$x_j^{(i)}$ 表示第 $i$ 个训练示例的第 $j$ 个特征的值
 
 $$ 
 f_{\vec{w}, b}(\vec{x}) = w_1 x_1 + ... + w_n x_n + b 
@@ -111,32 +119,42 @@ f_{\vec{w}, b}(\vec{x}) = w_1 x_1 + ... + w_n x_n + b
 \tag{Model}
 $$
 
-$$ J(w_1,...,w_n,b) = J(\vec{w},b) \tag{Cost function}$$
+$$ J(\vec{w},b) =  \tag{Cost function}$$
+
+$$ \min_{w,b} J(\vec{w},b) \tag{Goal} $$
 
 其中，模型参数如下:
-- $\vec{w} = \begin{bmatrix} w_1 & ... & w_n\end{bmatrix}$
-- $b$：bias，即偏差；
+- $\vec{w} = \begin{bmatrix} w_1 & ... & w_n\end{bmatrix}$，分别对应 n 个特征的权重；
+- $b$：bias，即偏差，也是截距（intercept）；
 
 ##### 应用
 
+直接使用向量的**点积**。
+
 ```python
 import numpy as np
+from sklearn.linear_model import LinearRegression
 
-w = np.array([])
-b = 1.1
-x = np.array([])
+X = np.array([[1, 1], [1, 2], [2, 2], [2, 3]])
+y = np.dot(X, np.array([1, 2])) + 3
+# y = np.array([6, 8, 9, 11])
 
-# 点积
-f = np.dot(w, x) + b
+reg = LinearRegression().fit(X, y)
+reg.score(X, y)
+w = reg.coef_
+b = reg.intercept_
+reg.predict(np.array([[3, 5]]))
 ```
 
-？？向量乘积，矩阵乘积
+上述模型结果是 $y = x_1 + 2x_2 + 3$
 
 ### 多项式回归
 
+Polynomial regression，解决**回归**问题。
+
 ##### 原理
 
-Polynomial regression，解决**回归**问题。
+目标：
 
 $$
 f_{\vec{w},b}(x) = w_1x + w_2x^2 + b
@@ -302,7 +320,7 @@ $$
 
 #### MSE Cost Function
 
-平均平方差成本函数（Mean Squared Error Cost Function），适用于线性回归模型。
+均方误差成本函数（Mean Squared Error Cost Function），适用于线性回归模型。
 
 $$
 J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (\hat y^{(i)} - y^{(i)})^2 
