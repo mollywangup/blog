@@ -48,9 +48,9 @@ libraries:
 
 #### 对于监督学习
 
-Step1：确定训练模型，其中算法模型包括若干个特征和若干个模型参数；
+Step1：确定训练模型，其中模型包括若干个特征和若干个模型参数；
 Step2：确定成本函数，用于衡量预测值与实际值之间的差异程度，是关于若干个模型参数的函数；
-Step3：求解使得成本函数最小化的一组参数值，如使用梯度下降算法；
+Step3：求解**使得成本函数最小化**的一组参数值，可使用梯度下降算法；
 
 关于损失函数和梯度下降的具体数学原理，详见结尾的附录部分。
 
@@ -59,16 +59,11 @@ Step3：求解使得成本函数最小化的一组参数值，如使用梯度下
 
 ## 监督学习
 
-### 概述
+如果训练集中**包含标签**，则属于监督学习，即 `(features, targets) -> Model` 或 $(\vec{x},y) \rightarrow \hat{y}$ 问题。
 
-训练集中**包含标签**，则属于监督学习，即 `(features, targets) -> Model`.
-
-按照预测值的类型，监督学习可分为以下两类：
-
-- 回归（Regression）：预测值为**连续型变量**；
-  - 线性回归（Linear Regression）
-  - 
-- 分类（Classification）：**离散型变量**；
+按照预测值的数据类型，可分为以下两类：
+- 回归：Regression，预测值为**连续型变量**；
+- 分类：Classification，预测值为**离散型变量**；
 
 ### 线性回归
 
@@ -89,7 +84,7 @@ Parameters:
 
 Cost Function:
 
-$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}$$
+$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{Cost Function}$$
 
 Goal:
 
@@ -300,7 +295,7 @@ $$
 J(\vec{w},b) = \displaystyle \frac{1}{m} \sum_{i=1}^{m} L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)})
 $$
 
-### MSE Cost Function
+#### MSE Cost Function
 
 平均平方差成本函数（Mean Squared Error Cost Function），适用于线性回归模型。
 
@@ -315,7 +310,7 @@ $$
 其中 `m` 为训练集中训练示例数量，几何意义上指点的个数。
 注意：除以 `2m` 而不是 ~~`m`~~，目的是在不影响结果的前提下，使得求解偏导数更加简洁（仅此而已）；
 
-### Logistic loss function
+#### Logistic loss function
 
 适用于逻辑回归模型。
 
