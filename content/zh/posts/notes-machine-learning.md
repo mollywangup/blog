@@ -31,9 +31,11 @@ libraries:
 - `Parameters`：模型参数，调整模型的本质是调整模型参数；
 - `feature engineering`：特征工程，指从原始数据中选择、提取和转换最相关的若干个特征，以提高机器学习模型的准确性；
 
+## 机器学习概述
+
 机器学习解决的问题是：给定训练集，通过机器学习算法生成最佳训练模型，最终应用于预测新特征对应的输出值。
 
-## 机器学习分类
+### 分类
 
 根据训练集中是否包含标签，可分为以下四类（本文仅涉及前两类）：
 
@@ -42,173 +44,18 @@ libraries:
 - 半监督学习（Semi-Supervised Learning）：部分包含标签；
 - 强化学习（Reinforcement Learning）
 
-## 损失函数
+### 核心思路
 
-损失函数（Loss function）用于衡量预测值与实际值之间的差异程度，一般使用 $L$ 表示：
+#### 对于监督学习
 
-$$ L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) $$
+Step1：确定训练模型，其中算法模型包括若干个特征和若干个模型参数；
+Step2：确定成本函数，用于衡量预测值与实际值之间的差异程度，是关于若干个模型参数的函数；
+Step3：求解使得成本函数最小化的一组参数值，如使用梯度下降算法；
 
-成本函数（Cost function）也称作代价函数，用于评估模型的**拟合程度**。一般使用 $J$ 表示：
+关于损失函数和梯度下降的具体数学原理，详见结尾的附录部分。
 
-$$
-J(\vec{w},b) = \displaystyle \frac{1}{m} \sum_{i=1}^{m} L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)})
-$$
+#### 对于无监督学习
 
-### Squared error cost function
-
-适用于线性回归模型。
-
-$$
-J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (\hat y^{(i)} - y^{(i)})^2 
-$$
-即
-$$ 
-J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 
-$$
-
-其中 `m` 为训练集中训练示例数量，几何意义上指点的个数。
-注意：除以 `2m` 而不是 ~~`m`~~，目的是使得求偏导数时，在不影响结果的前提下，为了更加简洁（仅此而已）；
-
-### Logistic loss function
-
-适用于逻辑回归模型。
-
-$$
-L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) = 
-\begin{cases}
--log\left(f_{\vec{w},b}(\vec{x}^{(i)})\right) & if\ y^{(i)} = 1 \\\\
--log\left(1-f_{\vec{w},b}(\vec{x}^{(i)})\right) & if\ y^{(i)} = 0 \\\\
-\end{cases}
-$$
-
-## 梯度下降
-
-### 梯度
-
-给定任意 $n$ 元**可微**函数 $$f(x_1, x_2,..., x_n)$$
-
-函数 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
-
-$$
-grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
-$$
-
-梯度的几何意义是，<mark>**梯度方向**是函数值上升最快的方向，反方向为下降最快的方向</mark>，因此可应用于求解多元函数的极值。
-
-{{< expand "偏导数">}}
-
-函数 $f$ 对自变量 $x_i$ 的偏导数，指保持其他自变量不变，当 $x_i$ 发生增量 $\Delta x_i$ 且趋向于零即 $\displaystyle \lim_{{\Delta x_i} \to 0} $ 时，函数 $f$ 的`瞬时变化率`：
-
-$$ \frac{\partial f}{\partial x_i} = \lim_{{\Delta x_i} \to 0} \frac{\Delta f}{\Delta x_i} = \lim_{{\Delta x_i} \to 0} \frac{f(x_i + {\Delta x_i}, ...) - f(x_i, ...)}{\Delta x_i}
-$$
-
-注意，可微一定可导，即任意给定点的邻域内所有偏导数存在且连续。
-
-{{< /expand >}}
-
-### 梯度下降算法
-
-梯度下降（Gradient Descent）是一种迭代优化算法，用于求解任意一个可微函数的**局部最小值**。
-
-在机器学习中，常用于**最小化成本函数**，即最大程度减小预测值与实际值之间的误差。即：
-
-给定成本函数 $J(w_1,w_2,...,w_n)$，求解一组 $(w_1,w_2,...,w_n)$，使得
-$$ \min_{w_1,w_2,...,w_n} J(w_1,w_2,...,w_n) $$
-
-实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
-
-选定初始位置 $(w_1,w_2,...,w_n)$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
-
-$$
-\begin{equation} 
-  \begin{pmatrix}
-    w_1 \\\\
-    w_2 \\\\
-    \vdots \\\\
-    w_n \\\\
-  \end{pmatrix}
-    \rightarrow
-  \begin{pmatrix}
-    w_1 \\\\
-    w_2 \\\\
-    \vdots \\\\
-    w_n \\\\
-  \end{pmatrix}
-    - \alpha
-  \begin{pmatrix}
-    \frac{\partial J}{\partial w_1} \\\\
-    \frac{\partial J}{\partial w_2} \\\\
-    \vdots \\\\
-    \frac{\partial J}{\partial w_n} \\\\
-  \end{pmatrix}
-\end{equation}
-$$
-
-说明：
-- $\alpha$ 指学习率（Learning rate），也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
-- 假设 $w$ 表示点坐标对应的向量，则上述迭代步骤可使用梯度简写为：
-  $$
-  \vec{w} \rightarrow \vec{w} - \alpha \nabla J
-  $$
-
-#### 选择学习率
-
-方法：给定不同 $\alpha$ 运行梯度下降时，绘制 $J$ 和 迭代次数的图，通过观察 $J$ **是否单调递减直至收敛**来判断 $\alpha$ 的选择是否合适；
-  - 单调递增或有增有减：$\alpha$ 太大，步子迈大了，应该降低 $\alpha$；
-  - 单调递减但未收敛：$\alpha$ 太小，学习太慢，应该提升 $\alpha$；
-
-经验值：[0.001, 0.01, 0.1, 1] 或者 [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1]
-
-
-#### 分类
-
-- 批量梯度下降（Batch Gradient Descent）：使用训练集中的所有数据
-- 随机梯度下降（SGD）：？？根据每个训练样本进行参数更新
-
-## 特征缩放
-
-特征缩放（Feature Scaling）是一种用于**标准化自变量或特征范围**的方法。
-
-目标：为了使梯度下降运行的更快。
-
-不同特征之间的取值范围差异较大，导致梯度下降运行低效。
-特征缩放使得不同特征之间的取值范围差异，降低至可比较的范围。
-
-- 除上限，如 [200, 1000] -> [0.2, 1]
-
-
-### 均值归一化（Mean Normalization）
-
-与均值的差异 / 上下限的整体差异：
-
-$$
-x^{\prime} = \frac{x - \mu}{max(x) - min(x)}
-$$
-
-### Z 分数归一化（Z-score normalization）
-
-与均值的差异 / 标准差：
-
-$$
-x^{\prime} = \frac{x - \mu}{\sigma}
-$$
-
-其中标准差（Standard Deviation）$\sigma$ 计算公式如下：
-
-$$
-\sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
-$$
-
-经验值：
-- 太大或者太小都需要：如[-0.001, 0.001]、[-100, 100]；
-- 通常[-3, 3]范围内，不需要；
-
-## 过拟合
-
-解决过拟合的方法：
-1. 收集更多的训练示例；
-2. 特征值选择；
-3. 正则化；
 
 ## 监督学习
 
@@ -439,7 +286,174 @@ Neural Network，解决**分类+回归**问题。
 - 特征向量：矩阵的特征向量。数据集结构的非零向量；空间中每个点对应的一个坐标向量。
 
 
+## 附
 
+### 成本函数
+
+损失函数（Loss function）用于衡量预测值与实际值之间的差异程度，一般使用 $L$ 表示：
+
+$$ L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) $$
+
+成本函数（Cost function）也称作代价函数，用于评估模型的**拟合程度**。一般使用 $J$ 表示：
+
+$$
+J(\vec{w},b) = \displaystyle \frac{1}{m} \sum_{i=1}^{m} L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)})
+$$
+
+### MSE Cost Function
+
+平均平方差成本函数（Mean Squared Error Cost Function），适用于线性回归模型。
+
+$$
+J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (\hat y^{(i)} - y^{(i)})^2 
+$$
+即
+$$ 
+J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 
+$$
+
+其中 `m` 为训练集中训练示例数量，几何意义上指点的个数。
+注意：除以 `2m` 而不是 ~~`m`~~，目的是在不影响结果的前提下，使得求解偏导数更加简洁（仅此而已）；
+
+### Logistic loss function
+
+适用于逻辑回归模型。
+
+$$
+L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) = 
+\begin{cases}
+-log\left(f_{\vec{w},b}(\vec{x}^{(i)})\right) & if\ y^{(i)} = 1 \\\\
+-log\left(1-f_{\vec{w},b}(\vec{x}^{(i)})\right) & if\ y^{(i)} = 0 \\\\
+\end{cases}
+$$
+即
+$$
+-y^{(i)}log(f_{\vec{w},b}(\vec{x}^{(i)}) - (1-y^{(i)})log(f_{\vec{w},b}(\vec{x}^{(i)})
+$$
+
+### 梯度下降
+
+#### 梯度定义
+
+给定任意 $n$ 元**可微**函数 $$f(x_1, x_2,..., x_n)$$
+
+则函数 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
+
+$$
+grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
+$$
+
+梯度的几何意义是，<mark>**梯度方向**是函数值上升最快的方向，反方向为下降最快的方向</mark>，因此可应用于求解多元函数的极值。
+
+{{< expand "关于偏导数">}}
+
+函数 $f$ 对自变量 $x_i$ 的偏导数，指保持其他自变量不变，当 $x_i$ 发生增量 $\Delta x_i$ 且趋向于零即 $\displaystyle \lim_{{\Delta x_i} \to 0} $ 时，函数 $f$ 的`瞬时变化率`：
+
+$$ \frac{\partial f}{\partial x_i} = \lim_{{\Delta x_i} \to 0} \frac{\Delta f}{\Delta x_i} = \lim_{{\Delta x_i} \to 0} \frac{f(x_i + {\Delta x_i}, ...) - f(x_i, ...)}{\Delta x_i}
+$$
+
+注意，可微一定可导，即任意给定点的邻域内所有偏导数存在且连续。
+
+{{< /expand >}}
+
+#### 梯度下降算法
+
+梯度下降（Gradient Descent）是一种迭代优化算法，用于求解任意一个可微函数的**局部最小值**。在机器学习中，常用于**最小化成本函数**，即最大程度减小预测值与实际值之间的误差。即：
+
+给定成本函数 $J(w_1,w_2,...,w_n)$，求解一组 $(w_1,w_2,...,w_n)$，使得
+$$ \min_{w_1,w_2,...,w_n} J(w_1,w_2,...,w_n) $$
+
+实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
+
+选定初始位置 $(w_1,w_2,...,w_n)$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
+
+$$
+\begin{equation} 
+  \begin{pmatrix}
+    w_1 \\\\
+    w_2 \\\\
+    \vdots \\\\
+    w_n \\\\
+  \end{pmatrix}
+    \rightarrow
+  \begin{pmatrix}
+    w_1 \\\\
+    w_2 \\\\
+    \vdots \\\\
+    w_n \\\\
+  \end{pmatrix}
+    - \alpha
+  \begin{pmatrix}
+    \frac{\partial J}{\partial w_1} \\\\
+    \frac{\partial J}{\partial w_2} \\\\
+    \vdots \\\\
+    \frac{\partial J}{\partial w_n} \\\\
+  \end{pmatrix}
+\end{equation}
+$$
+
+其中：
+- $\alpha$ 指学习率（Learning rate），也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
+- 假设 $\vec{w}$ 表示点坐标对应的向量，则上述迭代步骤可使用梯度简写为：
+  $$
+  \vec{w} \rightarrow \vec{w} - \alpha \nabla J
+  $$
+
+##### 选择学习率
+
+方法：给定不同 $\alpha$ 运行梯度下降时，绘制 $J$ 和 迭代次数的图，通过观察 $J$ **是否单调递减直至收敛**来判断 $\alpha$ 的选择是否合适；
+  - 单调递增或有增有减：$\alpha$ 太大，步子迈大了，应该降低 $\alpha$；
+  - 单调递减但未收敛：$\alpha$ 太小，学习太慢，应该提升 $\alpha$；
+
+经验值参考：[0.001, 0.01, 0.1, 1] 或者 [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1]
+
+
+##### 梯度分类
+
+- 批量梯度下降（Batch Gradient Descent）：使用训练集中的所有数据
+- 随机梯度下降（SGD）：？？根据每个训练样本进行参数更新
+
+### 特征缩放
+
+特征缩放（Feature Scaling）是一种用于**标准化自变量或特征范围**的方法。
+
+背景：不同特征之间的取值范围差异较大，导致梯度下降运行低效。特征缩放使得不同特征之间的取值范围差异，降低至可比较的范围。
+  - 除上限，如 [200, 1000] -> [0.2, 1]
+
+目标：为了使梯度下降运行的更快，最终提高模型训练性能。
+
+经验值：
+- 太大或者太小都需要：如[-0.001, 0.001]、[-100, 100]；
+- 通常[-3, 3]范围内，不需要；
+
+#### 均值归一化
+
+Mean Normalization，与均值的差异 / 上下限的整体差异：
+
+$$
+x^{\prime} = \frac{x - \mu}{max(x) - min(x)}
+$$
+
+#### Z 分数归一化
+
+Z-score normalization，与均值的差异 / 标准差：
+
+$$
+x^{\prime} = \frac{x - \mu}{\sigma}
+$$
+
+其中标准差（Standard Deviation）$\sigma$ 计算公式如下：
+
+$$
+\sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
+$$
+
+### 过拟合
+
+解决过拟合的方法：
+1. 收集更多的训练示例；
+2. 特征值选择；
+3. 正则化；
 
 
 <img src='https://www.nvidia.cn/content/dam/en-zz/Solutions/gtcf20/data-analytics/nvidia-ai-data-science-workflow-diagram.svg'>
