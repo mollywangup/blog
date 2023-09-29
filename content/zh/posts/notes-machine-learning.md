@@ -15,7 +15,7 @@ libraries:
 - mathjax
 ---
 
-本笔记仅涉及监督学习和无监督学习两类。涉及到的数学知识，点到为止，侧重于实际应用。
+本笔记仅涉及监督学习和无监督学习两类。涉及到的数学知识，点到为止，侧重于实际应用（Python）。
 
 统一口径：
 
@@ -88,23 +88,55 @@ $$ \min_{w,b} J(w,b) \tag{Goal} $$
 
 ##### 应用
 
-直接使用向量的**点积**。
+以下示例来源于 sklearn 的糖尿病数据集。
 
 ```python
+import matplotlib.pyplot as plt
 import numpy as np
+from sklearn import datasets
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 
-X = np.array([[1], [2], [3], [4]])
-y = np.dot(X, np.array([2])) + 5
+X, y = datasets.load_diabetes(return_X_y=True)
 
-reg = LinearRegression().fit(X, y)
-reg.score(X, y)
+print(X.shape, y.shape)
+
+# 仅使用其中一个特征
+X = X[:, np.newaxis, 2]
+print(X.shape)
+
+# 拆分训练集和测试集
+X_train = X[:-20]
+X_test = X[-20:]
+y_train = y[:-20]
+y_test = y[-20:]
+
+# 训练模型
+reg = LinearRegression().fit(X_train, y_train)
+
+# 使用测试集验证
+y_pred = reg.predict(X_test)
+
+# 模型结果
+score = reg.score(X_train, y_train)
 w = reg.coef_
 b = reg.intercept_
-reg.predict(np.array([[5]]))
+MSE = mean_squared_error(y_test, y_pred)
+r2_score = r2_score(y_test, y_pred) # The coefficient of determination: 1 is perfect prediction
+
+# 绘图
+plt.xlabel('X')
+plt.ylabel('y')
+plt.xticks(())
+plt.yticks(())
+
+plt.scatter(X_test, y_test, color="black")
+plt.plot(X_test, y_pred, color="blue", linewidth=3)
+
+plt.show()
 ```
 
-上述模型结果是 $y = 2x + 5$
+上述模型结果是 $y = 938.24x + 152.92$
 
 #### 多元线性回归
 
@@ -129,15 +161,16 @@ $$ \min_{w,b} J(\vec{w},b) \tag{Goal} $$
 
 ##### 应用
 
-直接使用向量的**点积**。
+以下示例来源于 Python 源码。
 
 ```python
+import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
 X = np.array([[1, 1], [1, 2], [2, 2], [2, 3]])
-y = np.dot(X, np.array([1, 2])) + 3
-# y = np.array([6, 8, 9, 11])
+# y = np.dot(X, np.array([1, 2])) + 3
+y = np.array([6, 8, 9, 11])
 
 reg = LinearRegression().fit(X, y)
 reg.score(X, y)
