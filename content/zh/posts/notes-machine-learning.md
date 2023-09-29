@@ -86,7 +86,7 @@ $$ \min_{w,b} J(w,b) \tag{Goal} $$
 - $w$：weight，即权重，也是斜率（slope）；
 - $b$：bias，即偏差，也是截距（intercept）；
 
-##### 应用
+##### 示例
 
 以下示例来源于 sklearn 的糖尿病数据集。
 
@@ -121,7 +121,7 @@ y_pred = reg.predict(X_test)
 score = reg.score(X_train, y_train)
 w = reg.coef_
 b = reg.intercept_
-MSE = mean_squared_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
 r2_score = r2_score(y_test, y_pred) # The coefficient of determination: 1 is perfect prediction
 
 # 绘图
@@ -159,7 +159,7 @@ $$ \min_{w,b} J(\vec{w},b) \tag{Goal} $$
 - $\vec{w} = \begin{bmatrix} w_1 & ... & w_n\end{bmatrix}$，分别对应 n 个特征的权重；
 - $b$：bias，即偏差，也是截距（intercept）；
 
-##### 应用
+##### 示例
 
 以下示例来源于 Python 源码。
 
@@ -187,16 +187,31 @@ Polynomial regression，解决**回归**问题。
 
 ##### 原理
 
-目标：
+目标：求解一组 $(\vec{w},b)$ 使得成本函数最小化。
 
-$$
-f_{\vec{w},b}(x) = w_1x + w_2x^2 + b
-$$
+$$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + b \tag{Model: 一元二次} $$
+$$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{Model: 一元三次} $$
+$$ f_{\vec{w},b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{Model: 二元二次} $$
 
-##### 应用
+$$ J(\vec{w},b) =  \tag{Cost function}$$
+
+$$ \min_{w,b} J(\vec{w},b) \tag{Goal} $$
+
+##### 示例
+
+以下示例来源于 Python 源码。
 
 ```python
+import numpy as np
+from sklearn.preprocessing import PolynomialFeatures
 
+X = np.arange(6).reshape(3, 2)
+
+poly = PolynomialFeatures(2)
+poly.fit_transform(X)
+
+poly = PolynomialFeatures(interaction_only=True)
+poly.fit_transform(X)
 ```
 
 ### 逻辑回归
