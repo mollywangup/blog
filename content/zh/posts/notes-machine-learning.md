@@ -146,8 +146,7 @@ plt.xticks(())
 plt.yticks(())
 plt.savefig('LinearRegression_diabetes.pdf')
 ```
-
-<img src='https://user-images.githubusercontent.com/46241961/271753260-b885185f-9de0-4641-a574-8ae2d4e07cda.svg' alt='' width=70%>
+<img src='https://user-images.githubusercontent.com/46241961/271753436-9a007e6d-6938-45bd-8ac3-ac9e26fce916.svg' alt='' width=100%>
 
 ##### 多元线性回归
 
