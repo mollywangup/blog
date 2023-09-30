@@ -73,6 +73,7 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 ### 线性回归
 
 Linear Regression，解决**回归**问题。包含一元线性回归和多元线性回归两类情况。
+
 <img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png' alt='Linear Regression Example' width='60%'>
 
 #### 原理
@@ -113,26 +114,29 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
-# 数据集：仅取其中一个特征
+# 加载数据集：仅取其中一个特征
 features, target = load_diabetes(return_X_y=True)
 feature = features[:, np.newaxis, 2]
-print(features.shape, target.shape, feature.shape)
+print('特征数量：{} 个（原始数据集共 {} 个特征）\n总样本量：{} 组'.format(feature.shape[1], features.shape[1], target.shape[0]))
 
-# 训练/测试拆分：7/3
+# 拆分训练集/测试集：7/3
 X_train, X_test, y_train, y_test = train_test_split(feature, target, test_size=0.3, random_state=None)
 
-# 训练模型
-reg = LinearRegression().fit(X_train, y_train)
+# 创建线性回归模型并拟合数据
+model = LinearRegression()
+model.fit(X_train, y_train)
 
-# 使用测试集验证
-y_pred = reg.predict(X_test)
+# 获取模型参数
+score = model.score(X_train, y_train)
+w = model.coef_
+b = model.intercept_
+print('模型参数：w={}, b={}'.format(w, b))
 
-# 模型结果
-score = reg.score(X_train, y_train)
-w = reg.coef_
-b = reg.intercept_
+# 使用测试集验证模型性能
+y_pred = model.predict(X_test)
 mse = mean_squared_error(y_test, y_pred)
 r2_score = r2_score(y_test, y_pred) # The coefficient of determination: 1 is perfect prediction
+print('mse：{}, r2_score：{}'.format(mse, r2_score))
 
 # 绘图
 plt.scatter(X_test, y_test, color='red', marker='X')
@@ -140,10 +144,10 @@ plt.plot(X_test, y_pred, color='blue', linewidth=3)
 plt.text(0.09, 210, '$y={}x+{}$'.format(round(w[0], 2), round(b, 2)))
 plt.xticks(())
 plt.yticks(())
-plt.savefig('LinearRegression.pdf')
+plt.savefig('LinearRegression_diabetes.pdf')
 ```
 
-上述模型结果是 $y = 952.24x + 151.92$
+<img src='https://user-images.githubusercontent.com/46241961/271753260-b885185f-9de0-4641-a574-8ae2d4e07cda.svg' alt='' width=70%>
 
 ##### 多元线性回归
 
