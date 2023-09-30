@@ -73,8 +73,7 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 ### 线性回归
 
 Linear Regression，解决**回归**问题。包含一元线性回归和多元线性回归两类情况。
-
-<img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png' alt='Linear Regression Example'>
+<img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png' alt='Linear Regression Example' width='60%'>
 
 #### 原理
 
@@ -107,23 +106,20 @@ $$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
 以下示例来源于 sklearn 的糖尿病数据集。
 
 ```python
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.datasets import load_diabetes
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
+# 数据集：仅取其中一个特征
 features, target = load_diabetes(return_X_y=True)
+feature = features[:, np.newaxis, 2]
+print(features.shape, target.shape, feature.shape)
 
-print(features.shape, target.shape)
-
-# 仅使用其中一个特征
-features = features[:, np.newaxis, 2]
-print(features.shape)
-
-# 使用30％的测试大小进行训练/测试拆分
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.3, random_state=RANDOM_STATE)
+# 训练/测试拆分：7/3
+X_train, X_test, y_train, y_test = train_test_split(feature, target, test_size=0.3, random_state=None)
 
 # 训练模型
 reg = LinearRegression().fit(X_train, y_train)
@@ -141,10 +137,9 @@ r2_score = r2_score(y_test, y_pred) # The coefficient of determination: 1 is per
 # 绘图
 plt.scatter(X_test, y_test, color='red', marker='X')
 plt.plot(X_test, y_pred, color='blue', linewidth=3)
-
+plt.text(0.09, 210, '$y={}x+{}$'.format(round(w[0], 2), round(b, 2)))
 plt.xticks(())
 plt.yticks(())
-
 plt.savefig('LinearRegression.pdf')
 ```
 
@@ -155,8 +150,8 @@ plt.savefig('LinearRegression.pdf')
 以下示例来源于 Python 源码。
 
 ```python
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 
 X = np.array([[1, 1], [1, 2], [2, 2], [2, 3]])
@@ -201,6 +196,7 @@ $$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
 ```python
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 
 X = np.arange(6).reshape(3, 2)
 
