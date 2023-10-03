@@ -2,7 +2,7 @@
 title: "学习笔记：吴恩达机器学习"
 date: 2023-08-04T08:09:47Z
 draft: false
-description: 
+description: 线性回归，多项式回归，逻辑回归，SVM，朴素贝叶斯等。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -142,9 +142,9 @@ print('mse：{}, r2_score：{}'.format(mse, r2_score))
 plt.scatter(X_test, y_test, color='red', marker='X')
 plt.plot(X_test, y_pred, color='blue', linewidth=3)
 plt.text(0.09, 210, '$y={}x+{}$'.format(round(w[0], 2), round(b, 2)))
-plt.xticks(())
-plt.yticks(())
-plt.savefig('LinearRegression_diabetes.pdf')
+# plt.xticks(())
+# plt.yticks(())
+plt.savefig('LinearRegression_diabetes.svg')
 ```
 <img src='https://user-images.githubusercontent.com/46241961/271753436-9a007e6d-6938-45bd-8ac3-ac9e26fce916.svg' alt='一元线性回归-糖尿病数据集' width=80%>
 
@@ -198,16 +198,36 @@ $$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
 
 ```python
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
-X = np.arange(6).reshape(3, 2)
+# 数据集
+X = np.arange(100).reshape((-1, 1))
+y = (np.power(X, 2) + X + 1)[:, 0]
 
-poly = PolynomialFeatures(2)
-poly.fit_transform(X)
+# 创建多项式特征（如二次多项式）
+poly_feature = PolynomialFeatures(degree=2)
+X_poly = poly.fit_transform(X)
 
-poly = PolynomialFeatures(interaction_only=True)
-poly.fit_transform(X)
+# 创建线性回归模型并拟合多项式特征
+model = LinearRegression()
+model.fit(X_poly, y)
+
+# 获取模型参数
+w = model.coef_
+b = model.intercept_
+print('模型参数：w={}, b={}'.format(w, b))
+
+# 使用测试集验证模型性能
+y_pred = model.predict(X_poly)
+
+# poly = PolynomialFeatures(interaction_only=True)
+# poly.fit_transform(X)
+
+# 绘图
+plt.scatter(X, y, color='red', marker='X')
+plt.plot(X, y_pred, color='blue')
 ```
 
 ### 逻辑回归
