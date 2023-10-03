@@ -174,6 +174,8 @@ reg.predict(np.array([[3, 5]]))
 
 Polynomial regression，解决**回归**问题。
 
+核心思想是将非线性问题转化为线性问题。
+
 #### 原理
 
 目标：求解一组 $(\vec{w},b)$ 使得成本函数最小化。
@@ -201,34 +203,49 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+rng = np.random.RandomState(0)
 
 # 数据集
-X = np.arange(100).reshape((-1, 1))
-y = (np.power(X, 2) + X + 1)[:, 0]
+x = np.linspace(-3, 7, 10)
+y = np.power(x, 3) + np.power(x, 2) + x + 1 + rng.randn(1)
+X = x[:, np.newaxis] # 训练模型或绘图时都需要 2D
 
-# 创建多项式特征（如二次多项式）
-poly_feature = PolynomialFeatures(degree=2)
-X_poly = poly.fit_transform(X)
-
-# 创建线性回归模型并拟合多项式特征
-model = LinearRegression()
-model.fit(X_poly, y)
-
-# 获取模型参数
-w = model.coef_
-b = model.intercept_
-print('模型参数：w={}, b={}'.format(w, b))
-
-# 使用测试集验证模型性能
-y_pred = model.predict(X_poly)
-
-# poly = PolynomialFeatures(interaction_only=True)
-# poly.fit_transform(X)
-
-# 绘图
+# 绘制训练集
+plt.figure(figsize=(8, 6))
 plt.scatter(X, y, color='red', marker='X')
-plt.plot(X, y_pred, color='blue')
+legend_names = ['training points']
+
+# 多项式特征的线性回归模型
+for degree in range(10):
+    # 创建多项式特征
+    poly = PolynomialFeatures(degree=degree)
+    X_poly = poly.fit_transform(X)
+    
+    # 创建线性回归模型：X_poly 与 y 为线性关系
+    model = LinearRegression()
+    model.fit(X_poly, y)
+
+    # 使用模型预测
+    y_pred = model.predict(X_poly)
+    
+    # 获取模型参数和性能指标
+    w = model.coef_
+    b = model.intercept_
+    mse = mean_squared_error(y, y_pred) # 均方误差
+    r2 = r2_score(y, y_pred) # 决定系数
+    print('当 degree 取 {} 时，mse={}, r2={}, 模型参数 w={}, b={:.4f}'.format(degree, round(mse, 3), r2, w, b))
+
+    # 绘图
+    plt.plot(X, y_pred)
+    legend_names.append('degree {}: mse {}, r2 {}'.format(degree, round(mse, 3), r2))
+
+# 添加图例
+plt.legend(legend_names)
+plt.savefig('PolynomialFeatures_LinearRegression.svg')
 ```
+<img src='https://user-images.githubusercontent.com/46241961/272204746-6f8c1665-2d34-40fc-ae86-29e8d0d7a942.svg' alt='PolynomialFeatures_LinearRegression' width='80%'>
 
 ### 逻辑回归
 
