@@ -76,33 +76,45 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 
 ### 线性回归
 
-Linear Regression，解决**回归**问题。包含一元线性回归和多元线性回归两类情况。
+线性回归（Linear Regression），解决**回归**问题。包含一元线性回归和多元线性回归两类情况。
 
-<img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png' alt='Linear Regression Example' width='60%'>
+<img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png' alt='One variable Linear Regression Example' width='60%'>
 
 #### 原理
 
-目标：求解一组 $(\vec{w},b)$ 使得成本函数最小化。
-
-$$ f_{w,b}(x) = wx + b \tag{Model1} $$
+目标：求解一组模型参数 $(\vec{w},b)$ 使得成本函数 $J$ 最小化。
 
 $$ 
-f_{\vec{w}, b}(\vec{x}) = w_1 x_1 + ... + w_n x_n + b 
-= \sum_{j=1}^{n} w_j x_j + b \\\\
-= \vec{w} \cdot \vec{x} + b \\\\
-\tag{Model2}
+f_{\vec{w},b}(\vec{x}) = \sum_{j=1}^{n} w_j x_j + b 
+= \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix} \cdot \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix} + b 
+= \vec{w} \cdot \vec{x} + b 
+\tag{Model}
 $$
 
 $$ J(\vec{w},b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 \tag{Cost function} $$
 
+$$ J(\vec{w},b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 + \alpha {\lVert \vec{w} \rVert}_1 \tag{Cost function: L1 norm} $$
+
+$$ J(\vec{w},b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 + \alpha {\lVert \vec{w} \rVert}_2^2 \tag{Cost function: L2 norm} $$
+
 $$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
 
 其中，模型参数如下:
-- $\vec{w}$：分别对应 n 个特征的权重（weights）或系数（coefficients）；
-  - 当 n = 1 时，也指斜率（slope）；
+- $\vec{w} = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}$，分别对应 n 个特征的权重（weights）或系数（coefficients）；
 - $b$：偏差（bias）或截距（intercept）；
 
-说明：上述 Model1、Model2 分别对应一元线性回归、多元线性回归。
+说明：
+- 当 n = 1 时，对应一元线性回归，即 $ f_{w,b}(x) = wx + b $；当 n >= 2 时，对应多元线性回归；
+- 对于普通最小二乘法：
+  - $MSE = \frac{1}{m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2$，但机器学习中经验使用 $\frac{1}{2} MSE$，仅用于求导数/偏导数时，计算消去常数2，并不影响结果；
+- 三种成本函数分别对应的线性回归模型：
+  - 普通线性回归：最小二乘法；
+  - Lasso 回归（也称作 L1 回归或套索回归）：
+    - 作用：可进行特征选择，即让特征系数取零；
+    - 方法：在最小二乘法的基础上，添加了 L1 正则项 $\alpha {\lVert \vec{w} \rVert}_1$ 作为惩罚（其中 $\alpha > 0$）；
+  - Ridge 岭回归（也称作 L2 回归或岭回归）：
+    - 作用：可防止过拟合；
+    - 方法：在最小二乘法的基础上，添加了 L2 正则项即 $\alpha {\lVert \vec{w} \rVert}_2^2$ 作为惩罚（其中 $\alpha > 0$）；
 
 #### 示例
 
@@ -118,13 +130,11 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
-# 加载数据集：仅取其中一个特征
+# 加载数据集：仅取其中一个特征，并拆分训练集/测试集（7/3）
 features, target = load_diabetes(return_X_y=True)
 feature = features[:, np.newaxis, 2]
-print('特征数量：{} 个（原始数据集共 {} 个特征）\n总样本量：{} 组'.format(feature.shape[1], features.shape[1], target.shape[0]))
-
-# 拆分训练集/测试集：7/3
 X_train, X_test, y_train, y_test = train_test_split(feature, target, test_size=0.3, random_state=8)
+print('特征数量：{} 个（原始数据集共 {} 个特征）\n总样本量：共 {} 组，其中训练集 {} 组，测试集 {} 组'.format(feature.shape[1], features.shape[1], target.shape[0], X_train.shape[0], X_test.shape[0]))
 
 # 创建线性回归模型并拟合数据
 model = LinearRegression()
@@ -143,14 +153,15 @@ r2_score = r2_score(y_test, y_pred) # The coefficient of determination: 1 is per
 print('mse：{}, r2_score：{}'.format(mse, r2_score))
 
 # 绘图
+plt.title('LinearRegression (One variable)')
 plt.scatter(X_test, y_test, color='red', marker='X')
-plt.plot(X_test, y_pred, color='blue', linewidth=3)
+plt.plot(X_test, y_pred, linewidth=3)
 plt.text(0.09, 210, '$y={}x+{}$'.format(round(w[0], 2), round(b, 2)))
 # plt.xticks(())
 # plt.yticks(())
 plt.savefig('LinearRegression_diabetes.svg')
 ```
-<img src='https://user-images.githubusercontent.com/46241961/271753436-9a007e6d-6938-45bd-8ac3-ac9e26fce916.svg' alt='一元线性回归-糖尿病数据集' width=80%>
+<img src='https://user-images.githubusercontent.com/46241961/273380946-b43c5d8a-fa63-4315-ad86-f97f03296638.svg' alt='一元线性回归-糖尿病数据集' width=80%>
 
 ##### 多元线性回归
 
@@ -182,7 +193,8 @@ Polynomial regression，解决**回归**问题。
 
 #### 原理
 
-目标：求解一组 $(\vec{w},b)$ 使得成本函数最小化。
+目标：求解一组模型参数 $(\vec{w},b)$ 使得成本函数 $J$ 最小化。
+
 
 $$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + b \tag{Model1} $$
 $$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{Model2} $$
