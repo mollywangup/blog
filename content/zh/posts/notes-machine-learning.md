@@ -9,13 +9,17 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Machine Learning
+- sklearn
 categories:
 - Notes
 libraries:
 - mathjax
 ---
 
-本笔记仅涉及监督学习和无监督学习两类。涉及到的数学知识，点到为止，侧重于实际应用（Python）。
+本笔记基于以下学习资料（侧重于实际应用，及直接使用数学结论）：
+> 入门机器学习：[(强推|双字)2022吴恩达机器学习Deeplearning.ai课程](https://www.bilibili.com/video/BV1Pa411X76s/)
+> Python 代码库：[scikit-learn 官网](https://scikit-learn.org/stable/index.html)
+> 复习线性代数：3Blue1Brown 的 [线性代数的本质 - 系列合集](https://www.bilibili.com/video/BV1ys411472E/)
 
 统一口径：
 
@@ -94,9 +98,9 @@ $$ J(\vec{w},b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x
 $$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
 
 其中，模型参数如下:
-- $\vec{w}$：分别对应 n 个特征的权重，也指系数（coefficients）；
+- $\vec{w}$：分别对应 n 个特征的权重（weights）或系数（coefficients）；
   - 当 n = 1 时，也指斜率（slope）；
-- $b$：bias，即偏差，也指截距（intercept）；
+- $b$：偏差（bias）或截距（intercept）；
 
 说明：上述 Model1、Model2 分别对应一元线性回归、多元线性回归。
 
@@ -120,7 +124,7 @@ feature = features[:, np.newaxis, 2]
 print('特征数量：{} 个（原始数据集共 {} 个特征）\n总样本量：{} 组'.format(feature.shape[1], features.shape[1], target.shape[0]))
 
 # 拆分训练集/测试集：7/3
-X_train, X_test, y_train, y_test = train_test_split(feature, target, test_size=0.3, random_state=None)
+X_train, X_test, y_train, y_test = train_test_split(feature, target, test_size=0.3, random_state=8)
 
 # 创建线性回归模型并拟合数据
 model = LinearRegression()
@@ -189,14 +193,14 @@ $$ J(\vec{w},b) =  \tag{Cost function}$$
 $$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
 
 其中，模型参数如下:
-- $\vec{w}$：分别对应各项的权重，也指系数（coefficients）；
-- $b$：bias，即偏差，也指截距（intercept）；
+- $\vec{w}$：分别对应各项的权重（weights）或系数（coefficients）；
+- $b$：偏差（bias）或截距（intercept）；
 
 说明：上述 Model1、Model2、Model3 依次是一元二次多项式、一元三次多项式、二元二次多项式。
 
 #### 示例
 
-以下示例来源于 Python 源码。
+以下示例为一元三次多项式。
 
 ```python
 import numpy as np
