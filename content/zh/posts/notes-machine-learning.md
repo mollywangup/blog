@@ -76,7 +76,7 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 
 ### 线性回归
 
-线性回归（Linear Regression），解决**回归**问题。包含一元线性回归和多元线性回归两类情况。
+线性回归（Linear Regression），解决线性的**回归**问题。包含一元线性回归和多元线性回归两类情况。
 
 <img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png' alt='One variable Linear Regression Example' width='60%'>
 
@@ -108,11 +108,11 @@ $$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
 - 对于普通最小二乘法：
   - $MSE = \frac{1}{m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2$，但机器学习中经验使用 $\frac{1}{2} MSE$，仅用于求导数/偏导数时，计算消去常数2，并不影响结果；
 - 三种成本函数分别对应的线性回归模型：
-  - 普通线性回归：最小二乘法；
+  - 普通最小二乘回归；
   - Lasso 回归（也称作 L1 回归或套索回归）：
     - 作用：可进行特征选择，即让特征系数取零；
     - 方法：在最小二乘法的基础上，添加了 L1 正则项 $\alpha {\lVert \vec{w} \rVert}_1$ 作为惩罚（其中 $\alpha > 0$）；
-  - Ridge 岭回归（也称作 L2 回归或岭回归）：
+  - Ridge 回归（也称作 L2 回归或岭回归）：
     - 作用：可防止过拟合；
     - 方法：在最小二乘法的基础上，添加了 L2 正则项即 $\alpha {\lVert \vec{w} \rVert}_2^2$ 作为惩罚（其中 $\alpha > 0$）；
 
@@ -141,53 +141,83 @@ model = LinearRegression()
 model.fit(X_train, y_train)
 
 # 获取模型参数
-score = model.score(X_train, y_train)
 w = model.coef_
 b = model.intercept_
 print('模型参数：w={}, b={}'.format(w, b))
 
-# 使用测试集验证模型性能
-y_pred = model.predict(X_test)
-mse = mean_squared_error(y_test, y_pred)
-r2_score = r2_score(y_test, y_pred) # The coefficient of determination: 1 is perfect prediction
-print('mse：{}, r2_score：{}'.format(mse, r2_score))
+# 衡量模型性能：R2 和 MSE
+y_train_pred = model.predict(X_train)
+y_test_pred = model.predict(X_test)
+# R2（决定系数，1最佳），计算等同于 r2_score(y_true, y_pred)
+r2_train = model.score(X_train, y_train)
+r2_test = model.score(X_test, y_test)
+# MSE（均方误差）
+mse_train = mean_squared_error(y_train, y_train_pred)
+mse_test = mean_squared_error(y_test, y_test_pred)
+print('模型性能：\n  训练集：R2={:.3f}, MSE={:.3f}\n  测试集：R2={:.3f}, MSE={:.3f}'.format(r2_train, mse_train, r2_test, mse_test))
 
 # 绘图
 plt.title('LinearRegression (One variable)')
-plt.scatter(X_test, y_test, color='red', marker='X')
+plt.scatter(X_train, y_train, color='red', marker='X')
 plt.plot(X_test, y_pred, linewidth=3)
-plt.text(0.09, 210, '$y={}x+{}$'.format(round(w[0], 2), round(b, 2)))
-# plt.xticks(())
-# plt.yticks(())
+plt.legend(['training points', 'model: $y={:.2f}x+{:.2f}$'.format(w[0], b)])
 plt.savefig('LinearRegression_diabetes.svg')
 ```
-<img src='https://user-images.githubusercontent.com/46241961/273380946-b43c5d8a-fa63-4315-ad86-f97f03296638.svg' alt='一元线性回归-糖尿病数据集' width=80%>
+<img src='https://user-images.githubusercontent.com/46241961/273402064-fdd2a737-a691-45bc-8c17-6f921e02d487.svg' alt='一元线性回归-糖尿病数据集' width=80%>
 
 ##### 多元线性回归
 
-以下示例来源于 Python 源码。
+以下示例来源于 sklearn 的糖尿病数据集，选取了所有的特征，并对比了普通最小二乘/Lasso/Ridge 三种回归的模型性能。
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
+from sklearn.datasets import load_diabetes
+from sklearn.linear_model import LinearRegression, Lasso, Ridge
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
 
-X = np.array([[1, 1], [1, 2], [2, 2], [2, 3]])
-# y = np.dot(X, np.array([1, 2])) + 3
-y = np.array([6, 8, 9, 11])
+# 加载数据集：取所有特征，并拆分训练集/测试集（7/3）
+features, target = load_diabetes(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.3, random_state=8)
+print('特征数量：{} 个\n总样本量：共 {} 组，其中训练集 {} 组，测试集 {} 组'.format(features.shape[1], target.shape[0], X_train.shape[0], X_test.shape[0]))
 
-reg = LinearRegression().fit(X, y)
-reg.score(X, y)
-w = reg.coef_
-b = reg.intercept_
-reg.predict(np.array([[3, 5]]))
+def _models(alpha=1):
+    lr = LinearRegression().fit(X_train, y_train) # 第一种：普通最小二乘回归
+    lasso = Lasso(alpha=alpha).fit(X_train, y_train) # 第二种：Lasso/L1/套索回归
+    ridge = Ridge(alpha=alpha).fit(X_train, y_train) # 第三种：Ridge/L2/岭回归
+    return lr, lasso, ridge
+
+# 对比四组 alpha 取值
+alphas_list = [0.05, 0.1, 0.5, 1]
+
+for i in range(len(alphas_list)):
+    alpha = alphas_list[i]
+    print('\n======== alpha={} ========'.format(alpha))
+    
+    # 对比三种线性模型
+    models = _models(alpha=alpha)
+    for model in models:    
+        # 模型参数
+        w = model.coef_
+        b = model.intercept_
+
+        # 模型性能：R2 和 MSE
+        r2_train = model.score(X_train, y_train)
+        r2_test = model.score(X_test, y_test)
+        mse_train = mean_squared_error(y_train, model.predict(X_train))
+        mse_test = mean_squared_error(y_test, model.predict(X_test))
+    
+        # 打印
+        model_name = model.__class__.__name__
+        print('{}：\n  模型参数：w={}, b={:.3f}\n  训练集：R2={:.3f}, MSE={:.3f}\n  测试集：R2={:.3f}, MSE={:.3f}'.format(model_name, w, b, r2_train, mse_train, r2_test, mse_test))
 ```
 
 上述模型结果是 $y = x_1 + 2x_2 + 3$
 
 ### 多项式回归
 
-Polynomial regression，解决**回归**问题。
+多项式回归（Polynomial regression），解决非线性的**回归**问题。
 
 核心思想是将非线性问题转化为线性问题。
 
@@ -226,7 +256,7 @@ rng = np.random.RandomState(0)
 # 数据集
 x = np.linspace(-3, 7, 10)
 y = np.power(x, 3) + np.power(x, 2) + x + 1 + rng.randn(1)
-X = x[:, np.newaxis] # 训练模型或绘图时都需要 2D
+X = x[:, np.newaxis]
 
 # 绘制训练集
 plt.figure(figsize=(8, 6))
@@ -446,8 +476,6 @@ $$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
 思考：
 - 当 $R^2 \to 1$ 时，表明模型质量越高，因为此时 $SSR \to SST$，即客观存在的 $SST$，可以近似全部使用 $SSR$ 解释，此时 $SSE \to 0$；
 - 当 $R^2 \to 0$ 时，表明模型质量越差，因为此时 $SSE \to SST$，即客观存在的 $SST$，几乎全部来自于 $SSE$；
-
-## 附
 
 ### 成本函数
 
