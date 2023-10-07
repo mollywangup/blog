@@ -400,6 +400,31 @@ Neural Network，解决**分类+回归**问题。
 - 协方差：线性相关性程度。若协方差为0则线性无关；
 - 特征向量：矩阵的特征向量。数据集结构的非零向量；空间中每个点对应的一个坐标向量。
 
+### $SST/SSR/SSR/R^2$
+
+<img src='https://user-images.githubusercontent.com/46241961/273396195-6b600d0a-5248-4c07-aa9c-66bbc9e36518.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
+
+定义：
+$SST$ (sum of squares total)：总平方和，用以衡量**实际值**偏离**均值**的程度。客观存在，与回归模型无关；
+$SSR$ (sum of squares due to regression)：回归平方和，用于衡量**预测值**偏离**均值**的程度；
+$SSE$ (sum of squares error)：误差平方和，用于衡量**预测值**偏离**实际值**的程度；
+$R^2$ (coefficient of determination)：决定系数，通过**回归平方和**占比**总平方和**来衡量回归模型的质量，具体指：
+  - 当 $R^2 \to 1$ 时，表明模型质量越高，因为此时 $SSR \to SST$，即客观存在的 $SST$，可以近似全部使用 $SSR$ 解释，此时 $SSE \to 0$；
+  - 当 $R^2 \to 0$ 时，表明模型质量越差，因为此时 $SSE \to SST$，即客观存在的 $SST$，几乎全部来自于 $SSE$；
+
+计算公式：
+$$ SST = \sum (y - \bar{y})^2 $$
+
+$$ SSR = \sum (\hat{y} - \bar{y})^2 $$
+
+$$ SSE = \sum (y - \hat{y})^2 $$
+
+$$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
+
+其中：
+$y$: 实际值，target
+$\hat{y}$: 预测值，prediction
+$\bar{y}$: 平均值
 
 ## 附
 
