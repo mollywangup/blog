@@ -400,11 +400,13 @@ Neural Network，解决**分类+回归**问题。
 - 协方差：线性相关性程度。若协方差为0则线性无关；
 - 特征向量：矩阵的特征向量。数据集结构的非零向量；空间中每个点对应的一个坐标向量。
 
-### SST/SSR/SSR/R<sup>2</sup>
+### SST/SSR/SSE/R<sup>2</sup>
+
+助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
 
 <img src='https://user-images.githubusercontent.com/46241961/273396195-6b600d0a-5248-4c07-aa9c-66bbc9e36518.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
 
-<br>统一说明：
+<br>以下公式统一说明：
 $y$：实际值，target
 $\hat{y}$：预测值，prediction
 $\bar{y}$：平均值，mean
