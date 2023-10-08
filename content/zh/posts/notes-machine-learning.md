@@ -21,51 +21,56 @@ libraries:
 > Python 代码库：[scikit-learn 官网](https://scikit-learn.org/stable/index.html)
 > 复习线性代数：3Blue1Brown 的 [线性代数的本质 - 系列合集](https://www.bilibili.com/video/BV1ys411472E/)
 
-统一口径：
+## 统一口径
 
 - `feature`: 指输入变量，常称作特征；
 - `label`: 指输出值，可以是实际值，也可以是预测值，常称作标签；
   - `target`: 指实际输出值；
   - `prediction`: 指预测输出值；
 - `training set`: 训练集，指用于训练模型的数据集；
-- `training example`: 训练示例 $x^{(i)}$，指训练集中的一组数据；
+- `training example`: 训练示例，指训练集中的一组数据；
 - `Model`：训练模型，即最终的拟合函数；
 - `Parameters`：模型参数，调整模型的本质是调整模型参数；
 - `feature engineering`：特征工程，指从原始数据中选择、提取和转换最相关的若干个特征，以提高机器学习模型的准确性；
-- 数学表达式约定：
-  - $m$ 表示训练集数量（使用 $i$ 遍历训练示例），$n$ 表示特征数量（使用 $j$ 遍历特征）；
-  - 小写字母（除标量外）默认指**列向量**：如 $x$ 表示特征变量，$w$ 表示回归系数，$y$ 表示实际值，$\hat{y}$ 表示预测值；
-  - 大写字母默认指**矩阵**：如矩阵 X 表示训练集中的所有特征数据，其中每一行对应一组训练示例；
-  - 强调说明：
-    - $x_j$ 表示第 $j$ 个特征，是个一元变量；
-    - $x^{(i)}$ 表示第 $i$ 个训练示例，是个列向量（矩阵 X 的第 $i$ 行）；
-    - $x^{(j)}$ 表示第 $j$ 个特征，是个列向量（矩阵 X 的第 $j$ 列）；
-    - $x^{(ij)}$ 表示第 $i$ 个训练示例的第 $j$ 个特征，是个标量；
-    - $y^{(i)}$ 和 $\hat{y}^{(i)}$ 分别表示第 $i$ 个训练示例的实际值和预测值，都是标量；
-  $$
-  x = \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix}
-  \space
-  w = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}
-  \space
-  y = \begin{bmatrix}y^{(1)} \\\\ y^{(2)} \\\\ \vdots \\\\ y^{(m)} \end{bmatrix}
-  \space
-  \hat{y} = \begin{bmatrix}\hat{y}^{(1)} \\\\ \hat{y}^{(2)} \\\\ \vdots \\\\ \hat{y}^{(m)} \end{bmatrix}
-  \space
-  $$
 
-  $$
-  X = 
-  \begin{bmatrix}
-    x^{(11)} & x^{(12)} & \dots & x^{(1n)} \\\\ 
-    x^{(21)} & x^{(22)} & \dots & x^{(2n)} \\\\ 
-    \vdots & \vdots & x^{(ij)} & \vdots \\\\ 
-    x^{(m1)} & x^{(m2)} & \dots & x^{(mn)} 
-  \end{bmatrix}
-  \space
-  x^{(i)} = \begin{bmatrix}x^{(i1)} \\\\ x^{(i2)} \\\\ \vdots \\\\ x^{(in)} \end{bmatrix}
-  \space
-  x^{(j)} = \begin{bmatrix}x^{(1j)} \\\\ x^{(2j)} \\\\ \vdots \\\\ x^{(mj)} \end{bmatrix}
-  $$
+### 数学表达式约定
+
+- $m$ 表示训练示例数量，$n$ 表示特征数量；
+- 使用 $i$ 遍历训练示例，也就是行数据；使用 $j$ 遍历特征，也就是列数据；
+- 小写字母默认指**列向量**：如 $x$ 表示特征变量，$w$ 表示回归系数，$y$ 表示实际值，$\hat{y}$ 表示预测值；
+- 大写字母默认指**矩阵**：如矩阵 $X$ 表示训练集中的所有特征数据，其中每一行对应一组训练示例；
+  
+总结起来如下：
+- $x_j$ 表示第 $j$ 个特征，是个一元变量；
+- $x^{(i)}$ 表示第 $i$ 个训练示例，是个列向量（矩阵 $X$ 的第 $i$ 行）；
+- $x^{(j)}$ 表示第 $j$ 个特征，是个列向量（矩阵 $X$ 的第 $j$ 列）；
+- $x^{(ij)}$ 表示第 $i$ 个训练示例的第 $j$ 个特征，是个标量；
+- $y^{(i)}$ 和 $\hat{y}^{(i)}$ 分别表示第 $i$ 个训练示例的实际值和预测值，都是标量；
+
+$$
+x = \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix}
+\space
+w = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}
+\space
+y = \begin{bmatrix}y^{(1)} \\\\ y^{(2)} \\\\ \vdots \\\\ y^{(m)} \end{bmatrix}
+\space
+\hat{y} = \begin{bmatrix}\hat{y}^{(1)} \\\\ \hat{y}^{(2)} \\\\ \vdots \\\\ \hat{y}^{(m)} \end{bmatrix}
+\space
+$$
+
+$$
+X = 
+\begin{bmatrix}
+  x^{(11)} & x^{(12)} & \dots & x^{(1n)} \\\\ 
+  x^{(21)} & x^{(22)} & \dots & x^{(2n)} \\\\ 
+  \vdots & \vdots & x^{(ij)} & \vdots \\\\ 
+  x^{(m1)} & x^{(m2)} & \dots & x^{(mn)} 
+\end{bmatrix}
+\space
+x^{(i)} = \begin{bmatrix}x^{(i1)} \\\\ x^{(i2)} \\\\ \vdots \\\\ x^{(in)} \end{bmatrix}
+\space
+x^{(j)} = \begin{bmatrix}x^{(1j)} \\\\ x^{(2j)} \\\\ \vdots \\\\ x^{(mj)} \end{bmatrix}
+$$
 
 ## 机器学习概述
 
