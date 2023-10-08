@@ -213,8 +213,6 @@ for i in range(len(alphas_list)):
         print('{}：\n  模型参数：w={}, b={:.3f}\n  训练集：R2={:.3f}, MSE={:.3f}\n  测试集：R2={:.3f}, MSE={:.3f}'.format(model_name, w, b, r2_train, mse_train, r2_test, mse_test))
 ```
 
-上述模型结果是 $y = x_1 + 2x_2 + 3$
-
 ### 多项式回归
 
 多项式回归（Polynomial regression），解决非线性的**回归**问题。
@@ -390,7 +388,92 @@ Neural Network，解决**分类+回归**问题。
 
 ## 模型评估
 
-### 混淆矩阵
+模型评估的目标是**选出泛化能力强的模型**以完成机器学习任务。
+
+### 评估方法
+
+留出法（Hold-out）：拆分训练集和测试集
+
+交叉验证法（Cross Validation）：将数据集分成 N 块，使用 N-1 块进行训练，再用最后一块进行测试；
+
+自助法（Bootstrap）：
+
+### 回归问题评估指标
+
+<br>以下公式统一说明：
+$y$：实际值，target
+$\hat{y}$：预测值，prediction
+$\bar{y}$：平均值，mean
+
+#### MAE
+
+MAE（Mean Absolute Error），平均绝对误差
+
+$$ MAE = \frac{1}{m} \sum_{i=1}^{m} \lvert \hat{y_i} - y_i \rvert $$
+
+#### MAPE
+
+MAPE（Mean Absolute Percentage Error），平均绝对百分误差
+
+$$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y_i - \hat{y_i}}{y_i} \rvert $$
+
+#### MSE
+
+MSE（Mean squared error），均方误差
+
+$$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y_i} - y_i)^2 $$
+
+#### RMSE
+
+RMSE（Root Mean Square Error），均方根误差
+
+$$ RMSE = \sqrt{MSE} $$
+
+#### R<sup>2</sup>
+
+R<sup>2</sup> (coefficient of determination)，决定系数，**回归平方和**占比**总平方和**来衡量回归模型的质量；
+
+$$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
+
+
+为了计算 R<sup>2</sup> ，需要先引入 SST/SSR/SSE 这三个概念。
+
+{{< boxmd >}}
+助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
+{{< /boxmd >}}
+
+<img src='https://user-images.githubusercontent.com/46241961/273396195-6b600d0a-5248-4c07-aa9c-66bbc9e36518.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
+
+
+
+
+SST (sum of squares total)，总平方和，用以衡量**实际值**偏离**均值**的程度；
+
+$$ SST = \sum (y - \bar{y})^2 $$
+
+思考：SST 客观存在，与回归模型无关；
+
+SSR (sum of squares due to regression)，回归平方和，用于衡量**预测值**偏离**均值**的程度；
+
+$$ SSR = \sum (\hat{y} - \bar{y})^2 $$
+
+思考：当 SSR = SST 时，即回归模型进行了完美的预测；
+
+SSE (sum of squares error)，误差平方和，用于衡量**预测值**偏离**实际值**的程度；
+
+$$ SSE = \sum (y - \hat{y})^2 $$
+
+思考：
+- SSE 直接决定了回归模型的质量；
+- 三者之间的关系是 $SST = SSR + SSE$；
+
+思考：
+- 当 $R^2 \to 1$ 时，表明模型质量越高，因为此时 $SSR \to SST$，即客观存在的 $SST$，可以近似全部使用 $SSR$ 解释，此时 $SSE \to 0$；
+- 当 $R^2 \to 0$ 时，表明模型质量越差，因为此时 $SSE \to SST$，即客观存在的 $SST$，几乎全部来自于 $SSE$；
+
+### 分类问题评估指标
+
+#### 混淆矩阵
 
 （confusion matrix）
 
@@ -406,15 +489,13 @@ Neural Network，解决**分类+回归**问题。
 - 召回率（recall）：也称作查全率，指实际为正中预测为正的比例，即 $\frac{TP}{TP+FN}$
 - F1：$\frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率}$
 
-### ROC 曲线
+#### ROC
 
 [深入介紹及比較ROC曲線及PR曲線](https://medium.com/nlp-tsupei/roc-pr-%E6%9B%B2%E7%B7%9A-f3faa2231b8c)
 
 用于分类模型的效果评估，以可视化的方式。
 
 
-训练集和测试集
-交叉验证时：将数据集分成 N 块，使用 N-1 块进行训练，再用最后一块进行测试；
 
 ## 附
 
@@ -429,53 +510,6 @@ Neural Network，解决**分类+回归**问题。
 - 方差：分散程度。样本和样本均值的差的平方和的均值；
 - 协方差：线性相关性程度。若协方差为0则线性无关；
 - 特征向量：矩阵的特征向量。数据集结构的非零向量；空间中每个点对应的一个坐标向量。
-
-### SST/SSR/SSE/R<sup>2</sup>
-
-助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
-
-<img src='https://user-images.githubusercontent.com/46241961/273396195-6b600d0a-5248-4c07-aa9c-66bbc9e36518.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
-
-<br>以下公式统一说明：
-$y$：实际值，target
-$\hat{y}$：预测值，prediction
-$\bar{y}$：平均值，mean
-
-#### SST
-
-SST (sum of squares total)：总平方和，用以衡量**实际值**偏离**均值**的程度；
-
-$$ SST = \sum (y - \bar{y})^2 $$
-
-思考：SST 客观存在，与回归模型无关；
-
-#### SSR
-
-SSR (sum of squares due to regression)：回归平方和，用于衡量**预测值**偏离**均值**的程度；
-
-$$ SSR = \sum (\hat{y} - \bar{y})^2 $$
-
-思考：当 SSR = SST 时，即回归模型进行了完美的预测；
-
-#### SSE
-
-SSE (sum of squares error)：误差平方和，用于衡量**预测值**偏离**实际值**的程度；
-
-$$ SSE = \sum (y - \hat{y})^2 $$
-
-思考：
-- SSE 直接决定了回归模型的质量；
-- 三者之间的关系是 $SST = SSR + SSE$；
-
-#### R<sup>2</sup>
-
-R<sup>2</sup> (coefficient of determination)：决定系数，通过**回归平方和**占比**总平方和**来衡量回归模型的质量；
-
-$$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
-
-思考：
-- 当 $R^2 \to 1$ 时，表明模型质量越高，因为此时 $SSR \to SST$，即客观存在的 $SST$，可以近似全部使用 $SSR$ 解释，此时 $SSE \to 0$；
-- 当 $R^2 \to 0$ 时，表明模型质量越差，因为此时 $SSE \to SST$，即客观存在的 $SST$，几乎全部来自于 $SSE$；
 
 ### 成本函数
 
