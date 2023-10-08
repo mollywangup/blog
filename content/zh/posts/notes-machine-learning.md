@@ -16,7 +16,7 @@ libraries:
 - mathjax
 ---
 
-本笔记基于以下学习资料（侧重于实际应用，及直接使用数学结论）：
+本笔记基于以下学习资料（侧重实际应用）：
 > 入门机器学习：[(强推|双字)2022吴恩达机器学习Deeplearning.ai课程](https://www.bilibili.com/video/BV1Pa411X76s/)
 > Python 代码库：[scikit-learn 官网](https://scikit-learn.org/stable/index.html)
 > 复习线性代数：3Blue1Brown 的 [线性代数的本质 - 系列合集](https://www.bilibili.com/video/BV1ys411472E/)
@@ -24,16 +24,48 @@ libraries:
 统一口径：
 
 - `feature`: 指输入变量，常称作特征；
-  - 一元对应 $x$，多元对应 $\vec x$
 - `label`: 指输出值，可以是实际值，也可以是预测值，常称作标签；
-  - `target`: 指实际输出值 $y$；
-  - `prediction`: 指预测输出值 $\hat y$；
+  - `target`: 指实际输出值；
+  - `prediction`: 指预测输出值；
 - `training set`: 训练集，指用于训练模型的数据集；
-- `training example`: 训练示例，指训练集中的一组数据；
-  - 一元对应 $x^{(i)}$，多元对应 $\vec x^{(i)}$
+- `training example`: 训练示例 $x^{(i)}$，指训练集中的一组数据；
 - `Model`：训练模型，即最终的拟合函数；
 - `Parameters`：模型参数，调整模型的本质是调整模型参数；
 - `feature engineering`：特征工程，指从原始数据中选择、提取和转换最相关的若干个特征，以提高机器学习模型的准确性；
+- 数学表达式约定：
+  - $m$ 表示训练集数量（使用 $i$ 遍历训练示例），$n$ 表示特征数量（使用 $j$ 遍历特征）；
+  - 小写字母（除标量外）默认指**列向量**：如 $x$ 表示特征变量，$w$ 表示回归系数，$y$ 表示实际值，$\hat{y}$ 表示预测值；
+  - 大写字母默认指**矩阵**：如矩阵 X 表示训练集中的所有特征数据，其中每一行对应一组训练示例；
+  - 强调说明：
+    - $x_j$ 表示第 $j$ 个特征，是个一元变量；
+    - $x^{(i)}$ 表示第 $i$ 个训练示例，是个列向量（矩阵 X 的第 $i$ 行）；
+    - $x^{(j)}$ 表示第 $j$ 个特征，是个列向量（矩阵 X 的第 $j$ 列）；
+    - $x^{(ij)}$ 表示第 $i$ 个训练示例的第 $j$ 个特征，是个标量；
+    - $y^{(i)}$ 和 $\hat{y}^{(i)}$ 分别表示第 $i$ 个训练示例的实际值和预测值，都是标量；
+  $$
+  x = \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix}
+  \space
+  w = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}
+  \space
+  y = \begin{bmatrix}y^{(1)} \\\\ y^{(2)} \\\\ \vdots \\\\ y^{(m)} \end{bmatrix}
+  \space
+  \hat{y} = \begin{bmatrix}\hat{y}^{(1)} \\\\ \hat{y}^{(2)} \\\\ \vdots \\\\ \hat{y}^{(m)} \end{bmatrix}
+  \space
+  $$
+
+  $$
+  X = 
+  \begin{bmatrix}
+    x^{(11)} & x^{(12)} & \dots & x^{(1n)} \\\\ 
+    x^{(21)} & x^{(22)} & \dots & x^{(2n)} \\\\ 
+    \vdots & \vdots & x^{(ij)} & \vdots \\\\ 
+    x^{(m1)} & x^{(m2)} & \dots & x^{(mn)} 
+  \end{bmatrix}
+  \space
+  x^{(i)} = \begin{bmatrix}x^{(i1)} \\\\ x^{(i2)} \\\\ \vdots \\\\ x^{(in)} \end{bmatrix}
+  \space
+  x^{(j)} = \begin{bmatrix}x^{(1j)} \\\\ x^{(2j)} \\\\ \vdots \\\\ x^{(mj)} \end{bmatrix}
+  $$
 
 ## 机器学习概述
 
@@ -82,31 +114,28 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 
 #### 原理
 
-目标：求解一组模型参数 $(\vec{w},b)$ 使得成本函数 $J$ 最小化。
+目标：求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
 $$ 
-f_{\vec{w},b}(\vec{x}) = \sum_{j=1}^{n} w_j x_j + b 
-= \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix} \cdot \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix} + b 
-= \vec{w} \cdot \vec{x} + b 
-\tag{Model}
+f_{w,b}(x) = wx + b = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix} \cdot \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix} + b = \sum_{j=1}^{n} w_j x_j + b \tag{Model}
 $$
 
-$$ J(\vec{w},b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 \tag{Cost function} $$
+$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{Cost function} $$
 
-$$ J(\vec{w},b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 + \alpha {\lVert \vec{w} \rVert}_1 \tag{Cost function: L1 norm} $$
+$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \alpha {\lVert \vec{w} \rVert}_1 \tag{Cost function: L1 norm} $$
 
-$$ J(\vec{w},b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2 + \alpha {\lVert \vec{w} \rVert}_2^2 \tag{Cost function: L2 norm} $$
+$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \alpha {\lVert \vec{w} \rVert}_2^2 \tag{Cost function: L2 norm} $$
 
-$$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
+$$ \min_{\vec{w},b} J(w,b) \tag{Goal} $$
 
 其中，模型参数如下:
-- $\vec{w} = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}$，分别对应 n 个特征的权重（weights）或系数（coefficients）；
+- $w = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}$，分别对应 n 个特征的权重（weights）或系数（coefficients）；
 - $b$：偏差（bias）或截距（intercept）；
 
 说明：
-- 当 n = 1 时，对应一元线性回归，即 $ f_{w,b}(x) = wx + b $；当 n >= 2 时，对应多元线性回归；
+- 当 n = 1 时，对应一元线性回归；当 n >= 2 时，对应多元线性回归；
 - 对于普通最小二乘法：
-  - $MSE = \frac{1}{m} \displaystyle\sum_{i=1}^{m} (f_{\vec{w},b}(\vec{x}^{(i)}) - y^{(i)})^2$，但机器学习中经验使用 $\frac{1}{2} MSE$，仅用于求导数/偏导数时，计算消去常数2，并不影响结果；
+  - $MSE = \frac{1}{m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2$，但机器学习中经验使用 $\frac{1}{2} MSE$，仅用于求导数/偏导数时，计算消去常数2，并不影响结果；
 - 三种成本函数分别对应的线性回归模型：
   - 普通最小二乘回归；
   - Lasso 回归（也称作 L1 回归或套索回归）：
@@ -224,13 +253,13 @@ for i in range(len(alphas_list)):
 目标：求解一组模型参数 $(\vec{w},b)$ 使得成本函数 $J$ 最小化。
 
 
-$$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + b \tag{Model1} $$
-$$ f_{\vec{w},b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{Model2} $$
-$$ f_{\vec{w},b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{Model3} $$
+$$ f_{w,b}(x) = w_1x + w_2x^2 + b \tag{Model1} $$
+$$ f_{w,b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{Model2} $$
+$$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{Model3} $$
 
-$$ J(\vec{w},b) =  \tag{Cost function}$$
+$$ J(w,b) =  \tag{Cost function}$$
 
-$$ \min_{\vec{w},b} J(\vec{w},b) \tag{Goal} $$
+$$ \min_{\vec{w},b} J(w,b) \tag{Goal} $$
 
 其中，模型参数如下:
 - $\vec{w}$：分别对应各项的权重（weights）或系数（coefficients）；
@@ -388,7 +417,7 @@ Neural Network，解决**分类+回归**问题。
 
 ## 模型评估
 
-模型评估的目标是**选出泛化能力强的模型**以完成机器学习任务。
+模型评估的目标是**选出泛化能力最强的模型**。
 
 ### 评估方法
 
@@ -398,7 +427,7 @@ Neural Network，解决**分类+回归**问题。
 
 自助法（Bootstrap）：
 
-### 回归问题评估指标
+### 回归评估指标
 
 <br>以下公式统一说明：
 $y$：实际值，target
@@ -471,7 +500,7 @@ $$ SSE = \sum (y - \hat{y})^2 $$
 - 当 $R^2 \to 1$ 时，表明模型质量越高，因为此时 $SSR \to SST$，即客观存在的 $SST$，可以近似全部使用 $SSR$ 解释，此时 $SSE \to 0$；
 - 当 $R^2 \to 0$ 时，表明模型质量越差，因为此时 $SSE \to SST$，即客观存在的 $SST$，几乎全部来自于 $SSE$；
 
-### 分类问题评估指标
+### 分类评估指标
 
 #### 混淆矩阵
 
@@ -515,12 +544,12 @@ $$ SSE = \sum (y - \hat{y})^2 $$
 
 损失函数（Loss function）用于衡量预测值与实际值之间的差异程度，一般使用 $L$ 表示：
 
-$$ L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) $$
+$$ L(f_{w,b}(x^{(i)}), y^{(i)}) $$
 
 成本函数（Cost function）也称作代价函数，用于评估模型的**拟合程度**。一般使用 $J$ 表示：
 
 $$
-J(\vec{w},b) = \displaystyle \frac{1}{m} \sum_{i=1}^{m} L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)})
+J(w,b) = \displaystyle \frac{1}{m} \sum_{i=1}^{m} L(f_{w,b}(x^{(i)}), y^{(i)})
 $$
 
 #### MSE Cost Function
@@ -543,15 +572,15 @@ $$
 适用于逻辑回归模型。
 
 $$
-L(f_{\vec{w},b}(\vec{x}^{(i)}), y^{(i)}) = 
+L(f_{w,b}(x^{(i)}), y^{(i)}) = 
 \begin{cases}
--log\left(f_{\vec{w},b}(\vec{x}^{(i)})\right) & if\ y^{(i)} = 1 \\\\
--log\left(1-f_{\vec{w},b}(\vec{x}^{(i)})\right) & if\ y^{(i)} = 0 \\\\
+-log\left(f_{w,b}(x^{(i)})\right) & if\ y^{(i)} = 1 \\\\
+-log\left(1-f_{w,b}(x^{(i)})\right) & if\ y^{(i)} = 0 \\\\
 \end{cases}
 $$
 即
 $$
--y^{(i)}log(f_{\vec{w},b}(\vec{x}^{(i)}) - (1-y^{(i)})log(f_{\vec{w},b}(\vec{x}^{(i)})
+-y^{(i)}log(f_{w,b}(x^{(i)}) - (1-y^{(i)})log(f_{w,b}(x^{(i)})
 $$
 
 ### 梯度下降
