@@ -447,9 +447,11 @@ $$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{
 
 #### MSE
 
-MSE（Mean squared error），均方误差。
+MSE（Mean Squared Error），均方误差。
 
 $$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
+
+常用作线性回归模型的成本函数，但经验意义上使用 $\frac{1}{2m} \displaystyle \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2$ 即除以 `2m` 而不是 ~~`m`~~，目的是在不影响结果的前提下，使得求解偏导数更加简洁（仅此而已）；
 
 #### RMSE
 
@@ -459,11 +461,13 @@ $$ RMSE = \sqrt{MSE} $$
 
 #### R<sup>2</sup>
 
-R<sup>2</sup> (coefficient of determination)，决定系数。**回归平方和**占比**总平方和**来衡量回归模型的质量；
+R<sup>2</sup> (coefficient of determination)，决定系数。衡量**总误差（客观存在且无关回归模型）中可以被回归模型解释的比例**，即拟合程度。
 
 $$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
 
-为了计算 R<sup>2</sup> ，需要先引入 SST/SSR/SSE 这三个概念。
+说明：
+当 $R^2 \to 1$ 时，表明拟合程度越好，因为此时 SSR 趋向于 SST（或 SSE 趋向于 0）；
+当 $R^2 \to 0$ 时，表明拟合程度越差，因为此时 SSR 趋向于 0（或 SSE 趋向于 SST）；
 
 {{< expand "关于 SST/SSR/SSE">}}
 
@@ -471,34 +475,23 @@ $$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
 助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
 {{< /boxmd >}}
 
-1. SST (sum of squares total)，总平方和，用以衡量**实际值**偏离**均值**的程度。SST 客观存在，与回归模型无关；
+SST (sum of squares total)，总平方和，用以衡量**实际值**相对**均值**的离散程度。SST 客观存在且与回归模型无关；
 
 $$ SST = \sum_{i=1}^{m} (y^{(i)} - \bar{y})^2 $$
 
-2. SSR (sum of squares due to regression)，回归平方和，用于衡量**预测值**偏离**均值**的程度；当 SSR = SST 时，即回归模型进行了完美的预测；
+SSR (sum of squares due to regression)，回归平方和，用于衡量**预测值**相对**均值**的离散程度。当 SSR = SST 时，回归模型完美；
 
 $$ SSR = \sum_{i=1}^{m} (\hat{y}^{(i)} - \bar{y})^2 $$
 
-3. SSE (sum of squares error)，误差平方和，用于衡量**预测值**偏离**实际值**的程度；
+SSE (sum of squares error)，误差平方和，用于衡量**预测值**相对**实际值**的离散程度；
 
 $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
+且三者之间的关系是 $SST = SSR + SSE$.
+
 {{< /expand >}}
 
-{{< boxmd >}}
-助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
-{{< /boxmd >}}
-
 <img src='https://user-images.githubusercontent.com/46241961/273468625-e2263610-af8d-4ada-9cf9-9c25eef6c3c3.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
-
-
-思考：
-- SSE 直接决定了回归模型的质量；
-- 三者之间的关系是 $SST = SSR + SSE$；
-
-思考：
-- 当 $R^2 \to 1$ 时，表明模型质量越高，因为此时 $SSR \to SST$，即客观存在的 $SST$，可以近似全部使用 $SSR$ 解释，此时 $SSE \to 0$；
-- 当 $R^2 \to 0$ 时，表明模型质量越差，因为此时 $SSE \to SST$，即客观存在的 $SST$，几乎全部来自于 $SSE$；
 
 ### 分类评估指标
 
@@ -554,18 +547,6 @@ $$
 
 #### MSE Cost Function
 
-均方误差成本函数（Mean Squared Error Cost Function），适用于线性回归模型。
-
-$$
-J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (\hat y^{(i)} - y^{(i)})^2 
-$$
-即
-$$ 
-J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 
-$$
-
-其中 `m` 为训练集中训练示例数量，几何意义上指点的个数。
-注意：除以 `2m` 而不是 ~~`m`~~，目的是在不影响结果的前提下，使得求解偏导数更加简洁（仅此而已）；
 
 #### Logistic loss function
 
