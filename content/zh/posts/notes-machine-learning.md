@@ -421,7 +421,7 @@ Neural Network，解决**分类+回归**问题。
 
 ## 模型评估
 
-模型评估的目标是**选出泛化能力最强的模型**。
+模型评估的目标是**选出泛化能力最优的模型**。
 
 ### 评估方法
 
@@ -433,68 +433,64 @@ Neural Network，解决**分类+回归**问题。
 
 ### 回归评估指标
 
-<br>以下公式统一说明：
-$y$：实际值，target
-$\hat{y}$：预测值，prediction
-$\bar{y}$：平均值，mean
-
 #### MAE
 
-MAE（Mean Absolute Error），平均绝对误差
+MAE（Mean Absolute Error），平均绝对误差。
 
-$$ MAE = \frac{1}{m} \sum_{i=1}^{m} \lvert \hat{y_i} - y_i \rvert $$
+$$ MAE = \frac{1}{m} \sum_{i=1}^{m} \lvert \hat{y}^{(i)} - y^{(i)} \rvert $$
 
 #### MAPE
 
-MAPE（Mean Absolute Percentage Error），平均绝对百分误差
+MAPE（Mean Absolute Percentage Error），平均绝对百分误差。
 
-$$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y_i - \hat{y_i}}{y_i} \rvert $$
+$$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{(i)}} \rvert $$
 
 #### MSE
 
-MSE（Mean squared error），均方误差
+MSE（Mean squared error），均方误差。
 
-$$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y_i} - y_i)^2 $$
+$$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 #### RMSE
 
-RMSE（Root Mean Square Error），均方根误差
+RMSE（Root Mean Square Error），均方根误差。
 
 $$ RMSE = \sqrt{MSE} $$
 
 #### R<sup>2</sup>
 
-R<sup>2</sup> (coefficient of determination)，决定系数，**回归平方和**占比**总平方和**来衡量回归模型的质量；
+R<sup>2</sup> (coefficient of determination)，决定系数。**回归平方和**占比**总平方和**来衡量回归模型的质量；
 
 $$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
 
-
 为了计算 R<sup>2</sup> ，需要先引入 SST/SSR/SSE 这三个概念。
+
+{{< expand "关于 SST/SSR/SSE">}}
 
 {{< boxmd >}}
 助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
 {{< /boxmd >}}
 
-<img src='https://user-images.githubusercontent.com/46241961/273396195-6b600d0a-5248-4c07-aa9c-66bbc9e36518.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
+1. SST (sum of squares total)，总平方和，用以衡量**实际值**偏离**均值**的程度。SST 客观存在，与回归模型无关；
 
+$$ SST = \sum_{i=1}^{m} (y^{(i)} - \bar{y})^2 $$
 
+2. SSR (sum of squares due to regression)，回归平方和，用于衡量**预测值**偏离**均值**的程度；当 SSR = SST 时，即回归模型进行了完美的预测；
 
+$$ SSR = \sum_{i=1}^{m} (\hat{y}^{(i)} - \bar{y})^2 $$
 
-SST (sum of squares total)，总平方和，用以衡量**实际值**偏离**均值**的程度；
+3. SSE (sum of squares error)，误差平方和，用于衡量**预测值**偏离**实际值**的程度；
 
-$$ SST = \sum (y - \bar{y})^2 $$
+$$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
-思考：SST 客观存在，与回归模型无关；
+{{< /expand >}}
 
-SSR (sum of squares due to regression)，回归平方和，用于衡量**预测值**偏离**均值**的程度；
+{{< boxmd >}}
+助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
+{{< /boxmd >}}
 
-$$ SSR = \sum (\hat{y} - \bar{y})^2 $$
+<img src='https://user-images.githubusercontent.com/46241961/273468625-e2263610-af8d-4ada-9cf9-9c25eef6c3c3.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
 
-思考：当 SSR = SST 时，即回归模型进行了完美的预测；
-
-SSE (sum of squares error)，误差平方和，用于衡量**预测值**偏离**实际值**的程度；
-
-$$ SSE = \sum (y - \hat{y})^2 $$
 
 思考：
 - SSE 直接决定了回归模型的质量；
