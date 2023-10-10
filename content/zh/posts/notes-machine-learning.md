@@ -139,11 +139,17 @@ $b$：偏差（bias）或截距（intercept）；
 
 ##### 成本函数
 
-$$ J(w,b) = \frac{1}{2} MSE = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1} $$
+$$
+J(w,b) = \frac{1}{2} MSE = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}
+$$
 
-$$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}_1 = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} {\lvert w_j \rvert} \tag{2} $$
+$$
+J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}_1 = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} {\lvert w_j \rvert} \tag{2}
+$$
 
-$$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}_2^2 = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} w_j^2 \tag{3} $$
+$$
+J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}_2^2 = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} w_j^2 \tag{3}
+$$
 
 说明：
 1. 回归系数 $w$ 在模型 $f_{w,b}(x)$ 中是参数，在成本函数 $J(w,b)$ 中属于变量；
