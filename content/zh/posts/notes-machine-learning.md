@@ -37,9 +37,9 @@ libraries:
 ### 数学表达式
 
 约定如下：
-1. m 个训练示例，n 个特征；
+1. `m` 个训练示例，`n` 个特征；
 2. 向量是一维数组，使用小写字母表示，且默认为列向量；矩阵是二维数组，使用大写字母表示；
-3. 非代码部分从 1 开始计数；
+3. 非代码部分从 `1` 开始计数；
 
 <br>具体符号：
 - $x$ 表示特征变量，$w$ 表示回归系数，$y$ 表示实际值，$\hat{y}$ 表示预测值，都是列向量；
@@ -81,10 +81,10 @@ $$
 
 ### 分类
 
-根据训练集中包含标签的情况，可分为以下三类（本文仅涉及前两类）：
+根据训练集中包含标签的情况，机器学习可分为以下三类（本文仅涉及前两类）：
 
 - 监督学习（Supervised Learning）：训练集中包含标签，分为：
-  - **回归（Regression）**
+  - **`回归（Regression）`**
   - **分类（Classification）**
 - 无监督学习（Unsupervised Learning）：训练集中不包含标签，分为：
   - **聚类（Clustering）**
@@ -108,9 +108,9 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 
 ## 监督学习算法
 
-如果训练集中**包含标签**，则属于监督学习，即 `(features, targets) -> Model` 问题。
+如果训练集中**包含标签**，则属于监督学习，即 `(features, labels) -> Model` 问题。
 
-共以下两类学习任务：
+监督学习共以下两类学习任务：
 - 回归：预测值为**连续型**，可应用于趋势预测、价格预测、流量预测等；
 - 分类：预测值为**离散型**，可应用于构建用户画像、用户行为预测、图像识别分类等；
 
@@ -124,32 +124,37 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 
 目标：求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
+##### 模型
+
 $$ 
 f_{w,b}(x) = w \cdot x + b = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix} \cdot \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix} + b = \sum_{j=1}^{n} w_j \cdot x_j + b \tag{Model}
 $$
 
-$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{Cost function} $$
+说明：当 n = 1 时，对应一元线性回归；当 n >= 2 时，对应多元线性回归；
 
-$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \alpha {\lVert \vec{w} \rVert}_1 \tag{Cost function: L1 norm} $$
+##### 模型参数
 
-$$ J(w,b) = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \alpha {\lVert \vec{w} \rVert}_2^2 \tag{Cost function: L2 norm} $$
-
-$$ \min_{\vec{w},b} J(w,b) \tag{Goal} $$
-
-其中，模型参数如下:
 - $w = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}$，分别对应 n 个特征的权重（weights）或系数（coefficients）；
 - $b$：偏差（bias）或截距（intercept）；
 
+##### 成本函数
+
+$$ J(w,b) = \frac{1}{2} MSE = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1} $$
+
+$$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}_1 = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} {\lvert w_j \rvert} \tag{2} $$
+
+$$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}_2^2 = \frac{1}{2m} \displaystyle\sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} w_j^2 \tag{3} $$
+
 说明：
-- 当 n = 1 时，对应一元线性回归；当 n >= 2 时，对应多元线性回归；
-- 三种成本函数分别对应的线性回归模型：
-  - 普通最小二乘回归；
-  - Lasso 回归（也称作 L1 回归或套索回归）：
-    - 作用：可进行特征选择，即让特征系数取零；
-    - 方法：在最小二乘法的基础上，添加了 L1 正则项 $\alpha {\lVert \vec{w} \rVert}_1$ 作为惩罚（其中 $\alpha > 0$）；
-  - Ridge 回归（也称作 L2 回归或岭回归）：
-    - 作用：可防止过拟合；
-    - 方法：在最小二乘法的基础上，添加了 L2 正则项即 $\alpha {\lVert \vec{w} \rVert}_2^2$ 作为惩罚（其中 $\alpha > 0$）；
+1. $\alpha > 0$
+2. $w$ 在模型中是参数，在成本函数中属于变量；
+3. 成本函数 $(1)$ 对应普通最小二乘回归；
+4. 成本函数 $(2)$ 对应 `Lasso 回归`，是在最小二乘的基础上，添加了 $w$ 的 L1 范数作为惩罚项，目的是进行**特征选择**（即让 $w$ 中的部分取零）；
+5. 成本函数 $(3)$ 对应 `Ridge 回归/岭回归`，在最小二乘的基础上，添加了参数 $w$ 的 L2 范数作为惩罚项，目的是**防止过拟合**。
+
+##### 目标
+
+$$ \min_{w,b} J(w,b) \tag{Goal} $$
 
 #### 示例
 
@@ -202,7 +207,7 @@ plt.savefig('LinearRegression_diabetes.svg')
 
 ##### 多元线性回归
 
-以下示例来源于 sklearn 的糖尿病数据集，选取了所有的特征，并对比了普通最小二乘/Lasso/Ridge 三种回归的模型性能。
+以下示例来源于 sklearn 的糖尿病数据集，选取了所有的特征，并对比了普通最小二乘/Lasso/Ridge 三种回归模型的性能。
 
 ```python
 import numpy as np
@@ -268,7 +273,7 @@ $$ J(w,b) =  \tag{Cost function}$$
 $$ \min_{\vec{w},b} J(w,b) \tag{Goal} $$
 
 其中，模型参数如下:
-- $\vec{w}$：分别对应各项的权重（weights）或系数（coefficients）；
+- $w$：分别对应各项的权重（weights）或系数（coefficients）；
 - $b$：偏差（bias）或截距（intercept）；
 
 说明：上述 Model1、Model2、Model3 依次是一元二次多项式、一元三次多项式、二元二次多项式。
