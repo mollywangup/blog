@@ -74,6 +74,17 @@ x^{(i)} = \begin{bmatrix}x_1^{(i)} \\\\ x_2^{(i)} \\\\ \vdots \\\\ x_n^{(i)} \en
 x_j = \begin{bmatrix}x_j^{(1)} \\\\ x_j^{(2)} \\\\ \vdots \\\\ x_j^{(m)} \end{bmatrix}
 $$
 
+$$
+X = \left [
+\begin{array}{cccc|c}
+  x_1^{(1)} & x_2^{(1)} & \dots & x_n^{(1)} & y^{(1)} \\\\ 
+  x_1^{(2)} & x_2^{(2)} & \dots & x_n^{(2)} & y^{(2)} \\\\ 
+  \vdots & \vdots & \ddots & \vdots & \vdots \\\\ 
+  x_1^{(m)} & x_2^{(m)} & \dots & x_n^{(m)} & y^{(m)} 
+\end{array}
+\right ]
+$$
+
 ## 机器学习概述
 
 机器学习解决的问题是：给定训练集，通过机器学习算法生成最佳训练模型，最终应用于预测新特征对应的输出值。
@@ -524,7 +535,7 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 ### 向量乘法
 
-点积（dot product），也称作内积，运算结果是一个标量。
+点积（Dot product），也称作点乘、内积，运算结果是一个标量。
 
 $$
 \begin{bmatrix}a \\\\ b \\\\ c \end{bmatrix}
@@ -533,11 +544,26 @@ $$
 ad + be + cf 
 $$
 
-叉乘（），也称作外积，预算结果是
+叉积（Cross product），也称作叉乘、外积，运算结果是一个向量。
+
+$$
+\begin{bmatrix}a \\\\ b \\\\ c \end{bmatrix}
+\times
+\begin{bmatrix}d \\\\ e \\\\ f \end{bmatrix} =
+\left|
+  \begin{matrix}
+  \vec{i} & \vec{j} & \vec{k} \\\\ 
+  a & b & c \\\\
+  d & e & f
+  \end{matrix}
+\right| =
+(bf-ce)\vec{i} - (af-cd)\vec{j} + (ae-bd)\vec{k} = 
+\begin{bmatrix}bf-ce \\\\ -(af-cd) \\\\ ae-bd \end{bmatrix}
+$$
 
 ### 矩阵向量乘法
 
-理解：将矩阵的列向量看做一组新的基向量 $\vec{u}, \vec{v}, \vec{w}$（非严谨说法，帮助理解），则矩阵向量乘法的几何意义是，该向量在新基向量下的新向量，也就是发生了一次线性变化。
+理解：将矩阵的列向量看作一组新的基向量 $(\vec{u}, \vec{v}, \vec{w})$（非严谨说法，帮助理解），则矩阵向量乘法的几何意义是，该向量在新基向量下的新向量，也就是发生了一次线性变化。
 
 $$
 \begin{bmatrix}a & b & c \\\\ d & e & f \\\\ g & h & i \end{bmatrix}
