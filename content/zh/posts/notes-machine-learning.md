@@ -731,34 +731,27 @@ $$
 **距离函数在机器学习中常用于相似性度量，距离越近，则相似性越高。**
 {{< /alert >}}
 
-对于 n 维空间中两点 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 和 $y = \begin{pmatrix}y_1 & y_2 & \dots & y_n \end{pmatrix}$，两点间的距离可转化为**差向量 $x - y$ 的大小的衡量**。
+对于 n 维空间中两点 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 和 $y = \begin{pmatrix}y_1 & y_2 & \dots & y_n \end{pmatrix}$，可将两点间的距离计算问题转化为量化**差向量 $x - y$ 的大小问题**。
 
-这里用到了范数。以下式 $(1) (2) (3) (4)$ 依次对应 L1、L2、L$\infty$、Lp 范数；
+以下式 $(1) (2) (3) (4)$ 用到了范数，依次对应 L1、L2、L$\infty$、Lp 范数；
 
 #### 曼哈顿距离<a id="ManhattanDistance"></a>
 
-$$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{1}$$
+$$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{1} $$
 
 #### 欧氏距离<a id="EuclideanDistance"></a>
 
-$$ ({\sum_{j=1}^{n} (x_j - y_j)^2})^{1/2} \tag{2}$$
+$$ \sqrt{\sum_{j=1}^{n} (x_j - y_j)^2} \tag{2} $$
 
 #### 切比雪夫距离<a id="ChebyshevDistance"></a>
 
-$$
-\begin{split}
-\lim_{p \to +\infty} (\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p)^{1/p} &= 
-\max (\lvert x_1 - y_1 \rvert, \lvert x_2 - y_2 \rvert, \dots, \lvert x_n - y_n \rvert)
-\end{split} \tag{3}
-$$
+$$ \max_{j} {\lvert x_j - y_j \rvert} \tag{3} $$
 
 #### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
 
 是含参数 p 的距离函数。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
 
-$$
-\sum_{j=1}^{n} ({\lvert x_j - y_j \rvert}^p)^{1/p} \tag{4}
-$$
+$$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
 
 #### 马氏距离
 
