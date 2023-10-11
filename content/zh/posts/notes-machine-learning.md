@@ -687,7 +687,7 @@ $$
 ### 范数
 
 {{< alert theme="info" >}}
-**范数是一个函数，用于量化向量或矩阵的大小，也就是将向量或矩阵映射为一个标量。**
+**范数是一个函数，用于量化向量或矩阵的大小，即将向量或矩阵映射为一个标量。**
 {{< /alert >}}
 
 #### 向量范数<a id="VectorNorms"></a>
@@ -700,22 +700,28 @@ $$
 
 则当 p 依次取 $-\infty, 1, 2, +\infty$ 时，分别对应如下范数：
 
-L1 范数：向量各元素的绝对值之和。
-
-$$ L_1 = {\lVert x \rVert}\_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} $$
-
-L2 范数：向量各元素的平方和的平方根。
-
-$$ L_2 = 
-{\lVert x \rVert}\_2 = (\sum_{j=1}^{n} {\lvert x_j \rvert}^2)^{1/2}
+$$ 
+{\lVert x \rVert}\_{-\infty} = \lim_{p \to -\infty} \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} = 
+\min_{j} {\lvert x_j \rvert} 
 $$
 
-L$\infty$ 范数：向量元素绝对值的最大值。
-
-$$ L_{+\infty} = 
-\lim_{p \to +\infty} (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p} = 
-\max (\lvert x_1 \rvert, \lvert x_2 \rvert, \dots, \lvert x_n \rvert)
+$$ 
+{\lVert x \rVert}\_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} \tag{L1}
 $$
+
+$$ 
+{\lVert x \rVert}\_2 = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^2\right)^{1/2} \tag{L2}
+$$
+
+$$ 
+{\lVert x \rVert}\_{+\infty} = \lim_{p \to +\infty} \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} = 
+\max_{j} {\lvert x_j \rvert}
+$$
+
+补充说明：
+1. L1 范数，也称作[曼哈顿距离](#ManhattanDistance)；
+2. L2 范数，也称作[欧氏距离](#EuclideanDistance)，可用于计算向量的模；
+3. L$+\infty$ 范数，也称作[切比雪夫距离](#ChebyshevDistance)或最大范数；
 
 #### 矩阵范数<a id="MatrixNorms"></a>
 
@@ -729,15 +735,15 @@ $$
 
 这里用到了范数。以下式 $(1) (2) (3) (4)$ 依次对应 L1、L2、L$\infty$、Lp 范数；
 
-#### 曼哈顿距离
+#### 曼哈顿距离<a id="ManhattanDistance"></a>
 
 $$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{1}$$
 
-#### 欧氏距离
+#### 欧氏距离<a id="EuclideanDistance"></a>
 
 $$ ({\sum_{j=1}^{n} (x_j - y_j)^2})^{1/2} \tag{2}$$
 
-#### 切比雪夫距离
+#### 切比雪夫距离<a id="ChebyshevDistance"></a>
 
 $$
 \begin{split}
@@ -746,7 +752,7 @@ $$
 \end{split} \tag{3}
 $$
 
-#### 闵可夫斯基距离
+#### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
 
 是含参数 p 的距离函数。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
 
