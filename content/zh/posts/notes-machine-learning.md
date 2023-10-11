@@ -598,7 +598,9 @@ $$
 grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
 $$
 
-<mark>**梯度方向**是函数值上升最快的方向，反方向为下降最快的方向</mark>，因此可应用于求解多元函数的极值。
+{{< alert theme="info" >}}
+**梯度方向**是函数值上升最快的方向，反方向为下降最快的方向，因此可应用于求解多元函数的极值问题。
+{{< /alert >}}
 
 {{< expand "关于偏导数">}}
 
@@ -611,7 +613,7 @@ $$
 
 {{< /expand >}}
 
-### 向量运算
+### 向量矩阵运算
 
 #### 向量加减法
 
@@ -652,7 +654,9 @@ $$
 
 #### 矩阵向量乘法
 
+{{< alert theme="info" >}}
 **矩阵是一组线性变换的组合**。
+{{< /alert >}}
 
 理解：将矩阵的列向量看作一组新的基向量 $(\vec{u}, \vec{v}, \vec{w})$（非严谨说法，帮助理解），则矩阵向量乘法的几何意义是，该向量在新基向量下的新向量，也就是发生了一次线性变化。
 
@@ -682,7 +686,9 @@ $$
 
 ### 范数
 
-范数是一个函数，用于量化向量或矩阵的大小，也就是将向量或矩阵映射为一个标量。
+{{< alert theme="info" >}}
+**范数是一个函数，用于量化向量或矩阵的大小，也就是将向量或矩阵映射为一个标量。**
+{{< /alert >}}
 
 #### 向量范数<a id="VectorNorms"></a>
 
@@ -713,36 +719,37 @@ $$
 
 ### 距离函数
 
+{{< alert theme="info" >}}
 **距离函数在机器学习中常用于相似性度量，距离越近，则相似性越高。**
+{{< /alert >}}
 
 对于 n 维空间中两点 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 和 $y = \begin{pmatrix}y_1 & y_2 & \dots & y_n \end{pmatrix}$，两点间的距离可转化为**差向量 $x - y$ 的大小的衡量**。这里用到了范数。
 
+以下式 $(1) (2) (3) (4)$ 一次对应 L1/L2L$\infty$Lp范数；
+
 #### 曼哈顿距离
 
-$$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{L1 范数}$$
+$$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{1}$$
 
 #### 欧氏距离
 
-即差向量的 L2 范数：
-
-$$ ({\sum_{j=1}^{n} (x_j - x_j)^2})^{1/2} \tag{L2 范数}$$
+$$ ({\sum_{j=1}^{n} (x_j - y_j)^2})^{1/2} \tag{2}$$
 
 #### 切比雪夫距离
 
 $$
 \begin{split}
-\lim_{p \to +\infty} (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p} &= 
+\lim_{p \to +\infty} (\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p)^{1/p} &= 
 \max (\lvert x_1 - y_1 \rvert, \lvert x_2 - y_2 \rvert, \dots, \lvert x_n - y_n \rvert)
-\end{split}
-\tag{L$\infty$ 范数}
+\end{split} \tag{3}
 $$
 
 #### 闵可夫斯基距离
 
-对应 Lp 范数，是一组距离的定义。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
+是含参数 p 的距离函数。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
 
 $$
-\sum_{j=1}^{n} ({\lvert x_{1j} - x_{2j} \rvert}^p)^{1/p} \tag{Lp 范数}
+\sum_{j=1}^{n} ({\lvert x_j - y_j \rvert}^p)^{1/p} \tag{4}
 $$
 
 #### 马氏距离
