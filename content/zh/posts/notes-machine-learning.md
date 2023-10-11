@@ -173,8 +173,8 @@ $$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_2^2 \tag{岭回归} $$
 说明：
 1. 使用 $\frac{1}{2} MSE$，仅是为了在求导数/偏导数时消去常数 2，并不影响结果；
 2. $(w, b)$ 在模型 $f_{w,b}(x)$ 中是参数，在成本函数 $J(w,b)$ 中是变量；
-3. `套索回归（Lasso）`，用于**特征选择**，即让 $w$ 中的部分取零。是在普通最小二乘的基础上，添加了回归系数的 `L1 范数`（${\lVert w \rVert}\_1 = \displaystyle \sum_{j=1}^{n} {\lvert w_j \rvert}$）作为惩罚项；
-4. `岭回归（Ridge）`，用于**防止过拟合**。是在普通最小二乘的基础上，添加了回归系数的 `L2 范数`（${\lVert w \rVert}\_2^2 = \displaystyle \sum_{j=1}^{n} w_j^2$）作为惩罚项；
+3. `套索回归（Lasso）`：用于**特征选择**，即让回归系数稀疏（sparse）。是在普通最小二乘的基础上，添加了回归系数的 [L1 范数](#VectorNorms)（${\lVert w \rVert}\_1 = \displaystyle \sum_{j=1}^{n} {\lvert w_j \rvert}$）作为惩罚项；
+4. `岭回归（Ridge）`：用于**防止过拟合**。是在普通最小二乘的基础上，添加了回归系数的 `L2 范数`（${\lVert w \rVert}\_2^2 = \displaystyle \sum_{j=1}^{n} w_j^2$）作为惩罚项；
 5. 参数 $\alpha$：非负标量，作为伸缩系数，为了控制惩罚项的大小。
 
 ##### 目标
@@ -669,11 +669,34 @@ $$
 
 理解：多次线性变化的叠加。
 
+### 范数
+
+范数是一个函数，用于量化向量、矩阵的大小，也就是将向量、矩阵映射为一个标量。
+
+#### 向量范数<a id="VectorNorms"></a>
+
+对于向量 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$，p 范数公式如下：
+
+$$ 
+{\lVert x \rVert}_p = \left(\displaystyle \sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} $$
+
+L1 范数：对应 p 取 1，${\lVert x \rVert}_1 = \displaystyle \sum_{j=1}^{n} {\lvert x_j \rvert}$，等于原点到向量终点的曼哈顿距离；
+L2 范数：对应 p 取 2，${\lVert x \rVert}_2 = \left(\displaystyle \sum_{j=1}^{n} {\lvert x_j \rvert}^2\right)^{1/2}$，也称作欧几里得范数，等于原点到向量终点的欧氏距离；
+
+#### 矩阵范数<a id="MatrixNorms"></a>
+
+### 距离函数
+
+对于向量 $x_1 = \begin{pmatrix}x_{11} & x_{12} & \dots & x_{1n} \end{pmatrix}$ 和向量 $x_2 = \begin{pmatrix}x_{21} & y_{22} & \dots & y_{2n} \end{pmatrix}$，则对应两点间的距离计算公式有如下若干种方法：
+
+曼哈顿距离：$\displaystyle \sum_{j=1}^{n} \lvert x_{1j} - x_{2j} \rvert$
+欧氏距离：$\sqrt{\displaystyle \sum_{j=1}^{n} (x_{1j} - x_{2j})^2}$
+闵可夫斯基距离：
+
 ## 附
 
 两点之间距离的计算方式（相似度衡量）：
-- 欧氏距离：差的平方和的平方根；
-- 曼哈顿距离：差的绝对值的和；
+
 - 马氏距离：？？协方差距离
 - 余弦相似度（cosine similarity）：用两个向量夹角的余弦值衡量两个样本差异的大小；（越接近于1，说明夹角越接近于0，表明越相似）
 
