@@ -164,28 +164,18 @@ $$
 
 在机器学习中，基于 MSE 共以下三种常见成本函数：
 
-$$
-J(w,b) = \frac{1}{2} MSE = 
-\frac{1}{2m} {\lVert X \cdot w + b - y \rVert}\_2^2 \tag{1}
-$$
+$$ J(w,b) = \frac{1}{2} MSE \tag{普通最小二乘回归} $$
 
-$$
-J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_1 = 
-\frac{1}{2m} {\lVert X \cdot w + b - y \rVert}\_2^2 + \alpha {\lVert w \rVert}\_1 \tag{2}
-$$
+$$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_1 \tag{Lasso 回归} $$
 
-$$
-J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_2^2 = 
-\frac{1}{2m} {\lVert X \cdot w + b - y \rVert}\_2^2 + \alpha {\lVert w \rVert}\_2^2 \tag{3}
-$$
+$$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_2^2 \tag{岭回归} $$
 
 说明：
 1. 使用 $\frac{1}{2} MSE$，仅是为了在求导数/偏导数时消去常数 2，并不影响结果；
 2. $(w, b)$ 在模型 $f_{w,b}(x)$ 中是参数，在成本函数 $J(w,b)$ 中是变量；
-3. $(1)$ 式对应`普通最小二乘回归（OLS）`（Ordinary Least Squares）；
-4. $(2)$ 式对应 `套索回归（Lasso）`，是在普通最小二乘的基础上，添加了回归系数的 `L1 范数`（${\lVert w \rVert}\_1 = \displaystyle \sum_{j=1}^{n} {\lvert w_j \rvert}$）作为惩罚项，目的是进行**特征选择**（即让 $w$ 中的部分取零）；
-5. $(3)$ 式对应 `岭回归（Ridge）`，在普通最小二乘的基础上，添加了回归系数的 `L2 范数`（${\lVert w \rVert}\_2^2 = \displaystyle \sum_{j=1}^{n} w_j^2$）作为惩罚项，目的是**防止过拟合** ；
-6. 标量 $\alpha$，作为伸缩系数，非负，为了控制惩罚项的大小。
+3. `套索回归（Lasso）`，用于**特征选择**，即让 $w$ 中的部分取零。是在普通最小二乘的基础上，添加了回归系数的 `L1 范数`（${\lVert w \rVert}\_1 = \displaystyle \sum_{j=1}^{n} {\lvert w_j \rvert}$）作为惩罚项；
+4. `岭回归（Ridge）`，用于**防止过拟合**。是在普通最小二乘的基础上，添加了回归系数的 `L2 范数`（${\lVert w \rVert}\_2^2 = \displaystyle \sum_{j=1}^{n} w_j^2$）作为惩罚项；
+5. 参数 $\alpha$：非负标量，作为伸缩系数，为了控制惩罚项的大小。
 
 ##### 目标
 
