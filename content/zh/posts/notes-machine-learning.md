@@ -611,7 +611,18 @@ $$
 
 {{< /expand >}}
 
-### 向量乘法
+### 向量运算
+
+#### 向量加减法
+
+$$
+\begin{bmatrix}a \\\\ b \\\\ c \end{bmatrix}
+\pm
+\begin{bmatrix}d \\\\ e \\\\ f \end{bmatrix} =
+\begin{bmatrix}a \pm d \\\\ b \pm e \\\\ c \pm f \end{bmatrix}
+$$
+
+#### 向量乘法
 
 点积（Dot product），也称作点乘、内积，运算结果是一个标量。
 
@@ -639,7 +650,7 @@ $$
 \begin{bmatrix}bf-ce \\\\ -(af-cd) \\\\ ae-bd \end{bmatrix}
 $$
 
-### 矩阵向量乘法
+#### 矩阵向量乘法
 
 **矩阵是一组线性变换的组合**。
 
@@ -665,61 +676,89 @@ z \begin{bmatrix}0 \\\\ 0 \\\\ 1 \end{bmatrix} =
 \begin{bmatrix}x \\\\ y \\\\ z \end{bmatrix}
 $$
 
-### 矩阵矩阵乘法
+#### 矩阵矩阵乘法
 
 理解：多次线性变化的叠加。
 
 ### 范数
 
-范数是一个函数，用于量化向量、矩阵的大小，也就是将向量、矩阵映射为一个标量。
+范数是一个函数，用于量化向量或矩阵的大小，也就是将向量或矩阵映射为一个标量。
 
 #### 向量范数<a id="VectorNorms"></a>
 
 对于向量 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$，p 范数公式如下：
 
 $$ 
-{\lVert x \rVert}\_p = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p}
+{\lVert x \rVert}\_p = (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p}
 $$
 
-L1 范数：对应 p 取 1，等于原点到向量终点的曼哈顿距离；
+L1 范数：对应 p 取 1，向量各元素的绝对值之和。
 
 $$ {\lVert x \rVert}\_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} $$
 
-L2 范数：对应 p 取 2，也称作欧几里得范数，等于原点到向量终点的欧氏距离；
+L2 范数：对应 p 取 2，向量各元素的平方和的平方根。
 
 $$
-{\lVert x \rVert}\_2 = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^2\right)^{1/2}
+{\lVert x \rVert}\_2 = (\sum_{j=1}^{n} {\lvert x_j \rvert}^2)^{1/2}
+$$
+
+L$\infty$ 范数：对应 p 取 $\infty$，向量元素绝对值的最大值。
+
+$$
+\lim_{p \to \infty} (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p} = 
+\max (\lvert x_1 \rvert, \lvert x_2 \rvert, \dots, \lvert x_n \rvert)
 $$
 
 #### 矩阵范数<a id="MatrixNorms"></a>
 
 ### 距离函数
 
-对于向量 $x_1 = \begin{pmatrix}x_{11} & x_{12} & \dots & x_{1n} \end{pmatrix}$ 和向量 $x_2 = \begin{pmatrix}x_{21} & y_{22} & \dots & y_{2n} \end{pmatrix}$，则对应两点间的距离计算有如下若干种方法：
+**距离函数在机器学习中常用于相似性度量，距离越近，则相似性越高。**
 
-曼哈顿距离，对应 L1 范数；
-$$ d_{12} = \sum_{j=1}^{n} \lvert x_{1j} - x_{2j} \rvert $$
+对于 n 维空间中两点 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 和 $y = \begin{pmatrix}y_1 & y_2 & \dots & y_n \end{pmatrix}$，两点间的距离可转化为**差向量 $x - y$ 的大小的衡量**。这里用到了范数。
 
-欧氏距离，对应 L2 范数；
-$$ d_{12} = \sqrt{\sum_{j=1}^{n} (x_{1j} - x_{2j})^2} $$
+#### 曼哈顿距离
 
-切比雪夫距离；
-$$ d_{12} = {\sum_{j=1}^{n} (x_{1j} - x_{2j})^2} $$
-$$ \max_{w,b} J(w,b) $$
+$$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{L1 范数}$$
 
-闵可夫斯基距离：是一组距离的定义，对应 Lp 范数；
-$$ d_{12} = \sum_{j=1}^{n} \left({\lvert x_{1j} - x_{2j} \rvert}^p\right)^{1/p} $$
+#### 欧氏距离
+
+即差向量的 L2 范数：
+
+$$ ({\sum_{j=1}^{n} (x_j - x_j)^2})^{1/2} \tag{L2 范数}$$
+
+#### 切比雪夫距离
+
+$$
+\begin{split}
+\lim_{p \to +\infty} (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p} &= 
+\max (\lvert x_1 - y_1 \rvert, \lvert x_2 - y_2 \rvert, \dots, \lvert x_n - y_n \rvert)
+\end{split}
+\tag{L$\infty$ 范数}
+$$
+
+#### 闵可夫斯基距离
+
+对应 Lp 范数，是一组距离的定义。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
+
+$$
+\sum_{j=1}^{n} ({\lvert x_{1j} - x_{2j} \rvert}^p)^{1/p} \tag{Lp 范数}
+$$
+
+#### 马氏距离
+
+？？协方差距离
+
+#### 汉明距离
+
+#### 杰卡德距离
+
 
 ## 附
 
-两点之间距离的计算方式（相似度衡量）：
-
-- 马氏距离：？？协方差距离
 - 余弦相似度（cosine similarity）：用两个向量夹角的余弦值衡量两个样本差异的大小；（越接近于1，说明夹角越接近于0，表明越相似）
 
-
 一些术语概念：
-- 方差：分散程度。样本和样本均值的差的平方和的均值；
 - 协方差：线性相关性程度。若协方差为0则线性无关；
 - 特征向量：矩阵的特征向量。数据集结构的非零向量；空间中每个点对应的一个坐标向量。
 
