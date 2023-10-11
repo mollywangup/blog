@@ -127,7 +127,21 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 ##### 模型
 
 $$ 
-f_{w,b}(x) = w \cdot x + b = \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix} \cdot \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix} + b = \sum_{j=1}^{n} w_j \cdot x_j + b \tag{Model}
+f_{w,b}(x) = w \cdot x + b = 
+\begin{bmatrix}
+  w_1 \\\
+  w_2 \\\
+  \vdots \\\
+  w_n 
+\end{bmatrix} 
+\cdot 
+\begin{bmatrix}
+  x_1 \\\
+  x_2 \\\ 
+  \vdots \\\
+  x_n 
+\end{bmatrix} + b =
+\sum_{j=1}^{n} w_j \cdot x_j + b \tag{Model}
 $$
 
 说明：当 n = 1 时，对应一元线性回归；当 n >= 2 时，对应多元线性回归；
@@ -139,19 +153,22 @@ $b$：偏差（bias）或截距（intercept），是标量；
 
 ##### 成本函数
 
-[MSE]({{  < relref "######模型参数" >  }})指**预测值与实际值之间误差的平方和的均值**，可作为模型质量的评估指标。为了求得该指标的**极小值**，便引入了成本函数 $J$，具体公式如下：
+[MSE](#mse) 指**预测值与实际值之间误差的平方和的均值**，可作为模型质量的评估指标。为了求得该指标的**极小值**，便引入了成本函数 $J$，具体公式如下：
 
 $$
-J(w,b) = \frac{1}{2} MSE = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}
+J(w,b) = \frac{1}{2} MSE = 
+\frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}
 $$
 
 <!-- 坑：这里是因为“下划线被解释成Markdown语法了，因此需要加\转义” 参考 https://github.com/theme-next/hexo-theme-next/issues/826 {\lVert w \rVert}\_1 正常不需要加，但为了渲染需要加--> 
 $$
-J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_1 = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} {\lvert w_j \rvert} \tag{2}
+J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_1 = 
+\frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} {\lvert w_j \rvert} \tag{2}
 $$
 
 $$
-J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_2^2 = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} w_j^2 \tag{3}
+J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_2^2 = 
+\frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} w_j^2 \tag{3}
 $$
 
 说明：
@@ -462,7 +479,7 @@ MAPE（Mean Absolute Percentage Error），平均绝对百分误差。
 
 $$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{(i)}} \rvert $$
 
-#### MSE
+#### MSE<a id="mse"></a>
 
 MSE（Mean Squared Error），均方误差。
 
