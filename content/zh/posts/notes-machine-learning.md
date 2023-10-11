@@ -155,9 +155,11 @@ $b$：偏差（bias）或截距（intercept），是标量；
 
 <!-- 坑：这里是因为“下划线被解释成Markdown语法了，因此需要加\转义” 参考 https://github.com/theme-next/hexo-theme-next/issues/826 {\lVert w \rVert}\_1 正常不需要加，但为了渲染需要加-->
 $$
-MSE = \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 = 
-\frac{1}{m} \sum_{i=1}^{m} (w \cdot x^{(i)} + b - y^{(i)})^2 = 
-\frac{1}{m} {\lVert X \cdot w + b - y \rVert}\_2^2
+\begin{split}
+MSE &= \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \\\\
+&= \frac{1}{m} \sum_{i=1}^{m} (w \cdot x^{(i)} + b - y^{(i)})^2 \\\\
+&= \frac{1}{m} {\lVert X \cdot w + b - y \rVert}\_2^2
+\end{split}
 $$
 
 在机器学习中，基于 MSE 共以下三种常见成本函数：
@@ -178,7 +180,7 @@ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_2^2 =
 $$
 
 说明：
-1. 使用 $\frac{1}{2}$ 即除以 `2m` 而不是 ~~`m`~~，仅是为了在求导数/偏导数时消去常数 2，并不影响结果；
+1. 使用 $\frac{1}{2} MSE$，仅是为了在求导数/偏导数时消去常数 2，并不影响结果；
 2. $(w, b)$ 在模型 $f_{w,b}(x)$ 中是参数，在成本函数 $J(w,b)$ 中是变量；
 3. $(1)$ 式对应`普通最小二乘回归（OLS）`（Ordinary Least Squares）；
 4. $(2)$ 式对应 `套索回归（Lasso）`，是在普通最小二乘的基础上，添加了回归系数的 `L1 范数`（${\lVert w \rVert}\_1 = \displaystyle \sum_{j=1}^{n} {\lvert w_j \rvert}$）作为惩罚项，目的是进行**特征选择**（即让 $w$ 中的部分取零）；
@@ -189,7 +191,7 @@ $$
 
 求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
-$$ \min_{w,b} J(w,b) \tag{Goal} $$
+$$ \min_{w,b} J(w,b) $$
 
 #### 示例
 
