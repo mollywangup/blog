@@ -678,20 +678,37 @@ $$
 对于向量 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$，p 范数公式如下：
 
 $$ 
-{\lVert x \rVert}_p = \left(\displaystyle \sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} $$
+{\lVert x \rVert}\_p = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p}
+$$
 
-L1 范数：对应 p 取 1，${\lVert x \rVert}_1 = \displaystyle \sum_{j=1}^{n} {\lvert x_j \rvert}$，等于原点到向量终点的曼哈顿距离；
-L2 范数：对应 p 取 2，${\lVert x \rVert}_2 = \left(\displaystyle \sum_{j=1}^{n} {\lvert x_j \rvert}^2\right)^{1/2}$，也称作欧几里得范数，等于原点到向量终点的欧氏距离；
+L1 范数：对应 p 取 1，等于原点到向量终点的曼哈顿距离；
+
+$$ {\lVert x \rVert}\_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} $$
+
+L2 范数：对应 p 取 2，也称作欧几里得范数，等于原点到向量终点的欧氏距离；
+
+$$
+{\lVert x \rVert}\_2 = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^2\right)^{1/2}
+$$
 
 #### 矩阵范数<a id="MatrixNorms"></a>
 
 ### 距离函数
 
-对于向量 $x_1 = \begin{pmatrix}x_{11} & x_{12} & \dots & x_{1n} \end{pmatrix}$ 和向量 $x_2 = \begin{pmatrix}x_{21} & y_{22} & \dots & y_{2n} \end{pmatrix}$，则对应两点间的距离计算公式有如下若干种方法：
+对于向量 $x_1 = \begin{pmatrix}x_{11} & x_{12} & \dots & x_{1n} \end{pmatrix}$ 和向量 $x_2 = \begin{pmatrix}x_{21} & y_{22} & \dots & y_{2n} \end{pmatrix}$，则对应两点间的距离计算有如下若干种方法：
 
-曼哈顿距离：$\displaystyle \sum_{j=1}^{n} \lvert x_{1j} - x_{2j} \rvert$
-欧氏距离：$\sqrt{\displaystyle \sum_{j=1}^{n} (x_{1j} - x_{2j})^2}$
-闵可夫斯基距离：
+曼哈顿距离，对应 L1 范数；
+$$ d_{12} = \sum_{j=1}^{n} \lvert x_{1j} - x_{2j} \rvert $$
+
+欧氏距离，对应 L2 范数；
+$$ d_{12} = \sqrt{\sum_{j=1}^{n} (x_{1j} - x_{2j})^2} $$
+
+切比雪夫距离；
+$$ d_{12} = {\sum_{j=1}^{n} (x_{1j} - x_{2j})^2} $$
+$$ \max_{w,b} J(w,b) $$
+
+闵可夫斯基距离：是一组距离的定义，对应 Lp 范数；
+$$ d_{12} = \sum_{j=1}^{n} \left({\lvert x_{1j} - x_{2j} \rvert}^p\right)^{1/p} $$
 
 ## 附
 
