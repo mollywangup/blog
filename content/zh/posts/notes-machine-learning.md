@@ -692,28 +692,28 @@ $$
 
 #### 向量范数<a id="VectorNorms"></a>
 
-对于向量 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$，p 范数公式如下：
+向量 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 的 p 范数定义如下：
 
 $$ 
-{\lVert x \rVert}\_p = (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p}
+L_p(x) = {\lVert x \rVert}\_p = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p}
 $$
 
-特别的，当 p 依次取 1, 2, $\infty$ 时，分别对应如下范数：
+则当 p 依次取 $-\infty, 1, 2, +\infty$ 时，分别对应如下范数：
 
 L1 范数：向量各元素的绝对值之和。
 
-$$ {\lVert x \rVert}\_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} $$
+$$ L_1 = {\lVert x \rVert}\_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} $$
 
 L2 范数：向量各元素的平方和的平方根。
 
-$$
+$$ L_2 = 
 {\lVert x \rVert}\_2 = (\sum_{j=1}^{n} {\lvert x_j \rvert}^2)^{1/2}
 $$
 
 L$\infty$ 范数：向量元素绝对值的最大值。
 
-$$
-\lim_{p \to \infty} (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p} = 
+$$ L_{+\infty} = 
+\lim_{p \to +\infty} (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p} = 
 \max (\lvert x_1 \rvert, \lvert x_2 \rvert, \dots, \lvert x_n \rvert)
 $$
 
@@ -727,7 +727,7 @@ $$
 
 对于 n 维空间中两点 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 和 $y = \begin{pmatrix}y_1 & y_2 & \dots & y_n \end{pmatrix}$，两点间的距离可转化为**差向量 $x - y$ 的大小的衡量**。
 
-这里用到了范数。以下式 $(1) (2) (3) (4)$ 一依次对应 L1、L2、L$\infty$、Lp范数；
+这里用到了范数。以下式 $(1) (2) (3) (4)$ 依次对应 L1、L2、L$\infty$、Lp 范数；
 
 #### 曼哈顿距离
 
