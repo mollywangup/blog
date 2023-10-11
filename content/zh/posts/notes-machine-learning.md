@@ -31,7 +31,7 @@ libraries:
 - 测试集（`test set`）：指用于测试模型的数据集；
 - 训练示例（`training example`）：指训练集中的一组数据；
 - 训练模型（`model`）：指拟合函数；
-- 模型参数（`parameters`）：调整模型的本质是调整模型参数；
+- 模型参数（`parameter`）：调整模型的本质是调整模型参数；
 - 特征工程（`feature engineering`）：指从原始数据中选择、提取和转换最相关的若干个特征，以提高机器学习模型的准确性；
 
 ### 数学表达式
@@ -122,23 +122,21 @@ Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其�
 
 #### 原理
 
-目标：求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
-
 ##### 模型
 
 $$ 
 f_{w,b}(x) = w \cdot x + b = 
 \begin{bmatrix}
-  w_1 \\\
-  w_2 \\\
-  \vdots \\\
+  w_1 \\\\
+  w_2 \\\\
+  \vdots \\\\
   w_n 
 \end{bmatrix} 
 \cdot 
 \begin{bmatrix}
-  x_1 \\\
-  x_2 \\\ 
-  \vdots \\\
+  x_1 \\\\
+  x_2 \\\\ 
+  \vdots \\\\
   x_n 
 \end{bmatrix} + b =
 \sum_{j=1}^{n} w_j \cdot x_j + b \tag{Model}
@@ -153,33 +151,43 @@ $b$：偏差（bias）或截距（intercept），是标量；
 
 ##### 成本函数
 
-[MSE](#mse) 指**预测值与实际值之间误差的平方和的均值**，可作为模型质量的评估指标。为了求得该指标的**极小值**，便引入了成本函数 $J$，具体公式如下：
+[MSE](#mse) 指**预测值与实际值之间误差的平方和的均值**，取值越小说明预测越准，模型性能越好。代入模型对应的预测值，计算公式如下：
+
+<!-- 坑：这里是因为“下划线被解释成Markdown语法了，因此需要加\转义” 参考 https://github.com/theme-next/hexo-theme-next/issues/826 {\lVert w \rVert}\_1 正常不需要加，但为了渲染需要加-->
+$$
+MSE = \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 = 
+\frac{1}{m} \sum_{i=1}^{m} (w \cdot x^{(i)} + b - y^{(i)})^2 = 
+\frac{1}{m} {\lVert X \cdot w + b - y \rVert}\_2^2
+$$
+
+在机器学习中，基于 MSE 共以下三种常见成本函数：
 
 $$
 J(w,b) = \frac{1}{2} MSE = 
-\frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}
+\frac{1}{2m} {\lVert X \cdot w + b - y \rVert}\_2^2 \tag{1}
 $$
 
-<!-- 坑：这里是因为“下划线被解释成Markdown语法了，因此需要加\转义” 参考 https://github.com/theme-next/hexo-theme-next/issues/826 {\lVert w \rVert}\_1 正常不需要加，但为了渲染需要加--> 
 $$
 J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_1 = 
-\frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} {\lvert w_j \rvert} \tag{2}
+\frac{1}{2m} {\lVert X \cdot w + b - y \rVert}\_2^2 + \alpha {\lVert w \rVert}\_1 \tag{2}
 $$
 
 $$
 J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_2^2 = 
-\frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \sum_{j=1}^{n} w_j^2 \tag{3}
+\frac{1}{2m} {\lVert X \cdot w + b - y \rVert}\_2^2 + \alpha {\lVert w \rVert}\_2^2 \tag{3}
 $$
 
 说明：
-1. 使用 $\frac{1}{2} MSE$ 而不是 ~~$MSE$~~，即除以 `2m` 而不是 ~~`m`~~，仅是为了在求导数/偏导数时消去常数2，并不影响结果；
-2. 回归系数 $w$ 在模型 $f_{w,b}(x)$ 中是参数，在成本函数 $J(w,b)$ 中是变量；
-3. 成本函数 $(1)$ 对应`普通最小二乘回归（OLS）`（Ordinary Least Squares）；
-4. 成本函数 $(2)$ 对应 `套索回归（Lasso）`，是在最小二乘的基础上，添加了回归系数的 `L1 范数`作为惩罚项，目的是进行**特征选择**（即让 $w$ 中的部分取零）；
-5. 成本函数 $(3)$ 对应 `岭回归（Ridge）`，在最小二乘的基础上，添加了回归系数的 `L2 范数`作为惩罚项，目的是**防止过拟合**；
+1. 使用 $\frac{1}{2}$ 即除以 `2m` 而不是 ~~`m`~~，仅是为了在求导数/偏导数时消去常数 2，并不影响结果；
+2. $(w, b)$ 在模型 $f_{w,b}(x)$ 中是参数，在成本函数 $J(w,b)$ 中是变量；
+3. $(1)$ 式对应`普通最小二乘回归（OLS）`（Ordinary Least Squares）；
+4. $(2)$ 式对应 `套索回归（Lasso）`，是在普通最小二乘的基础上，添加了回归系数的 `L1 范数`（${\lVert w \rVert}\_1 = \displaystyle \sum_{j=1}^{n} {\lvert w_j \rvert}$）作为惩罚项，目的是进行**特征选择**（即让 $w$ 中的部分取零）；
+5. $(3)$ 式对应 `岭回归（Ridge）`，在普通最小二乘的基础上，添加了回归系数的 `L2 范数`（${\lVert w \rVert}\_2^2 = \displaystyle \sum_{j=1}^{n} w_j^2$）作为惩罚项，目的是**防止过拟合** ；
 6. 标量 $\alpha$，作为伸缩系数，非负，为了控制惩罚项的大小。
 
 ##### 目标
+
+求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
 $$ \min_{w,b} J(w,b) \tag{Goal} $$
 
@@ -481,11 +489,9 @@ $$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{
 
 #### MSE<a id="mse"></a>
 
-MSE（Mean Squared Error），均方误差。
+MSE（Mean Squared Error），均方误差。最小二乘法的均值版，常用于线性回归模型的成本函数。
 
 $$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
-
-应用：常用作线性回归模型的成本函数。
 
 #### RMSE
 
@@ -509,7 +515,7 @@ $$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
 助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
 {{< /boxmd >}}
 
-SST (sum of squares total)，总平方和，用以衡量**实际值**相对**均值**的离散程度。SST 客观存在且与回归模型无关；
+SST (sum of squares total)，总平方和，用于衡量**实际值**相对**均值**的离散程度。SST 客观存在且与回归模型无关；
 
 $$ SST = \sum_{i=1}^{m} (y^{(i)} - \bar{y})^2 $$
 
@@ -588,7 +594,7 @@ $$
 \sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
 $$
 
-## 恶补高数与线代
+## 恶补数学
 
 ### 梯度
 
@@ -600,13 +606,13 @@ $$
 grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
 $$
 
-梯度的几何意义是，<mark>**梯度方向**是函数值上升最快的方向，反方向为下降最快的方向</mark>，因此可应用于求解多元函数的极值。
+<mark>**梯度方向**是函数值上升最快的方向，反方向为下降最快的方向</mark>，因此可应用于求解多元函数的极值。
 
 {{< expand "关于偏导数">}}
 
-函数 $f$ 对自变量 $x_i$ 的偏导数，指保持其他自变量不变，当 $x_i$ 发生增量 $\Delta x_i$ 且趋向于零即 $\displaystyle \lim_{{\Delta x_i} \to 0} $ 时，函数 $f$ 的`瞬时变化率`：
+函数 $f$ 对自变量 $x_j$ 的偏导数，指保持其他自变量不变，当 $x_j$ 发生增量 $\Delta x_j$ 且趋向于零即 $\displaystyle \lim_{{\Delta x_j} \to 0} $ 时，函数 $f$ 的`瞬时变化率`：
 
-$$ \frac{\partial f}{\partial x_i} = \lim_{{\Delta x_i} \to 0} \frac{\Delta f}{\Delta x_i} = \lim_{{\Delta x_i} \to 0} \frac{f(x_i + {\Delta x_i}, ...) - f(x_i, ...)}{\Delta x_i}
+$$ \frac{\partial f}{\partial x_j} = \lim_{{\Delta x_j} \to 0} \frac{\Delta f}{\Delta x_j} = \lim_{{\Delta x_j} \to 0} \frac{f(x_j + {\Delta x_j}, ...) - f(x_j, ...)}{\Delta x_j}
 $$
 
 注意，可微一定可导，即任意给定点的邻域内所有偏导数存在且连续。
