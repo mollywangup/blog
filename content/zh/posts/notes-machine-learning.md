@@ -173,8 +173,8 @@ $$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_2^2 \tag{岭回归} $$
 说明：
 1. 使用 $\frac{1}{2} MSE$，仅是为了在求导数/偏导数时消去常数 2，并不影响结果；
 2. $(w, b)$ 在模型 $f_{w,b}(x)$ 中是参数，在成本函数 $J(w,b)$ 中是变量；
-3. `套索回归（Lasso）`：用于**特征选择**，即让回归系数稀疏（sparse）。是在普通最小二乘的基础上，添加了回归系数的 [L1 范数](#VectorNorms)（${\lVert w \rVert}\_1 = \displaystyle \sum_{j=1}^{n} {\lvert w_j \rvert}$）作为惩罚项；
-4. `岭回归（Ridge）`：用于**防止过拟合**。是在普通最小二乘的基础上，添加了回归系数的 `L2 范数`（${\lVert w \rVert}\_2^2 = \displaystyle \sum_{j=1}^{n} w_j^2$）作为惩罚项；
+3. `套索回归（Lasso）`：用于**特征选择**，即让回归系数稀疏（sparse）。是在普通最小二乘的基础上，添加了回归系数的 [L1 范数](#VectorNorms) 作为惩罚项；
+4. `岭回归（Ridge）`：用于**防止过拟合**。是在普通最小二乘的基础上，添加了回归系数的 [L2 范数](#VectorNorms) 的平方作为惩罚项；
 5. 参数 $\alpha$：非负标量，作为伸缩系数，为了控制惩罚项的大小。
 
 ##### 目标
@@ -698,17 +698,19 @@ $$
 {\lVert x \rVert}\_p = (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p}
 $$
 
-L1 范数：对应 p 取 1，向量各元素的绝对值之和。
+特别的，当 p 依次取 1, 2, $\infty$ 时，分别对应如下范数：
+
+L1 范数：向量各元素的绝对值之和。
 
 $$ {\lVert x \rVert}\_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} $$
 
-L2 范数：对应 p 取 2，向量各元素的平方和的平方根。
+L2 范数：向量各元素的平方和的平方根。
 
 $$
 {\lVert x \rVert}\_2 = (\sum_{j=1}^{n} {\lvert x_j \rvert}^2)^{1/2}
 $$
 
-L$\infty$ 范数：对应 p 取 $\infty$，向量元素绝对值的最大值。
+L$\infty$ 范数：向量元素绝对值的最大值。
 
 $$
 \lim_{p \to \infty} (\sum_{j=1}^{n} {\lvert x_j \rvert}^p)^{1/p} = 
@@ -723,9 +725,9 @@ $$
 **距离函数在机器学习中常用于相似性度量，距离越近，则相似性越高。**
 {{< /alert >}}
 
-对于 n 维空间中两点 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 和 $y = \begin{pmatrix}y_1 & y_2 & \dots & y_n \end{pmatrix}$，两点间的距离可转化为**差向量 $x - y$ 的大小的衡量**。这里用到了范数。
+对于 n 维空间中两点 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 和 $y = \begin{pmatrix}y_1 & y_2 & \dots & y_n \end{pmatrix}$，两点间的距离可转化为**差向量 $x - y$ 的大小的衡量**。
 
-以下式 $(1) (2) (3) (4)$ 一次对应 L1/L2L$\infty$Lp范数；
+这里用到了范数。以下式 $(1) (2) (3) (4)$ 一依次对应 L1、L2、L$\infty$、Lp范数；
 
 #### 曼哈顿距离
 
