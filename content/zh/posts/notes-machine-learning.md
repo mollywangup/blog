@@ -28,18 +28,13 @@ libraries:
 - 特征（`feature`）：指输入变量；
 - 标签（`label`）：指输出值，可以是真实值（`target`），也可以是预测值（`prediction`）；
 - 训练集（`training set`）：指用于训练模型的数据集；
-- 测试集（`test set`）：指用于测试模型的数据集；
+- 测试集（`test set`）：指用于验证模型的数据集；
 - 训练示例（`training example`）：指训练集中的一组数据；
-- 模型（`model`）：指拟合函数，一般使用 $f(x)$ 表示；
+- 模型（`model`）：指拟合函数；
 - 模型参数（`parameter`）：调整模型的本质是调整模型参数；
-- 损失函数（`Loss function`）：衡量预测值与真实值之间差异程度的函数，一般使用 $L(\hat{y}, y)$ 表示；
-- 成本函数（`Cost function`）：用于评估模型性能，一般使用 $J = \displaystyle \sum_{i=1}^{m} L\left(f(x^{(i)}), y^{(i)}\right)$ 表示；
+- [损失函数（Loss function）](#LossFunction)：衡量预测值与真实值之间的差异程度；
+- 成本函数（`Cost function`）：用于评估模型性能，可理解为"总损失"；
 - 特征工程（`feature engineering`）：指从原始数据中选择、提取和转换最相关的若干个特征，以提高机器学习模型的准确性；
-
-{{< notice info >}}
-损失函数本质上是一个**衡量两个变量之间差异程度的通用函数**，与训练集无关；
-成本函数则可以理解为**损失函数的实例化**，且与选用模型及训练集有关，其中模型决定了预测值，训练示例决定了真实值。**所有训练示例的"损失"加起来，才是模型的成本**。之所以称为成本函数，因为**模型参数在"成本"中属于变量**。
-{{< /notice >}}
 
 ### 符号
 
@@ -56,6 +51,7 @@ libraries:
   - $x_j$ 表示第 $j$ 个特征，是个列向量（矩阵 $X$ 的第 $j$ 列）；
   - $x_j^{(i)}$ 表示第 $i$ 个训练示例的第 $j$ 个特征，是个标量；
   - $y^{(i)}$ 和 $\hat{y}^{(i)}$ 分别表示第 $i$ 个训练示例的真实值和预测值，都是标量；
+<!-- 说明：$x \in \mathbb{R}^n, \space w \in \mathbb{R}^n, \space y \in \mathbb{R}, \space \hat{y} \in \mathbb{R}, \space X \in \mathbb{R}^{m \times n}$ -->
 
 $$
 x = \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix}
@@ -443,9 +439,9 @@ Neural Network，解决**分类+回归**问题。
 
 - PCA：主成分分析；
 
-## 强化学习
+<!-- ## 强化学习
 
-（Reinforcement Learning）：有延迟和稀疏的反馈标签；
+（Reinforcement Learning）：有延迟和稀疏的反馈标签； -->
 
 ## 模型评估
 
@@ -459,7 +455,49 @@ Neural Network，解决**分类+回归**问题。
 
 自助法（Bootstrap）：
 
-### 回归评估指标
+### 损失函数<a id='LossFunction'></a>
+
+{{< alert theme="info" >}}
+损失函数可理解为评估"损失"的方法，成本函数可理解为实际的"总损失"。
+{{< /alert >}}
+
+损失函数用于**衡量预测值与真实值之间的差异程度**，一般使用 $L(f(x), y)$ 表示；
+
+成本函数用于**评估模型性能**，一般使用 $J$ 表示，且通常：
+
+$$
+J = \frac{1}{m} \displaystyle \sum_{i=1}^{m} L\left(f(x^{(i)}), y^{(i)}\right)
+$$
+
+{{< notice info >}}
+模型参数是成本函数的变量。
+{{< /notice >}}
+
+#### 最小二乘误差
+
+适用于线性回归模型。
+
+$$
+L(f_{w,b}(x), y) = \left(f_{w,b}(x) - y\right)^2
+$$
+
+#### Logistic 损失
+
+适用于逻辑回归模型。
+
+$$
+L(f_{w,b}(x), y) = 
+\begin{cases}
+-log\left(f_{w,b}(x)\right) & if\ y = 1 \\\\
+-log\left(1-f_{w,b}(x)\right) & if\ y = 0 \\\\
+\end{cases}
+$$
+即
+$$
+-ylog(f_{w,b}(x)) - (1-y)log(f_{w,b}(x))
+$$ 
+
+### 回归指标
 
 #### MAE
 
@@ -519,7 +557,7 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 <img src='https://user-images.githubusercontent.com/46241961/273468625-e2263610-af8d-4ada-9cf9-9c25eef6c3c3.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
 
-### 分类评估指标
+### 分类指标
 
 #### 混淆矩阵
 
@@ -765,31 +803,6 @@ $$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
 一些术语概念：
 - 协方差：线性相关性程度。若协方差为0则线性无关；
 - 特征向量：矩阵的特征向量。数据集结构的非零向量；空间中每个点对应的一个坐标向量。
-
-### 成本函数
-
-
-成本函数（Cost function）也称作代价函数，用于评估模型的**拟合程度**。一般使用 $J$ 表示：
-
-$$
-J(w,b) = \displaystyle \frac{1}{m} \sum_{i=1}^{m} L(f_{w,b}(x^{(i)}), y^{(i)})
-$$
-
-#### Logistic loss function
-
-适用于逻辑回归模型。
-
-$$
-L(f_{w,b}(x^{(i)}), y^{(i)}) = 
-\begin{cases}
--log\left(f_{w,b}(x^{(i)})\right) & if\ y^{(i)} = 1 \\\\
--log\left(1-f_{w,b}(x^{(i)})\right) & if\ y^{(i)} = 0 \\\\
-\end{cases}
-$$
-即
-$$
--y^{(i)}log(f_{w,b}(x^{(i)}) - (1-y^{(i)})log(f_{w,b}(x^{(i)})
-$$
 
 ### 梯度下降算法<a id="梯度下降算法"></a>
 
