@@ -79,9 +79,7 @@ $$
 ## 监督学习<a id="SupervisedLearning"></a>
 
 {{< alert theme="info" >}}
-有标签的是监督学习，预测连续数据的是回归任务，预测离散数据的是分类任务。
-给定包含标签的训练集 $(X|y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$。
-$(X|y) \to f \to \hat{y}$
+有标签的是监督学习，预测连续数据的是回归任务，预测离散数据的是分类任务。给定包含标签的训练集 $(X|y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$。$(X|y) \to f \to \hat{y}$
 {{< /alert >}}
 
 如果训练集中**包含标签**，则属于监督学习（Supervised Learning），即 `(features, labels) -> Model` 问题。
