@@ -25,8 +25,8 @@ libraries:
 
 ### 术语
 
-- 特征（`feature`）：指输入变量；
-- 标签（`label`）：指输出值，可以是真实值（`target`），也可以是预测值（`prediction`）；
+- 特征（`feature`）：指自变量；
+- 标签（`label`）：指因变量，但是是真实值（`target`）；
 - 训练集（`training set`）：指用于训练模型的数据集；
 - 测试集（`test set`）：指用于验证模型的数据集；
 - 训练示例（`training example`）：指训练集中的一组数据；
@@ -34,7 +34,7 @@ libraries:
 - 模型参数（`parameter`）：调整模型的本质是调整模型参数；
 - [损失函数（Loss function）](#LossFunction)：衡量预测值与真实值之间的差异程度；
 - 成本函数（`Cost function`）：用于评估模型性能，可理解为"总损失"；
-- 特征工程（`feature engineering`）：指从原始数据中选择、提取和转换最相关的若干个特征，以提高机器学习模型的准确性；
+- 特征工程（`feature engineering`）：对特征进行选择、提取和转换等操作，用于提高模型性能；
 
 ### 符号
 
@@ -88,8 +88,8 @@ $$
 给定**包含标签**的训练集 $(X|y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习（Supervised Learning），即：$$ (X|y) \to f \to \hat{y} $$
 
 监督学习主要包括以下两类任务：
-- `回归（Regression）`：预测值为**连续型**，可用于趋势预测、价格预测、流量预测等；
-- `分类（Classification）`：预测值为**离散型**，可用于构建用户画像、用户行为预测、图像识别分类等；
+- `回归（Regression）`：预测**连续值**，可用于趋势预测、价格预测、流量预测等；
+- `分类（Classification）`：预测**离散值**，可用于构建用户画像、用户行为预测、图像识别分类等；
 
 ### 算法思路
 
@@ -291,18 +291,21 @@ for i in range(len(alphas_list)):
 
 多项式回归（Polynomial Regression），解决非线性的**回归**问题。
 
-核心思想是将非线性问题转化为线性问题。
-
 #### 原理
+
+{{< alert theme="info" >}}
+核心思想是将非线性问题转化为线性问题。
+{{< /alert >}}
 
 以下式 $(1)(2)(3)$ 依次对应一元二次多项式、一元三次多项式、二元二次多项式模型：
 
 $$ f_{w,b}(x) = w_1x + w_2x^2 + b \tag{1} $$
+
 $$ f_{w,b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{2} $$
+
 $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
-以式 $(1)$ 的模型为例，将非线性的 $f(x) \to y$ 问题，转化为线性的 $f(x,x^2) \to y$ 问题。
-即将非一次项的 $x^2$ 视作新特征，然后按照线性回归模型训练即可。
+以式 $(1)$ 的模型为例，将非线性的 $f(x) \to y$ 问题，转化为线性的 $f(x,x^2) \to y$ 问题，即将非一次项的 $x^2$ 视作新特征，即可按照线性回归模型训练。
 
 #### 示例
 
@@ -359,7 +362,7 @@ plt.savefig('PolynomialFeatures_LinearRegression.svg')
 
 ### 逻辑回归
 
-逻辑回归（Logistic Regression），解决**二分类（Binary Classification）**问题。
+逻辑回归（Logistic Regression），解决**二分类**（Binary Classification）问题。
 
 #### 原理
 
@@ -423,9 +426,13 @@ Neural Network，解决**分类+回归**问题。
 
 ## 无监督学习<a id="UnsupervisedLearning"></a>
 
-训练集中**不包含标签**，则属于无监督学习（Unsupervised Learning），即 `(features) -> Model`.
+{{< alert theme="info" >}}
+无标签的是无监督学习。
+{{< /alert >}}
 
-共分为两大类任务：
+给定**不包含标签**的训练集 $X$，通过算法构建一个模型，揭示数据的内在分布特性及规律，则属于无监督学习（Unsupervised Learning），即：$$ X \to f \to \hat{y} $$
+
+无监督学习主要包括以下两类任务：
 - `聚类（Clustering）`
 - `降维（Dimensionality reduction）`
 
