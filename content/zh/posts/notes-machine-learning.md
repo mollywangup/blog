@@ -123,7 +123,7 @@ f_{w,b}(x) = w \cdot x + b =
   \vdots \\\\
   x_n 
 \end{bmatrix} + b =
-\sum_{j=1}^{n} w_j \cdot x_j + b \tag{Model}
+\sum_{j=1}^{n} w_j \cdot x_j + b 
 $$
 
 其中，模型参数：
@@ -166,7 +166,7 @@ $$
 
 {{< /expand >}}
 
-在机器学习中，基于 MSE 共以下三种常见成本函数：
+基于 MSE 共以下三种常见成本函数：
 
 $$ J(w,b) = \frac{1}{2} MSE \tag{普通最小二乘回归} $$
 
@@ -487,7 +487,7 @@ J = \displaystyle \sum_{i=1}^{m} L\left(f(x^{(i)}), y^{(i)}\right)
 $$
 
 {{< notice info >}}
-成本函数更灵活，在上述 \$J\$ 的基础上，有时会取均值，有时会再加上正则项（防止过拟合）。
+成本函数更灵活，在上述 J 的基础上，有时会取均值，有时会再加上正则项（防止过拟合）。
 {{< /notice >}}
 
 #### 最小二乘误差
