@@ -78,6 +78,8 @@ $$
 
 ## 监督学习<a id="SupervisedLearning"></a>
 
+test
+
 {{< alert theme="info" >}}
 有标签的是监督学习，预测连续数据的是回归任务，预测离散数据的是分类任务。给定包含标签的训练集 $(X|y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$。$(X|y) \to f \to \hat{y}$
 {{< /alert >}}
