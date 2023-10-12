@@ -82,29 +82,29 @@ $$
 ## 监督学习
 
 {{< alert theme="info" >}}
-有标签的是监督学习。预测连续数据的是回归任务，预测离散数据的是分类任务。
+有标签的是监督学习。预测连续值的是回归任务，预测离散值的是分类任务。
 {{< /alert >}}
 
 给定**包含标签**的训练集 $(X|y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习（Supervised Learning），即：$$ (X|y) \to f \to \hat{y} $$
 
 监督学习主要包括以下两类任务：
-`回归（Regression）`：预测值为**连续型**，可用于趋势预测、价格预测、流量预测等；
-`分类（Classification）`：预测值为**离散型**，可用于构建用户画像、用户行为预测、图像识别分类等；
+- `回归（Regression）`：预测值为**连续型**，可用于趋势预测、价格预测、流量预测等；
+- `分类（Classification）`：预测值为**离散型**，可用于构建用户画像、用户行为预测、图像识别分类等；
 
 ### 算法思路
 
 目标：模型应尽可能满足，最大限度地减少预测值与真实值之间的差异程度，且同时兼顾模型的泛化能力；
 
-步骤：
-Step1：确定训练模型（Model）：回归还是分类，线性还是非线性；
-Step2：评估模型性能：成本函数（Cost function），用于衡量预测值与真实值之间的差异程度，是关于若干个模型参数的函数；
-Step3：求解**使得成本函数最小化**（Goal）的一组参数值，其中可使用梯度下降算法；
+思路：
+Step1：选择训练模型：含模型参数；
+Step2：评估模型性能：选择合适的损失函数，将模型代入损失函数得到成本函数，此时**模型参数是成本函数的变量**；
+Step3：求（局部）最优解：求解一组模型参数，使得成本函数最小化。求极小值问题常用到[梯度下降算法](#梯度下降算法)。
 
 ### 线性回归
 
 线性回归（Linear Regression），解决线性的**回归**问题。包含一元线性回归和多元线性回归两类情况。
 
-<img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png' alt='One variable Linear Regression Example' width='60%'>
+<!-- <img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_ols_001.png' alt='One variable Linear Regression Example' width='60%'> -->
 
 #### 原理
 
@@ -137,7 +137,7 @@ $b$：偏差（bias）或截距（intercept），是标量；
 
 ##### 成本函数
 
-[MSE](#mse) 指**预测值与真实值之间误差的平方和的均值**，取值越小说明预测越准，模型性能越好。代入模型对应的预测值，计算公式如下：
+[MSE](#mse) 指**预测值与真实值之间误差的平方和的均值**，取值越小说明预测越准，模型性能越好。代入线性回归模型，计算公式如下：
 
 <!-- 坑：这里是因为“下划线被解释成Markdown语法了，因此需要加\转义” 参考 https://github.com/theme-next/hexo-theme-next/issues/826 {\lVert w \rVert}\_1 正常不需要加，但为了渲染需要加-->
 $$
@@ -159,7 +159,7 @@ $$
 \begin{array}{ccccc|c}
   1 & x_1^{(1)} & x_2^{(1)} & \dots & x_n^{(1)} & y^{(1)} \\\\ 
   1 & x_1^{(2)} & x_2^{(2)} & \dots & x_n^{(2)} & y^{(2)} \\\\ 
-  \vdots & \vdots & \ddots & \vdots & \vdots \\\\ 
+  \vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\\\ 
   1 & x_1^{(m)} & x_2^{(m)} & \dots & x_n^{(m)} & y^{(m)} 
 \end{array}
 \right ]
@@ -289,28 +289,20 @@ for i in range(len(alphas_list)):
 
 ### 多项式回归
 
-多项式回归（Polynomial regression），解决非线性的**回归**问题。
+多项式回归（Polynomial Regression），解决非线性的**回归**问题。
 
 核心思想是将非线性问题转化为线性问题。
 
 #### 原理
 
-目标：求解一组模型参数 $(\vec{w},b)$ 使得成本函数 $J$ 最小化。
+以下式 $(1)(2)(3)$ 依次对应一元二次多项式、一元三次多项式、二元二次多项式模型：
 
+$$ f_{w,b}(x) = w_1x + w_2x^2 + b \tag{1} $$
+$$ f_{w,b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{2} $$
+$$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
-$$ f_{w,b}(x) = w_1x + w_2x^2 + b \tag{Model1} $$
-$$ f_{w,b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{Model2} $$
-$$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{Model3} $$
-
-$$ J(w,b) =  \tag{Cost function}$$
-
-$$ \min_{\vec{w},b} J(w,b) \tag{Goal} $$
-
-其中，模型参数如下:
-- $w$：分别对应各项的权重（weights）或系数（coefficients）；
-- $b$：偏差（bias）或截距（intercept）；
-
-说明：上述 Model1、Model2、Model3 依次是一元二次多项式、一元三次多项式、二元二次多项式。
+以式 $(1)$ 的模型为例，将非线性的 $f(x) \to y$ 问题，转化为线性的 $f(x,x^2) \to y$ 问题。
+即将非一次项的 $x^2$ 视作新特征，然后按照线性回归模型训练即可。
 
 #### 示例
 
@@ -367,9 +359,9 @@ plt.savefig('PolynomialFeatures_LinearRegression.svg')
 
 ### 逻辑回归
 
-logistic regression，解决**分类**问题。
+逻辑回归（Logistic Regression），解决**二分类（Binary Classification）**问题。
 
-（binary classification）
+#### 原理
 
 true: 1, positive class
 false: 0, negative class
