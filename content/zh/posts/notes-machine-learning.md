@@ -144,9 +144,30 @@ $$
 \begin{split}
 MSE &= \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \\\\
 &= \frac{1}{m} \sum_{i=1}^{m} (w \cdot x^{(i)} + b - y^{(i)})^2 \\\\
-&= \frac{1}{m} {\lVert X \cdot w + b - y \rVert}\_2^2
 \end{split}
 $$
+
+{{< expand "矩阵乘向量形式的写法（手动解的思路） ">}}
+
+$$
+MSE = \frac{1}{m} {\lVert X_{new} \cdot w_{new} - y \rVert}\_2^2
+$$
+
+其中：
+$$
+(X_{new}|y) = \left [
+\begin{array}{ccccc|c}
+  1 & x_1^{(1)} & x_2^{(1)} & \dots & x_n^{(1)} & y^{(1)} \\\\ 
+  1 & x_1^{(2)} & x_2^{(2)} & \dots & x_n^{(2)} & y^{(2)} \\\\ 
+  \vdots & \vdots & \ddots & \vdots & \vdots \\\\ 
+  1 & x_1^{(m)} & x_2^{(m)} & \dots & x_n^{(m)} & y^{(m)} 
+\end{array}
+\right ]
+\space
+w_{new} = \begin{bmatrix}b \\\\ w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}
+$$
+
+{{< /expand >}}
 
 在机器学习中，基于 MSE 共以下三种常见成本函数：
 
@@ -488,8 +509,8 @@ $$
 $$
 L(f_{w,b}(x), y) = 
 \begin{cases}
--log\left(f_{w,b}(x)\right) & if\ y = 1 \\\\
--log\left(1-f_{w,b}(x)\right) & if\ y = 0 \\\\
+-log\left(f_{w,b}(x)\right) & if\space y = 1 \\\\
+-log\left(1-f_{w,b}(x)\right) & if\space y = 0 \\\\
 \end{cases}
 $$
 即
