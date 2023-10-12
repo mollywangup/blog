@@ -76,9 +76,7 @@ x^{(i)} = \begin{bmatrix}x_1^{(i)} \\\\ x_2^{(i)} \\\\ \vdots \\\\ x_n^{(i)} \en
 x_j = \begin{bmatrix}x_j^{(1)} \\\\ x_j^{(2)} \\\\ \vdots \\\\ x_j^{(m)} \end{bmatrix}
 $$
 
-## 监督学习<a id="SupervisedLearning"></a>
-
-test
+## 监督学习
 
 {{< alert theme="info" >}}
 有标签的是监督学习，预测连续数据的是回归任务，预测离散数据的是分类任务。给定包含标签的训练集 $(X|y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$。$(X|y) \to f \to \hat{y}$
