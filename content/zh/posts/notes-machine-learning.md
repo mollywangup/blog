@@ -32,7 +32,7 @@ libraries:
 - 训练示例（`training example`）：指训练集中的一组数据；
 - 模型（`model`）：指拟合函数；
 - 模型参数（`parameter`）：调整模型的本质是调整模型参数；
-- [损失函数（Loss function）](#LossFunction)：衡量预测值与真实值之间的差异程度；
+- [损失函数（Loss function）](#LossFunction)：衡量预测值与真实值之间的差异程度，可理解为"单个损失"；
 - 成本函数（`Cost function`）：用于评估模型性能，可理解为"总损失"；
 - 特征工程（`feature engineering`）：对特征进行选择、提取和转换等操作，用于提高模型性能；
 
@@ -479,12 +479,12 @@ Neural Network，解决**分类+回归**问题。
 损失函数可理解为评估"损失"的**方法**，成本函数可理解为最终的"**总损失**"。
 {{< /alert >}}
 
-损失函数用于**衡量预测值与真实值之间的差异程度**，一般表示为：$$ L(f(x), y) $$
+损失函数用于**衡量预测值与真实值之间的差异程度**，一般表示为：$$ L(\hat{y}, y) $$
 
 成本函数用于**评估模型性能**，一般使用 $J$ 表示，且通常有：
 
 $$
-J = \displaystyle \sum_{i=1}^{m} L\left(f(x^{(i)}), y^{(i)}\right)
+J = \displaystyle \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)
 $$
 
 {{< notice info >}}
@@ -493,26 +493,26 @@ $$
 
 #### 最小二乘误差
 
-适用于线性回归模型。
+$$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
-$$
-L(f_{w,b}(x), y) = \left(f_{w,b}(x) - y\right)^2
-$$
+#### 交叉熵
 
-#### Logistic 损失
+交叉熵（Cross Entropy）属于信息论的概念，主要用于度量
+
+
 
 适用于逻辑回归模型。
 
 $$
-L(f_{w,b}(x), y) = 
+L(\hat{y}, y) = 
 \begin{cases}
--log\left(f_{w,b}(x)\right) & if\space y = 1 \\\\
--log\left(1-f_{w,b}(x)\right) & if\space y = 0 \\\\
+-log(\hat{y}) & if\space y = 1 \\\\
+-log(1-\hat{y}) & if\space y = 0 \\\\
 \end{cases}
 $$
 即
 $$
--ylog(f_{w,b}(x)) - (1-y)log(f_{w,b}(x))
+-ylog(\hat{y}) - (1-y)log(\hat{y})
 $$ 
 
 ### 回归指标
@@ -854,6 +854,27 @@ $$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
 
 #### 杰卡德距离
 
+### 贝叶斯定理
+
+设 $A$ 和 $B$ 为两个随机事件，则：
+
+**先验概率**：指某个事件发生的概率。$A$ 发生的概率记作 $P(A)$；
+
+**联合概率**：指两个事件同时发生的概率。$A$ 与 $B$ 的联合概率，记作 $P(A,B)$ 或 $P(AB)$ 或 $P(A \cap B)$；
+
+**条件概率**：也称作**后验概率**。$B$ 发生的条件下 $A$ 发生的概率，其中 $P(B) \neq 0$，记作 $P(A|B)$。有：$$ P(A|B) = \frac{P(A,B)}{P(B)} $$
+
+**相互独立**：$A$ 与 $B$ 相互独立，当且仅当 $P(A,B) = P(A)P(B)$ 时成立；
+
+{{< alert theme="info" >}}
+朴素贝叶斯的**朴素**就指的是假设特征之间相互独立。
+{{< /alert >}}
+
+**贝叶斯定理（Bayes'theorem）**：
+
+$$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
+
+其中 $P(B) \neq 0$，可由条件概率推导得到，因为 $P(A,B) = P(A|B)P(B) = P(B|A)P(A)$
 
 ## 附
 
@@ -924,7 +945,7 @@ $$
 
 解决过拟合的方法：
 1. 收集更多的训练示例；
-2. 特征值选择；
+2. 特征选择；
 3. 正则化；
 
 
