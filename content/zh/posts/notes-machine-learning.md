@@ -856,6 +856,8 @@ $$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
 
 ### 贝叶斯定理
 
+#### 四个基础概念
+
 设 $A$ 和 $B$ 为两个随机事件，则：
 
 **先验概率**：指某个事件发生的概率。$A$ 发生的概率记作 $P(A)$；
@@ -866,15 +868,17 @@ $$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
 
 **相互独立**：$A$ 与 $B$ 相互独立，当且仅当 $P(A,B) = P(A)P(B)$ 时成立；
 
-{{< alert theme="info" >}}
+{{< notice info>}}
 朴素贝叶斯的**朴素**就指的是假设特征之间相互独立。
-{{< /alert >}}
+{{< /notice >}}
 
-**贝叶斯定理（Bayes'theorem）**：
+#### 贝叶斯定理
+
+贝叶斯定理（Bayes'theorem）公式如下（其中 $P(B) \neq 0$）：
 
 $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
-其中 $P(B) \neq 0$，可由条件概率推导得到，因为 $P(A,B) = P(A|B)P(B) = P(B|A)P(A)$
+可由条件概率推导得到，因为 $P(A,B) = P(A|B)P(B) = P(B|A)P(A)$
 
 ## 附
 
