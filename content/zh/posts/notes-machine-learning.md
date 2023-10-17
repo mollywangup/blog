@@ -25,8 +25,8 @@ libraries:
 
 ### 术语
 
-- 特征（`feature`）：指自变量；
-- 标签（`label`）：指因变量，但是是真实值（`target`）；
+- 特征（`feature`）：指输入变量；
+- 标签（`label`）：指输出变量，真实值（`target`），预测值（`prediction`）；
 - 训练集（`training set`）：指用于训练模型的数据集；
 - 测试集（`test set`）：指用于验证模型的数据集；
 - 训练示例（`training example`）：指训练集中的一组数据；
@@ -292,7 +292,7 @@ for i in range(len(alphas_list)):
 #### 原理
 
 {{< alert theme="info" >}}
-核心思想是将非线性问题转化为线性问题。
+核心思想是将非线性问题转化为线性问题，即将多项式视作新的特征。
 {{< /alert >}}
 
 以下式 $(1)(2)(3)$ 依次对应一元二次多项式、一元三次多项式、二元二次多项式模型：
@@ -363,6 +363,18 @@ plt.savefig('PolynomialFeatures_LinearRegression.svg')
 逻辑回归（Logistic Regression），解决**二分类**（Binary Classification）问题。
 
 #### 原理
+
+{{< alert theme="info" >}}
+核心思想是借助 sigmoid 函数将函数值转化为接近的二分类分布的函数，
+{{< /alert >}}
+
+##### 模型
+
+
+
+##### 成本函数
+
+##### 目标函数
 
 true: 1, positive class
 false: 0, negative class
@@ -497,8 +509,54 @@ $$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
 #### 交叉熵
 
-交叉熵（Cross Entropy）属于信息论的概念，主要用于度量
+{{< alert theme="info" >}}
+**信息量**是信息的大小，**熵**是信息量的期望值，**相对熵**用于衡量两个概率分布之间的差异，**交叉熵**是相对熵的简化版。
+{{< /alert >}}
 
+##### 信息量
+
+设随机变量 $x$ 的概率分布为 $p(x)$，则 $x$ 的信息量定义为：$$ I(x) = \log \frac{1}{p(x)} = - \log p(x) $$
+
+说明：对数底数仅影响量化的单位，以 2 为底则单位是比特（默认），以 e 为底则单位是纳特。
+
+理解：概率越小，信息量越大。
+
+##### 熵
+
+熵（Entropy）表示随机变量 $x$ 信息量的期望值，用于衡量分布的混乱程度或不确定性，定义如下：
+
+$$ 
+H(p) = E(I(x)) = 
+\displaystyle \sum_{j=1}^{n} p(x) I(x) = 
+- \displaystyle \sum_{j=1}^{n} p(x) \log p(x)
+$$
+
+理解：$p(x)$ 分布越混乱（或不确定性越大），熵越大。
+
+##### 相对熵
+
+相对熵，又称为 KL 散度，用于**衡量两个概率分布之间的差异程度**。设随机变量 $x$ 服从两个概率分布 $p(x)$ 和 $q(x)$，则相对熵定义如下：
+
+$$ 
+\begin{split}
+D_{KL}(p||q) &= \displaystyle \sum_{j=1}^{n} p(x) \log \frac{p(x)}{q(x)} \\\\
+&= \displaystyle \sum_{j=1}^{n} p(x) \log p(x) - \sum_{j=1}^{n} p(x) \log q(x) \\\\
+&= -H(p) + H(p,q)
+\end{split}
+$$
+
+理解：$p(x)$ 和 $q(x)$ 分布越接近，相对熵越小。
+
+##### 交叉熵
+
+交叉熵（Cross Entropy）定义：
+
+$$
+H(p,q) = - \displaystyle \sum_{j=1}^{n} p(x) \log q(x) 
+$$
+
+即
+属于信息论的概念，主要用于**衡量两个概率分布之间的差异程度**。假设
 
 
 适用于逻辑回归模型。
@@ -512,7 +570,7 @@ L(\hat{y}, y) =
 $$
 即
 $$
--ylog(\hat{y}) - (1-y)log(\hat{y})
+-ylog(\hat{y}) - (1-y)log(1-\hat{y})
 $$ 
 
 ### 回归指标
@@ -856,7 +914,7 @@ $$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
 
 ### 贝叶斯定理
 
-#### 基础铺垫
+#### 基础概念
 
 设 $A$ 和 $B$ 为两个随机事件，则：
 
