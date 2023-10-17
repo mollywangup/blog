@@ -515,7 +515,7 @@ $$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
 ##### 信息量
 
-设随机变量 $x$ 的概率分布为 $p(x)$，则 $x$ 的信息量定义为：$$ I(x) = \log \frac{1}{p(x)} = - \log p(x) $$
+设随机变量 $x$ 的概率分布为 $p(x)$，则 $x$ 的信息量定义如下：$$ I(x) = \log \frac{1}{p(x)} = - \log p(x) $$
 
 说明：对数底数仅影响量化的单位，以 2 为底则单位是比特（默认），以 e 为底则单位是纳特。
 
@@ -523,40 +523,45 @@ $$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
 ##### 熵
 
-熵（Entropy）表示随机变量 $x$ 信息量的期望值，用于衡量分布的混乱程度或不确定性，定义如下：
+熵（Entropy）表示随机变量 $x$ 的**信息量的期望值**，用于衡量分布的混乱程度或不确定性，定义如下：
 
 $$ 
-H(p) = E(I(x)) = 
-\displaystyle \sum_{j=1}^{n} p(x) I(x) = 
-- \displaystyle \sum_{j=1}^{n} p(x) \log p(x)
+H(p) = E(I(x)) = \sum_x p(x) I(x) = - \sum_x p(x) \log p(x)
 $$
 
-理解：$p(x)$ 分布越混乱（或不确定性越大），熵越大。
+理解：熵越大，则 $p(x)$ 分布越混乱（或不确定性越大）。
 
 ##### 相对熵
 
-相对熵，又称为 KL 散度，用于**衡量两个概率分布之间的差异程度**。设随机变量 $x$ 服从两个概率分布 $p(x)$ 和 $q(x)$，则相对熵定义如下：
+相对熵（Relative Entropy），又称为 KL 散度，用于**衡量两个概率分布之间的差异程度**。设随机变量 $x$ 服从两个概率分布 $p(x)$ 和 $q(x)$，则相对熵定义如下：
 
 $$ 
 \begin{split}
-D_{KL}(p||q) &= \displaystyle \sum_{j=1}^{n} p(x) \log \frac{p(x)}{q(x)} \\\\
-&= \displaystyle \sum_{j=1}^{n} p(x) \log p(x) - \sum_{j=1}^{n} p(x) \log q(x) \\\\
+D_{KL}(p||q) &= \sum_x p(x) \log \frac{p(x)}{q(x)} \\\\
+&= \sum_x p(x) \log p(x) - \sum_x p(x) \log q(x) \\\\
 &= -H(p) + H(p,q)
 \end{split}
 $$
 
-理解：$p(x)$ 和 $q(x)$ 分布越接近，相对熵越小。
+巧了，公式的前半部分是 $p(x)$ 的熵，后半部分则就是交叉熵：$$ H(p,q) = - \sum_x p(x) \log q(x) $$
+
+理解：当 $p(x) = q(x)$ 时，$D_{KL} = 0$，当 $p(x) \neq q(x)$ 时，$D_{KL} > 0$
+
+{{ < expand "证明：相对熵大于零" >}}
+由于 $\ln(x) \leq x - 1$，则：
+
+$$
+- D_{KL}(p||q) = \sum_x p(x) \log \frac{q(x)}{p(x)} \leq \sum_x p(x) (\frac{q(x)}{p(x)} - 1) = \sum_x (q(x) - p(x)) = 0
+$$
+
+因此 $D_{KL}(p||q) \geq 0$，当且仅当 $p(x) = q(x)$ 时为零。
+{{ < /expand >}}
+
+相对熵越小，$p(x)$ 和 $q(x)$ 分布越接近。
 
 ##### 交叉熵
 
-交叉熵（Cross Entropy）定义：
-
-$$
-H(p,q) = - \displaystyle \sum_{j=1}^{n} p(x) \log q(x) 
-$$
-
-即
-属于信息论的概念，主要用于**衡量两个概率分布之间的差异程度**。假设
+交叉熵（Cross Entropy）定义：$$ H(p,q) = - \sum_x p(x) \log q(x) $$
 
 
 适用于逻辑回归模型。
