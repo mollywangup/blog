@@ -494,7 +494,7 @@ Neural Network，解决**分类+回归**问题。
 损失函数用于**衡量预测值与真实值之间的差异程度**，一般表示为：$$ L(\hat{y}, y) $$
 选择损失函数的标准是，凸函数，因为极小值就是最小值。
 
-成本函数用于**评估模型性能**，一般使用 $J$ 表示，且通常有：
+说明：成本函数用于**评估模型性能**，一般使用 $J$ 表示，且通常有：
 
 $$
 J = \frac{1}{m} \displaystyle \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)
@@ -536,7 +536,7 @@ $$
 
 $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
 
-说明：当 $p(x) = q(x)$ 时，相对熵为零；当 $p(x) \neq q(x)$ 时，相对熵大于零。相对熵越小，则 $p(x)$ 和 $q(x)$ 分布越接近。
+说明：$D_{KL}(p||q) \geq 0$，当且仅当 $p(x) = q(x)$ 时等号成立。相对熵越小，则 $p(x)$ 和 $q(x)$ 分布越接近。
 
 {{< expand "证明：相对熵大于等于零" >}}
 由于 $\ln(x) \leq x - 1$，则：
@@ -694,32 +694,60 @@ $$
 
 ## 恶补数学
 
-### 梯度
+### 导数与偏导数
 
 {{< alert theme="info" >}}
-**梯度是一个向量，沿着梯度方向函数值上升最快，逆着梯度方向函数值下降最快。**
+**一元函数的一阶导用于单调性判断，二阶导用于凹凸性判断。**
 {{< /alert >}}
 
-给定任意 $n$ (>=2) 元**可微**函数 $$ f(x_1, x_2,..., x_n) $$
+#### 导数
 
-则函数 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
+设一元函数 $f: \mathbb{R} \to \mathbb{R}$
+
+##### 一阶导数
+
+函数 $f$ 在某点处的一阶导数，几何意义是函数在该点处的`瞬时变化率`。记作 $f'$ 或 $\frac{dy}{dx}$，即：
 
 $$
-grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
+f' = \frac{dy}{dx} = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = \lim_{{\Delta x} \to 0} \frac{f(x + {\Delta x})}{\Delta x}
 $$
 
-[梯度下降算法](#梯度下降算法) 用于求解局部极小值的问题。
+常用于判断函数的**单调性**：一阶导大于零则单调递增，一阶导小于零则单调递减；
 
-{{< expand "关于偏导数">}}
+##### 二阶导数
 
-函数 $f$ 对自变量 $x_j$ 的偏导数，指保持其他自变量不变，当 $x_j$ 发生增量 $\Delta x_j$ 且趋向于零即 $\displaystyle \lim_{{\Delta x_j} \to 0} $ 时，函数 $f$ 的`瞬时变化率`：
+函数 $f$ 在某点处的二阶导数，等于一阶导数的导数。记作 $f''$ 或 $\frac{d^2y}{dx^2}$。
+
+常用于判断函数的**凹凸性**：二阶导大于零则凸（U 型），二阶导小于零则凹（倒扣的 U 型）；
+
+#### 偏导数
+
+设多元函数 $f: \mathbb{R}^n \to \mathbb{R}$，则函数 $f$ 对自变量 $x_j$ 的偏导数（partial derivative），指将其他自变量视作常量时，对 $x_j$ 的导数，即：
 
 $$ \frac{\partial f}{\partial x_j} = \lim_{{\Delta x_j} \to 0} \frac{\Delta f}{\Delta x_j} = \lim_{{\Delta x_j} \to 0} \frac{f(x_j + {\Delta x_j}, ...) - f(x_j, ...)}{\Delta x_j}
 $$
 
 注意，可微一定可导，即任意给定点的邻域内所有偏导数存在且连续。
 
-{{< /expand >}}
+### 凸函数
+
+如果一个函数满足**任意两点连成的线段都位于函数图形的上方**，则称这个函数为凸函数（Convex function）。
+
+凸函数的局部最小值等于极小值，是选择损失函数的重要参考之一。
+
+### 梯度
+
+{{< alert theme="info" >}}
+**梯度是一个向量，沿着梯度方向函数值上升最快，逆着梯度方向函数值下降最快。**
+{{< /alert >}}
+
+给定**可微**函数 $f: \mathbb{R}^n \to \mathbb{R}$，则 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
+
+$$
+grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
+$$
+
+[梯度下降算法](#梯度下降算法) 用于求解局部极小值的问题。
 
 ### 向量
 
