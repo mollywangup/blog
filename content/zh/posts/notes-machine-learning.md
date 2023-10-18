@@ -620,7 +620,7 @@ $$
 f(x) = \frac{1}{1+e^{-x}} \in (0,1)
 $$
 
-<img src='https://user-images.githubusercontent.com/46241961/276302604-44080d48-59a9-4ce1-ab2a-83e058ac00af.svg' alt='ActivationFunction_Sigmoid'>
+<img src='https://user-images.githubusercontent.com/46241961/276302604-44080d48-59a9-4ce1-ab2a-83e058ac00af.svg' alt='ActivationFunction_Sigmoid' width=80%>
 
 ### tanh
 
@@ -628,7 +628,7 @@ $$
 f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \in (-1, 1)
 $$
 
-<img src='https://user-images.githubusercontent.com/46241961/276302656-2e0dfbdc-a990-4486-bec9-502441bfe07a.svg' alt='ActivationFunction_tanh'>
+<img src='https://user-images.githubusercontent.com/46241961/276302656-2e0dfbdc-a990-4486-bec9-502441bfe07a.svg' alt='ActivationFunction_tanh' width=80%>
 
 ### ReLU
 
@@ -640,7 +640,7 @@ x, & \text{if $x \geq 0$} \\\\
 \end{cases}
 $$
 
-<img src='https://user-images.githubusercontent.com/46241961/276302720-d6f6ffe9-6a1c-45a3-9bbc-1fe15938f289.svg' alt='ActivationFunction_ReLU'>
+<img src='https://user-images.githubusercontent.com/46241961/276302720-d6f6ffe9-6a1c-45a3-9bbc-1fe15938f289.svg' alt='ActivationFunction_ReLU' width=80%>
 
 ### Softmax
 
