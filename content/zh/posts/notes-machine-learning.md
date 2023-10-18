@@ -644,6 +644,14 @@ x, & \text{if $x \geq 0$} \\\\
 \end{cases}
 $$
 
+$$
+f'(x) =
+\begin{cases}
+1, & \text{if $x \geq 0$} \\\\
+0, & \text{if $x < 0$}
+\end{cases}
+$$
+
 <img src='https://user-images.githubusercontent.com/46241961/276302720-d6f6ffe9-6a1c-45a3-9bbc-1fe15938f289.svg' alt='ActivationFunction_ReLU' width=80%>
 
 ### Softmax
