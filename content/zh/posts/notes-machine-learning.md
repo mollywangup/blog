@@ -712,10 +712,10 @@ $$
 函数 $f$ 在某点处的一阶导数。记作 $f'$，定义如下：
 
 $$
-f' = \frac{dy}{dx} = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = \lim_{{\Delta x} \to 0} \frac{f(x + {\Delta x})}{\Delta x}
+f' = \frac{dy}{dx} = \lim_{{\Delta x} \to 0} \frac{f(x + {\Delta x})}{\Delta x}
 $$
 
-几何意义是函数在该点处的`瞬时变化率`。用于判断函数的**单调性**：一阶导大于零则单调递增，一阶导小于零则单调递减；
+几何意义是函数在该点处的`瞬时变化率`。用于判断函数的**单调性**：一阶导大于零则单调递增，一阶导小于零则单调递减。
 
 #### 二阶导数
 
@@ -723,13 +723,14 @@ $$
 
 $$ f'' = (f')' = \frac{d^2y}{dx^2} $$
 
-用于判断函数的**凹凸性**：二阶导大于零则凸（U 型），二阶导小于零则凹（倒扣的 U 型）；
+用于判断函数的**凹凸性**：二阶导大于零则凸（U 型），二阶导小于零则凹（倒扣的 U 型）。
 
 ### 偏导数
 
 设多元函数 $f: \mathbb{R}^n \to \mathbb{R}$，则函数 $f$ 对自变量 $x_j$ 的偏导数（partial derivative），指将其他自变量视作常量时，对 $x_j$ 的导数，即：
 
-$$ \frac{\partial f}{\partial x_j} = \lim_{{\Delta x_j} \to 0} \frac{\Delta f}{\Delta x_j} = \lim_{{\Delta x_j} \to 0} \frac{f(x_j + {\Delta x_j}, ...) - f(x_j, ...)}{\Delta x_j}
+$$ 
+\frac{\partial f}{\partial x_j} = \lim_{{\Delta x_j} \to 0} \frac{f(x_j + {\Delta x_j}, ...) - f(x_j, ...)}{\Delta x_j}
 $$
 
 注意：可微一定可导，即任意给定点的邻域内所有偏导数存在且连续。
@@ -756,46 +757,64 @@ $$
 
 ### 向量
 
-基于应用层面，本文一律默认列向量，在 Python 中对应一维数组。
-
-#### 加减法
+n 维向量 $x$ 记作：
 
 $$
-\begin{bmatrix}a \\\\ b \\\\ c \end{bmatrix}
-\pm
-\begin{bmatrix}d \\\\ e \\\\ f \end{bmatrix} =
-\begin{bmatrix}a \pm d \\\\ b \pm e \\\\ c \pm f \end{bmatrix}
+x = \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix} \in \mathbb{R}^n
 $$
 
-#### 点积
+说明：本文中的向量一律默认列向量，在 Python 中对应一维数组。$x$ 也可视作一个 $n \times 1$ 矩阵。
 
-点积（Dot product），也称作点乘、内积，运算结果是一个标量。
+#### 点积(<a id="DotProduct"></a>)
+
+点积（Dot product），也称作点乘、内积、数量积。对于 $x,y \in \mathbb{R}^n$：
 
 $$
-\begin{bmatrix}a \\\\ b \\\\ c \end{bmatrix}
-\cdot
-\begin{bmatrix}d \\\\ e \\\\ f \end{bmatrix} =
-ad + be + cf 
+x \cdot y = x^Ty = \sum_{j=1}^{n} x_jy_j \in \mathbb{R}
 $$
+
+说明：几何意义是向量围成的平面的**面积**或空间的**体积**（$n=2$ 对应平行四边形的面积，$n=3$ 对应平行六面体的体积），大小等于 ${\lVert x \rVert}\_2{\lVert y \rVert}\_2\cos(\theta)$，其中 $\theta$ 为两向量之间的夹角；
+用途：求两向量夹角余弦，用于评估向量的相似性，即[余弦相似度](#CosineSimilarity)；
+注意：相同维数的向量才能进行点积乘法。
 
 #### 叉积
 
-叉积（Cross product），也称作叉乘、外积，运算结果是一个向量。
+叉积（Cross product），也称作叉乘、向量积。对于 $x,y \in \mathbb{R}^3$：
 
 $$
-\begin{bmatrix}a \\\\ b \\\\ c \end{bmatrix}
-\times
-\begin{bmatrix}d \\\\ e \\\\ f \end{bmatrix} =
+\begin{split}
+x \times y &= 
 \left|
   \begin{matrix}
   \vec{i} & \vec{j} & \vec{k} \\\\ 
-  a & b & c \\\\
-  d & e & f
+  x_1 & x_2 & x_3 \\\\
+  y_1 & y_2 & y_3
   \end{matrix}
-\right| =
-(bf-ce)\vec{i} - (af-cd)\vec{j} + (ae-bd)\vec{k} = 
-\begin{bmatrix}bf-ce \\\\ -(af-cd) \\\\ ae-bd \end{bmatrix}
+\right|\
+&= (x_2y_3-x_3y_2)\vec{i} - (x_1y_3-x_3y_1)\vec{j} + (x_1y_2-x_2y_1)\vec{k} 
+&= \begin{bmatrix}x_2y_3-x_3y_2 \\\\ -(x_1y_3-x_3y_1) \\\\ x_1y_2-x_2y_1 \end{bmatrix} \in \mathbb{R}^3
+\end{split}
 $$
+
+说明：几何意义是**法向量**，大小等于 ${\lVert x \rVert}\_2{\lVert y \rVert}\_2\sin(\theta)$，其中 $\theta$ 为两向量之间的夹角；
+注意：叉积的概念仅用于三维空间。
+
+#### 外积
+
+外积（Outer product）。对于 $x \in \mathbb{R}^m, y \in \mathbb{R}^n$：
+
+$$
+x \otimes y = xy^T = 
+\begin{bmatrix}
+  x_1y_1 & x_1y_2 & \dots & x_1y_n \\\\ 
+  x_2y_1 & x_2y_2 & \dots & x_2y_n \\\\ 
+  \vdots & \vdots & \ddots & \vdots \\\\ 
+  x_my_1 & x_my_2 & \dots & x_my_n
+\end{bmatrix}
+\in \mathbb{R}^{m \times n}
+$$
+
+说明：运算结果是个矩阵。
 
 ### 矩阵
 
@@ -917,6 +936,12 @@ $$
 
 以下式 $(1) (2) (3) (4)$ 用到了范数，依次对应 L1、L2、L$\infty$、Lp 范数；
 
+#### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
+
+是含参数 p 的距离函数。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
+
+$$ Minkowski \space Distance = \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
+
 #### 曼哈顿距离<a id="ManhattanDistance"></a>
 
 $$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{1} $$
@@ -929,12 +954,6 @@ $$ \sqrt{\sum_{j=1}^{n} (x_j - y_j)^2} \tag{2} $$
 
 $$ \max_{j} {\lvert x_j - y_j \rvert} \tag{3} $$
 
-#### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
-
-是含参数 p 的距离函数。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
-
-$$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
-
 #### 马氏距离
 
 ？？协方差距离
@@ -942,6 +961,18 @@ $$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
 #### 汉明距离
 
 #### 杰卡德距离
+
+#### KL 散度
+
+$$KL(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)}$$
+
+#### 余弦相似度(<a id="CosineSimilarity"></a>)
+
+余弦相似度（Cosine Similarity）使用两个向量夹角的余弦值来衡量相似度：
+
+$$ Cosine Similarity = \cos(\theta) = \frac{x \cdot y}{{\lVert x \rVert}\_2{\lVert y \rVert}\_2} $$
+
+说明：由[向量点积](#DotProduct)计算公式推导而来。越接近于 1，说明夹角越接近于 0，表明越相似。
 
 ### 贝叶斯定理
 
@@ -970,8 +1001,6 @@ $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 可由条件概率推导得到，因为 $P(A,B) = P(A|B)P(B) = P(B|A)P(A)$
 
 ## 附
-
-- 余弦相似度（cosine similarity）：用两个向量夹角的余弦值衡量两个样本差异的大小；（越接近于1，说明夹角越接近于0，表明越相似）
 
 一些术语概念：
 - 协方差：线性相关性程度。若协方差为0则线性无关；
