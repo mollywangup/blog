@@ -601,13 +601,45 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 为了引入非线性因素。
 
-### Sign
+<!-- ### Sign
+
+符号函数，公式如下：
+
+$$
+sgn \space x = 
+\begin{cases}
+-1, & \text{if $x < 0$} \\\\
+0, & \text{if $x = 0$} \\\\
+1, & \text{if $x \ge 0$}
+\end{cases}
+$$ -->
 
 ### Sigmoid
 
+$$ 
+\forall x \in \mathbb{R}, \space\space
+f(x) = \frac{1}{1+e^{-x}} \in (0,1)
+$$
+
 ### tanh
 
+$$
+\forall x \in \mathbb{R}, \space\space
+f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \in (-1, 1)
+$$
+
 ### ReLU
+
+ReLU (rectified linear unit)
+
+$$
+\forall x \in \mathbb{R}, \space\space
+f(x) =
+\begin{cases}
+x, & \text{if $x \geq 0$} \\\\
+0, & \text{if $x < 0$}
+\end{cases}
+$$
 
 ### Softmax
 
@@ -746,8 +778,8 @@ x \times y &=
   x_1 & x_2 & x_3 \\\\
   y_1 & y_2 & y_3
   \end{matrix}
-\right|\
-&= (x_2y_3-x_3y_2)\vec{i} - (x_1y_3-x_3y_1)\vec{j} + (x_1y_2-x_2y_1)\vec{k} 
+\right| \\\\
+&= (x_2y_3-x_3y_2)\vec{i} - (x_1y_3-x_3y_1)\vec{j} + (x_1y_2-x_2y_1)\vec{k} \\\\
 &= \begin{bmatrix}x_2y_3-x_3y_2 \\\\ -(x_1y_3-x_3y_1) \\\\ x_1y_2-x_2y_1 \end{bmatrix} \in \mathbb{R}^3
 \end{split}
 $$
@@ -849,7 +881,7 @@ $$
 
 #### 向量范数<a id="VectorNorms"></a>
 
-向量 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 的 p 范数定义如下：
+n 维向量 $x$ 的 p 范数定义如下：
 
 $$ 
 L_p(x) = \lVert x \rVert_p = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p}
