@@ -509,70 +509,9 @@ $$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
 #### 交叉熵
 
-{{< alert theme="info" >}}
-**信息量**是信息的大小，**熵**是信息量的期望值，**相对熵**用于衡量两个概率分布之间的差异，**交叉熵**是相对熵的简化版。
-{{< /alert >}}
+推导详见[交叉熵](#CrossEntropy)
 
-##### 信息量
-
-设随机变量 $x$ 的概率分布为 $p(x)$，则 $x$ 的**信息量**定义如下：$$ I(x) = \ln \frac{1}{p(x)} = - \ln p(x) $$
-
-说明：
-概率越小，信息量越大；
-对数底数仅影响量化的单位，以 2 为底则单位是比特，以 e 为底则单位是纳特（默认）。
-
-##### 熵
-
-熵（Entropy）等于随机变量 $x$ 的**信息量的期望值**，用于衡量**不确定性**，定义如下：
-
-$$ 
-H(p) = E(I(x)) = \sum_x p(x) I(x) = - \sum_x p(x) \ln p(x)
-$$
-
-说明：
-熵越大，则不确定性越大；
-离散型随机变量对应**求和**，连续型随机变量对应**求积分**（已省略）；
-
-##### 相对熵
-
-相对熵（Relative Entropy），又称为 KL 散度（Kullback-Leibler divergence），用于**衡量两个概率分布之间的差异程度**。对于两个概率分布 $p(x)$ 和 $q(x)$，其相对熵定义如下：
-
-$$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
-
-说明：
-相对熵越小，则 $p(x)$ 和 $q(x)$ 分布越接近；
-$D_{KL}(p||q) \geq 0$，当且仅当 $p(x) = q(x)$ 时等号成立；
-
-{{< expand "证明：相对熵大于等于零" >}}
-由于 $\ln(x) \leq x - 1$，则：
-
-$$
-\begin{split}
-\- D_{KL}(p||q) &= \sum_x p(x) \ln \frac{q(x)}{p(x)} \\\\ 
-&\leq \sum_x p(x) (\frac{q(x)}{p(x)} - 1) &= \sum_x (q(x) - p(x)) = 0
-\end{split}
-$$
-
-因此 $D_{KL}(p||q) \geq 0$，当且仅当 $p(x) = q(x)$ 时为零。
-{{< /expand >}}
-
-##### 交叉熵
-
-将上述相对熵公式展开：
-
-$$ 
-\begin{split}
-D_{KL}(p||q) &= \sum_x p(x) \ln \frac{p(x)}{q(x)} \\\\
-&= \sum_x p(x) \ln p(x) - \sum_x p(x) \ln q(x) \\\\
-&= -H(p) + H(p,q)
-\end{split}
-$$
-
-其中，前半部分就是负的 $p(x)$ 的熵，后半部分则就是交叉熵（Cross Entropy）：$$ H(p,q) = - \sum_x p(x) \ln q(x) $$
-
-应用到机器学习中，使用相对熵 $D_{KL}(y||\hat{y})$ 评估预测值与真实值之间的差异程度，但由于 $D_{KL}(y||\hat{y}) = H(y,\hat{y}) - H(y)$，其中 $H(y)$ 为真实值的熵，是一个常数，因此可直接使用 $H(y,\hat{y})$ 即交叉熵作为损失函数：
-
-$$ L(\hat{y}, y) = - \sum_x y \ln \hat{y} $$
+$$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
 
 对于二分类问题：$$ L(\hat{y}, y) = -y\ln(\hat{y}) - (1-y)\ln(1-\hat{y}) $$ 
 
@@ -765,7 +704,7 @@ $$
 
 说明：本文中的向量一律默认列向量，在 Python 中对应一维数组。$x$ 也可视作一个 $n \times 1$ 矩阵。
 
-#### 点积(<a id="DotProduct"></a>)
+#### 点积<a id="DotProduct"></a>
 
 点积（Dot product），也称作点乘、内积、数量积。对于 $x,y \in \mathbb{R}^n$：
 
@@ -940,39 +879,47 @@ $$
 
 是含参数 p 的距离函数。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
 
-$$ Minkowski \space Distance = \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{4} $$
+$$ Minkowski \space Distance = \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{1} $$
 
 #### 曼哈顿距离<a id="ManhattanDistance"></a>
 
-$$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{1} $$
+$$ Manhattan \space Distance = \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{2} $$
 
 #### 欧氏距离<a id="EuclideanDistance"></a>
 
-$$ \sqrt{\sum_{j=1}^{n} (x_j - y_j)^2} \tag{2} $$
+$$ Euclidean \space Distance = \sqrt{\sum_{j=1}^{n} (x_j - y_j)^2} \tag{3} $$
 
 #### 切比雪夫距离<a id="ChebyshevDistance"></a>
 
-$$ \max_{j} {\lvert x_j - y_j \rvert} \tag{3} $$
+$$ \max_{j} {\lvert x_j - y_j \rvert} \tag{4} $$
+
+#### 海明距离
+
+
 
 #### 马氏距离
 
 ？？协方差距离
 
-#### 汉明距离
 
 #### 杰卡德距离
 
-#### KL 散度
+#### KL 散度<a id="KLDivergence"></a>
 
-$$KL(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)}$$
+给定随机变量 $x$ 的两个概率分布 $p(x)$ 和 $q(x)$，[KL 散度](#KLD)可用于衡量两个概率分布之间的差异程度，其公式如下：
 
-#### 余弦相似度(<a id="CosineSimilarity"></a>)
+$$ KL(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
+
+#### 余弦相似度<a id="CosineSimilarity"></a>
 
 余弦相似度（Cosine Similarity）使用两个向量夹角的余弦值来衡量相似度：
 
-$$ Cosine Similarity = \cos(\theta) = \frac{x \cdot y}{{\lVert x \rVert}\_2{\lVert y \rVert}\_2} $$
+$$ Cosine Similarity = \cos(\theta) = \frac{x \cdot y}{\lVert x \rVert_2 \lVert y \rVert_2} $$
 
 说明：由[向量点积](#DotProduct)计算公式推导而来。越接近于 1，说明夹角越接近于 0，表明越相似。
+
+#### 皮尔逊相关系数
+
 
 ### 贝叶斯定理
 
@@ -1062,6 +1009,73 @@ $$
 
 - 批量梯度下降（Batch Gradient Descent）：使用训练集中的所有数据
 - 随机梯度下降（SGD）：？？根据每个训练样本进行参数更新
+
+### 熵<a id="Entropy"></a>
+
+{{< alert theme="info" >}}
+**信息量**是信息的大小，**熵**是信息量的期望值，**相对熵**用于衡量两个概率分布之间的差异，**交叉熵**是相对熵的简化版。
+{{< /alert >}}
+
+#### 信息量
+
+给定随机变量 $x$ 的概率分布 $p(x)$，则 $x$ 的**信息量**定义如下：$$ I(x) = \ln \frac{1}{p(x)} = - \ln p(x) $$
+
+说明：
+概率越小，信息量越大；
+对数底数仅影响量化的单位，以 2 为底则单位是比特，以 e 为底则单位是纳特（默认）。
+
+#### 熵
+
+熵（Entropy）等于随机变量 $x$ 的**信息量的期望值**，用于衡量**不确定性**，定义如下：
+
+$$ 
+H(p) = E(I(x)) = \sum_x p(x) I(x) = - \sum_x p(x) \ln p(x)
+$$
+
+说明：
+熵越大，则不确定性越大；
+离散型随机变量对应**求和**，连续型随机变量对应**求积分**（已省略）；
+
+#### 相对熵<a id="KLD"></a>
+
+相对熵（Relative Entropy），又称为 KL 散度（Kullback-Leibler divergence），用于**衡量两个概率分布之间的差异程度**。对于两个概率分布 $p(x)$ 和 $q(x)$，其相对熵定义如下：
+
+$$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
+
+说明：
+相对熵越小，则 $p(x)$ 和 $q(x)$ 分布越接近；
+$D_{KL}(p||q) \geq 0$，当且仅当 $p(x) = q(x)$ 时等号成立；
+
+{{< expand "证明：相对熵大于等于零" >}}
+由于 $\ln(x) \leq x - 1$，则：
+
+$$
+\begin{split}
+\- D_{KL}(p||q) &= \sum_x p(x) \ln \frac{q(x)}{p(x)} \\\\ 
+&\leq \sum_x p(x) (\frac{q(x)}{p(x)} - 1) &= \sum_x (q(x) - p(x)) = 0
+\end{split}
+$$
+
+因此 $D_{KL}(p||q) \geq 0$，当且仅当 $p(x) = q(x)$ 时为零。
+{{< /expand >}}
+
+#### 交叉熵<a id="CrossEntropy"></a>
+
+将上述相对熵公式展开：
+
+$$ 
+\begin{split}
+D_{KL}(p||q) &= \sum_x p(x) \ln \frac{p(x)}{q(x)} \\\\
+&= \sum_x p(x) \ln p(x) - \sum_x p(x) \ln q(x) \\\\
+&= -H(p) + H(p,q)
+\end{split}
+$$
+
+其中，前半部分就是负的 $p(x)$ 的熵，后半部分则就是交叉熵（Cross Entropy）：$$ H(p,q) = - \sum_x p(x) \ln q(x) $$
+
+实际应用中，如果将 $p(x)$ 作为真实值的概率分布，$q(x)$ 作为预测值的概率分布，则由于真实值的熵 $H(p)$ 是一个常数，因此以下是等价的：
+
+$$ D_{KL}(p||q) \sim H(p,q)$$
 
 ### 过拟合
 
