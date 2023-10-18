@@ -137,7 +137,7 @@ $b$：偏差（bias）或截距（intercept），是标量；
 
 [MSE](#mse) 指**预测值与真实值之间误差的平方和的均值**，取值越小说明预测越准，模型性能越好。代入线性回归模型，计算公式如下：
 
-<!-- 坑：这里是因为“下划线被解释成Markdown语法了，因此需要加\转义” 参考 https://github.com/theme-next/hexo-theme-next/issues/826 {\lVert w \rVert}\_1 正常不需要加，但为了渲染需要加-->
+<!-- 坑：这里是因为“下划线被解释成Markdown语法了，因此需要加\转义” 参考 https://github.com/theme-next/hexo-theme-next/issues/826 \lVert w \rVert_1 正常不需要加，但为了渲染需要加-->
 $$
 \begin{split}
 MSE &= \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \\\\
@@ -148,7 +148,7 @@ $$
 {{< expand "矩阵乘向量形式的写法（手动解的思路） ">}}
 
 $$
-MSE = \frac{1}{m} {\lVert X_{new} \cdot w_{new} - y \rVert}\_2^2
+MSE = \frac{1}{m} \lVert X_{new} \cdot w_{new} - y \rVert_2^2
 $$
 
 其中：
@@ -171,9 +171,9 @@ $$
 
 $$ J(w,b) = \frac{1}{2} MSE \tag{普通最小二乘回归} $$
 
-$$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_1 \tag{Lasso 回归} $$
+$$ J(w,b) = \frac{1}{2} MSE + \alpha \lVert w \rVert_1 \tag{Lasso 回归} $$
 
-$$ J(w,b) = \frac{1}{2} MSE + \alpha {\lVert w \rVert}\_2^2 \tag{岭回归} $$
+$$ J(w,b) = \frac{1}{2} MSE + \alpha \lVert w \rVert_2^2 \tag{岭回归} $$
 
 说明：
 1. 使用 $\frac{1}{2} MSE$，仅是为了在求导数/偏导数时消去常数 2，并不影响结果；
@@ -493,9 +493,7 @@ Neural Network，解决**分类+回归**问题。
 
 损失函数用于**衡量预测值与真实值之间的差异程度**，一般表示为：$$ L(\hat{y}, y) $$
 
-说明：选择损失函数的标准是，凸函数，因为极小值就是最小值。
-
-成本函数用于**评估模型性能**，一般使用 $J$ 表示，且通常有：
+成本函数用于**评估模型性能**，一般使用 $J$ 表示，且通常：
 
 $$
 J = \frac{1}{m} \displaystyle \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)
@@ -696,13 +694,17 @@ $$
 
 ### 向量
 
+{{< alert theme="info" >}}
+**点积是标量，叉积是向量，外积是矩阵。**
+{{< /alert >}}
+
 n 维向量 $x$ 记作：
 
 $$
 x = \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix} \in \mathbb{R}^n
 $$
 
-说明：本文中的向量一律默认列向量，在 Python 中对应一维数组。$x$ 也可视作一个 $n \times 1$ 矩阵。
+说明：本文一律默认列向量，在 Python 中对应一维数组。$x$ 也可视作一个 $n \times 1$ 矩阵。
 
 #### 点积<a id="DotProduct"></a>
 
@@ -712,8 +714,8 @@ $$
 x \cdot y = x^Ty = \sum_{j=1}^{n} x_jy_j \in \mathbb{R}
 $$
 
-说明：几何意义是向量围成的平面的**面积**或空间的**体积**（$n=2$ 对应平行四边形的面积，$n=3$ 对应平行六面体的体积），大小等于 ${\lVert x \rVert}\_2{\lVert y \rVert}\_2\cos(\theta)$，其中 $\theta$ 为两向量之间的夹角；
-用途：求两向量夹角余弦，用于评估向量的相似性，即[余弦相似度](#CosineSimilarity)；
+说明：几何意义是向量围成的平面的**面积**或空间的**体积**，大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\cos(\theta)$，其中 $\theta$ 为两向量之间的夹角；
+用途：[余弦相似度](#CosineSimilarity)
 注意：相同维数的向量才能进行点积乘法。
 
 #### 叉积
@@ -735,8 +737,8 @@ x \times y &=
 \end{split}
 $$
 
-说明：几何意义是**法向量**，大小等于 ${\lVert x \rVert}\_2{\lVert y \rVert}\_2\sin(\theta)$，其中 $\theta$ 为两向量之间的夹角；
-注意：叉积的概念仅用于三维空间。
+说明：几何意义是**法向量**，大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\sin(\theta)$，其中 $\theta$ 为两向量之间的夹角；
+注意：叉积的概念仅用于三维空间。这里的公式表达使用了[行列式](#Determinant)和代数余子式。
 
 #### 外积
 
@@ -787,7 +789,7 @@ $$ w_1x_1 + w_2x_2 + \cdots + w_nx_n = \vec{0},\space\space (n>=2) $$
 当 $rank(X) = n$ 时，即列满秩，说明 n 个特征线性无关；
 当 $rank(X) < n$ 时，即列不满秩，说明 n 个特征线性相关；
 
-#### 行列式
+#### 行列式<a id="Determinant"></a>
 
 行列式（Determinant）针对的是 $n \times n$ 矩阵，也称为 **n 阶方阵**，记作 $\det$.
 
@@ -835,26 +837,26 @@ $$
 向量 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 的 p 范数定义如下：
 
 $$ 
-L_p(x) = {\lVert x \rVert}\_p = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p}
+L_p(x) = \lVert x \rVert_p = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p}
 $$
 
 则当 p 依次取 $-\infty, 1, 2, +\infty$ 时，分别对应如下范数：
 
 $$ 
-{\lVert x \rVert}\_{-\infty} = \lim_{p \to -\infty} \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} = 
+\lVert x \rVert_{-\infty} = \lim_{p \to -\infty} \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} = 
 \min_{j} {\lvert x_j \rvert} 
 $$
 
 $$ 
-{\lVert x \rVert}\_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} \tag{L1}
+\lVert x \rVert_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} \tag{L1}
 $$
 
 $$ 
-{\lVert x \rVert}\_2 = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^2\right)^{1/2} \tag{L2}
+\lVert x \rVert_2 = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^2\right)^{1/2} \tag{L2}
 $$
 
 $$ 
-{\lVert x \rVert}\_{+\infty} = \lim_{p \to +\infty} \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} = 
+\lVert x \rVert_{+\infty} = \lim_{p \to +\infty} \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} = 
 \max_{j} {\lvert x_j \rvert}
 $$
 
@@ -865,36 +867,31 @@ $$
 
 #### 矩阵范数<a id="MatrixNorms"></a>
 
-### 距离函数
+### 距离和相似度
 
-{{< alert theme="info" >}}
-**距离函数在机器学习中常用于相似性度量，距离越近，则相似性越高。**
-{{< /alert >}}
+两个 n 维向量 $x$ 和 $y$，可通过两个向量之间的**距离**或**相似度**来衡量差异程度。距离越近，则相似性越高，也就是差异程度越小。
 
-对于 n 维空间中两点 $x = \begin{pmatrix}x_1 & x_2 & \dots & x_n \end{pmatrix}$ 和 $y = \begin{pmatrix}y_1 & y_2 & \dots & y_n \end{pmatrix}$，可将两点间的距离计算问题转化为量化**差向量 $x - y$ 的大小问题**。
-
-以下式 $(1) (2) (3) (4)$ 用到了范数，依次对应 L1、L2、L$\infty$、Lp 范数；
+以下式 $(1) (2) (3) (4)$ 对应**差向量 $x - y$**的不同范数。
 
 #### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
 
 是含参数 p 的距离函数。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
 
-$$ Minkowski \space Distance = \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{1} $$
+$$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{1} $$
 
 #### 曼哈顿距离<a id="ManhattanDistance"></a>
 
-$$ Manhattan \space Distance = \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{2} $$
+$$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{2} $$
 
 #### 欧氏距离<a id="EuclideanDistance"></a>
 
-$$ Euclidean \space Distance = \sqrt{\sum_{j=1}^{n} (x_j - y_j)^2} \tag{3} $$
+$$ \sqrt{\sum_{j=1}^{n} (x_j - y_j)^2} \tag{3} $$
 
 #### 切比雪夫距离<a id="ChebyshevDistance"></a>
 
 $$ \max_{j} {\lvert x_j - y_j \rvert} \tag{4} $$
 
 #### 海明距离
-
 
 
 #### 马氏距离
@@ -906,15 +903,17 @@ $$ \max_{j} {\lvert x_j - y_j \rvert} \tag{4} $$
 
 #### KL 散度<a id="KLDivergence"></a>
 
-给定随机变量 $x$ 的两个概率分布 $p(x)$ 和 $q(x)$，[KL 散度](#KLD)可用于衡量两个概率分布之间的差异程度，其公式如下：
+给定随机变量 $x$ 的两个概率分布 $p(x)$ 和 $q(x)$，KL 散度用于衡量两个概率分布之间的差异程度，公式如下：
 
-$$ KL(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
+$$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
+
+说明：也称作[相对熵](#KLD)。大于等于零，越小越相似。
 
 #### 余弦相似度<a id="CosineSimilarity"></a>
 
-余弦相似度（Cosine Similarity）使用两个向量夹角的余弦值来衡量相似度：
+余弦相似度（Cosine Similarity）使用两个向量夹角的余弦值来衡量相似度，公式如下：
 
-$$ Cosine Similarity = \cos(\theta) = \frac{x \cdot y}{\lVert x \rVert_2 \lVert y \rVert_2} $$
+$$ \frac{x \cdot y}{\lVert x \rVert_2 \lVert y \rVert_2} $$
 
 说明：由[向量点积](#DotProduct)计算公式推导而来。越接近于 1，说明夹角越接近于 0，表明越相似。
 
@@ -1044,7 +1043,7 @@ $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
 
 说明：
 相对熵越小，则 $p(x)$ 和 $q(x)$ 分布越接近；
-$D_{KL}(p||q) \geq 0$，当且仅当 $p(x) = q(x)$ 时等号成立；
+$D_{KL}(p||q) \geq 0$，当且仅当 $p(x) = q(x)$ 时等号成立，且非对称；
 
 {{< expand "证明：相对熵大于等于零" >}}
 由于 $\ln(x) \leq x - 1$，则：
@@ -1073,7 +1072,7 @@ $$
 
 其中，前半部分就是负的 $p(x)$ 的熵，后半部分则就是交叉熵（Cross Entropy）：$$ H(p,q) = - \sum_x p(x) \ln q(x) $$
 
-实际应用中，如果将 $p(x)$ 作为真实值的概率分布，$q(x)$ 作为预测值的概率分布，则由于真实值的熵 $H(p)$ 是一个常数，因此以下是等价的：
+实际应用中，如果将 $p(x)$ 作为真实值的概率分布，$q(x)$ 作为预测值的概率分布，则由于真实值的熵 $H(p)$ 是一个常数，因此：
 
 $$ D_{KL}(p||q) \sim H(p,q)$$
 
