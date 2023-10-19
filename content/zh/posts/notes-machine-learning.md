@@ -765,9 +765,9 @@ $$
 x \cdot y = x^Ty = \sum_{j=1}^{n} x_jy_j \in \mathbb{R}
 $$
 
+注意：相同维数的向量才能进行点积乘法；
 说明：几何意义是向量围成的平面的**面积**或空间的**体积**，大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\cos(\theta)$，其中 $\theta$ 为两向量之间的夹角；
 用途：[余弦相似度](#CosineSimilarity)
-注意：相同维数的向量才能进行点积乘法。
 
 #### 叉积
 
@@ -788,8 +788,8 @@ x \times y &=
 \end{split}
 $$
 
-说明：几何意义是**法向量**，大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\sin(\theta)$，其中 $\theta$ 为两向量之间的夹角；
-注意：叉积的概念仅用于三维空间。这里的公式表达使用了[行列式](#Determinant)和代数余子式。
+注意：叉积的概念仅用于三维空间。这里的公式表达使用了[行列式](#Determinant)和代数余子式；
+说明：几何意义是**法向量**，大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\sin(\theta)$，其中 $\theta$ 为两向量之间的夹角。
 
 #### 外积
 
@@ -895,20 +895,20 @@ $$
 
 $$ 
 \lVert x \rVert_{-\infty} = \lim_{p \to -\infty} \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} = 
-\min_{j} {\lvert x_j \rvert} 
+\min_{j} {\lvert x_j \rvert} \tag{$L_{-\infty}$}
 $$
 
 $$ 
-\lVert x \rVert_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} \tag{L1}
+\lVert x \rVert_1 = \sum_{j=1}^{n} {\lvert x_j \rvert} \tag{$L_1$}
 $$
 
 $$ 
-\lVert x \rVert_2 = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^2\right)^{1/2} \tag{L2}
+\lVert x \rVert_2 = \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^2\right)^{1/2} \tag{$L_2$}
 $$
 
 $$ 
 \lVert x \rVert_{+\infty} = \lim_{p \to +\infty} \left(\sum_{j=1}^{n} {\lvert x_j \rvert}^p\right)^{1/p} = 
-\max_{j} {\lvert x_j \rvert}
+\max_{j} {\lvert x_j \rvert} \tag{$L_{+\infty}$}
 $$
 
 补充说明：
