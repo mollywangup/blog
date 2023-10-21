@@ -587,70 +587,6 @@ $$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
 
 对于二分类问题：$$ L(\hat{y}, y) = -y\ln(\hat{y}) - (1-y)\ln(1-\hat{y}) $$ 
 
-## 激活函数
-
-为了将线性输出转化为非线性输出。
-
-<!-- ### Sign
-
-符号函数，公式如下：
-
-$$
-sgn \space x = 
-\begin{cases}
--1, & \text{if $x < 0$} \\\\
-0, & \text{if $x = 0$} \\\\
-1, & \text{if $x \ge 0$}
-\end{cases}
-$$ -->
-
-### Sigmoid
-
-$$ 
-f(x) = \frac{1}{1+e^{-x}} \in (0,1) 
-$$
-
-$$
-f'(x) = \frac{e^{-x}}{(1 + e^{-x})^2} \in (0,0.25)
-$$
-
-<img src='https://user-images.githubusercontent.com/46241961/276302604-44080d48-59a9-4ce1-ab2a-83e058ac00af.svg' alt='ActivationFunction_Sigmoid' width=80%>
-
-### tanh
-
-$$
-f(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \in (-1, 1)
-$$
-
-<img src='https://user-images.githubusercontent.com/46241961/276302656-2e0dfbdc-a990-4486-bec9-502441bfe07a.svg' alt='ActivationFunction_tanh' width=80%>
-
-### ReLU
-
-$$
-f(x) =
-\begin{cases}
-x, & \text{if $x \geq 0$} \\\\
-0, & \text{if $x < 0$}
-\end{cases} \space\space\space \text{or} \space\space\space
-f(x) = \max(0, x)
-$$
-
-$$
-f'(x) =
-\begin{cases}
-1, & \text{if $x \geq 0$} \\\\
-0, & \text{if $x < 0$}
-\end{cases}
-$$
-
-<img src='https://user-images.githubusercontent.com/46241961/276302720-d6f6ffe9-6a1c-45a3-9bbc-1fe15938f289.svg' alt='ActivationFunction_ReLU' width=80%>
-
-### Softmax
-
-$$
-
-$$
-
 ## 优化算法
 
 ### 梯度下降算法<a id="GD"></a>
@@ -665,7 +601,10 @@ $$ \min_{w,b} J(w,b) $$
 选定初始位置 $w$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
 
 $$
-w \leftarrow w - \alpha \frac{\partial J}{\partial w} \\\\
+w \leftarrow w - \alpha \frac{\partial J}{\partial w}
+$$
+
+$$
 b \leftarrow b - \alpha \frac{\partial J}{\partial b}
 $$
 
