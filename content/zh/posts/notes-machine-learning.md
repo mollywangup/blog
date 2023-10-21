@@ -95,10 +95,10 @@ $$
 目标：模型应尽可能满足，最大限度地减少预测值与真实值之间的差异程度，但又不能过拟合（泛化能力）；
 
 <!-- 思路：先选择一个训练模型，那模型参数如何确定呢？ -->
-拆解目标：
+<!-- 拆解目标：
 Step1：选择训练模型：含模型参数；
 Step2：评估模型性能：选择合适的损失函数，以衡量模型的预测值与真实值之间的差异程度；确定损失函数：将模型代入损失函数得到成本函数，以量化模型性能；
-Step3：求解目标函数：求成本函数的极小值解。求极小值问题常用到[梯度下降算法](#GD)。
+Step3：求解目标函数：求成本函数的极小值解。求极小值问题常用到[梯度下降算法](#GD)。 -->
 
 ### 线性回归
 
@@ -127,27 +127,44 @@ f_{w,b}(x) = w \cdot x + b =
 $$
 
 其中，模型参数：
-$w$：回归系数，分别对应 n 个特征的权重（weights）或系数（coefficients），是向量；
-$b$：偏差（bias）或截距（intercept），是标量；
+$w \in \mathbb{R}^n$：回归系数，分别对应 n 个特征的权重（weights）或系数（coefficients）；
+$b \in \mathbb{R}$：偏差（bias）或截距（intercept）；
 
 说明：当 n = 1 时，对应一元线性回归；当 n >= 2 时，对应多元线性回归；
 
 ##### 成本函数
 
-[MSE](#mse) 指**预测值与真实值之间误差的平方和的均值**，取值越小说明预测越准，模型性能越好。代入线性回归模型，计算公式如下：
+使用[最小二乘法](#OrdinaryLeastSquares)作为损失函数：
 
-<!-- 坑：这里是因为“下划线被解释成Markdown语法了，因此需要加\转义” 参考 https://github.com/theme-next/hexo-theme-next/issues/826 \lVert w \rVert_1 正常不需要加，但为了渲染需要加-->
 $$
 \begin{split}
-MSE &= \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \\\\
-&= \frac{1}{m} \sum_{i=1}^{m} (w \cdot x^{(i)} + b - y^{(i)})^2 \\\\
+L(w,b) &= \frac{1}{2} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \\\\
+&= \frac{1}{2} (w \cdot x^{(i)} + b - y^{(i)})^2 
 \end{split}
 $$
+
+基于最小二乘损失，常见的三种成本函数：
+
+$$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{OLS} $$
+
+<!-- $$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \lambda \lVert w \rVert_1 \tag{Lasso} $$ -->
+
+$$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2m} \sum_{j=1}^{n} \lvert w_j \rvert \tag{Lasso} $$
+
+<!-- $$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2m} \lVert w \rVert_2^2 \tag{Ridge} $$ -->
+
+$$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2m} \sum_{j=1}^{n} \lvert w_j \rvert^2 \tag{Ridge} $$
+
+说明：
+1. 使用 $\frac{1}{2m}$ 取均值，仅是为了在求（偏）导数时消去常数 $2$，不影响结果；
+2. `Lasso`：用于**特征选择**，即让回归系数稀疏（sparse）。是在普通最小二乘的基础上，添加了回归系数的 [L1 范数](#VectorNorms) 作为惩罚项；
+3. `Ridge`：用于**防止过拟合**。是在普通最小二乘的基础上，添加了回归系数的 [L2 范数](#VectorNorms) 的平方作为惩罚项；
+4. $\lambda$：正则化项的参数，非负标量，为了控制惩罚项的大小。
 
 {{< expand "矩阵乘向量形式的写法（手动解的思路） ">}}
 
 $$
-MSE = \frac{1}{m} \lVert X_{new} \cdot w_{new} - y \rVert_2^2
+J(w,b) = \frac{1}{2m} \lVert X_{new} \cdot w_{new} - y \rVert_2^2
 $$
 
 其中：
@@ -166,28 +183,13 @@ $$
 
 {{< /expand >}}
 
-基于 MSE 共以下三种常见成本函数：
-
-$$ J(w,b) = \frac{1}{2} MSE \tag{普通最小二乘回归} $$
-
-$$ J(w,b) = \frac{1}{2} MSE + \alpha \lVert w \rVert_1 \tag{Lasso 回归} $$
-
-$$ J(w,b) = \frac{1}{2} MSE + \alpha \lVert w \rVert_2^2 \tag{岭回归} $$
-
-说明：
-1. 使用 $\frac{1}{2} MSE$，仅是为了在求导数/偏导数时消去常数 2，并不影响结果；
-2. $(w, b)$ 在模型 $f_{w,b}(x)$ 中是参数，在成本函数 $J(w,b)$ 中是变量；
-3. `套索回归（Lasso）`：用于**特征选择**，即让回归系数稀疏（sparse）。是在普通最小二乘的基础上，添加了回归系数的 [L1 范数](#VectorNorms) 作为惩罚项；
-4. `岭回归（Ridge）`：用于**防止过拟合**。是在普通最小二乘的基础上，添加了回归系数的 [L2 范数](#VectorNorms) 的平方作为惩罚项；
-5. 参数 $\alpha$：非负标量，作为伸缩系数，为了控制惩罚项的大小。
-
 ##### 目标函数
 
 求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
 $$ \min_{w,b} J(w,b) $$
 
-#### 示例
+#### 代码
 
 ##### 一元线性回归
 
@@ -304,7 +306,7 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 以式 $(1)$ 的模型为例，将非线性的 $f(x) \to y$ 问题，转化为线性的 $f(x,x^2) \to y$ 问题，即将非一次项的 $x^2$ 视作新特征，即可按照线性回归模型训练。
 
-#### 示例
+#### 代码
 
 以下示例为一元三次多项式。
 
@@ -571,7 +573,7 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 ## 损失函数<a id='LossFunction'></a>
 
 {{< alert theme="info" >}}
-损失函数用于**衡量预测值与真实值之间的差异程度**，也就是模型的拟合程度。本质上是衡量两个变量差异程度的通用函数，也可理解为"单个损失"。
+损失函数用于**衡量预测值与真实值之间的差异程度**，也就是模型的拟合程度。
 {{< /alert >}}
 
 给定 $\hat{y},y \in \mathbb{R}$，分别表示预测值和真实值，则损失函数表示为：$$ L(\hat{y}, y) $$
@@ -582,9 +584,9 @@ $$
 J = \frac{1}{m} \displaystyle \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)
 $$
 
-说明：成本函数更灵活，有时会在损失函数的基础上再加上正则项（防止过拟合）；
+说明：成本函数更灵活，有时会在损失函数的基础上再加上正则项；
 
-### 最小二乘法
+### 最小二乘法<a id="OrdinaryLeastSquares"></a>
 
 $$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
@@ -598,7 +600,7 @@ $$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
 
 ## 激活函数
 
-为了引入非线性模型。
+为了将线性输出转化为非线性输出。
 
 <!-- ### Sign
 
@@ -640,7 +642,8 @@ f(x) =
 \begin{cases}
 x, & \text{if $x \geq 0$} \\\\
 0, & \text{if $x < 0$}
-\end{cases}
+\end{cases} \space\space\space \text{or} \space\space\space
+f(x) = \max(0, x)
 $$
 
 $$
@@ -654,6 +657,10 @@ $$
 <img src='https://user-images.githubusercontent.com/46241961/276302720-d6f6ffe9-6a1c-45a3-9bbc-1fe15938f289.svg' alt='ActivationFunction_ReLU' width=80%>
 
 ### Softmax
+
+$$
+
+$$
 
 ## 优化算法
 
