@@ -26,7 +26,7 @@ libraries:
 ### 术语
 
 - 特征（`feature`）：指输入变量；
-- 标签（`label`）：指输出变量，真实值（`target`），预测值（`prediction`）；
+- 标签（`label`）：指输出变量，真实值（`target` 或 `ground truth`），预测值（`prediction`）；
 - 训练集（`training set`）：指用于训练模型的数据集；
 - 测试集（`test set`）：指用于验证模型的数据集；
 - 训练示例（`training example`）：指训练集中的一组数据；
@@ -42,7 +42,6 @@ libraries:
 1. `m` 个训练示例，`n` 个特征；
 2. 向量是一维数组，使用小写字母表示，且默认为列向量；矩阵是二维数组，使用大写字母表示；
 3. 非代码部分从 `1` 开始计数；
-<!-- 4. 模型默认为标量函数 $f: \mathbb{R}^n \to \mathbb{R}$； -->
 
 <br>具体符号：
 - $x$ 表示特征变量，$w$ 表示回归系数，$y$ 表示真实值，$\hat{y}$ 表示预测值，都是列向量；
@@ -78,21 +77,19 @@ x^{(i)} = \begin{bmatrix}x_1^{(i)} \\\\ x_2^{(i)} \\\\ \vdots \\\\ x_n^{(i)} \en
 x_j = \begin{bmatrix}x_j^{(1)} \\\\ x_j^{(2)} \\\\ \vdots \\\\ x_j^{(m)} \end{bmatrix}
 $$
 
-## 监督学习
+## 监督学习<a id="SupervisedLearning"></a>
 
 {{< alert theme="info" >}}
 有标签的是监督学习。预测连续值的是回归任务，预测离散值的是分类任务。
 {{< /alert >}}
 
-给定**包含标签**的训练集 $(X|y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习（Supervised Learning），即：$$ (X|y) \to f \to \hat{y} $$
+给定**包含标签**的训练集 $(X|y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X|y) \to f \to \hat{y} $$
 
 监督学习分为`回归（Regression）`和`分类（Classification）`两类任务，前者预测**连续值**，后者预测**离散值**。
 <!-- - `回归（Regression）`：可用于趋势预测、价格预测、流量预测等； -->
 <!-- - `分类（Classification）`：可用于构建用户画像、用户行为预测、图像识别分类等； -->
 
-### 算法思路
-
-目标：模型应尽可能满足，最大限度地减少预测值与真实值之间的差异程度，但又不能过拟合（泛化能力）；
+<!-- 目标：模型应尽可能满足，最大限度地减少预测值与真实值之间的差异程度，但又不能过拟合（泛化能力）； -->
 
 <!-- 思路：先选择一个训练模型，那模型参数如何确定呢？ -->
 <!-- 拆解目标：
@@ -431,23 +428,17 @@ Nbayes，解决**分类**问题。
 
 KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
 
-### 神经网络
-
-Neural Network，解决**分类+回归**问题。
-
 ## 无监督学习<a id="UnsupervisedLearning"></a>
 
 {{< alert theme="info" >}}
 无标签的是无监督学习。
 {{< /alert >}}
 
-给定**不包含标签**的训练集 $X$，通过算法构建一个模型，揭示数据的内在分布特性及规律，则属于无监督学习（Unsupervised Learning），即：$$ X \to f \to \hat{y} $$
+给定**不包含标签**的训练集 $X$，通过算法构建一个模型，揭示数据的内在分布特性及规律，则属于无监督学习，即：$$ X \to f \to \hat{y} $$
 
 无监督学习主要包括以下两类任务：
 - `聚类（Clustering）`
 - `降维（Dimensionality reduction）`
-
-### 算法思路
 
 ### K-means
 
@@ -475,8 +466,6 @@ Neural Network，解决**分类+回归**问题。
 （Reinforcement Learning）：有延迟和稀疏的反馈标签； -->
 
 ## 模型评估
-
-模型评估的目标是**选出泛化能力最优的模型**。
 
 ### 评估方法
 
@@ -668,12 +657,19 @@ $$
 
 梯度下降（Gradient Descent, GD）是一种迭代优化算法，用于求解任意一个可微函数的**局部最小值**。在机器学习中，常用于**最小化成本函数**，即最大程度减小预测值与真实值之间的误差。即：
 
-给定成本函数 $J(w_1,w_2,...,w_n)$，求解一组 $(w_1,w_2,...,w_n)$，使得
-$$ \min_{w_1,w_2,...,w_n} J(w_1,w_2,...,w_n) $$
+给定成本函数 $J(w,b)$，求解一组 $(w,b)$，使得
+$$ \min_{w,b} J(w,b) $$
 
 实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
 
-选定初始位置 $(w_1,w_2,...,w_n)$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
+选定初始位置 $w$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
+
+$$
+w \leftarrow w - \alpha \frac{\partial J}{\partial w} \\\\
+b \leftarrow b - \alpha \frac{\partial J}{\partial b}
+$$
+
+即：
 
 $$
 \begin{equation} 
@@ -682,13 +678,15 @@ $$
     w_2 \\\\
     \vdots \\\\
     w_n \\\\
+    b
   \end{pmatrix}
-    \rightarrow
+    \leftarrow
   \begin{pmatrix}
     w_1 \\\\
     w_2 \\\\
     \vdots \\\\
     w_n \\\\
+    b
   \end{pmatrix}
     - \alpha
   \begin{pmatrix}
@@ -696,16 +694,12 @@ $$
     \frac{\partial J}{\partial w_2} \\\\
     \vdots \\\\
     \frac{\partial J}{\partial w_n} \\\\
+    \frac{\partial J}{\partial b} 
   \end{pmatrix}
 \end{equation}
 $$
 
-其中：
-- $\alpha$ 指学习率（Learning rate），也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
-- 假设 $\vec{w}$ 表示点坐标对应的向量，则上述迭代步骤可使用梯度简写为：
-  $$
-  \vec{w} \rightarrow \vec{w} - \alpha \nabla J
-  $$
+其中：$\alpha$ 指学习率（Learning rate），也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
 
 #### 选择学习率
 
