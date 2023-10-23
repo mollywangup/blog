@@ -455,11 +455,11 @@ KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
 
 #### 原理
 
-给定训练集 $X \in \mathbb{R}^{m \times n}$，K-means 要实现的是将 m 个训练示例（也就是点）聚类为 k 个簇（Cluster），步骤如下：
+给定训练集 $X \in \mathbb{R}^{m \times n}$，K-means 要实现的是将 $m$ 个点（训练示例）聚类为 $k$ 个簇（Cluster），步骤如下：
 
-步骤一：随机初始化 k 个点作为簇中心，记作 $\mu_1, \mu_2, \cdots, \mu_k \in \mathbb{R}^n$；
-步骤二：为每个训练示例 $x^{(i)}$ 分配簇中心 $c^{(i)}$，方法是 $c^{(i)} = \displaystyle\min_{j} \lVert x^{(i)} - \mu_j\rVert_2^2 \in \mathbb{R}$；
-步骤三：为每个簇重新计算簇中心 $\mu_{j}$，方法是求均值；
+步骤一：随机初始化 $k$ 个簇中心，记作 $\mu_j \in \mathbb{R}^n$；
+步骤二：为每个点 $x^{(i)}$ 分配距离最近的簇，记作 $c^{(i)}$：$$ c^{(i)} = \displaystyle\min_{j} \lVert x^{(i)} - \mu_j\rVert_2^2 $$；
+步骤三：为每个簇重新计算簇中心 $\mu_{j}$，方法是该簇中所有点的均值；
 
 重复以上步骤二和步骤三，直至 k 个簇中心不再发生变化。（也就是收敛，此时簇内具有较高的相似度，簇间具有较低的相似度）
 
@@ -470,9 +470,9 @@ J(c^{(1)}, \cdots, c^{(m)}, \mu_1, \cdots, \mu_k) = \frac{1}{m} \sum_{i=1}^{m} \
 $$
 
 其中：
-$c^{(i)}$：距离训练示例 $x^{(i)}$ 最近的簇，公式为 $c^{(i)} = \min_{k} \lVert x^{(i)} - \mu_k\rVert_2^2$；
-$\mu_k$：第 k 个簇的中心位置（均值），公式为 $\frac{1}{} \sum $；
-$\mu_{c^{(i)}}$：训练示例 $x^{(i)}$ 所属的簇中心位置；
+$c^{(i)}$：距离 $x^{(i)}$ 距离最近的簇，公式为 $c^{(i)} = \displaystyle\min_{j} \lVert x^{(i)} - \mu_j\rVert_2^2$；
+$\mu_j$：第 $j$ 个簇中心（位置），公式为 $\frac{1}{} \sum $；
+$\mu_{c^{(i)}}$：$x^{(i)}$ 所属的簇中心；
 
 优化初始的 k 个簇中心选择：
 
@@ -481,7 +481,56 @@ $\mu_{c^{(i)}}$：训练示例 $x^{(i)}$ 所属的簇中心位置；
 
 #### 代码
 
+```python
+import time
+import numpy as np
+import matplotlib.pyplot as plt
 
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+from sklearn.metrics.pairwise import pairwise_distances_argmin
+
+# 生成测试数据
+np.random.seed(0)
+
+batch_size = 45
+centers = np.array([[1, 1], [-1, -1], [1, -1]])
+n_clusters = centers.shape[0]
+X, labels_true = make_blobs(n_samples=3000, centers=centers, cluster_std=[0.3, 0.7, 1])
+
+# 使用 K-means 聚类
+k_means = KMeans(init='k-means++', n_clusters=3, n_init=10)
+t0 = time.time()
+k_means.fit(X)
+t_batch = time.time() - t0
+
+# 校验
+k_means_cluster_centers = k_means.cluster_centers_
+k_means_labels = pairwise_distances_argmin(X, k_means_cluster_centers)
+
+# 绘图
+fig = plt.figure(figsize=(8, 3))
+fig.subplots_adjust(left=0.01, right=0.98, bottom=0.05, top=0.9)
+colors = ["#4EACC5", "#FF9C34", "#4E9A06"]
+
+ax = fig.add_subplot(1, 3, 1)
+for k, col in zip(range(n_clusters), colors):
+    my_members = k_means_labels == k
+    cluster_center = k_means_cluster_centers[k]
+    ax.plot(X[my_members, 0], X[my_members, 1], "w", markerfacecolor=col, marker=".")
+    ax.plot(
+        cluster_center[0],
+        cluster_center[1],
+        "o",
+        markerfacecolor=col,
+        markeredgecolor="k",
+        markersize=6,
+    )
+ax.set_title("KMeans")
+ax.set_xticks(())
+ax.set_yticks(())
+# plt.text(-3.5, 1.8, "train time: %.2fs\ninertia: %f" % (t_batch, k_means.inertia_))
+```
 
 ### DBSCAN
 
@@ -768,7 +817,7 @@ $$ c_v = \frac{\sigma}{\mu} $$
 **一阶导用于单调性判断，二阶导用于凹凸性判断。**
 {{< /alert >}}
 
-给定一元函数 $f: \mathbb{R} \to \mathbb{R}$，则 $f$ 在某点处的一阶导数（$f'$）和二阶导数（$f''$）的定义分别如下：
+给定一元函数 $f: \mathbb{R} \to \mathbb{R}$，则 $f$ 在点 $x$ 处的一阶导数 $f'$ 和二阶导数 $f''$ 的定义分别如下：
 
 $$
 f' = \frac{dy}{dx} = \lim_{{\Delta x} \to 0} \frac{f(x + {\Delta x})}{\Delta x}
@@ -776,6 +825,7 @@ $$
 
 $$ f'' = (f')' = \frac{d^2y}{dx^2} $$
 
+注意：可导等于可微，可导一定连续；
 说明：一阶导表示函数在该点处的`瞬时变化率`；
 用途：一阶导用于判断**单调性**，大于零则单调递增，小于零则单调递减；二阶导用于判断**凹凸性**，大于零则凸（U 型），小于零则凹（倒扣的 U 型）。
 
@@ -787,7 +837,7 @@ $$
 \frac{\partial f}{\partial x_j} = \lim_{{\Delta x_j} \to 0} \frac{f(x_j + {\Delta x_j}, ...) - f(x_j, ...)}{\Delta x_j}
 $$
 
-注意：可微一定可导，即任意给定点的邻域内所有偏导数存在且连续。
+注意：可微一定可导，可微一定连续。
 
 ### 梯度
 
@@ -1067,10 +1117,10 @@ $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
 #### 正态分布
 
-正态分布（Normal distribution），也称作高斯分布（Gaussian distribution）。连续型随机变量 $X$ 服从均值 $\mu$，方差 $\sigma^2$ 的正态分布，记作：
+正态分布（Normal distribution），也称作高斯分布（Gaussian distribution）。连续型随机变量 $x$ 服从均值 $\mu$，方差 $\sigma^2$ 的正态分布，记作：
 
 $$
-X \sim N(\mu, \sigma^2)
+x \sim N(\mu, \sigma^2)
 $$
 
 <!-- #### 指数分布
@@ -1154,7 +1204,7 @@ $$
 
 实际应用中，如果将 $p(x)$ 作为真实值的概率分布，$q(x)$ 作为预测值的概率分布，则由于真实值的熵 $H(p)$ 是一个常数，因此：
 
-$$ D_{KL}(p||q) \sim H(p,q)$$
+$$ D_{KL}(p||q) \simeq H(p,q)$$
 
 ### 过拟合
 
@@ -1164,10 +1214,10 @@ $$ D_{KL}(p||q) \sim H(p,q)$$
 3. 正则化；
 
 
-<img src='https://www.nvidia.cn/content/dam/en-zz/Solutions/gtcf20/data-analytics/nvidia-ai-data-science-workflow-diagram.svg'>
+<!-- <img src='https://www.nvidia.cn/content/dam/en-zz/Solutions/gtcf20/data-analytics/nvidia-ai-data-science-workflow-diagram.svg'>
 
 <img src='https://easyai.tech/wp-content/uploads/2022/08/523c0-2019-08-21-application.png.webp'>
 
 <img src='https://www.tibco.com/sites/tibco/files/media_entity/2021-05/random-forest-diagram.svg'>
 
-<img src='https://miro.medium.com/v2/resize:fit:1204/format:webp/1*iWHiPjPv0yj3RKaw0pJ7hA.png'>
+<img src='https://miro.medium.com/v2/resize:fit:1204/format:webp/1*iWHiPjPv0yj3RKaw0pJ7hA.png'> -->
