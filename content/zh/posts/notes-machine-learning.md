@@ -95,15 +95,18 @@ $$
 <!-- 拆解目标：
 Step1：选择训练模型：含模型参数；
 Step2：评估模型性能：选择合适的损失函数，以衡量模型的预测值与真实值之间的差异程度；确定损失函数：将模型代入损失函数得到成本函数，以量化模型性能；
-Step3：求解目标函数：求成本函数的极小值解。求极小值问题常用到[梯度下降算法](#GD)。 -->
+Step3：求解目标：求成本函数的极小值解。求极小值问题常用到[梯度下降算法](#GD)。 -->
 
 ### 线性回归
 
 线性回归（Linear Regression），解决线性的**回归**问题。
+<!-- 前提假设是预测值与真实值的误差（error）服从正态分布。 -->
 
 #### 原理
 
 ##### 模型
+
+$n$ 元线性回归的模型 $f: \mathbb{R}^n \to \mathbb{R}$ 如下：
 
 $$ 
 f_{w,b}(x) = w \cdot x + b = 
@@ -131,7 +134,7 @@ $b \in \mathbb{R}$：偏差（bias）或截距（intercept）；
 
 ##### 成本函数
 
-使用[最小二乘法](#OrdinaryLeastSquares)作为损失函数：
+使用[最小二乘](#OrdinaryLeastSquares)作为损失函数：
 
 $$
 \begin{split}
@@ -154,11 +157,12 @@ $$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\
 
 说明：
 1. 使用 $\frac{1}{2m}$ 取均值，仅是为了在求（偏）导数时消去常数 $2$，不影响结果；
-2. `Lasso`：用于**特征选择**，即让回归系数稀疏（sparse）。是在普通最小二乘的基础上，添加了回归系数的 [L1 范数](#VectorNorms) 作为惩罚项；
-3. `Ridge`：用于**防止过拟合**。是在普通最小二乘的基础上，添加了回归系数的 [L2 范数](#VectorNorms) 的平方作为惩罚项；
-4. $\lambda$：正则化项的参数，非负标量，为了控制惩罚项的大小。
+2. `OLS`：普通最小二乘回归；
+3. `Lasso`：用于**特征选择**，即让回归系数稀疏（sparse）。是在 OLS 的基础上，添加了 $w$ 的 [L1 范数](#VectorNorms) 作为正则化项；
+4. `Ridge`：用于**防止过拟合**。是在 OLS 的基础上，添加了 $w$ 的 [L2 范数](#VectorNorms) 的平方作为正则化项；
+5. $\lambda$：正则化项的参数，非负标量，为了控制惩罚项的大小。
 
-{{< expand "矩阵乘向量形式的写法（手动解的思路） ">}}
+{{< expand "矩阵乘向量写法 ">}}
 
 $$
 J(w,b) = \frac{1}{2m} \lVert X_{new} \cdot w_{new} - y \rVert_2^2
@@ -180,7 +184,7 @@ $$
 
 {{< /expand >}}
 
-##### 目标函数
+##### 目标
 
 求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
@@ -372,7 +376,7 @@ plt.savefig('PolynomialFeatures_LinearRegression.svg')
 
 ##### 成本函数
 
-##### 目标函数
+##### 目标
 
 true: 1, positive class
 false: 0, negative class
@@ -491,7 +495,7 @@ $$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{
 
 #### MSE<a id="mse"></a>
 
-MSE（Mean Squared Error），均方误差。最小二乘法的均值版，常用于线性回归模型的成本函数。
+MSE（Mean Squared Error），均方误差。最小二乘的均值版，常用于线性回归模型的成本函数。
 
 $$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
@@ -575,7 +579,7 @@ $$
 
 说明：成本函数更灵活，有时会在损失函数的基础上再加上正则项；
 
-### 最小二乘法<a id="OrdinaryLeastSquares"></a>
+### 最小二乘<a id="OrdinaryLeastSquares"></a>
 
 $$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
@@ -694,6 +698,36 @@ $$
 $$
 
 ## 恶补数学
+
+### 统计指标
+
+注意这里不区分**总体**和**样本**。
+
+#### 极差
+
+$$ \max(y) - \min(y) $$
+
+#### 均值
+
+$$ \mu = \frac{1}{m} \sum_{i=1}^{m} y^{(i)} $$
+
+#### 方差
+
+方差（Variance）用于衡量相对均值的离散程度。
+
+$$ \sigma^2 = \frac{1}{m} \sum_{i=1}^{m} \left(y^{(i)} - \mu\right)^2 $$
+
+#### 标准差
+
+衡量相对均值的离散程度。
+
+$$ \sigma = \sqrt{\sigma^2} $$
+
+#### 变异系数
+
+变异系数（coefficient of variation，CV），是标准差的归一化，无量纲。
+
+$$ c_v = \frac{\sigma}{\mu} $$
 
 ### 导数
 
@@ -995,6 +1029,26 @@ $$ \frac{x \cdot y}{\lVert x \rVert_2 \lVert y \rVert_2} $$
 $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
 可由条件概率推导得到，因为 $P(A,B) = P(A|B)P(B) = P(B|A)P(A)$
+
+### 概率分布
+
+#### 正态分布
+
+正态分布（Normal distribution），也称作高斯分布（Gaussian distribution）。连续型随机变量 $X$ 服从均值 $\mu$，方差 $\sigma^2$ 的正态分布，记作：
+
+$$
+X \sim N(\mu, \sigma^2)
+$$
+
+<!-- #### 指数分布
+
+
+#### 伯努利分布
+
+伯努利分布（Bernoulli distribution），也称作 0-1 分布。
+
+#### 泊松分布 -->
+
 
 ## 附
 
