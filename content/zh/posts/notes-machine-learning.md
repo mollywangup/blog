@@ -1150,7 +1150,7 @@ $$ \sigma^2 = \sum_{i} \left(x_i - \mu\right)^2 p(x_i) = \phi(1-\phi) $$
 
 #### 二项分布
 
-二项分布（Binomial distribution）指进行一组 $n$ 重伯努利试验，成功（$x=1$）次数（$\leq n$）的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
+二项分布（Binomial distribution）指进行一组 `n 重伯努利试验`，成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
 
 $$
 X \sim B(n, \phi)
@@ -1166,7 +1166,13 @@ $$ \mu = n\phi $$
 
 $$ \sigma^2 = n\phi(1-\phi)$$
 
-说明：$X \sim B(1, \phi)$ 等同于 $X \sim Bern(\phi)$；二项分布的期望值等于 $n$ 倍的伯努利分布的期望值，同理方差。
+<img src='https://user-images.githubusercontent.com/46241961/278027246-01e7fc5c-66b1-4b79-b855-002f64756da9.svg' alt='二项分布（10, 0.5）' width=60%>
+
+{{< notice info>}}
+1. $X \sim B(1, \phi)$ 等同于 $X \sim Bern(\phi)$；
+2. 二项分布的期望值等于 $n$ 倍的伯努利分布的期望值，同理方差；
+3. 当 $n \to \infty$ 时，二项分布趋向于正态分布。
+4. {{< /notice >}}
 
 #### 高斯分布
 
@@ -1182,9 +1188,7 @@ $$
 p(X=x;\mu,\sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{(x-\mu)^2} {2 \sigma^2}\right)  \tag{PDF}
 $$
 
-<img src='https://user-images.githubusercontent.com/46241961/278027298-8e138d61-dc0b-4b40-aeef-9ee3bdb4a493.svg' alt='高斯分布' width=80%>
-
-说明：当 $n \to \infty$ 时，二项分布趋向于正态分布。
+<img src='https://user-images.githubusercontent.com/46241961/278027298-8e138d61-dc0b-4b40-aeef-9ee3bdb4a493.svg' alt='高斯分布' width=70%>
 
 #### 拉普拉斯分布
 
