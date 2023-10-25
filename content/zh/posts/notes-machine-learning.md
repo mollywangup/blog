@@ -1127,7 +1127,7 @@ $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
 #### 伯努利分布
 
-伯努利分布（Bernoulli distribution），也称作 0-1 分布。离散型随机变量 $X$ 服从参数 $\phi \in (0,1)$ 的伯努利分布，记作：
+伯努利分布（Bernoulli distribution），也称作 0-1 分布。离散型随机变量 $X$ 服从参数 $\phi \in [0,1]$ 的伯努利分布，记作：
 
 $$
 X \sim Bern(\phi)
@@ -1166,13 +1166,12 @@ $$ \mu = n\phi $$
 
 $$ \sigma^2 = n\phi(1-\phi)$$
 
-<img src='https://user-images.githubusercontent.com/46241961/278027246-01e7fc5c-66b1-4b79-b855-002f64756da9.svg' alt='二项分布（10, 0.5）' width=60%>
+<img src='https://user-images.githubusercontent.com/46241961/278027246-01e7fc5c-66b1-4b79-b855-002f64756da9.svg' alt='二项分布：（10, 0.5）' width=70%>
 
-{{< notice info>}}
+<br>说明：
 1. $X \sim B(1, \phi)$ 等同于 $X \sim Bern(\phi)$；
 2. 二项分布的期望值等于 $n$ 倍的伯努利分布的期望值，同理方差；
 3. 当 $n \to \infty$ 时，二项分布趋向于正态分布。
-4. {{< /notice >}}
 
 #### 高斯分布
 
@@ -1189,6 +1188,11 @@ p(X=x;\mu,\sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{(x-\mu)^2} {2
 $$
 
 <img src='https://user-images.githubusercontent.com/46241961/278027298-8e138d61-dc0b-4b40-aeef-9ee3bdb4a493.svg' alt='高斯分布' width=70%>
+
+<br>说明：**方差越大，分布越分散（混乱），越扁，熵越大（信息量越大）。**
+{{< alert theme="info" >}}
+**方差越大，分布越分散（混乱），越扁，熵越大（信息量越大）。**
+{{< /alert >}}
 
 #### 拉普拉斯分布
 
