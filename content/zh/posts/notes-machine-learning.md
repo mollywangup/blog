@@ -1123,6 +1123,8 @@ $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
 ### 概率分布
 
+说明：离散型随机变量对应**概率质量函数**（Probability Mass Function, PMF），连续型随机变量对应**概率密度函数**（Probability Density Function, PDF）。
+
 #### 伯努利分布
 
 伯努利分布（Bernoulli distribution），也称作 0-1 分布。离散型随机变量 $X$ 服从参数 $\phi \in (0,1)$ 的伯努利分布，记作：
@@ -1131,42 +1133,40 @@ $$
 X \sim Bern(\phi)
 $$
 
-其概率质量函数（Probability Mass Function, PMF）如下：
+其概率质量函数、期望值和方差分别如下：
 
 $$
-p(x;\phi) = 
+p(X=x;\phi) = 
 \begin{cases}
 \phi, & \text{if $x=1$} \\\\
 1-\phi, & \text{if $x=0$} 
-\end{cases}  \space\space\space \text{or} \space\space\space
-\phi^x(1-\phi)^{1-x} 
+\end{cases} = 
+\phi^x(1-\phi)^{1-x} \tag{PMF}
 $$
-
-期望值和方差分别如下：
 
 $$ \mu = \sum_{i} x_i p(x_i) = \phi $$
 
-$$ \sigma^2 = \sum_{i} \left(x_i - \mu\right)^2 p(x_i) = (1-\phi)^2 \phi + (0-\phi)^2 (1-\phi) = \phi(1-\phi)$$
+$$ \sigma^2 = \sum_{i} \left(x_i - \mu\right)^2 p(x_i) = \phi(1-\phi) $$
 
 #### 二项分布
 
-二项分布（Binomial distribution）指重复进行 $n$ 次伯努利试验（$n$ 重伯努利），成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
+二项分布（Binomial distribution）指重复进行 $n$ 次伯努利试验，成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
 
 $$
 X \sim B(n, \phi)
 $$
 
-其概率质量函数（Probability Mass Function, PMF）如下，其中 $x \in \{0, 1, ..., n\}$：
+其概率质量函数、期望值和方差分别如下，其中 $x \in {0, 1, ..., n}$：
 
 $$
-p(x;n,\phi) = \frac{n!}{x!(n-x)!} \phi^x (1-\phi)^{n-x}
+p(X=x;n,\phi) = \frac{n!}{x!(n-x)!} \phi^x (1-\phi)^{n-x}  \tag{PMF}
 $$
 
-伯努利分布可看作 $X \sim B(1, \phi)$，二项分布对应 $n$ 个伯努利分布，因此期望值和方差如下：
+$$ \mu = \phi $$
 
-$$ \mu_n = n \phi $$
+$$ \sigma^2 = n\phi(1-\phi)$$
 
-$$ \sigma_n^2 = n\phi(1-\phi)$$
+说明：伯努利分布可看作 $X \sim B(1, \phi)$；二项分布的期望值等于 $n$ 倍的伯努利试验的期望值，方差同样。
 
 #### 正态分布
 
@@ -1176,11 +1176,14 @@ $$
 X \sim N(\mu, \sigma^2)
 $$
 
-其概率密度函数（Probability Density Function, PDF）如下：
+其概率密度函数如下：
 
 $$
-p(x;\mu,\sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{(x-\mu)^2} {2 \sigma^2}\right)
+p(X=x;\mu,\sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{(x-\mu)^2} {2 \sigma^2}\right)  \tag{PDF}
 $$
+
+#### 拉普拉斯分布
+
 
 <!-- #### 指数分布 -->
 
