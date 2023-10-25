@@ -1128,10 +1128,10 @@ $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 伯努利分布（Bernoulli distribution），也称作 0-1 分布。离散型随机变量 $X$ 服从参数 $\phi \in (0,1)$ 的伯努利分布，记作：
 
 $$
-X \sim Bernoulli(\phi)
+X \sim Bern(\phi)
 $$
 
-其概率质量函数（Probability Mass Function, PMF）、期望值、方差分别如下：
+其概率质量函数（Probability Mass Function, PMF）如下：
 
 $$
 p(x;\phi) = 
@@ -1142,11 +1142,31 @@ p(x;\phi) =
 \phi^x(1-\phi)^{1-x} 
 $$
 
-$$ E(X) = \sum_{i} x_i p(x_i) = \phi $$
+期望值和方差分别如下：
 
-$$ Var(X) = \sum_{i} \left(x_i - E(X)\right)^2 p(x_i) = (1-\phi)^2 \phi + (0-\phi)^2 (1-\phi) = \phi(1-\phi)$$
+$$ \mu = \sum_{i} x_i p(x_i) = \phi $$
 
-<!-- #### 二项分布 -->
+$$ \sigma^2 = \sum_{i} \left(x_i - \mu\right)^2 p(x_i) = (1-\phi)^2 \phi + (0-\phi)^2 (1-\phi) = \phi(1-\phi)$$
+
+#### 二项分布
+
+二项分布（Binomial distribution）指重复进行 $n$ 次伯努利试验（$n$ 重伯努利），成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
+
+$$
+X \sim B(n, \phi)
+$$
+
+其概率质量函数（Probability Mass Function, PMF）如下，其中 $x \in \{0, 1, ..., n\}$：
+
+$$
+p(x;n,\phi) = \frac{n!}{x!(n-x)!} \phi^x (1-\phi)^{n-x}
+$$
+
+伯努利分布可看作 $X \sim B(1, \phi)$，二项分布对应 $n$ 个伯努利分布，因此期望值和方差如下：
+
+$$ \mu_n = n \phi $$
+
+$$ \sigma_n^2 = n\phi(1-\phi)$$
 
 #### 正态分布
 
