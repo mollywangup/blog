@@ -134,7 +134,7 @@ $b \in \mathbb{R}$：偏差（bias）或截距（intercept）；
 
 ##### 成本函数
 
-使用[最小二乘](#OrdinaryLeastSquares)作为损失函数：
+使用[最小二乘](#LeastSquaresLoss)损失：
 
 $$
 \begin{split}
@@ -372,25 +372,32 @@ plt.savefig('PolynomialFeatures_LinearRegression.svg')
 
 ##### 模型
 
+令 $$ z = w \cdot x + b $$ 作为新的输入，通过 [Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 激活函数，使输出值分布以 $0.5$ 为分界： 
 
+$$
+p(y=1|x;w,b) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
+$$
+
+当 $p \geq 0.5$ 时，取 $1$，否则取 $0$
 
 ##### 成本函数
 
+使用[交叉熵损失](#CrossEntropyLoss)：
+
+$$ L(\hat{y}, y) = -y\ln\hat{y} - (1-y)\ln(1-\hat{y}) $$
+
+对应的成本函数：
+
+$$ J(w,b) = \frac{1}{m} \sum_{i=1}^{m} -y^{(i)} \ln \hat y^{(i)} - (1-y^{(i)}) \ln(1 - \hat y^{(i)}) $$
+
 ##### 目标
 
-true: 1, positive class
-false: 0, negative class
+求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
-logistic/sigmoid function
+$$ \min_{w,b} J(w,b) $$
 
-$$
-z = \vec{w} \cdot \vec{x} + b \\\\
-g(z) = \frac{1}{1+e^{-z}}
-$$
-
-$$
-g(z) = g(\vec{w} \cdot \vec{x} + b) = \frac{1}{1+e^{-(\vec{w} \cdot \vec{x} + b)}} = P(y=1|x;\vec{w},b)
-$$
+<!-- true: 1, positive class
+false: 0, negative class -->
 
 ### 决策树
 
@@ -449,6 +456,8 @@ KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
 - `聚类（Clustering）`
 - `降维（Dimensionality reduction）`
 
+<img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_cluster_comparison_001.png' alt='图源 scikit-learn: 聚类方法对比' width=80%>
+
 ### K-means
 
 解决**聚类**问题。
@@ -458,10 +467,10 @@ KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
 给定训练集 $X \in \mathbb{R}^{m \times n}$，K-means 要实现的是将 $m$ 个点（训练示例）聚类为 $k$ 个簇（Cluster），步骤如下：
 
 步骤一：随机初始化 $k$ 个簇中心，记作 $\mu_j \in \mathbb{R}^n$；
-步骤二：为每个点 $x^{(i)}$ 分配距离最近的簇，记作 $c^{(i)}$：$$ c^{(i)} = \displaystyle\min_{j} \lVert x^{(i)} - \mu_j\rVert_2^2 $$；
+步骤二：为每个点 $x^{(i)}$ 分配距离最近的簇，记作 $c^{(i)}$：$$ c^{(i)} = \displaystyle\min_{j} \lVert x^{(i)} - \mu_j\rVert_2^2 $$
 步骤三：为每个簇重新计算簇中心 $\mu_{j}$，方法是该簇中所有点的均值；
 
-重复以上步骤二和步骤三，直至 k 个簇中心不再发生变化。（也就是收敛，此时簇内具有较高的相似度，簇间具有较低的相似度）
+重复以上步骤二和步骤三，直至 $k$ 个簇中心不再发生变化（即收敛）。
 
 成本函数可以表示为：
 
@@ -469,10 +478,7 @@ $$
 J(c^{(1)}, \cdots, c^{(m)}, \mu_1, \cdots, \mu_k) = \frac{1}{m} \sum_{i=1}^{m} \lVert x^{(i)} - \mu_{c^{(i)}}\rVert_2^2
 $$
 
-其中：
-$c^{(i)}$：距离 $x^{(i)}$ 距离最近的簇，公式为 $c^{(i)} = \displaystyle\min_{j} \lVert x^{(i)} - \mu_j\rVert_2^2$；
-$\mu_j$：第 $j$ 个簇中心（位置），公式为 $\frac{1}{} \sum $；
-$\mu_{c^{(i)}}$：$x^{(i)}$ 所属的簇中心；
+其中：$\mu_{c^{(i)}}$ 表示 $x^{(i)}$ 所属的簇中心；
 
 优化初始的 k 个簇中心选择：
 
@@ -543,9 +549,11 @@ ax.set_yticks(())
 
 ### PCA
 
-解决**降维**问题。
+主成分分析（Principal Component Analysis, PCA），解决**降维**问题。
 
-- PCA：主成分分析；
+用最少的特征尽可能解释所有的方差（越离散方差越大）。
+
+用途：可视化，
 
 <!-- ## 强化学习
 
@@ -661,17 +669,17 @@ $$
 
 说明：成本函数更灵活，有时会在损失函数的基础上再加上正则项；
 
-### 最小二乘<a id="OrdinaryLeastSquares"></a>
+### 最小二乘<a id="LeastSquaresLoss"></a>
 
 $$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
-### 交叉熵
+### 交叉熵<a id="CrossEntropyLoss"></a>
 
 推导详见[交叉熵](#CrossEntropy)
 
 $$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
 
-对于二分类问题：$$ L(\hat{y}, y) = -y\ln(\hat{y}) - (1-y)\ln(1-\hat{y}) $$ 
+对于二分类问题：$$ L(\hat{y}, y) = -y\ln\hat{y} - (1-y)\ln(1-\hat{y}) $$
 
 ## 优化算法
 
@@ -779,9 +787,9 @@ $$
 \sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
 $$
 
-## 恶补数学
+## 数学基础
 
-### 统计指标
+### 统计
 
 注意这里不区分**总体**和**样本**。
 
@@ -801,7 +809,7 @@ $$ \sigma^2 = \frac{1}{m} \sum_{i=1}^{m} \left(y^{(i)} - \mu\right)^2 $$
 
 #### 标准差
 
-衡量相对均值的离散程度。
+标准差（Standard deviation）是方差的平方根。
 
 $$ \sigma = \sqrt{\sigma^2} $$
 
@@ -827,7 +835,7 @@ $$ f'' = (f')' = \frac{d^2y}{dx^2} $$
 
 注意：可导等于可微，可导一定连续；
 说明：一阶导表示函数在该点处的`瞬时变化率`；
-用途：一阶导用于判断**单调性**，大于零则单调递增，小于零则单调递减；二阶导用于判断**凹凸性**，大于零则凸（U 型），小于零则凹（倒扣的 U 型）。
+用途：一阶导用于判断**单调性**；二阶导用于判断**凹凸性**，大于零则凸（U 型），小于零则凹（倒扣的 U 型）。
 
 ### 偏导数
 
@@ -1115,22 +1123,49 @@ $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
 ### 概率分布
 
-#### 正态分布
-
-正态分布（Normal distribution），也称作高斯分布（Gaussian distribution）。连续型随机变量 $x$ 服从均值 $\mu$，方差 $\sigma^2$ 的正态分布，记作：
-
-$$
-x \sim N(\mu, \sigma^2)
-$$
-
-<!-- #### 指数分布
-
-
 #### 伯努利分布
 
-伯努利分布（Bernoulli distribution），也称作 0-1 分布。
+伯努利分布（Bernoulli distribution），也称作 0-1 分布。离散型随机变量 $X$ 服从参数 $\phi \in (0,1)$ 的伯努利分布，记作：
 
-#### 泊松分布 -->
+$$
+X \sim Bernoulli(\phi)
+$$
+
+其概率质量函数（Probability Mass Function, PMF）、期望值、方差分别如下：
+
+$$
+p(x;\phi) = 
+\begin{cases}
+\phi, & \text{if $x=1$} \\\\
+1-\phi, & \text{if $x=0$} 
+\end{cases}  \space\space\space \text{or} \space\space\space
+\phi^x(1-\phi)^{1-x} 
+$$
+
+$$ E(X) = \sum_{i} x_i p(x_i) = \phi $$
+
+$$ Var(X) = \sum_{i} \left(x_i - E(X)\right)^2 p(x_i) = (1-\phi)^2 \phi + (0-\phi)^2 (1-\phi) = \phi(1-\phi)$$
+
+<!-- #### 二项分布 -->
+
+#### 正态分布
+
+正态分布（Normal distribution），也称作高斯分布（Gaussian distribution）。连续型随机变量 $X$ 服从均值 $\mu$，方差 $\sigma^2$ 的正态分布，记作：
+
+$$
+X \sim N(\mu, \sigma^2)
+$$
+
+其概率密度函数（Probability Density Function, PDF）如下：
+
+$$
+p(x;\mu,\sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{(x-\mu)^2} {2 \sigma^2}\right)
+$$
+
+<!-- #### 指数分布 -->
+
+
+<!-- #### 泊松分布 -->
 
 
 ## 附

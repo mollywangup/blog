@@ -59,7 +59,7 @@ $$
 
 ### Sigmoid
 
-适用二分类问题。
+也称作 Logistic function，适用二分类问题。
 
 $$ 
 f(x) = \frac{1}{1+e^{-x}} \in (0,1) 
