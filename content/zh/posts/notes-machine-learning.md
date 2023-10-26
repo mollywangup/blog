@@ -2,7 +2,7 @@
 title: "学习笔记：吴恩达机器学习"
 date: 2023-08-04T08:09:47Z
 draft: false
-description: 线性回归，逻辑回归，决策树，随机森林，SVM，朴素贝叶斯，K 近邻，K-means，PCA 等。
+description: 监督学习包括线性回归，逻辑回归，决策树，随机森林，SVM，朴素贝叶斯，K 近邻；无监督学习包括 K-means，PCA 等。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -40,16 +40,16 @@ libraries:
 
 约定如下：
 1. `m` 个训练示例，`n` 个特征；
-2. 向量是一维数组，使用小写字母表示，且默认为列向量；矩阵是二维数组，使用大写字母表示；
+2. 向量是一维数组，使用小写字母表示，且`默认列向量`；矩阵是二维数组，使用大写字母表示；
 3. 非代码部分从 `1` 开始计数；
 
 <br>具体符号：
-- $x$ 表示特征变量，$w$ 表示回归系数，$y$ 表示真实值，$\hat{y}$ 表示预测值，都是列向量；
-- $X$ 表示训练示例组成的矩阵，$(X|y)$ 表示带标签的训练示例组成的增广矩阵。注意区分：
-  - $x^{(i)}$ 表示第 $i$ 个训练示例的特征，是个列向量（矩阵 $X$ 的第 $i$ 行）；
-  - $x_j$ 表示第 $j$ 个特征，是个列向量（矩阵 $X$ 的第 $j$ 列）；
-  - $x_j^{(i)}$ 表示第 $i$ 个训练示例的第 $j$ 个特征，是个标量；
-  - $y^{(i)}$ 和 $\hat{y}^{(i)}$ 分别表示第 $i$ 个训练示例的真实值和预测值，都是标量；
+- $x \in \mathbb{R}^n$ 表示输入变量，$w \in \mathbb{R}^n$ 表示回归系数，$y,\hat{y} \in \mathbb{R}^m$ 分别表示真实值和预测值（默认单值模型）；
+- $X$ 表示训练示例组成的矩阵。注意区分：
+  - $x^{(i)} \in \mathbb{R}^n$ 表示第 $i$ 个训练示例（第 $i \in [1,m]$ 行）；
+  - $x_j \in \mathbb{R}^m$ 表示第 $j$ 个特征（第 $j \in [1,n]$ 列）；
+  - $x_j^{(i)} \in \mathbb{R}$ 表示第 $i$ 个训练示例的第 $j$ 个特征；
+  - $y^{(i)},\hat{y}^{(i)} \in \mathbb{R}$ 分别表示第 $i$ 个训练示例的真实值和预测值；
 
 $$
 x = \begin{bmatrix}x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix}
@@ -63,6 +63,20 @@ y = \begin{bmatrix}y^{(1)} \\\\ y^{(2)} \\\\ \vdots \\\\ y^{(m)} \end{bmatrix}
 $$
 
 $$
+X =
+\begin{bmatrix}
+  x_1^{(1)} & x_2^{(1)} & \dots & x_n^{(1)} \\\\ 
+  x_1^{(2)} & x_2^{(2)} & \dots & x_n^{(2)} \\\\ 
+  \vdots & \vdots & \ddots & \vdots  \\\\ 
+  x_1^{(m)} & x_2^{(m)} & \dots & x_n^{(m)} 
+\end{bmatrix}
+\space
+x^{(i)} = \begin{bmatrix}x_1^{(i)} \\\\ x_2^{(i)} \\\\ \vdots \\\\ x_n^{(i)} \end{bmatrix}
+\space
+x_j = \begin{bmatrix}x_j^{(1)} \\\\ x_j^{(2)} \\\\ \vdots \\\\ x_j^{(m)} \end{bmatrix}
+$$
+
+<!-- $$
 (X|y) = \left [
 \begin{array}{cccc|c}
   x_1^{(1)} & x_2^{(1)} & \dots & x_n^{(1)} & y^{(1)} \\\\ 
@@ -71,11 +85,7 @@ $$
   x_1^{(m)} & x_2^{(m)} & \dots & x_n^{(m)} & y^{(m)} 
 \end{array}
 \right ]
-\space
-x^{(i)} = \begin{bmatrix}x_1^{(i)} \\\\ x_2^{(i)} \\\\ \vdots \\\\ x_n^{(i)} \end{bmatrix}
-\space
-x_j = \begin{bmatrix}x_j^{(1)} \\\\ x_j^{(2)} \\\\ \vdots \\\\ x_j^{(m)} \end{bmatrix}
-$$
+$$ -->
 
 ## 监督学习<a id="SupervisedLearning"></a>
 
@@ -83,9 +93,11 @@ $$
 有标签的是监督学习。预测连续值的是回归任务，预测离散值的是分类任务。
 {{< /alert >}}
 
-给定**包含标签**的训练集 $(X|y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X|y) \to f \to \hat{y} $$
+给定`包含标签`的训练集 $(X,y)$，其中 $X \in \mathbb{R}^{m \times n},y \in \mathbb{R}^m$，通过算法构建一个模型或预估器，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X,y) \to f(x) \space\text{Or}\space p(x) \to \hat{y} $$
 
-监督学习分为`回归（Regression）`和`分类（Classification）`两类任务，前者预测**连续值**，后者预测**离散值**。
+说明：以下约定**判别式模型**使用 $f(x)$，**生成式模型**使用 $p(x)$。
+
+监督学习任务分为`回归（Regression）`和`分类（Classification）`，前者预测**连续值**，后者预测**离散值**。
 <!-- - `回归（Regression）`：可用于趋势预测、价格预测、流量预测等； -->
 <!-- - `分类（Classification）`：可用于构建用户画像、用户行为预测、图像识别分类等； -->
 
@@ -106,24 +118,14 @@ Step3：求解目标：求成本函数的极小值解。求极小值问题常用
 
 ##### 模型
 
-$n$ 元线性回归的模型 $f: \mathbb{R}^n \to \mathbb{R}$ 如下：
+$n$ 元线性回归的模型 $f(x): \mathbb{R}^n \to \mathbb{R}$ 如下：
 
 $$ 
 f_{w,b}(x) = w \cdot x + b = 
-\begin{bmatrix}
-  w_1 \\\\
-  w_2 \\\\
-  \vdots \\\\
-  w_n 
-\end{bmatrix} 
+\begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix} 
 \cdot 
-\begin{bmatrix}
-  x_1 \\\\
-  x_2 \\\\ 
-  \vdots \\\\
-  x_n 
-\end{bmatrix} + b =
-\sum_{j=1}^{n} w_j \cdot x_j + b 
+\begin{bmatrix} x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix} + b =
+\sum_{j=1}^{n}w_j \cdot x_j + b 
 $$
 
 其中，模型参数：
@@ -289,7 +291,7 @@ for i in range(len(alphas_list)):
 
 ### 逻辑回归<a id="LogisticRegression"></a>
 
-逻辑回归（Logistic Regression），解决**二分类**（Binary Classification）问题。
+逻辑回归（Logistic Regression），解决`二分类`（Binary Classification）问题。
 
 #### 原理
 
@@ -379,11 +381,9 @@ KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
 
 给定**不包含标签**的训练集 $X$，通过算法构建一个模型，揭示数据的内在分布特性及规律，则属于无监督学习，即：$$ X \to f \to \hat{y} $$
 
-无监督学习主要包括以下两类任务：
-- `聚类（Clustering）`
-- `降维（Dimensionality reduction）`
+无监督学习任务分为`聚类（Clustering）`和`降维（Dimensionality reduction）`。
 
-<img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_cluster_comparison_001.png' alt='图源 scikit-learn: 聚类方法对比' width=80%>
+<br><img src='https://scikit-learn.org/stable/_images/sphx_glr_plot_cluster_comparison_001.png' alt='聚类方法对比（图源 scikit-learn）' width=80%>
 
 ### K-means
 
@@ -423,7 +423,7 @@ from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import pairwise_distances_argmin
 
-# 生成测试数据
+# 模拟测试数据
 np.random.seed(0)
 
 batch_size = 45
@@ -699,8 +699,6 @@ $$
 3. 正则化；
 
 <img src='https://user-images.githubusercontent.com/46241961/278217087-8b868e06-28d3-4a36-bec8-7af1aaff13e0.svg' alt='欠拟合和过拟合（一元线性回归）'>
-
-<img src='https://user-images.githubusercontent.com/46241961/278218826-30c1830f-e0b6-47b9-b478-9ae70d6307a7.svg'>
 
 {{< expand "代码：以一元线性回归为例（参考 scikit-learn 官网）">}}
 
