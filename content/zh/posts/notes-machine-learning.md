@@ -2,7 +2,7 @@
 title: "学习笔记：吴恩达机器学习"
 date: 2023-08-04T08:09:47Z
 draft: false
-description: 监督学习包括线性回归，逻辑回归，决策树，随机森林，SVM，朴素贝叶斯，K 近邻；无监督学习包括 K-means，PCA 等。
+description: 监督学习包括线性回归，逻辑回归，KNN，朴素贝叶斯，决策树，随机森林，SVM；无监督学习包括 K-means，PCA 等。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -45,8 +45,8 @@ libraries:
 
 <br>具体符号：
 - $x \in \mathbb{R}^n$ 表示输入变量，$w \in \mathbb{R}^n$ 表示回归系数；
-- $X \in \mathbb{R}^{m \times n}$ 表示训练示例组成的矩阵，$y,\hat{y} \in \mathbb{R}^m$ 分别表示真实值和预测值。注意区分：
-  - $x^{(i)} \in \mathbb{R}^n$ 表示第 $i$ 个训练示例；（第 $i \in [1,m]$ 行）
+- $X \in \mathbb{R}^{m \times n}$ 表示训练示例组成的矩阵，$y,\hat{y} \in \mathbb{R}^m$ 分别表示真实值和预测值。
+  - $x^{(i)} \in \mathbb{R}^n$ 表示第 $i$ 个训练示例；（第 $i$ 行，其中 $i \in [1,m]$）
   - $x_j \in \mathbb{R}^m$ 表示第 $j$ 个特征；（第 $j$ 列，其中 $j \in [1,n]$）
   - $x_j^{(i)} \in \mathbb{R}$ 表示第 $i$ 个训练示例的第 $j$ 个特征；
   - $y^{(i)},\hat{y}^{(i)} \in \mathbb{R}$ 分别表示第 $i$ 个训练示例的真实值和预测值；
@@ -93,7 +93,7 @@ $$ -->
 有标签的是监督学习。预测连续值的是回归任务，预测离散值的是分类任务。
 {{< /alert >}}
 
-给定`包含标签`的训练集 $(X,y)$，其中 $X \in \mathbb{R}^{m \times n},y \in \mathbb{R}^m$，通过算法构建一个模型或预估器，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X,y) \to f(x) \space\text{Or}\space p(x) \to \hat{y} $$
+给定`包含标签`的训练集 $(X,y)$，其中 $X \in \mathbb{R}^{m \times n},y \in \mathbb{R}^m$，通过算法构建一个模型或预估器，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X,y) \to f(x) \space\text{or}\space p(x) \to \hat{y} $$
 
 说明：以下约定**判别式模型**使用 $f(x)$，**生成式模型**使用 $p(x)$。
 
@@ -160,9 +160,9 @@ $$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\
 说明：
 1. 使用 $\frac{1}{2m}$ 取均值，仅是为了在求（偏）导数时消去常数 $2$，不影响结果；
 2. `OLS`：普通最小二乘回归；
-3. `Lasso`：用于**特征选择**，即让回归系数稀疏（sparse）。是在 OLS 的基础上，添加了 $w$ 的 [L1 范数](#VectorNorms) 作为正则化项；
-4. `Ridge`：用于**防止过拟合**。是在 OLS 的基础上，添加了 $w$ 的 [L2 范数](#VectorNorms) 的平方作为正则化项；
-5. $\lambda$：正则化项的参数，非负标量，为了控制惩罚项的大小。
+3. `Lasso`：用于**特征选择**。是在 OLS 的基础上，添加了 $w$ 的 [L1 范数](#VectorNorms) 作为正则化项；
+4. `Ridge`：用于[防止过拟合](#Underfitting-and-Overfitting)。是在 OLS 的基础上，添加了 $w$ 的 [L2 范数](#VectorNorms) 的平方作为正则化项；
+5. $\lambda$：超参数，非负标量，为了控制惩罚项的大小。
 
 {{< expand "矩阵乘向量写法 ">}}
 
@@ -295,10 +295,6 @@ for i in range(len(alphas_list)):
 
 #### 原理
 
-{{< alert theme="info" >}}
-核心思想是借助 sigmoid 函数将函数值转化为接近的二分类分布的函数，
-{{< /alert >}}
-
 ##### 模型
 
 令 $$ z = w \cdot x + b $$ 作为新的输入，通过 [Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 激活函数，使输出值分布以 $0.5$ 为分界： 
@@ -327,6 +323,16 @@ $$ \min_{w,b} J(w,b) $$
 
 <!-- true: 1, positive class
 false: 0, negative class -->
+
+### KNN<a id="K-NearestNeighbors"></a>
+
+KNN (K-Nearest Neighbors)，解决**分类+回归**问题。`K 个邻居的意思`。
+
+给定训练集 $(X,y)$，KNN 要实现的是将
+
+### 朴素贝叶斯<a id="NaiveBayes"></a>
+
+Naive Bayes，解决**分类**问题。
 
 ### 决策树<a id="DecisionTree"></a>
 
@@ -365,14 +371,6 @@ Random forest，解决**分类**问题。
 Hard-margin SVM
 Soft-margin SVM：加入了容错率
 
-### 朴素贝叶斯<a id="NaiveBayes"></a>
-
-Naive Bayes，解决**分类**问题。
-
-### K 近邻<a id="K-NearestNeighbors"></a>
-
-KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
-
 ## 无监督学习<a id="UnsupervisedLearning"></a>
 
 {{< alert theme="info" >}}
@@ -387,7 +385,7 @@ KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
 
 ### K-means
 
-解决**聚类**问题。
+解决**聚类**问题。`K 个类别的意思`。
 
 #### 原理
 
@@ -487,6 +485,10 @@ ax.set_yticks(())
 （Reinforcement Learning）：有延迟和稀疏的反馈标签； -->
 
 ## 特征工程
+
+<!-- 挖坑：
+缺失值处理
+异常值处理 -->
 
 ### 多项式特征<a id="PolynomialFeatures"></a>
 
@@ -691,7 +693,7 @@ $$
 
 ## 模型评估
 
-### 过拟合问题
+### 过拟合问题<a id="Underfitting-and-Overfitting"></a>
 
 解决过拟合的方法：
 1. 收集更多的训练示例；
