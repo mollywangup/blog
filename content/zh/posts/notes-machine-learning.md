@@ -486,205 +486,12 @@ ax.set_yticks(())
 
 （Reinforcement Learning）：有延迟和稀疏的反馈标签； -->
 
-## 模型评估
-
-### 评估方法
-
-留出法（Hold-out）：拆分训练集和测试集
-
-交叉验证法（Cross Validation）：将数据集分成 N 块，使用 N-1 块进行训练，再用最后一块进行测试；
-
-自助法（Bootstrap）：
-
-（Bagging）：
-
-### 回归指标
-
-#### MAE
-
-MAE（Mean Absolute Error），平均绝对误差。
-
-$$ MAE = \frac{1}{m} \sum_{i=1}^{m} \lvert \hat{y}^{(i)} - y^{(i)} \rvert $$
-
-#### MAPE
-
-MAPE（Mean Absolute Percentage Error），平均绝对百分误差。
-
-$$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{(i)}} \rvert $$
-
-#### MSE<a id="MSE"></a>
-
-MSE（Mean Squared Error），均方误差。最小二乘的均值版，常用于线性回归模型的成本函数。
-
-$$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
-
-#### RMSE
-
-RMSE（Root Mean Square Error），均方根误差。
-
-$$ RMSE = \sqrt{MSE} $$
-
-#### R<sup>2</sup><a id="Coefficient-of-Determination"></a>
-
-R<sup>2</sup> (coefficient of determination)，决定系数。衡量**总误差（客观存在且无关回归模型）中可以被回归模型解释的比例**，即拟合程度。
-
-$$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
-
-说明：
-当 $R^2 \to 1$ 时，表明拟合程度越好，因为此时 SSR 趋向于 SST（或 SSE 趋向于 0）；
-当 $R^2 \to 0$ 时，表明拟合程度越差，因为此时 SSR 趋向于 0（或 SSE 趋向于 SST）；
-
-{{< expand "关于 SST/SSR/SSE">}}
-
-{{< boxmd >}}
-助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
-{{< /boxmd >}}
-
-SST (sum of squares total)，总平方和，用于衡量**真实值**相对**均值**的离散程度。SST 客观存在且与回归模型无关；
-
-$$ SST = \sum_{i=1}^{m} (y^{(i)} - \bar{y})^2 $$
-
-SSR (sum of squares due to regression)，回归平方和，用于衡量**预测值**相对**均值**的离散程度。当 SSR = SST 时，回归模型完美；
-
-$$ SSR = \sum_{i=1}^{m} (\hat{y}^{(i)} - \bar{y})^2 $$
-
-SSE (sum of squares error)，误差平方和，用于衡量**预测值**相对**真实值**的离散程度；
-
-$$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
-
-且三者之间的关系是 $SST = SSR + SSE$.
-
-{{< /expand >}}
-
-<img src='https://user-images.githubusercontent.com/46241961/273468625-e2263610-af8d-4ada-9cf9-9c25eef6c3c3.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
-
-### 分类指标
-
-#### 混淆矩阵
-
-（confusion matrix）
-
-用于分类模型的效果评估。以下以二分类模型为例：
-
-| 预测/实际&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
-| ---------- | ---------- | ---------- |
-| **Positive** | TP  | FP&nbsp;&nbsp;&nbsp; | 
-| **Negative** | FN  | TN&nbsp;&nbsp;&nbsp; | 
-
-- 准确率（accuracy）：指预测正确的比例，即 $\frac{TP+TN}{TP+TN+FP+FN}$
-- 精确率（precision）：也称作查准率，指预测为正中实际为正的比例，即 $\frac{TP}{TP+FP}$
-- 召回率（recall）：也称作查全率，指实际为正中预测为正的比例，即 $\frac{TP}{TP+FN}$
-- F1：$\frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率}$
-
-#### ROC
-
-[深入介紹及比較ROC曲線及PR曲線](https://medium.com/nlp-tsupei/roc-pr-%E6%9B%B2%E7%B7%9A-f3faa2231b8c)
-
-用于分类模型的效果评估，以可视化的方式。
-
-## 损失函数<a id='LossFunction'></a>
-
-{{< alert theme="info" >}}
-损失函数用于**衡量预测值与真实值之间的差异程度**，也就是模型的拟合程度。
-{{< /alert >}}
-
-给定 $\hat{y},y \in \mathbb{R}$，分别表示预测值和真实值，则损失函数表示为：$$ L(\hat{y}, y) $$
-
-成本函数 $J$ 表示为：
-
-$$
-J = \frac{1}{m} \displaystyle \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)
-$$
-
-说明：成本函数更灵活，有时会在损失函数的基础上再加上正则项；
-
-### 最小二乘<a id="LeastSquaresLoss"></a>
-
-$$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
-
-### 交叉熵<a id="CrossEntropyLoss"></a>
-
-推导详见[交叉熵](#CrossEntropy)
-
-$$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
-
-对于二分类问题：$$ L(\hat{y}, y) = -y\ln\hat{y} - (1-y)\ln(1-\hat{y}) $$
-
-## 优化算法
-
-### 梯度下降算法<a id="GD"></a>
-
-梯度下降（Gradient Descent, GD）是一种迭代优化算法，用于求解任意一个可微函数的**局部最小值**。在机器学习中，常用于**最小化成本函数**，即最大程度减小预测值与真实值之间的误差。即：
-
-给定成本函数 $J(w,b)$，求解一组 $(w,b)$，使得
-$$ \min_{w,b} J(w,b) $$
-
-实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
-
-选定初始位置 $(w,b)$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
-
-$$
-w \leftarrow w - \alpha \frac{\partial J}{\partial w}
-$$
-
-$$
-b \leftarrow b - \alpha \frac{\partial J}{\partial b}
-$$
-
-即：
-
-$$
-\begin{equation} 
-  \begin{pmatrix}
-    w_1 \\\\
-    w_2 \\\\
-    \vdots \\\\
-    w_n \\\\
-    b
-  \end{pmatrix}
-    \leftarrow
-  \begin{pmatrix}
-    w_1 \\\\
-    w_2 \\\\
-    \vdots \\\\
-    w_n \\\\
-    b
-  \end{pmatrix}
-    - \alpha
-  \begin{pmatrix}
-    \frac{\partial J}{\partial w_1} \\\\
-    \frac{\partial J}{\partial w_2} \\\\
-    \vdots \\\\
-    \frac{\partial J}{\partial w_n} \\\\
-    \frac{\partial J}{\partial b} 
-  \end{pmatrix}
-\end{equation}
-$$
-
-其中：$\alpha$ 指学习率（Learning rate），也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
-
-#### 选择学习率
-
-方法：给定不同 $\alpha$ 运行梯度下降时，绘制 $J$ 和 迭代次数的图，通过观察 $J$ **是否单调递减直至收敛**来判断 $\alpha$ 的选择是否合适；
-  - 单调递增或有增有减：$\alpha$ 太大，步子迈大了，应该降低 $\alpha$；
-  - 单调递减但未收敛：$\alpha$ 太小，学习太慢，应该提升 $\alpha$；
-
-经验值参考：[0.001, 0.01, 0.1, 1] 或者 [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1]
-
-### 批量梯度下降<a id="BGD"></a>
-
-（Batch Gradient Descent, BGD）：使用训练集中的所有数据
-
-### 随机梯度下降<a id="SGD"></a>
-
-（stotastic gradient descent, SGD）：？？根据每个训练样本进行参数更新
-
 ## 特征工程
 
 ### 多项式特征<a id="PolynomialFeatures"></a>
 
 {{< alert theme="info" >}}
-通过添加**`特征的多项式`**来提高模型复杂度，将其视作新特征则归来仍是[线性回归](#LinearRegression)问题。
+通过添加`特征的多项式`来提高模型复杂度，将其视作新特征则归来仍是[线性回归](#LinearRegression)问题。
 {{< /alert >}}
 
 例子：以下式 $(1)(2)(3)$ 依次对应一元二次多项式、一元三次多项式、二元二次多项式模型：
@@ -784,6 +591,270 @@ $$
 $$
 \sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
 $$
+
+## 损失函数<a id='LossFunction'></a>
+
+{{< alert theme="info" >}}
+损失函数用于**衡量预测值与真实值之间的差异程度**，也就是模型的拟合程度。
+{{< /alert >}}
+
+给定 $\hat{y},y \in \mathbb{R}$，分别表示预测值和真实值，则损失函数表示为：$$ L(\hat{y}, y) $$
+
+成本函数 $J$ 表示为：
+
+$$
+J = \frac{1}{m} \displaystyle \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)
+$$
+
+说明：成本函数更灵活，有时会在损失函数的基础上再加上正则项；
+
+### 最小二乘<a id="LeastSquaresLoss"></a>
+
+$$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
+
+### 交叉熵<a id="CrossEntropyLoss"></a>
+
+推导详见[交叉熵](#CrossEntropy)
+
+$$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
+
+对于二分类问题：$$ L(\hat{y}, y) = -y\ln\hat{y} - (1-y)\ln(1-\hat{y}) $$
+
+## 优化算法
+
+### 梯度下降算法<a id="GD"></a>
+
+梯度下降（Gradient Descent, GD）是一种迭代优化算法，用于求解任意一个可微函数的**局部最小值**。在机器学习中，常用于**最小化成本函数**，即最大程度减小预测值与真实值之间的误差。即：
+
+给定成本函数 $J(w,b)$，求解一组 $(w,b)$，使得
+$$ \min_{w,b} J(w,b) $$
+
+实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
+
+选定初始位置 $(w,b)$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
+
+$$
+w \leftarrow w - \alpha \frac{\partial J}{\partial w}
+$$
+
+$$
+b \leftarrow b - \alpha \frac{\partial J}{\partial b}
+$$
+
+即：
+
+$$
+\begin{equation} 
+  \begin{pmatrix}
+    w_1 \\\\
+    w_2 \\\\
+    \vdots \\\\
+    w_n \\\\
+    b
+  \end{pmatrix}
+    \leftarrow
+  \begin{pmatrix}
+    w_1 \\\\
+    w_2 \\\\
+    \vdots \\\\
+    w_n \\\\
+    b
+  \end{pmatrix}
+    - \alpha
+  \begin{pmatrix}
+    \frac{\partial J}{\partial w_1} \\\\
+    \frac{\partial J}{\partial w_2} \\\\
+    \vdots \\\\
+    \frac{\partial J}{\partial w_n} \\\\
+    \frac{\partial J}{\partial b} 
+  \end{pmatrix}
+\end{equation}
+$$
+
+其中：$\alpha$ 指学习率（Learning rate），也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
+
+#### 选择学习率
+
+方法：给定不同 $\alpha$ 运行梯度下降时，绘制 $J$ 和 迭代次数的图，通过观察 $J$ **是否单调递减直至收敛**来判断 $\alpha$ 的选择是否合适；
+  - 单调递增或有增有减：$\alpha$ 太大，步子迈大了，应该降低 $\alpha$；
+  - 单调递减但未收敛：$\alpha$ 太小，学习太慢，应该提升 $\alpha$；
+
+经验值参考：[0.001, 0.01, 0.1, 1] 或者 [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1]
+
+### 批量梯度下降<a id="BGD"></a>
+
+（Batch Gradient Descent, BGD）：使用训练集中的所有数据
+
+### 随机梯度下降<a id="SGD"></a>
+
+（stotastic gradient descent, SGD）：？？根据每个训练样本进行参数更新
+
+## 模型评估
+
+### 过拟合问题
+
+解决过拟合的方法：
+1. 收集更多的训练示例；
+2. 特征选择；
+3. 正则化；
+
+<img src='https://user-images.githubusercontent.com/46241961/278217087-8b868e06-28d3-4a36-bec8-7af1aaff13e0.svg' alt='欠拟合和过拟合' width=70%>
+
+{{< expand "代码：以一元线性回归为例（参考 scikit-learn 官网）">}}
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import cross_val_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures
+
+sns.set(style='white')
+np.random.seed(0)
+
+def true_fun(x):
+    return np.cos(1.5 * np.pi * x)
+    
+# 数据集
+n_samples = 30
+degrees = [1, 4, 15]
+titles = ['Underfitting', 'Appropriate', 'Overfitting']
+
+x = np.sort(np.random.rand(n_samples))
+y = true_fun(x) + np.random.randn(n_samples) * 0.1
+X = x[:, np.newaxis]
+
+# 绘图
+plt.figure(figsize=(14, 5))
+for i in range(len(degrees)):
+    ax = plt.subplot(1, len(degrees), i + 1)
+    plt.setp(ax, xticks=(), yticks=())
+
+    polynomial_features = PolynomialFeatures(degree=degrees[i], include_bias=False)
+    linear_regression = LinearRegression()
+    pipeline = Pipeline(
+        [
+            ("polynomial_features", polynomial_features),
+            ("linear_regression", linear_regression),
+        ]
+    )
+    pipeline.fit(X, y)
+
+    # Evaluate the models using crossvalidation
+    scores = cross_val_score(
+        pipeline, X, y, scoring="neg_mean_squared_error", cv=10
+    )
+
+    X_test = np.linspace(0, 1, 100)
+    plt.scatter(X, y, color='red', marker='X', label="ground truth")
+    plt.plot(X_test, pipeline.predict(X_test[:, np.newaxis]), label="Model (degree = {})".format(degrees[i]))
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.xlim((0, 1))
+    plt.ylim((-2, 2))
+    plt.legend(loc="best")
+    plt.title("{}".format(titles[i])
+    )
+plt.savefig('Underfitting vs. Overfitting.svg')
+```
+{{< /expand >}}
+
+### 评估方法
+
+留出法（Hold-out）：拆分训练集和测试集
+
+交叉验证法（Cross Validation）：将数据集分成 N 块，使用 N-1 块进行训练，再用最后一块进行测试；
+
+自助法（Bootstrap）：
+
+（Bagging）：
+
+### 回归指标
+
+#### MAE
+
+MAE（Mean Absolute Error），平均绝对误差。
+
+$$ MAE = \frac{1}{m} \sum_{i=1}^{m} \lvert \hat{y}^{(i)} - y^{(i)} \rvert $$
+
+#### MAPE
+
+MAPE（Mean Absolute Percentage Error），平均绝对百分误差。
+
+$$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{(i)}} \rvert $$
+
+#### MSE<a id="MSE"></a>
+
+MSE（Mean Squared Error），均方误差。最小二乘的均值版，常用于线性回归模型的成本函数。
+
+$$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
+
+#### RMSE
+
+RMSE（Root Mean Square Error），均方根误差。
+
+$$ RMSE = \sqrt{MSE} $$
+
+#### R<sup>2</sup><a id="Coefficient-of-Determination"></a>
+
+R<sup>2</sup> (coefficient of determination)，决定系数。衡量**总误差（客观存在且无关回归模型）中可以被回归模型解释的比例**，即拟合程度。
+
+$$ R^2 = \frac{SSR}{SST} = 1- \frac{SSE}{SST} $$
+
+说明：
+当 $R^2 \to 1$ 时，表明拟合程度越好，因为此时 SSR 趋向于 SST（或 SSE 趋向于 0）；
+当 $R^2 \to 0$ 时，表明拟合程度越差，因为此时 SSR 趋向于 0（或 SSE 趋向于 SST）；
+
+{{< expand "关于 SST/SSR/SSE">}}
+
+{{< boxmd >}}
+助记小技巧：**T** is short for total, **R** is short for regression, **E** is short for error.
+{{< /boxmd >}}
+
+SST (sum of squares total)，总平方和，用于衡量**真实值**相对**均值**的离散程度。SST 客观存在且与回归模型无关；
+
+$$ SST = \sum_{i=1}^{m} (y^{(i)} - \bar{y})^2 $$
+
+SSR (sum of squares due to regression)，回归平方和，用于衡量**预测值**相对**均值**的离散程度。当 SSR = SST 时，回归模型完美；
+
+$$ SSR = \sum_{i=1}^{m} (\hat{y}^{(i)} - \bar{y})^2 $$
+
+SSE (sum of squares error)，误差平方和，用于衡量**预测值**相对**真实值**的离散程度；
+
+$$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
+
+且三者之间的关系是 $SST = SSR + SSE$.
+
+{{< /expand >}}
+
+<img src='https://user-images.githubusercontent.com/46241961/273468625-e2263610-af8d-4ada-9cf9-9c25eef6c3c3.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
+
+### 分类指标
+
+#### 混淆矩阵
+
+（confusion matrix）
+
+用于分类模型的效果评估。以下以二分类模型为例：
+
+| 预测/实际&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
+| ---------- | ---------- | ---------- |
+| **Positive** | TP  | FP&nbsp;&nbsp;&nbsp; | 
+| **Negative** | FN  | TN&nbsp;&nbsp;&nbsp; | 
+
+- 准确率（accuracy）：指预测正确的比例，即 $\frac{TP+TN}{TP+TN+FP+FN}$
+- 精确率（precision）：也称作查准率，指预测为正中实际为正的比例，即 $\frac{TP}{TP+FP}$
+- 召回率（recall）：也称作查全率，指实际为正中预测为正的比例，即 $\frac{TP}{TP+FN}$
+- F1：$\frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率}$
+
+#### ROC
+
+[深入介紹及比較ROC曲線及PR曲線](https://medium.com/nlp-tsupei/roc-pr-%E6%9B%B2%E7%B7%9A-f3faa2231b8c)
+
+用于分类模型的效果评估，以可视化的方式。
 
 ## 数学基础
 
@@ -1288,13 +1359,6 @@ $$ D_{KL}(p||q) \simeq H(p,q)$$
 一些术语概念：
 - 协方差：线性相关性程度。若协方差为0则线性无关；
 - 特征向量：矩阵的特征向量。数据集结构的非零向量；空间中每个点对应的一个坐标向量。
-
-### 过拟合
-
-解决过拟合的方法：
-1. 收集更多的训练示例；
-2. 特征选择；
-3. 正则化；
 
 <!-- <img src='https://www.nvidia.cn/content/dam/en-zz/Solutions/gtcf20/data-analytics/nvidia-ai-data-science-workflow-diagram.svg'>
 
