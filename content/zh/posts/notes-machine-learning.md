@@ -97,7 +97,7 @@ Step1：选择训练模型：含模型参数；
 Step2：评估模型性能：选择合适的损失函数，以衡量模型的预测值与真实值之间的差异程度；确定损失函数：将模型代入损失函数得到成本函数，以量化模型性能；
 Step3：求解目标：求成本函数的极小值解。求极小值问题常用到[梯度下降算法](#GD)。 -->
 
-### 线性回归
+### 线性回归<a id="LinearRegression"></a>
 
 线性回归（Linear Regression），解决线性的**回归**问题。
 <!-- 前提假设是预测值与真实值的误差（error）服从正态分布。 -->
@@ -287,80 +287,7 @@ for i in range(len(alphas_list)):
         print('{}：\n  模型参数：w={}, b={:.3f}\n  训练集：R2={:.3f}, MSE={:.3f}\n  测试集：R2={:.3f}, MSE={:.3f}'.format(model_name, w, b, r2_train, mse_train, r2_test, mse_test))
 ```
 
-### 多项式回归
-
-多项式回归（Polynomial Regression），解决非线性的**回归**问题。
-
-#### 原理
-
-{{< alert theme="info" >}}
-核心思想是将非线性问题转化为线性问题，即将多项式视作新的特征。
-{{< /alert >}}
-
-以下式 $(1)(2)(3)$ 依次对应一元二次多项式、一元三次多项式、二元二次多项式模型：
-
-$$ f_{w,b}(x) = w_1x + w_2x^2 + b \tag{1} $$
-
-$$ f_{w,b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{2} $$
-
-$$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
-
-以式 $(1)$ 的模型为例，将非线性的 $f(x) \to y$ 问题，转化为线性的 $f(x,x^2) \to y$ 问题，即将非一次项的 $x^2$ 视作新特征，即可按照线性回归模型训练。
-
-#### 代码
-
-以下示例为一元三次多项式。
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
-
-rng = np.random.RandomState(0)
-
-# 数据集
-x = np.linspace(-3, 7, 10)
-y = np.power(x, 3) + np.power(x, 2) + x + 1 + rng.randn(1)
-X = x[:, np.newaxis]
-
-# 绘制训练集
-plt.figure(figsize=(8, 6))
-plt.scatter(X, y, color='red', marker='X')
-legend_names = ['training points']
-
-# 多项式特征的线性回归模型
-for degree in range(10):
-    # 创建多项式特征
-    poly = PolynomialFeatures(degree=degree)
-    X_poly = poly.fit_transform(X)
-    
-    # 创建线性回归模型：X_poly 与 y 为线性关系
-    model = LinearRegression()
-    model.fit(X_poly, y)
-
-    # 使用模型预测
-    y_pred = model.predict(X_poly)
-    
-    # 获取模型参数和性能指标
-    w = model.coef_
-    b = model.intercept_
-    mse = mean_squared_error(y, y_pred) # 均方误差
-    r2 = r2_score(y, y_pred) # 决定系数
-    print('当 degree 取 {} 时，mse={}, r2={}, 模型参数 w={}, b={:.4f}'.format(degree, round(mse, 3), r2, w, b))
-
-    # 绘图
-    plt.plot(X, y_pred)
-    legend_names.append('degree {}: mse {}, r2 {}'.format(degree, round(mse, 3), r2))
-
-# 添加图例
-plt.legend(legend_names)
-plt.savefig('PolynomialFeatures_LinearRegression.svg')
-```
-<img src='https://user-images.githubusercontent.com/46241961/272204746-6f8c1665-2d34-40fc-ae86-29e8d0d7a942.svg' alt='PolynomialFeatures_LinearRegression' width='80%'>
-
-### 逻辑回归
+### 逻辑回归<a id="LogisticRegression"></a>
 
 逻辑回归（Logistic Regression），解决**二分类**（Binary Classification）问题。
 
@@ -399,9 +326,9 @@ $$ \min_{w,b} J(w,b) $$
 <!-- true: 1, positive class
 false: 0, negative class -->
 
-### 决策树
+### 决策树<a id="DecisionTree"></a>
 
-Decison tree，解决**分类**问题。
+Decision tree，解决**分类**问题。
 
 - 根节点：无入多出
 - 内部节点：一入多出
@@ -411,7 +338,7 @@ Decison tree，解决**分类**问题。
 
 基尼系数
 
-### 随机森林
+### 随机森林<a id="RandomForest"></a>
 
 有放回随机抽子集。
 
@@ -420,10 +347,10 @@ Random forest，解决**分类**问题。
 回归问题：求均值
 分列问题：求众数
 
-### XGBoost
+### XGBoost<a id="XGBoost"></a>
 
 
-### SVM
+### SVM<a id="SVM"></a>
 
 支持向量机，解决**分类**问题。
 
@@ -436,11 +363,11 @@ Random forest，解决**分类**问题。
 Hard-margin SVM
 Soft-margin SVM：加入了容错率
 
-### 朴素贝叶斯
+### 朴素贝叶斯<a id="NaiveBayes"></a>
 
-Nbayes，解决**分类**问题。
+Naive Bayes，解决**分类**问题。
 
-### K近邻
+### K近邻<a id="K-NearestNeighbors"></a>
 
 KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
 
@@ -547,7 +474,7 @@ ax.set_yticks(())
   - 边界点：在半径 eps 内的点的个数不超过 min_samples，但落在核心点的邻域内；
   - 噪音点：既不是核心点，也不是边界点；
 
-### PCA
+### PCA<a id="PrincipalComponentAnalysis"></a>
 
 主成分分析（Principal Component Analysis, PCA），解决**降维**问题。
 
@@ -569,6 +496,8 @@ ax.set_yticks(())
 
 自助法（Bootstrap）：
 
+（Bagging）：
+
 ### 回归指标
 
 #### MAE
@@ -583,7 +512,7 @@ MAPE（Mean Absolute Percentage Error），平均绝对百分误差。
 
 $$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{(i)}} \rvert $$
 
-#### MSE<a id="mse"></a>
+#### MSE<a id="MSE"></a>
 
 MSE（Mean Squared Error），均方误差。最小二乘的均值版，常用于线性回归模型的成本函数。
 
@@ -595,7 +524,7 @@ RMSE（Root Mean Square Error），均方根误差。
 
 $$ RMSE = \sqrt{MSE} $$
 
-#### R<sup>2</sup>
+#### R<sup>2</sup><a id="Coefficient-of-Determination"></a>
 
 R<sup>2</sup> (coefficient of determination)，决定系数。衡量**总误差（客观存在且无关回归模型）中可以被回归模型解释的比例**，即拟合程度。
 
@@ -692,7 +621,7 @@ $$ \min_{w,b} J(w,b) $$
 
 实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
 
-选定初始位置 $w$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
+选定初始位置 $(w,b)$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
 
 $$
 w \leftarrow w - \alpha \frac{\partial J}{\partial w}
@@ -751,6 +680,75 @@ $$
 （stotastic gradient descent, SGD）：？？根据每个训练样本进行参数更新
 
 ## 特征工程
+
+### 多项式特征<a id="PolynomialFeatures"></a>
+
+{{< alert theme="info" >}}
+通过添加**`特征的多项式`**来提高模型复杂度，将其视作新特征则归来仍是[线性回归](#LinearRegression)问题。
+{{< /alert >}}
+
+例子：以下式 $(1)(2)(3)$ 依次对应一元二次多项式、一元三次多项式、二元二次多项式模型：
+
+$$ f_{w,b}(x) = w_1x + w_2x^2 + b \tag{1} $$
+
+$$ f_{w,b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{2} $$
+
+$$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
+
+以式 $(1)$ 的模型为例，将非线性的 $f(x) \to y$ 问题，转化为线性的 $f(x,x^2) \to y$ 问题，即`将非一次项的 $x^2$ 视作新特征`，即可按照线性回归模型训练。
+
+{{< expand "代码：以一元特征为例，对比不同 degree 的模型质量" >}}
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+rng = np.random.RandomState(0)
+
+# 数据集
+x = np.linspace(-3, 7, 10)
+y = np.power(x, 3) + np.power(x, 2) + x + 1 + rng.randn(1)
+X = x[:, np.newaxis]
+
+# 绘制训练集
+plt.figure(figsize=(8, 6))
+plt.scatter(X, y, color='red', marker='X')
+legend_names = ['training points']
+
+# 多项式特征的线性回归模型
+for degree in range(10):
+    # 创建多项式特征
+    poly = PolynomialFeatures(degree=degree)
+    X_poly = poly.fit_transform(X)
+    
+    # 创建线性回归模型：X_poly 与 y 为线性关系
+    model = LinearRegression()
+    model.fit(X_poly, y)
+
+    # 使用模型预测
+    y_pred = model.predict(X_poly)
+    
+    # 获取模型参数和性能指标
+    w = model.coef_
+    b = model.intercept_
+    mse = mean_squared_error(y, y_pred) # 均方误差
+    r2 = r2_score(y, y_pred) # 决定系数
+    print('当 degree 取 {} 时，mse={}, r2={}, 模型参数 w={}, b={:.4f}'.format(degree, round(mse, 3), r2, w, b))
+
+    # 绘图
+    plt.plot(X, y_pred)
+    legend_names.append('degree {}: mse {}, r2 {}'.format(degree, round(mse, 3), r2))
+
+# 添加图例
+plt.legend(legend_names)
+plt.savefig('PolynomialFeatures_LinearRegression.svg')
+```
+{{< /expand >}}
+
+<img src='https://user-images.githubusercontent.com/46241961/272204746-6f8c1665-2d34-40fc-ae86-29e8d0d7a942.svg' alt='PolynomialFeatures_LinearRegression' width='80%'>
 
 ### 特征缩放
 
@@ -815,7 +813,7 @@ $$ \sigma = \sqrt{\sigma^2} $$
 
 #### 变异系数
 
-变异系数（coefficient of variation，CV），是标准差的归一化，无量纲。
+变异系数（Coefficient of variation，CV），是标准差的归一化，无量纲。
 
 $$ c_v = \frac{\sigma}{\mu} $$
 
@@ -835,7 +833,7 @@ $$ f'' = (f')' = \frac{d^2y}{dx^2} $$
 
 注意：可导等于可微，可导一定连续；
 说明：一阶导表示函数在该点处的`瞬时变化率`；
-用途：一阶导用于判断**单调性**；二阶导用于判断**凹凸性**，大于零则凸（U 型），小于零则凹（倒扣的 U 型）。
+用途：一阶导用于判断**单调性**；二阶导用于判断**凹凸性**，大于零则凸（U 型）。
 
 ### 偏导数
 
@@ -934,7 +932,7 @@ $$
 
 ### 矩阵
 
-$m \times n$ 矩阵可理解为 n 个列向量的集合（或 m 个行向量的集合）。如果把每个列向量看作一个**伪基向量**，则矩阵又可理解为 **伪 n 维空间**的一组**伪基向量**的集合。
+$m \times n$ 矩阵可理解为 n 个列向量的集合（或 m 个行向量的集合）。
 
 #### 线性相关
 
@@ -946,7 +944,7 @@ $m \times n$ 矩阵可理解为 n 个列向量的集合（或 m 个行向量的�
 
 $$ w_1x_1 + w_2x_2 + \cdots + w_nx_n = \vec{0},\space\space (n>=2) $$
 
-其中 $w_j$ 为标量。**如果当且仅当 $w_1 = w_2 = \cdots = w_n = 0$ 即全部系数为零时才成立，则称该 n 个向量线性无关**，否则线性相关。
+其中 $w_j$ 为标量。**`如果当且仅当 $w_1 = w_2 = \cdots = w_n = 0$ 即全部系数为零时才成立，则称该 n 个向量线性无关`**，否则线性相关。
 
 {{< notice info >}}
 线性无关，对于 n 取 2 就是两个向量不共线，对于 n 取 3 就是三个向量不共面。
@@ -1222,7 +1220,7 @@ $$
 
 $$ I(x) = \ln \frac{1}{p(x)} = - \ln p(x) $$
 
-其中 $\displaystyle \sum_x p(x) = 1$
+其中 $\displaystyle \sum_x p(x) = 1$.
 
 <img src='https://user-images.githubusercontent.com/46241961/278089095-219f103a-45e8-4920-825a-ef5f72e1832c.svg' alt='信息量' width=70%>
 
@@ -1232,7 +1230,7 @@ $$ I(x) = \ln \frac{1}{p(x)} = - \ln p(x) $$
 
 #### 熵
 
-熵（Entropy）等于$x$ 的 **`信息量的期望值`**，用于衡量**混乱程度或不确定性**，定义如下：
+熵（Entropy）等于 $x$ 的 **`信息量的期望值`**，用于衡量**混乱程度或不确定性**，定义如下：
 
 $$ 
 H(p) = E(I(x)) = \sum_x p(x) I(x) = - \sum_x p(x) \ln p(x)
@@ -1240,8 +1238,8 @@ $$
 
 <img src='https://user-images.githubusercontent.com/46241961/278096679-4b948c28-8618-43c6-85c0-3d52de6b4c61.svg' alt='不同高斯分布的熵对比' width=70%>
 
-说明：
-1. **方差越大，分布越分散（混乱），越扁（小概率占比高），熵越大（平均信息量越大）。** [梅开二度](GaussianDistribution)
+<br>说明：
+1. **方差越大，分布越分散（混乱），越扁（小概率占比大），熵越大（平均信息量越大）。** [（👈 梅开二度）](#GaussianDistribution)
 2. 离散型随机变量对应**求和**，连续型随机变量对应**求积分**（已省略）；
 
 #### 相对熵<a id="KLD"></a>
