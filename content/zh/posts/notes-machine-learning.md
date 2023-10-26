@@ -44,10 +44,10 @@ libraries:
 3. 非代码部分从 `1` 开始计数；
 
 <br>具体符号：
-- $x \in \mathbb{R}^n$ 表示输入变量，$w \in \mathbb{R}^n$ 表示回归系数，$y,\hat{y} \in \mathbb{R}^m$ 分别表示真实值和预测值（默认单值模型）；
-- $X$ 表示训练示例组成的矩阵。注意区分：
-  - $x^{(i)} \in \mathbb{R}^n$ 表示第 $i$ 个训练示例（第 $i \in [1,m]$ 行）；
-  - $x_j \in \mathbb{R}^m$ 表示第 $j$ 个特征（第 $j \in [1,n]$ 列）；
+- $x \in \mathbb{R}^n$ 表示输入变量，$w \in \mathbb{R}^n$ 表示回归系数；
+- $X \in \mathbb{R}^{m \times n}$ 表示训练示例组成的矩阵，$y,\hat{y} \in \mathbb{R}^m$ 分别表示真实值和预测值。注意区分：
+  - $x^{(i)} \in \mathbb{R}^n$ 表示第 $i$ 个训练示例；（第 $i \in [1,m]$ 行）
+  - $x_j \in \mathbb{R}^m$ 表示第 $j$ 个特征；（第 $j$ 列，其中 $j \in [1,n]$）
   - $x_j^{(i)} \in \mathbb{R}$ 表示第 $i$ 个训练示例的第 $j$ 个特征；
   - $y^{(i)},\hat{y}^{(i)} \in \mathbb{R}$ 分别表示第 $i$ 个训练示例的真实值和预测值；
 
