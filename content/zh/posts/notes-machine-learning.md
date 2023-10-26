@@ -2,7 +2,7 @@
 title: "学习笔记：吴恩达机器学习"
 date: 2023-08-04T08:09:47Z
 draft: false
-description: 线性回归，多项式回归，逻辑回归，SVM，朴素贝叶斯等。
+description: 线性回归，逻辑回归，决策树，随机森林，SVM，朴素贝叶斯，K 近邻，K-means，PCA 等。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -367,7 +367,7 @@ Soft-margin SVM：加入了容错率
 
 Naive Bayes，解决**分类**问题。
 
-### K近邻<a id="K-NearestNeighbors"></a>
+### K 近邻<a id="K-NearestNeighbors"></a>
 
 KNN (K-Nearest Neighbors)，解决**分类+回归**问题。
 
@@ -698,7 +698,9 @@ $$
 2. 特征选择；
 3. 正则化；
 
-<img src='https://user-images.githubusercontent.com/46241961/278217087-8b868e06-28d3-4a36-bec8-7af1aaff13e0.svg' alt='欠拟合和过拟合' width=70%>
+<img src='https://user-images.githubusercontent.com/46241961/278217087-8b868e06-28d3-4a36-bec8-7af1aaff13e0.svg' alt='欠拟合和过拟合（一元线性回归）'>
+
+<img src='https://user-images.githubusercontent.com/46241961/278218826-30c1830f-e0b6-47b9-b478-9ae70d6307a7.svg'>
 
 {{< expand "代码：以一元线性回归为例（参考 scikit-learn 官网）">}}
 
