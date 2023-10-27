@@ -870,7 +870,19 @@ $$ \max(y) - \min(y) $$
 
 #### 均值
 
-$$ \mu = \frac{1}{m} \sum_{i=1}^{m} y^{(i)} $$
+$$ \bar{y} = \frac{1}{m} \sum_{i=1}^{m} y^{(i)} $$
+
+#### 期望值
+
+随机变量 $X$ 服从概率分布 $p(x)$，则 $X$ 的期望值如下：
+
+$$ E(X) = \sum_{x} p(x) x $$
+
+其中 $p(x) \in [0,1], \displaystyle \sum_{x} p(x) = 1$
+
+{{< notice info>}}
+当 $p(x)$ 等于[均匀分布](#均匀分布)时，期望值等于算数平均值。
+{{< /notice >}}
 
 #### 方差
 
@@ -1210,17 +1222,18 @@ $$P(A,B) = P(A)P(B)$$
 
 离散型随机变量对应`概率质量函数`（Probability Mass Function, PMF），连续型随机变量对应`概率密度函数`（Probability Density Function, PDF）。
 
-#### 均匀分布
+#### 均匀分布<a id="均匀分布"></a>
 
-{{< alert theme="info" >}}
+<!-- {{< alert theme="info" >}}
+不严谨
 实际应用中，样本分布被认为是离散型变量的均匀分布，因此计算样本期望值时 $p(x) = \frac{1}{n}$.
-{{< /alert >}}
+{{< /alert >}} -->
 
-离散型随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均值分布，则其概率质量函数为常数：
+离散型随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均匀分布，则其概率质量函数为常数：
 
 $$ p(X=x) = \frac{1}{n} $$
 
-连续型随机变量 $X \in [a,b]$ 服从均值分布，则其概率密度函数在定义域内也为常数：
+连续型随机变量 $X \in [a,b]$ 服从均匀分布，则其概率密度函数在定义域内也为常数：
 
 $$
 p(X=x) =
