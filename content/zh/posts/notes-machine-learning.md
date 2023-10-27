@@ -93,9 +93,9 @@ $$ -->
 有标签的是监督学习。预测连续值的是回归任务，预测离散值的是分类任务。
 {{< /alert >}}
 
-给定`包含标签`的训练集 $(X,y)$，其中 $X \in \mathbb{R}^{m \times n},y \in \mathbb{R}^m$，通过算法构建一个模型或预估器，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X,y) \to f(x) \space\text{or}\space p(x) \to \hat{y} $$
+给定`包含标签`的训练集 $(X,y)$，其中 $X \in \mathbb{R}^{m \times n},y \in \mathbb{R}^m$，通过算法构建一个模型或预估器，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X,y) \to f(x) \space\text{or}\space p(y|x) \to \hat{y} $$
 
-说明：以下约定**判别式模型**使用 $f(x)$，**生成式模型**使用 $p(x)$。
+<!-- 说明：以下约定**判别式模型**使用 $f(x)$，**生成式模型**使用 $p(y|x)$。 -->
 
 监督学习任务分为`回归（Regression）`和`分类（Classification）`，前者预测**连续值**，后者预测**离散值**。
 <!-- - `回归（Regression）`：可用于趋势预测、价格预测、流量预测等； -->
@@ -896,7 +896,7 @@ $$ c_v = \frac{\sigma}{\mu} $$
 **一阶导用于单调性判断，二阶导用于凹凸性判断。**
 {{< /alert >}}
 
-给定一元函数 $f: \mathbb{R} \to \mathbb{R}$，则 $f$ 在点 $x$ 处的一阶导数 $f'$ 和二阶导数 $f''$ 的定义分别如下：
+给定函数 $f: \mathbb{R} \to \mathbb{R}$，则 $f$ 在点 $x$ 处的一阶导数 $f'$ 和二阶导数 $f''$ 的定义分别如下：
 
 $$
 f' = \frac{dy}{dx} = \lim_{{\Delta x} \to 0} \frac{f(x + {\Delta x})}{\Delta x}
@@ -910,7 +910,7 @@ $$ f'' = (f')' = \frac{d^2y}{dx^2} $$
 
 ### 偏导数
 
-给定多元函数 $f: \mathbb{R}^n \to \mathbb{R}$，则 $f$ 对自变量 $x_j$ 的偏导数（partial derivative），指将其他自变量视作常量时，对 $x_j$ 的导数，即：
+给定函数 $f: \mathbb{R}^n \to \mathbb{R}$，则 $f$ 对自变量 $x_j$ 的偏导数（partial derivative），指将其他自变量视作常量时，对 $x_j$ 的导数，即：
 
 $$ 
 \frac{\partial f}{\partial x_j} = \lim_{{\Delta x_j} \to 0} \frac{f(x_j + {\Delta x_j}, ...) - f(x_j, ...)}{\Delta x_j}
@@ -924,7 +924,7 @@ $$
 **梯度是一个向量，沿着梯度方向函数值上升最快，逆着梯度方向函数值下降最快。**
 {{< /alert >}}
 
-给定**可微**函数 $f: \mathbb{R}^n \to \mathbb{R}$，则 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
+给定`可微`函数 $f: \mathbb{R}^n \to \mathbb{R}$，则 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
 
 $$
 grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
@@ -960,8 +960,8 @@ $$
 x \cdot y = x^Ty = \sum_{j=1}^{n} x_jy_j \in \mathbb{R}
 $$
 
-注意：相同维数的向量才能进行点积乘法；
-说明：几何意义是向量围成的平面的**面积**或空间的**体积**，大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\cos(\theta)$，其中 $\theta$ 为两向量之间的夹角；
+注意：相同维数才能进行点积乘法；
+说明：几何意义是向量围成的平面的`面积`或空间的`体积`（有正负号），大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\cos(\theta)$，其中 $\theta$ 为两向量之间的夹角；
 用途：[余弦相似度](#CosineSimilarity)
 
 #### 叉积
@@ -984,7 +984,7 @@ x \times y &=
 $$
 
 注意：叉积的概念仅用于三维空间。这里的公式表达使用了[行列式](#Determinant)和代数余子式；
-说明：几何意义是**法向量**，大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\sin(\theta)$，其中 $\theta$ 为两向量之间的夹角。
+说明：几何意义是`法向量`，大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\sin(\theta)$，其中 $\theta$ 为两向量之间的夹角。
 
 #### 外积
 
@@ -1157,7 +1157,7 @@ $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
 
 #### 余弦相似度<a id="CosineSimilarity"></a>
 
-余弦相似度（Cosine Similarity）使用两个向量夹角的余弦值来衡量相似度，公式如下：
+余弦相似度（Cosine Similarity）使用`两个向量夹角的余弦值`来衡量相似度，公式如下：
 
 $$ \frac{x \cdot y}{\lVert x \rVert_2 \lVert y \rVert_2} $$
 
@@ -1209,7 +1209,9 @@ $$P(A,B) = P(A)P(B)$$
 
 #### 伯努利分布
 
-伯努利分布（Bernoulli distribution），也称作 0-1 分布。离散型随机变量 $X$ 服从参数 $\phi \in [0,1]$ 的伯努利分布，记作：
+`伯努利试验`指每次试验的结果只有两种可能，如果成功的概率是 $\phi$，则失败的概率是 $1-\phi$.
+
+伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`单次伯努利试验`中，成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $\phi \in [0,1]$ 的伯努利分布，记作：
 
 $$
 X \sim Bern(\phi)
@@ -1232,7 +1234,7 @@ $$ \sigma^2 = \sum_{i} \left(x_i - \mu\right)^2 p(x_i) = \phi(1-\phi) $$
 
 #### 二项分布
 
-二项分布（Binomial distribution）指进行一组 `n 重伯努利试验`，成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
+二项分布（Binomial distribution）指`n 次伯努利试验`中，成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
 
 $$
 X \sim B(n, \phi)
