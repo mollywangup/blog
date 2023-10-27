@@ -862,6 +862,10 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 ### 矩
 
+{{< alert theme="info" >}}
+一阶原点矩是[期望值](#Expectation)，二阶中心矩是[方差](#Variance)，三阶标准矩是[偏度](#)，四阶标准矩减常数3是[峰度](#)，二阶混合中心矩是[协方差](#Covariance)。
+{{< /alert >}}
+
 设随机变量 $X$ 和 $Y$，正整数 $k,l$.
 
 #### 原点矩
@@ -870,15 +874,11 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 $$ E(X^k) $$
 
-特别的，期望值 [$E(X)$](#均值) 就是一阶原点矩。
-
 #### 中心矩
 
 **中心**可理解为`期望值`。$X$ 的 $k$ 阶中心矩记作 $\mu_k$：
 
 $$ \mu_k = E\lbrack X - E(X)\rbrack^k $$
-
-特别的，方差 [$Var(X)$](#Variance) 就是二阶中心矩 $\mu_2$。
 
 #### 标准矩
 
@@ -887,8 +887,6 @@ $$ \mu_k = E\lbrack X - E(X)\rbrack^k $$
 $$
 \frac{\mu_k}{\sigma^k} = \frac{\mu_k}{\mu_2^{\frac{k}{2}}} = \frac{E\lbrack X - E(X)\rbrack^k}{\left(E\lbrack X - E(X)\rbrack^2\right)^{\frac{k}{2}}}
 $$
-
-特别的，偏度 [$Skewness$](#Skewness) 就是三阶标准矩，峰度 [$Kurtosis$](#Kurtosis) 就是四阶标准矩。
 
 #### 混合矩
 
@@ -902,8 +900,6 @@ $X$ 和 $Y$ 的 $k+l$ 阶混合中心矩：
 
 $$ E\lbrace\lbrack X - E(X)\rbrack^k \lbrack Y - E(Y)\rbrack^l \rbrace $$
 
-特别的，[$Cov(X,Y)$](#Covariance) 就是 $X$ 和 $Y$ 的二阶混合中心矩。
-
 ### 统计指标
 
 注意这里不严格区分**总体**和**样本**，并使用样本估计整体。
@@ -912,32 +908,36 @@ $$ E\lbrace\lbrack X - E(X)\rbrack^k \lbrack Y - E(Y)\rbrack^l \rbrace $$
 
 $$ \max(x) - \min(x) $$
 
-#### 期望值
+#### 期望值<a id="Expectation"></a>
 
-设随机变量 $X$ 服从概率分布 $p(x)$，则 $X$ 的期望值：
-
-$$ E(X) = \sum_{x} p(x) x $$
-
-说明：对于离散型随机变量，遍历总体"所有"取值再求算数平均值，是均值，也是期望值。可现实世界中看到的总是"样本"且永远无法获得"总体"，所以以下使用样本估计整体。
-
-#### 均值<a id="均值"></a>
+这里使用`样本均值`估计`总体期望值`。
 
 $$ 
-\mu = E(X) \approx 
-\bar{x} = \frac{1}{n} \sum_{j=1}^{n} x_j 
+\begin{split}
+\mu &= E(X) = \sum_{j=1}^{n} p(x_j) x_j \\\\ 
+&\approx \bar{x} = \frac{1}{n} \sum_{j=1}^{n} x_j 
+\end{split}
 $$
 
 {{< notice info>}}
 说明：根据[强大数定律](#)，当 n 趋向于无穷时，`样本均值依概率 1 收敛于期望值`。
 {{< /notice >}}
 
+##### 期望值与均值
+
+总体期望值是常数标量，样本均值依赖于具体的随机抽样。
+
+如抛硬币（[伯努利试验](#BernoulliDistribution)），总体期望值是 $0.5 * 1 + 0.5 * 0 = 0.5$，但样本均值比如抛 3 次 $(1+1+0)/3 \neq 0.5$.
+
 #### 方差<a id="Variance"></a>
 
-方差（Variance）用于衡量相对均值的`离散程度`。
+方差（Variance）用于衡量相对均值的`离散程度`。越大，越扁，越离散，熵越大。
 
 $$ 
-\sigma^2 = Var(X) = E\lbrack X - E(X)\rbrack^2 \approx 
-\frac{1}{n} \sum_{j=1}^{n} (x_j - \bar{x})^2 
+\begin{split}
+\sigma^2 &= Var(X) = E\lbrack X - E(X)\rbrack^2 = \sum_{j=1}^{n} p(x_j)(x_j - \mu)^2 \\\\
+&\approx \frac{1}{n} \sum_{j=1}^{n} (x_j - \bar{x})^2 
+\end{split}
 $$
 
 #### 标准差
@@ -946,11 +946,11 @@ $$
 
 $$ \sigma = \sqrt{\sigma^2} $$
 
-#### 变异系数
+<!-- #### 变异系数
 
 变异系数（Coefficient of variation，CV），是标准差的归一化，无量纲。
 
-$$ c_v = \frac{\sigma}{\mu} $$
+$$ c_v = \frac{\sigma}{\mu} $$ -->
 
 #### 协方差<a id="Covariance"></a>
 
@@ -1320,7 +1320,7 @@ p(X=x) =
 \end{cases}
 $$
 
-#### 伯努利分布
+#### 伯努利分布<a id="BernoulliDistribution"></a>
 
 `伯努利试验`指每次试验的结果只有两种可能，如果成功的概率是 $\phi \in [0,1]$，则失败的概率是 $1-\phi$.
 
