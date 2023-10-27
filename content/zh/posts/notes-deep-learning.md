@@ -86,8 +86,8 @@ $$
 $$
 f(x) =
 \begin{cases}
-x, & \text{if $x \geq 0$} \\\\
-0, & \text{if $x < 0$}
+x & \text{if $x \geq 0$} \\\\
+0 & \text{if $x < 0$}
 \end{cases} \space\space\space \text{or} \space\space\space
 f(x) = \max(0, x)
 $$
@@ -95,8 +95,8 @@ $$
 $$
 f'(x) =
 \begin{cases}
-1, & \text{if $x \geq 0$} \\\\
-0, & \text{if $x < 0$}
+1 & \text{if $x \geq 0$} \\\\
+0 & \text{if $x < 0$}
 \end{cases}
 $$
 

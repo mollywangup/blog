@@ -1210,6 +1210,26 @@ $$P(A,B) = P(A)P(B)$$
 
 离散型随机变量对应`概率质量函数`（Probability Mass Function, PMF），连续型随机变量对应`概率密度函数`（Probability Density Function, PDF）。
 
+#### 均匀分布
+
+{{< alert theme="info" >}}
+实际应用中，样本分布被认为是离散型变量的均匀分布，因此计算样本期望值时 $p(x) = \frac{1}{n}$.
+{{< /alert >}}
+
+离散型随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均值分布，则其概率质量函数为常数：
+
+$$ p(X=x) = \frac{1}{n} $$
+
+连续型随机变量 $X \in [a,b]$ 服从均值分布，则其概率密度函数在定义域内也为常数：
+
+$$
+p(X=x) =
+\begin{cases}
+\frac{1}{b-a} & \text{if $x \in [a,b]$} \\\\
+0 & \text{if $x \notin [a,b]$}
+\end{cases}
+$$
+
 #### 伯努利分布
 
 `伯努利试验`指每次试验的结果只有两种可能，如果成功的概率是 $\phi \in [0,1]$，则失败的概率是 $1-\phi$.
