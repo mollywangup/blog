@@ -1117,10 +1117,10 @@ $$
 ### 距离和相似度
 
 {{< alert theme="info" >}}
-`距离`和`相似度`计算常用于分类或聚类，距离越近或相似度越高，则被认为可以分/聚为一类。
+距离和相似度常用于分类或聚类，距离越近或相似度越高，则被认为可以分/聚为一类。
 {{< /alert >}}
 
-对于向量 $x,y \in \mathbb{R}^n$，或空间中两个点，计算距离可使用`差向量的大小的衡量`即范数，计算相似度可通过`两向量夹角`来衡量等。
+对于向量 $x,y \in \mathbb{R}^n$，或空间中两个点，计算距离可使用`差向量的大小的衡量`如范数，计算相似度可通过`两向量夹角`来衡量等。
 
 #### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
 
@@ -1152,11 +1152,11 @@ $$ \max_{j} {\lvert x_j - y_j \rvert} \tag{$L_{+\infty}$} $$
 
 #### 余弦相似度<a id="CosineSimilarity"></a>
 
-余弦相似度（Cosine Similarity）使用`两个向量夹角的余弦值`来衡量相似度，公式如下：
+使用`两个向量夹角的余弦值`来衡量相似度，公式如下：
 
-$$ \frac{x \cdot y}{\lVert x \rVert_2 \lVert y \rVert_2} $$
+$$ Cosine \space Similarity = \cos(\theta) = \frac{x \cdot y}{\lVert x \rVert_2 \lVert y \rVert_2} $$
 
-说明：由[向量点积](#DotProduct)计算公式推导而来。越接近于 1，说明夹角越接近于 0，表明越相似。
+说明：由[向量点积](#DotProduct)计算公式推导而来。越接近于 1，夹角越接近于 0，越相似。
 
 #### 皮尔逊相关系数
 
