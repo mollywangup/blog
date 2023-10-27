@@ -2,7 +2,7 @@
 title: "学习笔记：吴恩达机器学习"
 date: 2023-08-04T08:09:47Z
 draft: false
-description: 监督学习包括线性回归，逻辑回归，KNN，朴素贝叶斯，决策树，随机森林，SVM；无监督学习包括 K-means，PCA 等。
+description: 监督学习包括线性回归，逻辑回归，KNN，朴素贝叶斯，决策树，随机森林，SVM；无监督学习包括 K-means，PCA 等。附带复习相关数学基础。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -866,23 +866,23 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 一阶原点矩是[期望值](#Expectation)，二阶中心矩是[方差](#Variance)，三阶标准矩是[偏度](#)，四阶标准矩减常数3是[峰度](#)，二阶混合中心矩是[协方差](#Covariance)。
 {{< /alert >}}
 
-设随机变量 $X$ 和 $Y$，正整数 $k,l$.
+设随机变量 $X$ 和 $Y$，正整数 $k$ 和 $l$.
 
 #### 原点矩
 
-**原点**可理解为`坐标原点`。$X$ 的 $k$ 阶原点矩：
+**原点**指`坐标原点`。$X$ 的 $k$ 阶原点矩：
 
 $$ E(X^k) $$
 
 #### 中心矩
 
-**中心**可理解为`期望值`。$X$ 的 $k$ 阶中心矩记作 $\mu_k$：
+**中心**指`期望值`。$X$ 的 $k$ 阶中心矩记作 $\mu_k$：
 
 $$ \mu_k = E\lbrack X - E(X)\rbrack^k $$
 
 #### 标准矩
 
-**标准**可理解为`标准化后的中心矩`。$X$ 的 $k$ 阶标准矩：
+**标准化**指`除以标准差以剔除量纲`，标准矩是`标准化的中心矩`。$X$ 的 $k$ 阶标准矩：
 
 $$
 \frac{\mu_k}{\sigma^k} = \frac{\mu_k}{\mu_2^{\frac{k}{2}}} = \frac{E\lbrack X - E(X)\rbrack^k}{\left(E\lbrack X - E(X)\rbrack^2\right)^{\frac{k}{2}}}
@@ -931,7 +931,7 @@ $$
 
 #### 方差<a id="Variance"></a>
 
-方差（Variance）用于衡量相对均值的`离散程度`。越大，越扁，越离散，熵越大。
+方差（Variance）用于衡量相对均值的`离散程度`。
 
 $$ 
 \begin{split}
@@ -939,6 +939,8 @@ $$
 &\approx \frac{1}{n} \sum_{j=1}^{n} (x_j - \bar{x})^2 
 \end{split}
 $$
+
+说明：越大，越扁（峰度越小），越离散，熵越大。
 
 #### 标准差
 
@@ -954,10 +956,20 @@ $$ c_v = \frac{\sigma}{\mu} $$ -->
 
 #### 协方差<a id="Covariance"></a>
 
-协方差（Covariance）用于衡量两个变量的总体误差。
+协方差（Covariance）用于衡量两个变量的`线性相关性`。
 
 $$
 Cov(X,Y) = E\lbrace\lbrack X - E(X)\rbrack \lbrack Y - E(Y)\rbrack \rbrace
+$$
+
+说明：$Cov(X,X) = Var(X)$，即方差是协方差的特殊情形.
+
+#### 相关系数
+
+标准化的协方差。
+
+$$
+\rho = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
 $$
 
 #### 偏度<a id="Skewness"></a>
@@ -975,9 +987,6 @@ $$
 $$
 Kurtosis = \frac{\mu_4}{\sigma^4} - 3 = \frac{\mu_4}{\mu_2^2} - 3
 $$
-
-#### 相关系数
-
 
 ### 导数
 
