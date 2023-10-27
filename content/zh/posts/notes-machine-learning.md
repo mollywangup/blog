@@ -860,6 +860,50 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 ## 数学基础
 
+### 矩
+
+设随机变量 $X$ 和 $Y$，正整数 $k,l$.
+
+#### 原点矩
+
+**原点**可理解为`坐标原点`。$X$ 的 $k$ 阶原点矩：
+
+$$ E(X^k) $$
+
+特别的，期望值 [$E(X)$](#均值) 就是一阶原点矩。
+
+#### 中心矩
+
+**中心**可理解为`期望值`。$X$ 的 $k$ 阶中心矩记作 $\mu_k$：
+
+$$ \mu_k = E\lbrack X - E(X)\rbrack^k $$
+
+特别的，方差 [$Var(X)$](#Variance) 就是二阶中心矩 $\mu_2$。
+
+#### 标准矩
+
+**标准**可理解为`标准化后的中心矩`。$X$ 的 $k$ 阶标准矩：
+
+$$
+\frac{\mu_k}{\sigma^k} = \frac{\mu_k}{\mu_2^{\frac{k}{2}}} = \frac{E\lbrack X - E(X)\rbrack^k}{\left(E\lbrack X - E(X)\rbrack^2\right)^{\frac{k}{2}}}
+$$
+
+特别的，偏度 [$Skewness$](#Skewness) 就是三阶标准矩，峰度 [$Kurtosis$](#Kurtosis) 就是四阶标准矩。
+
+#### 混合矩
+
+$X$ 和 $Y$ 的 $k+l$ 阶混合矩：
+
+$$ E(X^kY^l) $$
+
+#### 混合中心矩
+
+$X$ 和 $Y$ 的 $k+l$ 阶混合中心矩：
+
+$$ E\lbrace\lbrack X - E(X)\rbrack^k \lbrack Y - E(Y)\rbrack^l \rbrace $$
+
+特别的，[$Cov(X,Y)$](#Covariance) 就是 $X$ 和 $Y$ 的二阶混合中心矩。
+
 ### 统计指标
 
 注意这里不严格区分**总体**和**样本**，并使用样本估计整体。
@@ -876,20 +920,20 @@ $$ E(X) = \sum_{x} p(x) x $$
 
 说明：对于离散型随机变量，遍历总体"所有"取值再求算数平均值，是均值，也是期望值。可现实世界中看到的总是"样本"且永远无法获得"总体"，所以以下使用样本估计整体。
 
-#### 均值
+#### 均值<a id="均值"></a>
 
 $$ 
 \mu = E(X) \approx 
-\frac{1}{n} \sum_{j=1}^{n} x_j 
+\bar{x} = \frac{1}{n} \sum_{j=1}^{n} x_j 
 $$
 
 {{< notice info>}}
 说明：根据[强大数定律](#)，当 n 趋向于无穷时，`样本均值依概率 1 收敛于期望值`。
 {{< /notice >}}
 
-#### 方差
+#### 方差<a id="Variance"></a>
 
-方差（Variance）用于衡量相对均值的离散程度。
+方差（Variance）用于衡量相对均值的`离散程度`。
 
 $$ 
 \sigma^2 = Var(X) = E\lbrack X - E(X)\rbrack^2 \approx 
@@ -898,7 +942,7 @@ $$
 
 #### 标准差
 
-标准差（Standard deviation）是方差的平方根。
+标准差（Standard deviation）是方差的正平方根。
 
 $$ \sigma = \sqrt{\sigma^2} $$
 
@@ -908,27 +952,32 @@ $$ \sigma = \sqrt{\sigma^2} $$
 
 $$ c_v = \frac{\sigma}{\mu} $$
 
-### 矩
+#### 协方差<a id="Covariance"></a>
 
-设随机变量 $X$ 和 $Y$，正整数 $k,l$，则：
+协方差（Covariance）用于衡量两个变量的总体误差。
 
-$X$ 的 k 阶原点矩：
+$$
+Cov(X,Y) = E\lbrace\lbrack X - E(X)\rbrack \lbrack Y - E(Y)\rbrack \rbrace
+$$
 
-$$ E(X^k) $$
+#### 偏度<a id="Skewness"></a>
 
-$X$ 的 k 阶中心矩：
+偏度（Skewness）用于衡量分布的`对称性`。
 
-$$ E\lbrack X - E(X)\rbrack^k $$
+$$
+Skewness = \frac{\mu_3}{\sigma^3} = \frac{\mu_3}{\mu_2^{\frac{3}{2}}}
+$$
 
-$X$ 和 $Y$ 的 $k+l$ 阶混合矩：
+#### 峰度<a id="Kurtosis"></a>
 
-$$ E(X^kY^l) $$
+峰度（Kurtosis）用于衡量相对高斯分布的`陡峭程度`。
 
-$X$ 和 $Y$ 的 $k+l$ 阶混合中心矩：
+$$
+Kurtosis = \frac{\mu_4}{\sigma^4} - 3 = \frac{\mu_4}{\mu_2^2} - 3
+$$
 
-$$ E\lbrace\lbrack X - E(X)\rbrack^k \lbrack Y - E(Y)\rbrack^l \rbrace $$
+#### 相关系数
 
-特别的，$E(X)$ 就是 $X$ 的一阶原点矩，方差 $Var(X)$ 就是 $X$ 的二阶中心矩，协方差 $Cov(X,Y)$ 就是 $X$ 和 $Y$ 的二阶混合中心矩。
 
 ### 导数
 
