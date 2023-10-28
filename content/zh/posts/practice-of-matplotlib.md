@@ -18,7 +18,28 @@ libraries:
 
 ## 小功能
 
-### 
+### 颜色填充
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 2 * np.pi, 100)
+y = np.sin(x)
+
+fig, ax = plt.subplots()
+
+ax.plot(x, y, color='green')
+ax.fill(x, y, facecolor='green', edgecolor=None, alpha=0.25)
+ax.fill_between(x=x, y1=y+1, y2=y+2, color='lightskyblue', alpha=0.75)
+
+plt.savefig('fill-and-fill_between.svg')
+plt.show()
+```
+
+<img src='https://user-images.githubusercontent.com/46241961/278825203-d5b282fb-9d70-480b-9ad1-9461e28dbd4f.svg' alt='fill-and-fill_between'>
+
+<!-- ###  -->
 
 ## 附：理解画布
 
