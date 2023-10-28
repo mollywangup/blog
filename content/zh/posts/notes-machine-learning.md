@@ -1315,23 +1315,23 @@ $$P(A,B) = P(A)P(B)$$
 实际应用中，样本分布被认为是离散型变量的均匀分布，因此计算样本期望值时 $p(x) = \frac{1}{n}$.
 {{< /alert >}} -->
 
-离散型随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均匀分布，则其概率质量函数为常数：
+离散型随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均匀分布，则：
 
-$$ p(X=x) = \frac{1}{n} $$
+$$ p(X=x) = \frac{1}{n} \tag{PMF} $$
 
-连续型随机变量 $X \in [a,b]$ 服从均匀分布，则其概率密度函数在定义域内也为常数：
+连续型随机变量 $X \in [a,b]$ 服从均匀分布，则：
 
 $$
 p(X=x) =
 \begin{cases}
 \frac{1}{b-a} & \text{if $x \in [a,b]$} \\\\
 0 & \text{if $x \notin [a,b]$}
-\end{cases}
+\end{cases} \tag{PMF}
 $$
 
 #### 伯努利分布<a id="BernoulliDistribution"></a>
 
-`伯努利试验`指每次试验的结果只有两种可能，如果成功的概率是 $\phi \in [0,1]$，则失败的概率是 $1-\phi$.
+`伯努利试验`指每次试验的结果只有两种可能，如果成功的概率是 $\phi$，则失败的概率是 $1-\phi$.
 
 伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`单次伯努利试验`中，成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
 
@@ -1344,8 +1344,8 @@ $$
 $$
 p(X=x;\phi) = 
 \begin{cases}
-\phi, & \text{if $x=1$} \\\\
-1-\phi, & \text{if $x=0$} 
+\phi & \text{if $x=1$} \\\\
+1-\phi & \text{if $x=0$} 
 \end{cases} = 
 \phi^x(1-\phi)^{1-x} \tag{PMF}
 $$
