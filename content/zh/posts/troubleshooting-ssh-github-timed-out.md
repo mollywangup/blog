@@ -1,7 +1,7 @@
 ---
 title: "踩坑：使用 SSH 时的各种报错"
 date: 2023-08-21T09:21:12Z
-draft: false
+draft: true
 description: Operation timed out (connect to host github.com port 22), ...
 hideToc: false
 enableToc: true
