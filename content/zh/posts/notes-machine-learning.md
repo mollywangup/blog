@@ -523,14 +523,13 @@ y = np.power(x, 3) + np.power(x, 2) + x + 1 + rng.randn(1)
 X = x[:, np.newaxis]
 
 # 绘制训练集
-plt.figure(figsize=(8, 6))
-plt.scatter(X, y, color='red', marker='X')
-legend_names = ['training points']
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.scatter(X, y, color='red', marker='X', label='training points')
 
 # 多项式特征的线性回归模型
 for degree in range(10):
     # 创建多项式特征
-    poly = PolynomialFeatures(degree=degree)
+    poly = PolynomialFeatures(degree)
     X_poly = poly.fit_transform(X)
     
     # 创建线性回归模型：X_poly 与 y 为线性关系
@@ -543,21 +542,20 @@ for degree in range(10):
     # 获取模型参数和性能指标
     w = model.coef_
     b = model.intercept_
-    mse = mean_squared_error(y, y_pred) # 均方误差
-    r2 = r2_score(y, y_pred) # 决定系数
-    print('当 degree 取 {} 时，mse={}, r2={}, 模型参数 w={}, b={:.4f}'.format(degree, round(mse, 3), r2, w, b))
+    r2 = model.score(X_poly, y)
+    mse = mean_squared_error(y, y_pred)
 
     # 绘图
-    plt.plot(X, y_pred)
-    legend_names.append('degree {}: mse {}, r2 {}'.format(degree, round(mse, 3), r2))
+    ax.plot(X, y_pred, label='Degree {}: MSE {:.3f}, $R^2$ {:.3f}'.format(degree, round(mse, 3), r2))
 
 # 添加图例
-plt.legend(legend_names)
+plt.legend(loc='best', fontsize='small')
 plt.savefig('PolynomialFeatures_LinearRegression.svg')
+plt.show()
 ```
 {{< /expand >}}
 
-<img src='https://user-images.githubusercontent.com/46241961/272204746-6f8c1665-2d34-40fc-ae86-29e8d0d7a942.svg' alt='PolynomialFeatures_LinearRegression' width='80%'>
+<img src='https://user-images.githubusercontent.com/46241961/278821723-d779c271-25a2-470f-88ee-3c0643ea69e1.svg' alt='PolynomialFeatures_LinearRegression' width='80%'>
 
 ### 特征缩放
 

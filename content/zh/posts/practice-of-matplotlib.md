@@ -16,23 +16,22 @@ libraries:
 ---
 
 
+## 小功能
 
+### 
 
 ## 附：理解画布
 
-`figure` 可以理解为整个画布，`ax/axes` 可以理解为具体的绘图区域（包括标题、坐标轴、刻度等）。
-`plt` 直接绘制在整个画布上，`ax/axes` 绘制在自己的一亩三分地中，并且有的复杂功能 `plt` 上没有。因此稍微复杂的图都**不建议**直接使用 `plt`.
+`figure` 可以理解为整个画布，`ax/axes` 可以理解为具体的绘图区域（包括坐标轴、刻度、标题等）。
+`plt` 直接绘制在整个画布上，`ax/axes` 绘制在自己的一亩三分地之中。因此稍微复杂的图都**不建议**直接使用 `plt`.
 
-### 画一个（推荐）
+### 画一个
 
-画复杂单图推荐，可扩展性较强。
+画复杂单图推荐。
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib as mpl
-from matplotlib.path import Path
-from matplotlib.patches import PathPatch
 
 x = np.linspace(0, 2 * np.pi, 50)
 y = np.sin(x)
@@ -49,33 +48,19 @@ ax.plot(x, y-1)
 ax.plot(x, y)
 ax.plot(x, y+1)
 
-# 添加辅助线
-vertices = [(0, -2), (0, 2), (1.5, 2), (1.5, -2), (0, -2)]
-codes = [Path.MOVETO, Path.LINETO, Path.LINETO, Path.LINETO, Path.CLOSEPOLY]
-path = Path(vertices, codes)
-pathpatch = PathPatch(path, facecolor='none', edgecolor='green', ls='--', lw=0.7)
-ax.add_patch(pathpatch)
-
-# 填充颜色
-ax.fill_between(x=x, y1=y+1, y2=y, color='lightskyblue', alpha=0.75)
-
-plt.savefig('single-ax.svg')
 plt.show()
 ```
 
-<img src='https://user-images.githubusercontent.com/46241961/278818513-50f9de61-e2a3-4fb4-9a12-a8aaacad7ac0.svg' alt='single-ax'>
-
-### 画一组（推荐）
+### 画一组
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 
 x = np.linspace(0, 2 * np.pi, 50)
 y = np.sin(x)
 
-# 配置画布
+# 配置画布：1x3
 fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(16, 6), sharey=True)
 ax1, ax2, ax3 = axes
 
