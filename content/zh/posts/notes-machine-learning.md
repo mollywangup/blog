@@ -912,7 +912,7 @@ $$ \max(x) - \min(x) $$
 
 $$ 
 \begin{split}
-\mu &= E(X) = \sum_{j=1}^{n} p(x_j) x_j \\\\ 
+\mu &= E(X) = \sum_{j=1}^{N} p(x_j) x_j \\\\ 
 &\approx \bar{x} = \frac{1}{n} \sum_{j=1}^{n} x_j 
 \end{split}
 $$
@@ -933,7 +933,7 @@ $$
 
 $$ 
 \begin{split}
-\sigma^2 &= Var(X) = E\lbrack X - E(X)\rbrack^2 = \sum_{j=1}^{n} p(x_j)(x_j - \mu)^2 \\\\
+\sigma^2 &= Var(X) = E\lbrack X - E(X)\rbrack^2 = \sum_{j=1}^{N} p(x_j)(x_j - \mu)^2 \\\\
 &\approx \frac{1}{n} \sum_{j=1}^{n} (x_j - \bar{x})^2 
 \end{split}
 $$
@@ -978,6 +978,10 @@ $$
 Skewness = \frac{\mu_3}{\sigma^3} = \frac{\mu_3}{\mu_2^{\frac{3}{2}}}
 $$
 
+说明：尾巴在哪边就偏哪边。
+
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Negative_and_positive_skew_diagrams_%28English%29.svg/2560px-Negative_and_positive_skew_diagrams_%28English%29.svg.png' alt='负偏（左）和正偏（右）（图源维基百科）'>
+
 #### 峰度<a id="Kurtosis"></a>
 
 峰度（Kurtosis）用于衡量相对高斯分布的`陡峭程度`。
@@ -985,6 +989,8 @@ $$
 $$
 Kurtosis = \frac{\mu_4}{\sigma^4} - 3 = \frac{\mu_4}{\mu_2^2} - 3
 $$
+
+说明：减常数 3 是为了使高斯分布的峰度为零。
 
 ### 导数
 
@@ -1278,7 +1284,7 @@ $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
 #### 联合概率
 
-$A$ 和 $B$ 的联合概率指同时发生的概率，记作 $P(A,B)$ 或 $P(AB)$ 或 $P(A \cap B)$.
+$A$ 和 $B$ 同时发生的概率，记作 $P(A,B)$ 或 $P(AB)$ 或 $P(A \cap B)$.
 
 #### 条件概率
 
@@ -1329,9 +1335,9 @@ $$
 
 #### 伯努利分布<a id="BernoulliDistribution"></a>
 
-`伯努利试验`指每次试验的结果只有两种可能，如果成功的概率是 $\phi$，则失败的概率是 $1-\phi$.
+`伯努利试验`指每次试验的结果只有两种可能，如果成功（$x=1$）的概率是 $\phi$，则失败（$x=0$）的概率是 $1-\phi$.
 
-伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`单次伯努利试验`中，成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
+伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`一次伯努利试验`中，成功的次数的概率分布。离散型随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
 
 $$
 X \sim Bern(\phi)
@@ -1348,13 +1354,13 @@ p(X=x;\phi) =
 \phi^x(1-\phi)^{1-x} \tag{PMF}
 $$
 
-$$ \mu = \sum_{i} x_i p(x_i) = \phi $$
+$$ \mu = \sum_{x} p(x) x = \phi $$
 
-$$ \sigma^2 = \sum_{i} \left(x_i - \mu\right)^2 p(x_i) = \phi(1-\phi) $$
+$$ \sigma^2 = \sum_{x} p(x) \left(x - \mu\right)^2 = \phi(1-\phi) $$
 
 #### 二项分布
 
-二项分布（Binomial distribution）指`n 次伯努利试验`中，成功（$x=1$）次数的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
+二项分布（Binomial distribution）指`重复 n 次伯努利试验`，成功的次数的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
 
 $$
 X \sim B(n, \phi)
@@ -1372,10 +1378,9 @@ $$ \sigma^2 = n\phi(1-\phi)$$
 
 <img src='https://user-images.githubusercontent.com/46241961/278027246-01e7fc5c-66b1-4b79-b855-002f64756da9.svg' alt='二项分布：（10, 0.5）' width=70%>
 
-<br>说明：
-1. $X \sim B(1, \phi)$ 等同于 $X \sim Bern(\phi)$；
-2. 二项分布的期望值等于 $n$ 倍的伯努利分布的期望值，同理方差；
-3. 当 $n \to \infty$ 时，二项分布趋向于正态分布。
+{{< notice info>}}
+伯努利分布是 n 取 1 时的二项分布。
+{{< /notice >}}
 
 #### 高斯分布<a id="GaussianDistribution"></a>
 
@@ -1394,6 +1399,10 @@ $$
 <img src='https://user-images.githubusercontent.com/46241961/278098372-7c4fe92c-e433-4c38-b7a0-06964ff05b12.svg' alt='高斯分布' width=70%>
 
 <br>说明：**方差越大，分布越分散（混乱），越扁，熵越大（平均信息量越大）。**
+<!-- 
+{{< notice info>}}
+当二项分布的 $\phi$ 取 0.5（对称），n 趋于无穷（连续）时，近似高斯分布。
+{{< /notice >}} -->
 
 <!-- #### 拉普拉斯分布 -->
 
@@ -1434,7 +1443,7 @@ $$
 <img src='https://user-images.githubusercontent.com/46241961/278096679-4b948c28-8618-43c6-85c0-3d52de6b4c61.svg' alt='不同高斯分布的熵对比' width=70%>
 
 <br>说明：
-1. **方差越大，分布越分散（混乱），越扁（小概率占比大），熵越大（平均信息量越大）。** [（👈 梅开二度）](#GaussianDistribution)
+1. **方差越大，分布越分散（混乱），越扁，熵越大（平均信息量越大）。** [（👈 梅开二度）](#GaussianDistribution)
 2. 离散型随机变量对应**求和**，连续型随机变量对应**求积分**（已省略）；
 
 #### 相对熵<a id="KLD"></a>

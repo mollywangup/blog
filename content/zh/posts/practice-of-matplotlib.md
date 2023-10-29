@@ -115,3 +115,19 @@ plt.show()
 ```
 
 <img src='https://user-images.githubusercontent.com/46241961/278814329-f3333ef6-be84-4ea2-9564-6d24001929d8.svg' alt='multiple-axes'>
+
+<!-- 
+参考
+https://liyangbit.com/pythonvisualization/matplotlib-top-50-visualizations/
+https://www.huaxiaozhuan.com/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/chapters/2_probability.html
+
+激活函数那个：https://paddlepedia.readthedocs.io/en/latest/tutorials/deep_learning/normalization/basic_normalization.html#id2
+熵那个：https://microsoft.github.io/ai-edu/%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/A2-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/%E7%AC%AC1%E6%AD%A5%20-%20%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/03.2-%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/
+
+mathjax符号那个：https://www.oscaner.com/skill/others/mathjax-symbol.html
+
+
+一般：
+向量范数那个：https://sunocean.life/blog/blog/2020/08/31/deep-learning-math-norm#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E8%8C%83%E6%95%B0 -->
+
+
