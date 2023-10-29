@@ -93,7 +93,7 @@ $$ -->
 有标签的是监督学习。预测连续值的是回归任务，预测离散值的是分类任务。
 {{< /alert >}}
 
-给定`包含标签`的训练集 $(X,y)$，其中 $X \in \mathbb{R}^{m \times n},y \in \mathbb{R}^m$，通过算法构建一个模型或预估器，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X,y) \to f(x) \space\text{or}\space p(y|x) \to \hat{y} $$
+给定`包含标签`的训练集 $(X,y)$，通过算法构建一个模型或预估器，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X,y) \to f(x) \space\text{or}\space p(y|x) \to \hat{y} $$
 
 <!-- 说明：以下约定**判别式模型**使用 $f(x)$，**生成式模型**使用 $p(y|x)$。 -->
 
@@ -938,7 +938,7 @@ $$
 \end{split}
 $$
 
-说明：越大，越扁（峰度越小），越离散，熵越大。
+说明：越大，越扁，越离散，熵越大。
 
 #### 标准差
 
@@ -980,7 +980,7 @@ $$
 
 说明：尾巴在哪边就偏哪边。
 
-<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Negative_and_positive_skew_diagrams_%28English%29.svg/2560px-Negative_and_positive_skew_diagrams_%28English%29.svg.png' alt='负偏（左）和正偏（右）（图源维基百科）'>
+<!-- <img src='' alt='负偏（左）和正偏（右）（图源维基百科）'> -->
 
 #### 峰度<a id="Kurtosis"></a>
 
@@ -1063,7 +1063,7 @@ x \cdot y = x^Ty = \sum_{j=1}^{n} x_jy_j \in \mathbb{R}
 $$
 
 注意：相同维数才能进行点积乘法；
-说明：几何意义是向量围成的平面的`面积`或空间的`体积`（有正负号），大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\cos(\theta)$，其中 $\theta$ 为两向量之间的夹角；
+说明：几何意义是向量围成的平面的`面积`或空间的`体积`（有正负号），大小等于 $\lVert x \rVert \lVert y \rVert\cos(\theta)$，其中 $\theta$ 为两向量之间的夹角；
 用途：[余弦相似度](#CosineSimilarity)
 
 #### 叉积
@@ -1121,9 +1121,10 @@ $$ w_1x_1 + w_2x_2 + \cdots + w_nx_n = \vec{0},\space\space (n>=2) $$
 
 其中 $w_j \in \mathbb{R}$。**`如果当且仅当 $w_1 = w_2 = \cdots = w_n = 0$ 即全部系数为零时才成立，则称该 n 个向量线性无关`**，否则线性相关。
 
+说明：线性相关，则其中一个可以用其余的线性组合表示，此时可降维。
+
 {{< notice info >}}
 线性无关，对于 n 取 2 就是两个向量不共线，对于 n 取 3 就是三个向量不共面。
-线性相关，其中一个可以用其余的线性组合表示，此时可降维。
 {{< /notice >}}
 
 #### 秩
@@ -1132,15 +1133,15 @@ $$ w_1x_1 + w_2x_2 + \cdots + w_nx_n = \vec{0},\space\space (n>=2) $$
 矩阵的秩等于线性无关的列向量的个数。满秩则线性无关，不满秩则线性相关。
 {{< /alert >}}
 
-矩阵的秩（Rank）记作 $rank$，且**秩 = 列秩 = 行秩**。
+矩阵的秩（Rank）记作 $rank$，且`秩 = 列秩 = 行秩`。
 
-机器学习中，对于矩阵 $X$（[详见这里](#符号)），由于 $m \gg n$，所以其秩由 $n$ 决定。 且：
-当 $rank(X) = n$ 时，即列满秩，说明 n 个特征线性无关；
-当 $rank(X) < n$ 时，即列不满秩，说明 n 个特征线性相关；
+对于 $X \in \mathbb{R}^{m \times n}$，由于实际中 $m \gg n$，因此其秩由 $n$ 决定。且：
+- 若 $rank(X) = n$，即列满秩，则 n 个特征线性无关；
+- 若 $rank(X) < n$，即列不满秩，则 n 个特征线性相关，此时`降维`走起。
 
 #### 行列式<a id="Determinant"></a>
 
-行列式（Determinant）针对的是 $n \times n$ 矩阵，也称为 **n 阶方阵**，记作 $\det$.
+行列式（Determinant）针对的是 `n 阶方阵`，记作 $\det$.
 
 
 #### 矩阵乘向量
@@ -1211,7 +1212,7 @@ $$
 
 补充说明：
 1. L1 范数，也称作[曼哈顿距离](#ManhattanDistance)；
-2. L2 范数，也称作[欧氏距离](#EuclideanDistance)，可用于计算向量的模；
+2. L2 范数，也称作[欧氏距离](#EuclideanDistance)，可用于计算向量的模（本文默认省略下标 2）；
 3. L$+\infty$ 范数，也称作[切比雪夫距离](#ChebyshevDistance)或最大范数；
 
 #### 矩阵范数<a id="MatrixNorms"></a>
@@ -1219,10 +1220,10 @@ $$
 ### 距离和相似度
 
 {{< alert theme="info" >}}
-距离和相似度常用于分类或聚类，距离越近或相似度越高，则被认为可以分/聚为一类。
+距离和相似度常用于分/聚类，距离越近或相似度越高，则被认为可以分/聚为一类。
 {{< /alert >}}
 
-对于向量 $x,y \in \mathbb{R}^n$，或空间中两个点，计算距离可使用`差向量的大小的衡量`如范数，计算相似度可通过`两向量夹角`来衡量等。
+对于向量 $x,y \in \mathbb{R}^n$，或空间中两个点，计算距离可使用`差向量的大小的衡量`如范数，计算相似度可通过`两向量夹角`等来衡量。
 
 #### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
 
@@ -1242,29 +1243,35 @@ $$ \sqrt{\sum_{j=1}^{n} (x_j - y_j)^2} \tag{$L_2$} $$
 
 $$ \max_{j} {\lvert x_j - y_j \rvert} \tag{$L_{+\infty}$} $$
 
-#### 海明距离
+<!-- #### 海明距离 -->
 
+<!-- #### 马氏距离
 
-#### 马氏距离
+？？协方差距离 -->
 
-？？协方差距离
-
-
-#### 杰卡德距离
+<!-- #### 杰卡德距离 -->
 
 #### 余弦相似度<a id="CosineSimilarity"></a>
 
 使用`两个向量夹角的余弦值`来衡量相似度，公式如下：
 
-$$ Cosine \space Similarity = \cos(\theta) = \frac{x \cdot y}{\lVert x \rVert_2 \lVert y \rVert_2} $$
+$$ Cosine \space Similarity = \cos(\theta) = \frac{x \cdot y}{\lVert x \rVert \lVert y \rVert} $$
 
 说明：由[向量点积](#DotProduct)计算公式推导而来。越接近于 1，夹角越接近于 0，越相似。
 
 #### 皮尔逊相关系数
 
+使用`标准化后的协方差`来衡量两个随机变量的`线性相关性`。
+
+$$
+\rho = \frac{Cov(X,Y)}{\sigma_X \sigma_Y} \in [-1, 1]
+$$
+
+说明：越接近 1 越正线性相关，越接近 -1 越负线性相关，等于 0 不线性相关。
+
 #### KL 散度<a id="KLDivergence"></a>
 
-给定随机变量 $x$ 的两个概率分布 $p(x)$ 和 $q(x)$，KL 散度用于衡量两个概率分布之间的差异程度，公式如下：
+给定`两个概率分布` $p(x)$ 和 $q(x)$，使用 KL 散度衡量两者之间的差异程度，公式如下：
 
 $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
 
@@ -1292,7 +1299,7 @@ $B$ 发生的条件下 $A$ 发生的概率，记作 $A$ 的条件概率 $P(A|B)$
 
 #### 先验概率
 
-`以经验进行判断`，$A$ 的先验概率记作 $P(A)$.
+`以经验进行判断`，如 $P(A)$.
 
 #### 后验概率
 
@@ -1314,16 +1321,11 @@ $$P(A,B) = P(A)P(B)$$
 
 #### 均匀分布<a id="均匀分布"></a>
 
-<!-- {{< alert theme="info" >}}
-不严谨
-实际应用中，样本分布被认为是离散型变量的均匀分布，因此计算样本期望值时 $p(x) = \frac{1}{n}$.
-{{< /alert >}} -->
-
-离散型随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均匀分布，则：
+`离散型`随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均匀分布，则：
 
 $$ p(X=x) = \frac{1}{n} \tag{PMF} $$
 
-连续型随机变量 $X \in [a,b]$ 服从均匀分布，则：
+`连续型`随机变量 $X \in [a,b]$ 服从均匀分布，则：
 
 $$
 p(X=x) =
@@ -1335,9 +1337,9 @@ $$
 
 #### 伯努利分布<a id="BernoulliDistribution"></a>
 
-`伯努利试验`指每次试验的结果只有两种可能，如果成功（$x=1$）的概率是 $\phi$，则失败（$x=0$）的概率是 $1-\phi$.
+`伯努利试验`指每次试验的结果只有两种可能，如果成功（1）的概率是 $\phi$，则失败（0）的概率是 $1-\phi$.
 
-伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`一次伯努利试验`中，成功的次数的概率分布。离散型随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
+伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`一次伯努利试验`中，成功的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
 
 $$
 X \sim Bern(\phi)
@@ -1360,7 +1362,7 @@ $$ \sigma^2 = \sum_{x} p(x) \left(x - \mu\right)^2 = \phi(1-\phi) $$
 
 #### 二项分布
 
-二项分布（Binomial distribution）指`重复 n 次伯努利试验`，成功的次数的概率分布。离散型随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
+二项分布（Binomial distribution）指`重复 n 次伯努利试验`，成功的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
 
 $$
 X \sim B(n, \phi)
@@ -1378,13 +1380,11 @@ $$ \sigma^2 = n\phi(1-\phi)$$
 
 <img src='https://user-images.githubusercontent.com/46241961/278027246-01e7fc5c-66b1-4b79-b855-002f64756da9.svg' alt='二项分布：（10, 0.5）' width=70%>
 
-{{< notice info>}}
-伯努利分布是 n 取 1 时的二项分布。
-{{< /notice >}}
+说明：伯努利分布是 n 取 1 时的二项分布。
 
 #### 高斯分布<a id="GaussianDistribution"></a>
 
-高斯分布（Gaussian distribution），也称作正态分布（Normal distribution）。连续型随机变量 $X$ 服从均值 $\mu$，方差 $\sigma^2$ 的正态分布，记作：
+高斯分布（Gaussian distribution），也称作正态分布（Normal distribution）。`连续型`随机变量 $X$ 服从均值 $\mu$，方差 $\sigma^2$ 的正态分布，记作：
 
 $$
 X \sim N(\mu, \sigma^2)
@@ -1420,7 +1420,7 @@ $$
 
 #### 信息量
 
-给定随机变量 $x$ 的概率分布 $p(x) \in [0,1]$，则 $x$ 的**信息量**定义如下：
+给定随机变量 $x$ 的概率分布 $p(x) \in [0,1]$，则 $x$ 的`信息量`定义如下：
 
 $$ I(x) = \ln \frac{1}{p(x)} = - \ln p(x) $$
 
@@ -1443,7 +1443,7 @@ $$
 <img src='https://user-images.githubusercontent.com/46241961/278096679-4b948c28-8618-43c6-85c0-3d52de6b4c61.svg' alt='不同高斯分布的熵对比' width=70%>
 
 <br>说明：
-1. **方差越大，分布越分散（混乱），越扁，熵越大（平均信息量越大）。** [（👈 梅开二度）](#GaussianDistribution)
+1. **方差越大，分布越分散（混乱），熵越大（平均信息量越大）。** [（👈 梅开二度）](#GaussianDistribution)
 2. 离散型随机变量对应**求和**，连续型随机变量对应**求积分**（已省略）；
 
 #### 相对熵<a id="KLD"></a>
@@ -1452,11 +1452,9 @@ $$
 
 $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
 
-说明：
-1. 相对熵越小，则 $p(x)$ 和 $q(x)$ 分布越接近；
-2. $D_{KL}(p||q) \geq 0$，当且仅当 $p(x) = q(x)$ 时等号成立，且非对称；
+说明：非负，且越小，则 $p(x)$ 和 $q(x)$ 分布越接近；
 
-{{< expand "证明：相对熵大于等于零" >}}
+{{< expand "证明：相对熵非负" >}}
 由于 $\ln(x) \leq x - 1$，则：
 
 $$
@@ -1490,7 +1488,6 @@ $$ D_{KL}(p||q) \simeq H(p,q)$$
 ## 附
 
 一些术语概念：
-- 协方差：线性相关性程度。若协方差为0则线性无关；
 - 特征向量：矩阵的特征向量。数据集结构的非零向量；空间中每个点对应的一个坐标向量。
 
 <!-- <img src='https://www.nvidia.cn/content/dam/en-zz/Solutions/gtcf20/data-analytics/nvidia-ai-data-science-workflow-diagram.svg'>
