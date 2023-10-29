@@ -2,7 +2,7 @@
 title: "学习笔记：吴恩达机器学习"
 date: 2023-08-04T08:09:47Z
 draft: false
-description: 监督学习包括线性回归，逻辑回归，KNN，朴素贝叶斯，决策树，随机森林，SVM；无监督学习包括 K-means，PCA 等。附带复习相关数学基础。
+description: 监督学习包括线性回归，逻辑回归，SVM，朴素贝叶斯，决策树，随机森林，XGBoost；无监督学习包括 K-means，PCA 等。附带复习相关数学基础。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -32,8 +32,8 @@ libraries:
 - 训练示例（`training example`）：指训练集中的一组数据；
 - 模型（`model`）：指拟合函数；
 - 模型参数（`parameter`）：调整模型的本质是调整模型参数；
-- [损失函数（Loss function）](#LossFunction)：衡量预测值与真实值之间的差异程度，可理解为"单个损失"；
-- 成本函数（`Cost function`）：用于评估模型性能，可理解为"总损失"；
+- [损失函数（Loss function）](#LossFunction)：衡量预测值与真实值之间的差异程度，"单个损失"；
+- 成本函数（`Cost function`）：用于评估模型性能，"总平均损失"；
 - 特征工程（`feature engineering`）：对特征进行选择、提取和转换等操作，用于提高模型性能；
 
 ### 符号<a id="符号"></a>
@@ -41,7 +41,6 @@ libraries:
 约定如下：
 1. `m` 个训练示例，`n` 个特征；
 2. 向量是一维数组，使用小写字母表示，且`默认列向量`；矩阵是二维数组，使用大写字母表示；
-3. 非代码部分从 `1` 开始计数；
 
 <br>具体符号：
 - $x \in \mathbb{R}^n$ 表示输入变量，$w \in \mathbb{R}^n$ 表示回归系数；
@@ -90,14 +89,14 @@ $$ -->
 ## 监督学习<a id="SupervisedLearning"></a>
 
 {{< alert theme="info" >}}
-有标签的是监督学习。预测连续值的是回归任务，预测离散值的是分类任务。
+有标签的是监督学习。预测连续值的是`回归`任务，预测离散值的是`分类`任务。
 {{< /alert >}}
 
-给定`包含标签`的训练集 $(X,y)$，通过算法构建一个模型或预估器，学习如何从 $x$ 预测 $\hat{y}$，则属于监督学习，即：$$ (X,y) \to f(x) \space\text{or}\space p(y|x) \to \hat{y} $$
+给定`包含标签`的训练集 $(X,y)$，通过算法构建一个模型或预估器，学习如何从 $x$ 预测 $\hat{y}$，即：$$ (X,y) \to f(x) \space\text{or}\space p(y|x) \to \hat{y} $$
 
 <!-- 说明：以下约定**判别式模型**使用 $f(x)$，**生成式模型**使用 $p(y|x)$。 -->
 
-监督学习任务分为`回归（Regression）`和`分类（Classification）`，前者预测**连续值**，后者预测**离散值**。
+<!-- 监督学习任务分为`回归（Regression）`和`分类（Classification）`，前者预测**连续值**，后者预测**离散值**。 -->
 <!-- - `回归（Regression）`：可用于趋势预测、价格预测、流量预测等； -->
 <!-- - `分类（Classification）`：可用于构建用户画像、用户行为预测、图像识别分类等； -->
 
@@ -131,8 +130,6 @@ $$
 其中，模型参数：
 $w \in \mathbb{R}^n$：回归系数，分别对应 n 个特征的权重（weights）或系数（coefficients）；
 $b \in \mathbb{R}$：偏差（bias）或截距（intercept）；
-
-说明：当 n = 1 时，对应一元线性回归；当 n >= 2 时，对应多元线性回归；
 
 ##### 成本函数
 
@@ -324,11 +321,24 @@ $$ \min_{w,b} J(w,b) $$
 <!-- true: 1, positive class
 false: 0, negative class -->
 
-### KNN<a id="K-NearestNeighbors"></a>
+### SVM<a id="SVM"></a>
+
+支持向量机，解决**分类**问题。
+
+属于线性分类器。非线性问题，可通过 kernal SVM 解决（映射到高维）；
+
+超平面：
+- 决策分界面（decision boundary）
+- 边界分界面（margin boundary）
+
+Hard-margin SVM
+Soft-margin SVM：加入了容错率
+
+<!-- ### KNN<a id="K-NearestNeighbors"></a>
 
 KNN (K-Nearest Neighbors)，解决**分类+回归**问题。`K 个邻居的意思`。
 
-给定训练集 $(X,y)$，KNN 要实现的是将
+给定训练集 $(X,y)$，KNN 要实现的是将 -->
 
 ### 朴素贝叶斯<a id="NaiveBayes"></a>
 
@@ -358,26 +368,13 @@ Random forest，解决**分类**问题。
 ### XGBoost<a id="XGBoost"></a>
 
 
-### SVM<a id="SVM"></a>
-
-支持向量机，解决**分类**问题。
-
-属于线性分类器。非线性问题，可通过 kernal SVM 解决（映射到高维）；
-
-超平面：
-- 决策分界面（decision boundary）
-- 边界分界面（margin boundary）
-
-Hard-margin SVM
-Soft-margin SVM：加入了容错率
-
 ## 无监督学习<a id="UnsupervisedLearning"></a>
 
 {{< alert theme="info" >}}
 无标签的是无监督学习。
 {{< /alert >}}
 
-给定**不包含标签**的训练集 $X$，通过算法构建一个模型，揭示数据的内在分布特性及规律，则属于无监督学习，即：$$ X \to f \to \hat{y} $$
+给定`不包含标签`的训练集 $X$，通过算法构建一个模型或预估器，揭示数据的内在分布特性及规律，即：$$ X \to f(x) \to \hat{y} $$
 
 无监督学习任务分为`聚类（Clustering）`和`降维（Dimensionality reduction）`。
 
@@ -595,7 +592,7 @@ $$
 ## 损失函数<a id='LossFunction'></a>
 
 {{< alert theme="info" >}}
-损失函数用于**衡量预测值与真实值之间的差异程度**，也就是模型的拟合程度。
+损失函数用于`衡量预测值与真实值之间的差异程度`，也就是模型的拟合程度。
 {{< /alert >}}
 
 给定 $\hat{y},y \in \mathbb{R}$，分别表示预测值和真实值，则损失函数表示为：$$ L(\hat{y}, y) $$
@@ -624,14 +621,19 @@ $$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
 
 ### 梯度下降算法<a id="GD"></a>
 
-梯度下降（Gradient Descent, GD）是一种迭代优化算法，用于求解任意一个可微函数的**局部最小值**。在机器学习中，常用于**最小化成本函数**，即最大程度减小预测值与真实值之间的误差。即：
+{{< alert theme="info" >}}
+核心原理是可微函数 **`沿着梯度反方向，函数值下降最快。`**
+{{< /alert >}}
+
+梯度下降（Gradient Descent, GD）是一种迭代优化算法，用于求解任意一个可微函数的`局部最小值`。在机器学习中，常用于**最小化成本函数**，即：
 
 给定成本函数 $J(w,b)$，求解一组 $(w,b)$，使得
 $$ \min_{w,b} J(w,b) $$
 
-实现的核心原理：<mark>**沿着梯度反方向，函数值下降最快**。</mark>
+#### 实现方法
 
-选定初始位置 $(w,b)$，通过重复以下步骤，直至收敛，即可得到局部最小值的解：
+步骤一：选定初始位置 $(w_{init},b_{init})$；
+步骤二：为了使函数值下降，需要`沿着梯度反方向迭代`，即重复以下步骤，直至收敛，即可得到局部最小值的解：
 
 $$
 w \leftarrow w - \alpha \frac{\partial J}{\partial w}
@@ -671,21 +673,21 @@ $$
 \end{equation}
 $$
 
-其中：$\alpha$ 指学习率（Learning rate），也称作步长，决定了迭代的次数。注意 $\alpha \geq 0$，因为需要沿着梯度反方向迭代；
+其中：$\alpha \geq 0$ 指`学习率`（Learning rate），也称作步长，决定了迭代的次数。
 
-#### 选择学习率
+<!-- #### 选择学习率
 
 方法：给定不同 $\alpha$ 运行梯度下降时，绘制 $J$ 和 迭代次数的图，通过观察 $J$ **是否单调递减直至收敛**来判断 $\alpha$ 的选择是否合适；
   - 单调递增或有增有减：$\alpha$ 太大，步子迈大了，应该降低 $\alpha$；
   - 单调递减但未收敛：$\alpha$ 太小，学习太慢，应该提升 $\alpha$；
 
-经验值参考：[0.001, 0.01, 0.1, 1] 或者 [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1]
+经验值参考：[0.001, 0.01, 0.1, 1] 或者 [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1] -->
 
-### 批量梯度下降<a id="BGD"></a>
+#### 批量梯度下降<a id="BGD"></a>
 
 （Batch Gradient Descent, BGD）：使用训练集中的所有数据
 
-### 随机梯度下降<a id="SGD"></a>
+#### 随机梯度下降<a id="SGD"></a>
 
 （stotastic gradient descent, SGD）：？？根据每个训练样本进行参数更新
 
@@ -693,74 +695,14 @@ $$
 
 ### 过拟合问题<a id="Underfitting-and-Overfitting"></a>
 
+定义过拟合：训练方差小，测试方差大。
+
 解决过拟合的方法：
 1. 收集更多的训练示例；
 2. 特征选择；
 3. 正则化；
 
 <img src='https://user-images.githubusercontent.com/46241961/278217087-8b868e06-28d3-4a36-bec8-7af1aaff13e0.svg' alt='欠拟合和过拟合（一元线性回归）'>
-
-{{< expand "代码：以一元线性回归为例（参考 scikit-learn 官网）">}}
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-import seaborn as sns
-
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import cross_val_score
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import PolynomialFeatures
-
-sns.set(style='white')
-np.random.seed(0)
-
-def true_fun(x):
-    return np.cos(1.5 * np.pi * x)
-    
-# 数据集
-n_samples = 30
-degrees = [1, 4, 15]
-titles = ['Underfitting', 'Appropriate', 'Overfitting']
-
-x = np.sort(np.random.rand(n_samples))
-y = true_fun(x) + np.random.randn(n_samples) * 0.1
-X = x[:, np.newaxis]
-
-# 绘图
-plt.figure(figsize=(14, 5))
-for i in range(len(degrees)):
-    ax = plt.subplot(1, len(degrees), i + 1)
-    plt.setp(ax, xticks=(), yticks=())
-
-    polynomial_features = PolynomialFeatures(degree=degrees[i], include_bias=False)
-    linear_regression = LinearRegression()
-    pipeline = Pipeline(
-        [
-            ("polynomial_features", polynomial_features),
-            ("linear_regression", linear_regression),
-        ]
-    )
-    pipeline.fit(X, y)
-
-    # Evaluate the models using crossvalidation
-    scores = cross_val_score(
-        pipeline, X, y, scoring="neg_mean_squared_error", cv=10
-    )
-
-    X_test = np.linspace(0, 1, 100)
-    plt.scatter(X, y, color='red', marker='X', label="ground truth")
-    plt.plot(X_test, pipeline.predict(X_test[:, np.newaxis]), label="Model (degree = {})".format(degrees[i]))
-    plt.xlabel("x")
-    plt.ylabel("y")
-    plt.xlim((0, 1))
-    plt.ylim((-2, 2))
-    plt.legend(loc="best")
-    plt.title("{}".format(titles[i])
-    )
-plt.savefig('Underfitting vs. Overfitting.svg')
-```
-{{< /expand >}}
 
 ### 评估方法
 
