@@ -124,7 +124,7 @@ f_{w,b}(x) = w \cdot x + b =
 \begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix} 
 \cdot 
 \begin{bmatrix} x_1 \\\\ x_2 \\\\ \vdots \\\\ x_n \end{bmatrix} + b =
-\sum_{j=1}^{n}w_j \cdot x_j + b 
+\sum_{j=1}^{n}w_jx_j + b 
 $$
 
 其中，模型参数：
@@ -138,7 +138,7 @@ $b \in \mathbb{R}$：偏差（bias）或截距（intercept）；
 $$
 \begin{split}
 L(w,b) &= \frac{1}{2} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \\\\
-&= \frac{1}{2} (w \cdot x^{(i)} + b - y^{(i)})^2 
+\\\\&= \frac{1}{2} (w \cdot x^{(i)} + b - y^{(i)})^2 
 \end{split}
 $$
 
@@ -902,7 +902,7 @@ $$
 Cov(X,Y) = E\lbrace\lbrack X - E(X)\rbrack \lbrack Y - E(Y)\rbrack \rbrace
 $$
 
-说明：$Cov(X,X) = Var(X)$，即方差是协方差的特殊情形.
+说明：$Cov(X,X) = Var(X)$，即方差是协方差的特殊情形。
 
 #### 相关系数
 
@@ -978,7 +978,7 @@ $$
 
 ### 凸函数
 
-如果一个函数满足**任意两点连成的线段都位于函数图形的上方**，则称这个函数为凸函数（Convex function）。
+如果一个函数满足`任意两点连成的线段都位于函数图形的上方`，则称这个函数为凸函数（Convex function）。
 
 凸函数的局部最小值等于极小值，可作为选择损失函数的重要参考。
 
@@ -1022,8 +1022,8 @@ x \times y &=
   y_1 & y_2 & y_3
   \end{matrix}
 \right| \\\\
-&= (x_2y_3-x_3y_2)\vec{i} - (x_1y_3-x_3y_1)\vec{j} + (x_1y_2-x_2y_1)\vec{k} \\\\
-&= \begin{bmatrix}x_2y_3-x_3y_2 \\\\ -(x_1y_3-x_3y_1) \\\\ x_1y_2-x_2y_1 \end{bmatrix} \in \mathbb{R}^3
+\\\\&= (x_2y_3-x_3y_2)\vec{i} - (x_1y_3-x_3y_1)\vec{j} + (x_1y_2-x_2y_1)\vec{k} \\\\
+\\\\&= \begin{bmatrix}x_2y_3-x_3y_2 \\\\ -(x_1y_3-x_3y_1) \\\\ x_1y_2-x_2y_1 \end{bmatrix} \in \mathbb{R}^3
 \end{split}
 $$
 
@@ -1281,7 +1281,7 @@ $$
 
 `伯努利试验`指每次试验的结果只有两种可能，如果成功（1）的概率是 $\phi$，则失败（0）的概率是 $1-\phi$.
 
-伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`一次伯努利试验`中，成功的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
+伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`一次伯努利试验`中，成功（1）的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
 
 $$
 X \sim Bernoulli(\phi)
@@ -1306,7 +1306,7 @@ $$ \sigma^2 = \sum_{x} p(x) \left(x - \mu\right)^2 = \phi(1-\phi) $$
 
 #### 二项分布
 
-二项分布（Binomial distribution）指`重复 n 次伯努利试验`，成功的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
+二项分布（Binomial distribution）指`重复 n 次伯努利试验`，成功（1）的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
 
 $$
 X \sim B(n, \phi)
