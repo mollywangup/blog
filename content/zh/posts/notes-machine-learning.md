@@ -117,7 +117,7 @@ Step3：求解目标：求成本函数的极小值解。求极小值问题常用
 
 ##### 模型
 
-$n$ 元线性回归的模型 $f(x): \mathbb{R}^n \to \mathbb{R}$ 如下：
+$n$ 元线性回归的模型 $f: \mathbb{R}^n \to \mathbb{R}$ 如下：
 
 $$ 
 f_{w,b}(x) = w \cdot x + b = 
@@ -187,7 +187,7 @@ $$
 
 求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
-$$ \min_{w,b} J(w,b) $$
+$$ arg\min_{w,b} J(w,b) $$
 
 #### 代码
 
@@ -300,6 +300,10 @@ $$
 p(y=1|x;w,b) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
 $$
 
+$$
+f_{w,b}(x) = p_{w,b}(y=1|x) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
+$$
+
 当 $p \geq 0.5$ 时，取 $1$，否则取 $0$
 
 ##### 成本函数
@@ -316,7 +320,7 @@ $$ J(w,b) = \frac{1}{m} \sum_{i=1}^{m} -y^{(i)} \ln \hat y^{(i)} - (1-y^{(i)}) \
 
 求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
-$$ \min_{w,b} J(w,b) $$
+$$ arg\min_{w,b} J(w,b) $$
 
 <!-- true: 1, positive class
 false: 0, negative class -->
@@ -628,7 +632,7 @@ $$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
 梯度下降（Gradient Descent, GD）是一种迭代优化算法，用于求解任意一个可微函数的`局部最小值`。在机器学习中，常用于**最小化成本函数**，即：
 
 给定成本函数 $J(w,b)$，求解一组 $(w,b)$，使得
-$$ \min_{w,b} J(w,b) $$
+$$ arg\min_{w,b} J(w,b) $$
 
 #### 实现方法
 
