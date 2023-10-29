@@ -1028,7 +1028,7 @@ x \times y &=
 $$
 
 注意：叉积的概念仅用于三维空间。这里的公式表达使用了[行列式](#Determinant)和代数余子式；
-说明：几何意义是`法向量`，大小等于 $\lVert x \rVert_2 \lVert y \rVert_2\sin(\theta)$，其中 $\theta$ 为两向量之间的夹角。
+说明：几何意义是`法向量`，大小等于 $\lVert x \rVert \lVert y \rVert \sin(\theta)$，其中 $\theta$ 为两向量之间的夹角。
 
 #### 外积
 
@@ -1213,9 +1213,9 @@ $$
 
 #### KL 散度<a id="KLDivergence"></a>
 
-给定`两个概率分布` $p(x)$ 和 $q(x)$，使用 KL 散度衡量两者之间的差异程度，公式如下：
+给定`两个概率分布` $p(x)$ 和 $q(x)$，使用 KL 散度来衡量两者之间的差异程度，公式如下：
 
-$$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
+$$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} \in [0, \infty] $$
 
 说明：也称作[相对熵](#KLD)。非负，越小越相似。
 
@@ -1273,7 +1273,7 @@ $$
 p(X=x) =
 \begin{cases}
 \frac{1}{b-a} & \text{if $x \in [a,b]$} \\\\
-0 & \text{if $x \notin [a,b]$}
+\\\\0 & \text{if $x \notin [a,b]$}
 \end{cases} \tag{PMF}
 $$
 
@@ -1284,18 +1284,20 @@ $$
 伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`一次伯努利试验`中，成功的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
 
 $$
-X \sim Bern(\phi)
+X \sim Bernoulli(\phi)
 $$
 
 其概率质量函数、期望值和方差分别如下：
 
 $$
-p(X=x;\phi) = 
+\begin{split}
+p(X=x;\phi) &= 
 \begin{cases}
-\phi & \text{if $x=1$} \\\\
+\phi & \text{if $x=1$} \\\\ \\\\
 1-\phi & \text{if $x=0$} 
-\end{cases} = 
-\phi^x(1-\phi)^{1-x} \tag{PMF}
+\end{cases} \\\\ 
+\\\\&= \phi^x(1-\phi)^{1-x} 
+\end{split} \tag{PMF}
 $$
 
 $$ \mu = \sum_{x} p(x) x = \phi $$
@@ -1390,7 +1392,7 @@ $$
 
 #### 相对熵<a id="KLD"></a>
 
-相对熵（Relative Entropy），又称为 `KL 散度`（Kullback-Leibler divergence），用于**衡量两个概率分布之间的差异程度**。对于两个概率分布 $p(x)$ 和 $q(x)$，其相对熵定义如下：
+相对熵（Relative Entropy），又称为 `KL 散度`（Kullback-Leibler divergence），用于`衡量两个概率分布之间的差异程度`。对于两个概率分布 $p(x)$ 和 $q(x)$，其相对熵定义如下：
 
 $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
 
