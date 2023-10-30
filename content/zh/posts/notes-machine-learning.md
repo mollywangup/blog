@@ -14,6 +14,7 @@ categories:
 - Notes
 libraries:
 - mathjax
+pinned: true
 ---
 
 本笔记基于以下学习资料（侧重实际应用）：

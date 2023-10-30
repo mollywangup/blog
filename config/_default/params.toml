@@ -16,7 +16,7 @@ notAllowedTypesInHomeFeed = ["about", "archive", "contact", "talks", "showcase",
 viewportSize = "normal" # widest, wider, wide, normal, narrow
 enableUiAnimation = true
 hideSingleContentsWhenJSDisabled = false
-enablePinnedPosts = false
+enablePinnedPosts = true
 minItemsToShowInTagCloud = 1 # Minimum items to show in tag cloud
 
 # appbar
