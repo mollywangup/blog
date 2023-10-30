@@ -420,57 +420,6 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 以式 $(1)$ 的模型为例，将非线性的 $f(x) \to y$ 问题，转化为线性的 $f(x,x^2) \to y$ 问题，即`将非一次项的 $x^2$ 视作新特征`，即可按照线性回归模型训练。
 
-{{< expand "代码：以一元特征为例，对比不同 degree 的模型质量" >}}
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
-
-rng = np.random.RandomState(0)
-
-# 数据集
-x = np.linspace(-3, 7, 10)
-y = np.power(x, 3) + np.power(x, 2) + x + 1 + rng.randn(1)
-X = x[:, np.newaxis]
-
-# 绘制训练集
-fig, ax = plt.subplots(figsize=(8, 6))
-ax.scatter(X, y, color='red', marker='X', label='training points')
-
-# 多项式特征的线性回归模型
-for degree in range(10):
-    # 创建多项式特征
-    poly = PolynomialFeatures(degree)
-    X_poly = poly.fit_transform(X)
-    
-    # 创建线性回归模型：X_poly 与 y 为线性关系
-    model = LinearRegression()
-    model.fit(X_poly, y)
-
-    # 使用模型预测
-    y_pred = model.predict(X_poly)
-    
-    # 获取模型参数和性能指标
-    w = model.coef_
-    b = model.intercept_
-    r2 = model.score(X_poly, y)
-    mse = mean_squared_error(y, y_pred)
-
-    # 绘图
-    ax.plot(X, y_pred, label='Degree {}: MSE {:.3f}, $R^2$ {:.3f}'.format(degree, round(mse, 3), r2))
-
-# 添加图例
-plt.legend(loc='best', fontsize='small')
-plt.savefig('PolynomialFeatures_LinearRegression.svg')
-plt.show()
-```
-{{< /expand >}}
-
-<img src='https://user-images.githubusercontent.com/46241961/278821723-d779c271-25a2-470f-88ee-3c0643ea69e1.svg' alt='PolynomialFeatures_LinearRegression' width='80%'>
-
 #### 特征缩放
 
 特征缩放（Feature Scaling）是一种用于**标准化自变量或特征范围**的方法。
