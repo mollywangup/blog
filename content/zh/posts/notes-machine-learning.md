@@ -190,103 +190,6 @@ $$
 
 $$ arg\min_{w,b} J(w,b) $$
 
-#### 代码
-
-##### 一元线性回归
-
-以下示例来源于 sklearn 的糖尿病数据集。
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.datasets import load_diabetes
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
-
-# 加载数据集：仅取其中一个特征，并拆分训练集/测试集（7/3）
-features, target = load_diabetes(return_X_y=True)
-feature = features[:, np.newaxis, 2]
-X_train, X_test, y_train, y_test = train_test_split(feature, target, test_size=0.3, random_state=8)
-print('特征数量：{} 个（原始数据集共 {} 个特征）\n总样本量：共 {} 组，其中训练集 {} 组，测试集 {} 组'.format(feature.shape[1], features.shape[1], target.shape[0], X_train.shape[0], X_test.shape[0]))
-
-# 创建线性回归模型并拟合数据
-model = LinearRegression()
-model.fit(X_train, y_train)
-
-# 获取模型参数
-w = model.coef_
-b = model.intercept_
-print('模型参数：w={}, b={}'.format(w, b))
-
-# 衡量模型性能：R2 和 MSE
-y_train_pred = model.predict(X_train)
-y_test_pred = model.predict(X_test)
-# R2（决定系数，1最佳），计算等同于 r2_score(y_true, y_pred)
-r2_train = model.score(X_train, y_train)
-r2_test = model.score(X_test, y_test)
-# MSE（均方误差）
-mse_train = mean_squared_error(y_train, y_train_pred)
-mse_test = mean_squared_error(y_test, y_test_pred)
-print('模型性能：\n  训练集：R2={:.3f}, MSE={:.3f}\n  测试集：R2={:.3f}, MSE={:.3f}'.format(r2_train, mse_train, r2_test, mse_test))
-
-# 绘图
-plt.title('LinearRegression (One variable)')
-plt.scatter(X_train, y_train, color='red', marker='X')
-plt.plot(X_test, y_pred, linewidth=3)
-plt.legend(['training points', 'model: $y={:.2f}x+{:.2f}$'.format(w[0], b)])
-plt.savefig('LinearRegression_diabetes.svg')
-```
-<img src='https://user-images.githubusercontent.com/46241961/273402064-fdd2a737-a691-45bc-8c17-6f921e02d487.svg' alt='一元线性回归-糖尿病数据集' width=80%>
-
-##### 多元线性回归
-
-以下示例来源于 sklearn 的糖尿病数据集，选取了所有的特征，并对比了普通最小二乘/Lasso/Ridge 三种回归模型的性能。
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.datasets import load_diabetes
-from sklearn.linear_model import LinearRegression, Lasso, Ridge
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
-
-# 加载数据集：取所有特征，并拆分训练集/测试集（7/3）
-features, target = load_diabetes(return_X_y=True)
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.3, random_state=8)
-print('特征数量：{} 个\n总样本量：共 {} 组，其中训练集 {} 组，测试集 {} 组'.format(features.shape[1], target.shape[0], X_train.shape[0], X_test.shape[0]))
-
-def _models(alpha=1):
-    lr = LinearRegression().fit(X_train, y_train) # 第一种：普通最小二乘回归
-    lasso = Lasso(alpha=alpha).fit(X_train, y_train) # 第二种：Lasso/L1/套索回归
-    ridge = Ridge(alpha=alpha).fit(X_train, y_train) # 第三种：Ridge/L2/岭回归
-    return lr, lasso, ridge
-
-# 对比四组 alpha 取值
-alphas_list = [0.05, 0.1, 0.5, 1]
-
-for i in range(len(alphas_list)):
-    alpha = alphas_list[i]
-    print('\n======== alpha={} ========'.format(alpha))
-    
-    # 对比三种线性模型
-    models = _models(alpha=alpha)
-    for model in models:    
-        # 模型参数
-        w = model.coef_
-        b = model.intercept_
-
-        # 模型性能：R2 和 MSE
-        r2_train = model.score(X_train, y_train)
-        r2_test = model.score(X_test, y_test)
-        mse_train = mean_squared_error(y_train, model.predict(X_train))
-        mse_test = mean_squared_error(y_test, model.predict(X_test))
-    
-        # 打印
-        model_name = model.__class__.__name__
-        print('{}：\n  模型参数：w={}, b={:.3f}\n  训练集：R2={:.3f}, MSE={:.3f}\n  测试集：R2={:.3f}, MSE={:.3f}'.format(model_name, w, b, r2_train, mse_train, r2_test, mse_test))
-```
-
 ### 逻辑回归<a id="LogisticRegression"></a>
 
 逻辑回归（Logistic Regression），解决`二分类`（Binary Classification）问题。
@@ -412,59 +315,6 @@ $$
 1. 从 $X$ 中选择；
 2. 
 
-#### 代码
-
-```python
-import time
-import numpy as np
-import matplotlib.pyplot as plt
-
-from sklearn.datasets import make_blobs
-from sklearn.cluster import KMeans
-from sklearn.metrics.pairwise import pairwise_distances_argmin
-
-# 模拟测试数据
-np.random.seed(0)
-
-batch_size = 45
-centers = np.array([[1, 1], [-1, -1], [1, -1]])
-n_clusters = centers.shape[0]
-X, labels_true = make_blobs(n_samples=3000, centers=centers, cluster_std=[0.3, 0.7, 1])
-
-# 使用 K-means 聚类
-k_means = KMeans(init='k-means++', n_clusters=3, n_init=10)
-t0 = time.time()
-k_means.fit(X)
-t_batch = time.time() - t0
-
-# 校验
-k_means_cluster_centers = k_means.cluster_centers_
-k_means_labels = pairwise_distances_argmin(X, k_means_cluster_centers)
-
-# 绘图
-fig = plt.figure(figsize=(8, 3))
-fig.subplots_adjust(left=0.01, right=0.98, bottom=0.05, top=0.9)
-colors = ["#4EACC5", "#FF9C34", "#4E9A06"]
-
-ax = fig.add_subplot(1, 3, 1)
-for k, col in zip(range(n_clusters), colors):
-    my_members = k_means_labels == k
-    cluster_center = k_means_cluster_centers[k]
-    ax.plot(X[my_members, 0], X[my_members, 1], "w", markerfacecolor=col, marker=".")
-    ax.plot(
-        cluster_center[0],
-        cluster_center[1],
-        "o",
-        markerfacecolor=col,
-        markeredgecolor="k",
-        markersize=6,
-    )
-ax.set_title("KMeans")
-ax.set_xticks(())
-ax.set_yticks(())
-# plt.text(-3.5, 1.8, "train time: %.2fs\ninertia: %f" % (t_batch, k_means.inertia_))
-```
-
 ### DBSCAN
 
 解决**聚类**问题。
@@ -494,7 +344,7 @@ ax.set_yticks(())
 距离和相似度常用于分/聚类，距离越近或相似度越高，则被认为可以分/聚为一类。
 {{< /alert >}}
 
-对于向量 $x,y \in \mathbb{R}^n$，或空间中两个点，计算距离可使用`差向量的大小的衡量`如[范数](#Norm)，计算相似度可通过`两向量夹角`等来衡量。
+对于[向量](#Vector) $x,y \in \mathbb{R}^n$，或空间中两个点，计算距离可使用`差向量的大小的衡量`如[范数](#Norm)，计算相似度可通过`两向量夹角`等来衡量。
 
 #### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
 
@@ -1049,7 +899,7 @@ $$
 
 凸函数的局部最小值等于极小值，可作为选择损失函数的重要参考。
 
-### 向量
+### 向量<a id="Vector"></a>
 
 {{< alert theme="info" >}}
 **点积是标量，叉积是向量，外积是矩阵。**
@@ -1226,7 +1076,7 @@ $$
 
 #### 矩阵范数<a id="MatrixNorms"></a>
 
-### 极大似然估计
+### 极大似然估计<a id="MaximumLikelihoodEstimation"></a>
 
 {{< alert theme="info" >}}
 极大似然估计是一种`已知样本数据`估计（反推）`概率分布参数`的方法。
@@ -1236,7 +1086,7 @@ $$
 
 $$ L(\theta) = p(x^{(1)}, x^{(2)}, \cdots, x^{(m)}) = \prod_{i=1}^{m} p(x^{(i)};\theta) $$
 
-其中 $\lbrace x^{(1)}, x^{(2)}, \cdots, x^{(m)} \rbrace, x^{(i)} \in \mathbb{R}^n$ 为已知样本数据。
+其中 $\lbrace x^{(1)}, x^{(2)}, \cdots, x^{(m)} \rbrace$ 为已知样本数据。
 
 说明：由于假设样本独立同分布，则联合概率等于各自概率的乘积。
 
