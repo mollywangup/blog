@@ -40,13 +40,14 @@ libraries:
 
 约定如下：
 1. `m` 个训练示例，`n` 个特征；
-2. 向量是一维数组，使用小写字母表示，且`默认列向量`；矩阵是二维数组，使用大写字母表示；
+2. $n$ 维向量使用小写字母表示，如 $x \in \mathbb{R}^n$，且`默认列向量`；
+3. $m \times n$ 矩阵使用大写字母表示，如 $X \in \mathbb{R}^{m \times n}$；
 
 <br>具体符号：
-- $x \in \mathbb{R}^n$ 表示输入变量，$w \in \mathbb{R}^n$ 表示回归系数；
-- $X \in \mathbb{R}^{m \times n}$ 表示训练示例组成的矩阵，$y,\hat{y} \in \mathbb{R}^m$ 分别表示真实值和预测值。
-  - $x^{(i)} \in \mathbb{R}^n$ 表示第 $i$ 个训练示例；（第 $i$ 行，其中 $i \in [1,m]$）
-  - $x_j \in \mathbb{R}^m$ 表示第 $j$ 个特征；（第 $j$ 列，其中 $j \in [1,n]$）
+- $x \in \mathbb{R}^n$ 表示`输入变量`，$w \in \mathbb{R}^n$ 表示`回归系数`；
+- $X \in \mathbb{R}^{m \times n}$ 表示`训练集`，$y,\hat{y} \in \mathbb{R}^m$ 分别表示`真实值`和`预测值`。
+  - $x^{(i)} \in \mathbb{R}^n$ 表示第 $i$ 个训练示例；（第 $i$ 行）
+  - $x_j \in \mathbb{R}^m$ 表示第 $j$ 个特征；（第 $j$ 列）
   - $x_j^{(i)} \in \mathbb{R}$ 表示第 $i$ 个训练示例的第 $j$ 个特征；
   - $y^{(i)},\hat{y}^{(i)} \in \mathbb{R}$ 分别表示第 $i$ 个训练示例的真实值和预测值；
 
@@ -485,13 +486,75 @@ ax.set_yticks(())
 
 （Reinforcement Learning）：有延迟和稀疏的反馈标签； -->
 
-## 特征工程
+## 机器学习基础
+
+### 距离和相似度
+
+{{< alert theme="info" >}}
+距离和相似度常用于分/聚类，距离越近或相似度越高，则被认为可以分/聚为一类。
+{{< /alert >}}
+
+对于向量 $x,y \in \mathbb{R}^n$，或空间中两个点，计算距离可使用`差向量的大小的衡量`如范数，计算相似度可通过`两向量夹角`等来衡量。
+
+#### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
+
+是含参数 p 的距离函数。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
+
+$$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{$L_p$} $$
+
+#### 曼哈顿距离<a id="ManhattanDistance"></a>
+
+$$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{$L_1$} $$
+
+#### 欧氏距离<a id="EuclideanDistance"></a>
+
+$$ \sqrt{\sum_{j=1}^{n} (x_j - y_j)^2} \tag{$L_2$} $$
+
+#### 切比雪夫距离<a id="ChebyshevDistance"></a>
+
+$$ \max_{j} {\lvert x_j - y_j \rvert} \tag{$L_{+\infty}$} $$
+
+<!-- #### 海明距离 -->
+
+<!-- #### 马氏距离
+
+？？协方差距离 -->
+
+<!-- #### 杰卡德距离 -->
+
+#### 余弦相似度<a id="CosineSimilarity"></a>
+
+使用`两个向量夹角的余弦值`来衡量相似度，公式如下：
+
+$$ Cosine \space Similarity = \cos(\theta) = \frac{x \cdot y}{\lVert x \rVert \lVert y \rVert} $$
+
+说明：由[向量点积](#DotProduct)计算公式推导而来。越接近于 1，夹角越接近于 0，越相似。
+
+#### 皮尔逊相关系数
+
+使用`标准化后的协方差`来衡量两个随机变量的`线性相关性`。
+
+$$
+\rho = \frac{Cov(X,Y)}{\sigma_X \sigma_Y} \in [-1, 1]
+$$
+
+说明：越接近于 1 越正线性相关，越接近于 -1 越负线性相关，等于 0 不线性相关。
+
+#### KL 散度<a id="KLDivergence"></a>
+
+给定`两个概率分布` $p(x)$ 和 $q(x)$，使用 KL 散度来衡量两者之间的差异程度，公式如下：
+
+$$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} \in [0, \infty] $$
+
+说明：也称作[相对熵](#KLD)。非负，越小越相似。
+
+### 特征工程
 
 <!-- 挖坑：
 缺失值处理
 异常值处理 -->
 
-### 多项式特征<a id="PolynomialFeatures"></a>
+#### 多项式特征<a id="PolynomialFeatures"></a>
 
 {{< alert theme="info" >}}
 通过添加`特征的多项式`来提高模型复杂度，将其视作新特征则归来仍是[线性回归](#LinearRegression)问题。
@@ -558,7 +621,7 @@ plt.show()
 
 <img src='https://user-images.githubusercontent.com/46241961/278821723-d779c271-25a2-470f-88ee-3c0643ea69e1.svg' alt='PolynomialFeatures_LinearRegression' width='80%'>
 
-### 特征缩放
+#### 特征缩放
 
 特征缩放（Feature Scaling）是一种用于**标准化自变量或特征范围**的方法。
 
@@ -571,7 +634,7 @@ plt.show()
 - 太大或者太小都需要：如[-0.001, 0.001]、[-100, 100]；
 - 通常[-3, 3]范围内，不需要；
 
-#### 均值归一化
+##### 均值归一化
 
 Mean Normalization，与均值的差异 / 上下限的整体差异：
 
@@ -579,7 +642,7 @@ $$
 x^{\prime} = \frac{x - \mu}{max(x) - min(x)}
 $$
 
-#### Z 分数归一化
+##### Z 分数归一化
 
 Z-score normalization，与均值的差异 / 标准差：
 
@@ -593,7 +656,7 @@ $$
 \sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
 $$
 
-## 损失函数<a id='LossFunction'></a>
+### 损失函数<a id='LossFunction'></a>
 
 {{< alert theme="info" >}}
 损失函数用于`衡量预测值与真实值之间的差异程度`，也就是模型的拟合程度。
@@ -609,11 +672,11 @@ $$
 
 说明：成本函数更灵活，有时会在损失函数的基础上再加上正则项；
 
-### 最小二乘<a id="LeastSquaresLoss"></a>
+#### 最小二乘<a id="LeastSquaresLoss"></a>
 
 $$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
-### 交叉熵<a id="CrossEntropyLoss"></a>
+#### 交叉熵<a id="CrossEntropyLoss"></a>
 
 推导详见[交叉熵](#CrossEntropy)
 
@@ -621,9 +684,9 @@ $$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
 
 对于二分类问题：$$ L(\hat{y}, y) = -y\ln\hat{y} - (1-y)\ln(1-\hat{y}) $$
 
-## 优化算法
+### 优化算法
 
-### 梯度下降算法<a id="GD"></a>
+#### 梯度下降算法<a id="GD"></a>
 
 {{< alert theme="info" >}}
 核心原理是可微函数 **`在某点沿着梯度反方向，函数值下降最快。`**
@@ -634,7 +697,7 @@ $$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
 给定成本函数 $J(w,b)$，求解一组 $(w,b)$，使得
 $$ arg\min_{w,b} J(w,b) $$
 
-#### 实现方法
+##### 实现方法
 
 步骤一：选定初始点 $(w_{init},b_{init})$；
 步骤二：为了使函数值下降，需要`沿着梯度反方向迭代`，即重复以下步骤，直至收敛，即可得到局部最小值的解：
@@ -687,17 +750,17 @@ $$
 
 经验值参考：[0.001, 0.01, 0.1, 1] 或者 [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1] -->
 
-#### 批量梯度下降<a id="BGD"></a>
+##### 批量梯度下降<a id="BGD"></a>
 
 （Batch Gradient Descent, BGD）：使用训练集中的所有数据
 
-#### 随机梯度下降<a id="SGD"></a>
+##### 随机梯度下降<a id="SGD"></a>
 
 （stotastic gradient descent, SGD）：？？根据每个训练样本进行参数更新
 
-## 模型评估
+### 模型评估
 
-### 过拟合问题<a id="Underfitting-and-Overfitting"></a>
+#### 过拟合问题<a id="Underfitting-and-Overfitting"></a>
 
 定义过拟合：训练方差小，测试方差大。
 
@@ -708,7 +771,7 @@ $$
 
 <img src='https://user-images.githubusercontent.com/46241961/278217087-8b868e06-28d3-4a36-bec8-7af1aaff13e0.svg' alt='欠拟合和过拟合（一元线性回归）'>
 
-### 评估方法
+#### 评估方法
 
 留出法（Hold-out）：拆分训练集和测试集
 
@@ -718,33 +781,33 @@ $$
 
 （Bagging）：
 
-### 回归指标
+#### 回归指标
 
-#### MAE
+##### MAE
 
 MAE（Mean Absolute Error），平均绝对误差。
 
 $$ MAE = \frac{1}{m} \sum_{i=1}^{m} \lvert \hat{y}^{(i)} - y^{(i)} \rvert $$
 
-#### MAPE
+##### MAPE
 
 MAPE（Mean Absolute Percentage Error），平均绝对百分误差。
 
 $$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{(i)}} \rvert $$
 
-#### MSE<a id="MSE"></a>
+##### MSE<a id="MSE"></a>
 
 MSE（Mean Squared Error），均方误差。最小二乘的均值版，常用于线性回归模型的成本函数。
 
 $$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
-#### RMSE
+##### RMSE
 
 RMSE（Root Mean Square Error），均方根误差。
 
 $$ RMSE = \sqrt{MSE} $$
 
-#### R<sup>2</sup><a id="Coefficient-of-Determination"></a>
+##### R<sup>2</sup><a id="Coefficient-of-Determination"></a>
 
 R<sup>2</sup> (coefficient of determination)，决定系数。衡量**总误差（客观存在且无关回归模型）中可以被回归模型解释的比例**，即拟合程度。
 
@@ -778,9 +841,9 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 <img src='https://user-images.githubusercontent.com/46241961/273468625-e2263610-af8d-4ada-9cf9-9c25eef6c3c3.svg' alt='LinearRegression_SST_SSR_SSE' width='80%'>
 
-### 分类指标
+#### 分类指标
 
-#### 混淆矩阵
+##### 混淆矩阵
 
 （confusion matrix）
 
@@ -796,7 +859,7 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 - 召回率（recall）：也称作查全率，指实际为正中预测为正的比例，即 $\frac{TP}{TP+FN}$
 - F1：$\frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率}$
 
-#### ROC
+##### ROC
 
 [深入介紹及比較ROC曲線及PR曲線](https://medium.com/nlp-tsupei/roc-pr-%E6%9B%B2%E7%B7%9A-f3faa2231b8c)
 
@@ -1163,65 +1226,6 @@ $$
 
 #### 矩阵范数<a id="MatrixNorms"></a>
 
-### 距离和相似度
-
-{{< alert theme="info" >}}
-距离和相似度常用于分/聚类，距离越近或相似度越高，则被认为可以分/聚为一类。
-{{< /alert >}}
-
-对于向量 $x,y \in \mathbb{R}^n$，或空间中两个点，计算距离可使用`差向量的大小的衡量`如范数，计算相似度可通过`两向量夹角`等来衡量。
-
-#### 闵可夫斯基距离<a id="MinkowskiDistance"></a>
-
-是含参数 p 的距离函数。当 p 依次取 1, 2, $\infty$ 时，分别对应曼哈顿距离、欧氏距离、切比雪夫距离；
-
-$$ \left(\sum_{j=1}^{n} {\lvert x_j - y_j \rvert}^p\right)^{1/p} \tag{$L_p$} $$
-
-#### 曼哈顿距离<a id="ManhattanDistance"></a>
-
-$$ \sum_{j=1}^{n} \lvert x_j - y_j \rvert \tag{$L_1$} $$
-
-#### 欧氏距离<a id="EuclideanDistance"></a>
-
-$$ \sqrt{\sum_{j=1}^{n} (x_j - y_j)^2} \tag{$L_2$} $$
-
-#### 切比雪夫距离<a id="ChebyshevDistance"></a>
-
-$$ \max_{j} {\lvert x_j - y_j \rvert} \tag{$L_{+\infty}$} $$
-
-<!-- #### 海明距离 -->
-
-<!-- #### 马氏距离
-
-？？协方差距离 -->
-
-<!-- #### 杰卡德距离 -->
-
-#### 余弦相似度<a id="CosineSimilarity"></a>
-
-使用`两个向量夹角的余弦值`来衡量相似度，公式如下：
-
-$$ Cosine \space Similarity = \cos(\theta) = \frac{x \cdot y}{\lVert x \rVert \lVert y \rVert} $$
-
-说明：由[向量点积](#DotProduct)计算公式推导而来。越接近于 1，夹角越接近于 0，越相似。
-
-#### 皮尔逊相关系数
-
-使用`标准化后的协方差`来衡量两个随机变量的`线性相关性`。
-
-$$
-\rho = \frac{Cov(X,Y)}{\sigma_X \sigma_Y} \in [-1, 1]
-$$
-
-说明：越接近于 1 越正线性相关，越接近于 -1 越负线性相关，等于 0 不线性相关。
-
-#### KL 散度<a id="KLDivergence"></a>
-
-给定`两个概率分布` $p(x)$ 和 $q(x)$，使用 KL 散度来衡量两者之间的差异程度，公式如下：
-
-$$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} \in [0, \infty] $$
-
-说明：也称作[相对熵](#KLD)。非负，越小越相似。
 
 ### 贝叶斯定理
 
