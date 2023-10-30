@@ -193,37 +193,45 @@ $$ arg\min_{w,b} J(w,b) $$
 
 ### 逻辑回归<a id="LogisticRegression"></a>
 
-逻辑回归（Logistic Regression）是一个`线性二分类器`。模型假设 $y|x \sim Bernoulli(\phi)$，可通过[极大似然估计法](#MaximumLikelihoodEstimation)求解模型参数，以预测 $p(y=1|x;w,b)$ 的问题。
+逻辑回归（Logistic Regression）是一个`线性二分类器`。模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。可通过[极大似然估计](#MaximumLikelihoodEstimation)求解模型参数，以预测 $p(y=1|x;w,b)$ 的问题。
 
 #### 原理
 
-##### 模型
+##### 确定模型
 
 令 $$ z = w \cdot x + b $$ 作为 [Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 激活函数
 
 $$ g(z) = \frac{1}{1+e^{-z}} \in (0,1) $$
 
-的输入，以使得输出值分布接近 [0-1 分布](#BernoulliDistribution)，即模型：
+的输入，以使得输出值接近 [0-1 分布](#BernoulliDistribution)，即模型：
 
 $$
-f_{w,b}(x) = p(y=1|x;w,b) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
+\begin{split}
+f_{w,b}(x) &= p(y=1|x;w,b) \\\\
+\\\\&= g(w \cdot x + b) \\\\
+\\\\&= \frac{1}{1 + e^{-(w \cdot x + b)}}
+\end{split}
 $$
 
 以 $0.5$ 为分界，若 $p \geq 0.5$ 则取 $1$，否则取 $0$.
 
-##### 成本函数
+说明：模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$.
 
-- 极大似然估计角度，构造似然函数 $L(w,b)$：
+##### 确定损失
+
+极大似然估计（独立同分布联合概率最大化）和交叉熵角度（概率分布的差异衡量），结果殊途同归，对应的损失函数是一样的。
+
+##### 极大似然估计角度
+
+构造似然函数 $L(w,b)$：
 
 $$ 
 \begin{split}
 L(w,b) 
 &= p(y^{(1)}|x^{(1)},y^{(2)}|x^{(2)},\cdots,y^{(m)}|x^{(m)}) \\\\ 
 \\\\&= \prod_{i=1}^{m} p(y^{(i)}|x^{(i)}) \\\\ 
-\\\\&= \prod_{i:y^{(i)}=1} \hat{y}^{(i)} \prod_{i:y^{(i)}=0} (1 - \hat{y}^{(i)}) \\\\
-\\\\&= \prod_{i=1}^{m} \left(\hat{y}^{(i)}\right)^{y^{(i)}} \left(1 - \hat{y}^{(i)})\right)^{1 - {y^{(i)}}} \\\\
 \\\\&= \prod_{i:y^{(i)}=1} f_{w,b}(x^{(i)}) \prod_{i:y^{(i)}=0} \left(1 - f_{w,b}(x^{(i)})\right) \\\\
-\\\\&= \prod_{i=1}^{m} \left(f_{w,b}(x^{(i)})\right)^{y^{(i)}} \left(1 - f_{w,b}(x^{(i)})\right)^{1 - {y^{(i)}}} 
+\\\\&= \prod_{i=1}^{m} \left(f_{w,b}(x^{(i)})\right)^{y^{(i)}} \left(1 - f_{w,b}(x^{(i)})\right)^{1 - y^{(i)}} 
 \end{split}
 $$ 
 
@@ -231,19 +239,24 @@ $$
 
 $$
 \begin{split} 
-& \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - {y^{(i)}})\ln(1 - f_{w,b}(x^{(i)}))
+J(w,b) =
+\sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
 \end{split}
 $$
 
-- [交叉熵损失](#CrossEntropyLoss)角度理解：
+##### 交叉熵损失角度
 
-$$ L(\hat{y}, y) = -y\ln\hat{y} - (1-y)\ln(1-\hat{y}) $$
+将真实值和预测值看做是两个概率分布，则可以直接使用[交叉熵](#CrossEntropyLoss)来衡量两者的差异程度，即：
 
-对应的成本函数：
+$$
+\begin{split}
+J(w,b) 
+&= H(f_{w,b}(x^{(i)}), y^{(i)}) \\\\ 
+\\\\&= \frac{1}{m} \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
+\end{split}
+$$
 
-$$ J(w,b) = \frac{1}{m} \sum_{i=1}^{m} -y^{(i)} \ln \hat y^{(i)} - (1-y^{(i)}) \ln(1 - \hat y^{(i)}) $$
-
-##### 目标
+##### 求解模型参数
 
 求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
 
@@ -1124,7 +1137,7 @@ $$
 
 `伯努利试验`指每次试验的结果只有两种可能，如果成功（1）的概率是 $\phi$，则失败（0）的概率是 $1-\phi$.
 
-伯努利分布（Bernoulli distribution），也称作 0-1 分布，指`一次伯努利试验`中，成功（1）的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
+伯努利分布（Bernoulli distribution），也称作 `0-1 分布`，指`一次伯努利试验`中，成功（1）的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
 
 $$
 X \sim Bernoulli(\phi)
