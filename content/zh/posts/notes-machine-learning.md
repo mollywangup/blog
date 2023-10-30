@@ -191,9 +191,11 @@ $$ \arg \min_{w,b} J(w,b) $$
 
 ### 逻辑回归<a id="LogisticRegression"></a>
 
-逻辑回归（Logistic Regression）是一个`线性二分类器`。模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。
+逻辑回归（Logistic Regression）是一个`线性二分类器`。
 
 #### 确定模型
+
+模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。
 
 令 $$ z = w \cdot x + b $$ 作为 [Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 激活函数
 
@@ -209,13 +211,13 @@ f_{w,b}(x) &= p(y=1|x;w,b) \\\\
 \end{split} 
 $$
 
-以 $0.5$ 为分界，若 $p \geq 0.5$ 则取 $1$，否则取 $0$.
+以 $0.5$ 为分界，若 $p \geq 0.5$ 则分类为 $1$，否则分类为 $0$.
 
 说明：模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$.
 
 #### 确定损失
 
-以下两种角度殊途同归，对应的损失函数是一样的。注意这里没有求均值，不影响结果。
+以下两种角度殊途同归。注意这里没有求均值，不影响结果。
 
 ##### 极大似然估计角度
 
@@ -234,21 +236,17 @@ $$
 将目标由 $\displaystyle\arg \max_{w,b} L(w,b)$ 转化为`取对数再取负号`后的 $\displaystyle\arg \min_{w,b} -\ln L(w,b)$，即：
 
 $$
-\begin{split}
-J(w,b) &= H(y|x, \hat{y}|x) \\\\ 
-\\\\&= \sum_{i=1}^{m} - p\left(y^{(i)}|x^{(i)}\right) \ln p\left(\hat{y}^{(i)}|x^{(i)}\right) \\\\
-\\\\&= \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
-\end{split}
+J(w,b) = \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
 $$
 
 ##### 交叉熵损失角度
 
-将 $y|x$ 和 $\hat{y}|x$ 看作两个概率分布，则可以直接使用[交叉熵](#CrossEntropy)来衡量两者的差异程度，即：
+将 $p(y|x)$ 和 $p(\hat{y}|x)$ 看作两个概率分布，则可以直接使用[交叉熵](#CrossEntropy)来衡量两者的差异程度，即：
 
 $$
 \begin{split}
-J(w,b) &= H(y, \hat{y}) \\\\ 
-\\\\&= \sum_{i=1}^{m} - p(y^{(i)}) \ln y^{(i)} \\\\
+J(w,b) &= H(p(y|x), p(\hat{y}|x)) \\\\ 
+\\\\&= \sum_{i=1}^{m} - p\left(y^{(i)}|x^{(i)}\right) \ln p\left(\hat{y}^{(i)}|x^{(i)}\right) \\\\
 \\\\&= \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
 \end{split}
 $$
