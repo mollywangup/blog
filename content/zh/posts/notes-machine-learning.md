@@ -94,7 +94,7 @@ $$ -->
 有标签的是监督学习。预测连续值的是`回归`任务，预测离散值的是`分类`任务。
 {{< /alert >}}
 
-给定`包含标签`的训练集 $(X,y)$，通过算法构建一个预估器，学习如何从 $x$ 预测 $\hat{y}$，即：$$ (X,y) \to f(x) \space\text{or}\space p(y|x) \to \hat{y} $$
+给定`包含标签`的训练集 $(X,y)$，通过算法构建一个模型，学习如何从 $x$ 预测 $\hat{y}$，即：$$ (X,y) \to f(x) \to \hat{y} $$
 
 <!-- 说明：以下约定**判别式模型**使用 $f(x)$，**生成式模型**使用 $p(y|x)$。 -->
 
@@ -154,13 +154,13 @@ $$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\
 
 <!-- $$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2m} \lVert w \rVert_2^2 \tag{Ridge} $$ -->
 
-$$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2m} \sum_{j=1}^{n} \lvert w_j \rvert^2 \tag{Ridge} $$
+$$ J(w,b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2 + \frac{\lambda}{2m} \sum_{j=1}^{n} w_j^2 \tag{Ridge} $$
 
 说明：
-1. 使用 $\frac{1}{2m}$ 取均值，仅是为了在求（偏）导数时消去常数 $2$，不影响结果；
+1. 使用 $\frac{1}{2m}$ 取均值，仅是为了在求偏导时消去常数 2，不影响结果；
 2. `OLS`：普通最小二乘回归；
-3. `Lasso`：用于**特征选择**。是在 OLS 的基础上，添加了 $w$ 的 [L1 范数](#VectorNorms) 作为正则化项；
-4. `Ridge`：用于[防止过拟合](#Underfitting-and-Overfitting)。是在 OLS 的基础上，添加了 $w$ 的 [L2 范数](#VectorNorms) 的平方作为正则化项；
+3. `Lasso`：Lasso 回归，用于**特征选择**。在 OLS 的基础上添加了 $w$ 的 [L1 范数](#VectorNorms) 作为正则化项；
+4. `Ridge`：岭回归，用于[防止过拟合](#Underfitting-and-Overfitting)。是在 OLS 的基础上，添加了 $w$ 的 [L2 范数](#VectorNorms) 的平方作为正则化项；
 5. $\lambda$：超参数，非负标量，为了控制惩罚项的大小。
 
 {{< expand "矩阵乘向量写法 ">}}
@@ -187,33 +187,55 @@ $$
 
 ##### 目标
 
-求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
+求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。方法见[梯度下降算法](#GD)
 
 $$ arg\min_{w,b} J(w,b) $$
 
 ### 逻辑回归<a id="LogisticRegression"></a>
 
-逻辑回归（Logistic Regression），解决`二分类`（Binary Classification）问题。
+逻辑回归（Logistic Regression）是一个`线性二分类器`。模型假设 $y|x \sim Bernoulli(\phi)$，可通过[极大似然估计法](#MaximumLikelihoodEstimation)求解模型参数，以预测 $p(y=1|x;w,b)$ 的问题。
 
 #### 原理
 
 ##### 模型
 
-令 $$ z = w \cdot x + b $$ 作为新的输入，通过 [Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 激活函数，使输出值分布以 $0.5$ 为分界： 
+令 $$ z = w \cdot x + b $$ 作为 [Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 激活函数
+
+$$ g(z) = \frac{1}{1+e^{-z}} \in (0,1) $$
+
+的输入，以使得输出值分布接近 [0-1 分布](#BernoulliDistribution)，即模型：
 
 $$
-p(y=1|x;w,b) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
+f_{w,b}(x) = p(y=1|x;w,b) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
 $$
 
-$$
-f_{w,b}(x) = p_{w,b}(y=1|x) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
-$$
-
-当 $p \geq 0.5$ 时，取 $1$，否则取 $0$
+以 $0.5$ 为分界，若 $p \geq 0.5$ 则取 $1$，否则取 $0$.
 
 ##### 成本函数
 
-使用[交叉熵损失](#CrossEntropyLoss)：
+- 极大似然估计角度，构造似然函数 $L(w,b)$：
+
+$$ 
+\begin{split}
+L(w,b) 
+&= p(y^{(1)}|x^{(1)},y^{(2)}|x^{(2)},\cdots,y^{(m)}|x^{(m)}) \\\\ 
+\\\\&= \prod_{i=1}^{m} p(y^{(i)}|x^{(i)}) \\\\ 
+\\\\&= \prod_{i:y^{(i)}=1} \hat{y}^{(i)} \prod_{i:y^{(i)}=0} (1 - \hat{y}^{(i)}) \\\\
+\\\\&= \prod_{i=1}^{m} \left(\hat{y}^{(i)}\right)^{y^{(i)}} \left(1 - \hat{y}^{(i)})\right)^{1 - {y^{(i)}}} \\\\
+\\\\&= \prod_{i:y^{(i)}=1} f_{w,b}(x^{(i)}) \prod_{i:y^{(i)}=0} \left(1 - f_{w,b}(x^{(i)})\right) \\\\
+\\\\&= \prod_{i=1}^{m} \left(f_{w,b}(x^{(i)})\right)^{y^{(i)}} \left(1 - f_{w,b}(x^{(i)})\right)^{1 - {y^{(i)}}} 
+\end{split}
+$$ 
+
+将目标由 $\displaystyle\arg \max_{w,b} L(w,b)$ 转化为`取对数再取负号`后的 $\displaystyle\arg \min_{w,b} -\ln L(w,b)$，即：
+
+$$
+\begin{split} 
+& \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - {y^{(i)}})\ln(1 - f_{w,b}(x^{(i)}))
+\end{split}
+$$
+
+- [交叉熵损失](#CrossEntropyLoss)角度理解：
 
 $$ L(\hat{y}, y) = -y\ln\hat{y} - (1-y)\ln(1-\hat{y}) $$
 
@@ -283,7 +305,7 @@ Random forest，解决**分类**问题。
 无标签的是无监督学习。
 {{< /alert >}}
 
-给定`不包含标签`的训练集 $X$，通过算法构建一个预估器，揭示数据的内在分布特性及规律，即：$$ X \to f(x) \to \hat{y} $$
+给定`不包含标签`的训练集 $X$，通过算法构建一个模型，揭示数据的内在分布特性及规律，即：$$ X \to f(x) \to \hat{y} $$
 
 无监督学习任务分为`聚类（Clustering）`和`降维（Dimensionality reduction）`。
 
