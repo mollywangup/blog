@@ -115,7 +115,9 @@ Step3：求解目标：求成本函数的极小值解。求极小值问题常用
 线性回归（Linear Regression），解决线性的**回归**问题。
 <!-- 前提假设是预测值与真实值的误差（error）服从正态分布。 -->
 
-#### 确定模型
+#### 原理
+
+##### 确定模型
 
 $n$ 元线性回归的模型 $f: \mathbb{R}^n \to \mathbb{R}$ 如下：
 
@@ -131,7 +133,7 @@ $$
 $w \in \mathbb{R}^n$：回归系数，分别对应 n 个特征的权重（weights）或系数（coefficients）；
 $b \in \mathbb{R}$：偏差（bias）或截距（intercept）；
 
-#### 确定损失
+##### 确定损失
 
 使用[最小二乘](#LeastSquaresLoss)损失：
 
@@ -183,25 +185,43 @@ $$
 
 {{< /expand >}}
 
-#### 求解模型参数
+##### 求解模型参数
 
 求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。方法见[梯度下降算法](#GD)
 
 $$ \arg \min_{w,b} J(w,b) $$
 
+#### 多项式特征<a id="PolynomialFeatures"></a>
+
+{{< alert theme="info" >}}
+通过添加`特征的多项式`可提高模型复杂度，将其视作新特征则归来仍是[线性回归](#LinearRegression)问题。
+{{< /alert >}}
+
+例子：以下式 $(1)(2)(3)$ 依次对应一元二次多项式、一元三次多项式、二元二次多项式模型：
+
+$$ f_{w,b}(x) = w_1x + w_2x^2 + b \tag{1} $$
+
+$$ f_{w,b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{2} $$
+
+$$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
+
+以式 $(1)$ 的模型为例，将`将非一次项的 $x^2$ 视作新特征`，即可按照线性回归模型训练。
+
 ### 逻辑回归<a id="LogisticRegression"></a>
 
 逻辑回归（Logistic Regression）是一个`线性二分类器`。
 
-#### 确定模型
+#### 原理
 
-模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。
+##### 确定模型
 
-令 $$ z = w \cdot x + b $$ 作为 [Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 激活函数
+模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。由于[Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 函数：
 
 $$ g(z) = \frac{1}{1+e^{-z}} \in (0,1) $$
 
-的输入，以使得输出值接近 [0-1 分布](#BernoulliDistribution)，即模型：
+接近 [0-1 分布](#BernoulliDistribution)，则令
+
+$$ z = w \cdot x + b $$ 作为输入，即模型：
 
 $$
 \begin{split}
@@ -215,11 +235,11 @@ $$
 
 说明：模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$.
 
-#### 确定损失
+##### 确定损失
 
 以下两种角度殊途同归。注意这里没有求均值，不影响结果。
 
-##### 极大似然估计角度
+###### 极大似然估计角度
 
 [极大似然估计](#MaximumLikelihoodEstimation)假设`样本独立同分布`，根据模型 $p(y=1|x;w,b) = f_{w,b}(x)$，构造似然函数 $L(w,b)$：
 
@@ -239,7 +259,7 @@ $$
 J(w,b) = \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
 $$
 
-##### 交叉熵损失角度
+###### 交叉熵损失角度
 
 将 $p(y|x)$ 和 $p(\hat{y}|x)$ 看作两个概率分布，则可以直接使用[交叉熵](#CrossEntropy)来衡量两者的差异程度，即：
 
@@ -251,11 +271,17 @@ J(w,b) &= H(p(y|x), p(\hat{y}|x)) \\\\
 \end{split}
 $$
 
-#### 求解模型参数
+##### 求解模型参数
 
 求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。方法见[梯度下降算法](#GD)
 
 $$ \arg \min_{w,b} J(w,b) $$
+
+#### 多分类问题
+
+思路一：
+
+
 
 ### SVM<a id="SVM"></a>
 
@@ -431,22 +457,6 @@ $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} \in [0, \infty] $$
 <!-- 挖坑：
 缺失值处理
 异常值处理 -->
-
-#### 多项式特征<a id="PolynomialFeatures"></a>
-
-{{< alert theme="info" >}}
-通过添加`特征的多项式`来提高模型复杂度，将其视作新特征则归来仍是[线性回归](#LinearRegression)问题。
-{{< /alert >}}
-
-例子：以下式 $(1)(2)(3)$ 依次对应一元二次多项式、一元三次多项式、二元二次多项式模型：
-
-$$ f_{w,b}(x) = w_1x + w_2x^2 + b \tag{1} $$
-
-$$ f_{w,b}(x) = w_1x + w_2x^2 + w_3x^3 + b \tag{2} $$
-
-$$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
-
-以式 $(1)$ 的模型为例，将非线性的 $f(x) \to y$ 问题，转化为线性的 $f(x,x^2) \to y$ 问题，即`将非一次项的 $x^2$ 视作新特征`，即可按照线性回归模型训练。
 
 #### 特征缩放
 
