@@ -115,9 +115,7 @@ Step3：求解目标：求成本函数的极小值解。求极小值问题常用
 线性回归（Linear Regression），解决线性的**回归**问题。
 <!-- 前提假设是预测值与真实值的误差（error）服从正态分布。 -->
 
-#### 原理
-
-##### 模型
+#### 确定模型
 
 $n$ 元线性回归的模型 $f: \mathbb{R}^n \to \mathbb{R}$ 如下：
 
@@ -133,7 +131,7 @@ $$
 $w \in \mathbb{R}^n$：回归系数，分别对应 n 个特征的权重（weights）或系数（coefficients）；
 $b \in \mathbb{R}$：偏差（bias）或截距（intercept）；
 
-##### 成本函数
+#### 确定损失
 
 使用[最小二乘](#LeastSquaresLoss)损失：
 
@@ -185,15 +183,15 @@ $$
 
 {{< /expand >}}
 
-##### 目标
+#### 求解模型参数
 
 求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。方法见[梯度下降算法](#GD)
 
-$$ arg\min_{w,b} J(w,b) $$
+$$ \arg \min_{w,b} J(w,b) $$
 
 ### 逻辑回归<a id="LogisticRegression"></a>
 
-逻辑回归（Logistic Regression）是一个`线性二分类器`。模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。可通过[极大似然估计](#MaximumLikelihoodEstimation)求解模型参数，以预测 $p(y=1|x;w,b)$ 的问题。
+逻辑回归（Logistic Regression）是一个`线性二分类器`。模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。
 
 #### 确定模型
 
@@ -208,7 +206,7 @@ $$
 f_{w,b}(x) &= p(y=1|x;w,b) \\\\
 \\\\&= g(w \cdot x + b) \\\\
 \\\\&= \frac{1}{1 + e^{-(w \cdot x + b)}}
-\end{split}
+\end{split} 
 $$
 
 以 $0.5$ 为分界，若 $p \geq 0.5$ 则取 $1$，否则取 $0$.
@@ -217,11 +215,11 @@ $$
 
 #### 确定损失
 
-极大似然估计（独立同分布联合概率最大化）和交叉熵角度（概率分布的差异衡量），结果殊途同归，对应的损失函数是一样的。
+以下两种角度殊途同归，对应的损失函数是一样的。注意这里没有求均值，不影响结果。
 
-#### 极大似然估计角度
+##### 极大似然估计角度
 
-构造似然函数 $L(w,b)$：
+[极大似然估计](#MaximumLikelihoodEstimation)假设`样本独立同分布`，根据模型 $p(y=1|x;w,b) = f_{w,b}(x)$，构造似然函数 $L(w,b)$：
 
 $$ 
 \begin{split}
@@ -236,31 +234,30 @@ $$
 将目标由 $\displaystyle\arg \max_{w,b} L(w,b)$ 转化为`取对数再取负号`后的 $\displaystyle\arg \min_{w,b} -\ln L(w,b)$，即：
 
 $$
-\begin{split} 
-J(w,b) =
-\sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
+\begin{split}
+J(w,b) &= H(y|x, \hat{y}|x) \\\\ 
+\\\\&= \sum_{i=1}^{m} - p\left(y^{(i)}|x^{(i)}\right) \ln p\left(\hat{y}^{(i)}|x^{(i)}\right) \\\\
+\\\\&= \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
 \end{split}
 $$
 
-#### 交叉熵损失角度
+##### 交叉熵损失角度
 
-将真实值和预测值看做是两个概率分布，则可以直接使用[交叉熵](#CrossEntropy)来衡量两者的差异程度，即：
+将 $y|x$ 和 $\hat{y}|x$ 看作两个概率分布，则可以直接使用[交叉熵](#CrossEntropy)来衡量两者的差异程度，即：
 
 $$
 \begin{split}
-J(w,b) &= \frac{1}{m} H(y, \hat{y}) \\\\ 
-\\\\&= \frac{1}{m} \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
+J(w,b) &= H(y, \hat{y}) \\\\ 
+\\\\&= \sum_{i=1}^{m} - p(y^{(i)}) \ln y^{(i)} \\\\
+\\\\&= \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
 \end{split}
 $$
 
 #### 求解模型参数
 
-求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。
+求解一组模型参数 $(w,b)$ 使得成本函数 $J$ 最小化。方法见[梯度下降算法](#GD)
 
-$$ arg\min_{w,b} J(w,b) $$
-
-<!-- true: 1, positive class
-false: 0, negative class -->
+$$ \arg \min_{w,b} J(w,b) $$
 
 ### SVM<a id="SVM"></a>
 
