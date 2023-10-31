@@ -236,28 +236,26 @@ $$
 
 ##### 确定模型
 
-由于 $y|x \in \lbrace 0,1 \rbrace$，即 $y$ 的条件概率接近[伯努利分布](#BernoulliDistribution)的函数，通过该函数将 $y$ 映射到
+<!-- 模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。 -->
 
-模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。由于[Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 函数：
+[Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 函数：
 
 $$ g(z) = \frac{1}{1+e^{-z}} \in (0,1) $$
 
-，则令
+令
 
-$$ z = w \cdot x + b $$ 作为输入，即模型：
+$$ z = w \cdot x + b $$ 则`正例`的概率模型：
 
 $$
-\begin{split}
-p(y=1|x;w,b) \\\\
-\\\\&= g(w \cdot x + b) \\\\
-\\\\&= \frac{1}{1 + e^{-(w \cdot x + b)}}
-\end{split} 
+p(y=1|x;w,b) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
 $$
 
-以 $0.5$ 为分界，若 $p \geq 0.5$ 则分类为 $1$，否则分类为 $0$.
+说明：
+1. 需要先将标签 $y \in \lbrace C_1,C_2 \rbrace$ 映射为 $y \in \lbrace 1,0 \rbrace$，这样标签就既可以`同时表示类别和概率`了；
+2. 模型表示`正例`的概率，且预测值 $\hat{y}$ 在区间 $(0,1)$ 内都有可能发生如 $0.6$，但标签是离散的非 $1$ 即 $0$。因此以 $0.5$ 为分界，若 $\hat{y} \geq 0.5$ 则分类为 $1$ 即正例，否则分类为 $0$.
+3. 模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$；
 
-注意：模型 $p(y=1|x;w,b)$ 中的 $y=1$ 是固定的，表示`约定的具体一个种类`的概率密度函数，也可以表达为 $y=C_1$ 等，只是[伯努利分布](#BernoulliDistribution)经验上这样表达；
-说明：模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$；
+<!-- [伯努利分布](#BernoulliDistribution) -->
 
 ##### 确定损失
 
