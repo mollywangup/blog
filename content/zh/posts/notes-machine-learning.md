@@ -2,7 +2,7 @@
 title: "学习笔记：吴恩达机器学习"
 date: 2023-08-04T08:09:47Z
 draft: false
-description: 监督学习包括线性回归，对数几率回归，SVM，朴素贝叶斯，决策树，随机森林，XGBoost；无监督学习包括 K-means，PCA 等。附带复习相关数学基础。
+description: 监督学习包括线性回归，逻辑回归，SVM，朴素贝叶斯，决策树，随机森林，XGBoost；无监督学习包括 K-means，PCA 等。附带复习相关数学基础。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -207,9 +207,9 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 以式 $(1)$ 的模型为例，将`将非一次项的 $x^2$ 视作新特征`，即可按照线性回归模型训练。
 
-### 对数几率回归<a id="LogisticRegression"></a>
+### 逻辑回归<a id="LogisticRegression"></a>
 
-对数几率回归（Logistic Regression）是一个`线性二分类器`，可通过 Softmax 泛化为`线性多分类器`。
+逻辑回归（Logistic Regression）是一个`线性二分类器`，可通过 Softmax 泛化为`线性多分类器`。
 
 #### 原理
 
@@ -217,7 +217,7 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 将二分类问题，即 $y \in \lbrace C_1,C_2 \rbrace$，转化为找到`一个`概率分布函数：
 
-$$ p(y=C_1|x) $$，然后取 $\displaystyle \max \lbrace p(y=C_1|x),p(y=C_2|x) \rbrace$ 即以 $0.5$ 为分界，若 $p(y=C_1|x) \geq 0.5$ 则分类为 $C_1$，否则分类为 $C_2$，即为`对数几率回归`；
+$$ p(y=C_1|x) $$，然后取 $\displaystyle \max \lbrace p(y=C_1|x),p(y=C_2|x) \rbrace$ 即以 $0.5$ 为分界，若 $p(y=C_1|x) \geq 0.5$ 则分类为 $C_1$，否则分类为 $C_2$，即为`逻辑回归`；
 
 将多分类问题，即 $y \in \lbrace C_1,C_2,\cdots,C_k \rbrace$，转化为找到 `k 个`概率分布函数：
 
@@ -230,7 +230,7 @@ p(y=C_1|x) \\\\
 \end{cases}	
 $$
 
-然后以 $\displaystyle \max_{i} p(y=C_i|x)$ 为最终分类类别，即为 `Softmax 回归`。
+其中 $\displaystyle\sum_{i=1}^{k} p(y=C_i|x) = 1$，然后以 $\displaystyle \max_{i} p(y=C_i|x)$ 为最终分类类别，即为 `Softmax 回归`。
 
 <!-- [伯努利分布](#BernoulliDistribution)。  -->
 
@@ -242,13 +242,13 @@ $$
 
 $$ g(z) = \frac{1}{1+e^{-z}} \in (0,1) $$
 
-接近 [0-1 分布](#BernoulliDistribution)，则令
+，则令
 
 $$ z = w \cdot x + b $$ 作为输入，即模型：
 
 $$
 \begin{split}
-f_{w,b}(x) &= p(y=1|x;w,b) \\\\
+p(y=1|x;w,b) \\\\
 \\\\&= g(w \cdot x + b) \\\\
 \\\\&= \frac{1}{1 + e^{-(w \cdot x + b)}}
 \end{split} 
@@ -256,7 +256,8 @@ $$
 
 以 $0.5$ 为分界，若 $p \geq 0.5$ 则分类为 $1$，否则分类为 $0$.
 
-说明：模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$.
+注意：模型 $p(y=1|x;w,b)$ 中的 $y=1$ 是固定的，表示`约定的具体一个种类`的概率密度函数，也可以表达为 $y=C_1$ 等，只是[伯努利分布](#BernoulliDistribution)经验上这样表达；
+说明：模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$；
 
 ##### 确定损失
 
@@ -264,27 +265,24 @@ $$
 
 ###### 极大似然估计角度
 
-[极大似然估计](#MaximumLikelihoodEstimation)假设`样本独立同分布`，根据模型 $p(y=1|x;w,b) = f_{w,b}(x)$，构造似然函数 $L(w,b)$：
+[极大似然估计](#MaximumLikelihoodEstimation)假设`样本独立同分布`，由模型 $p(y=1|x;w,b)$ 构造似然函数 $L(w,b)$：
 
 $$ 
 \begin{split}
-L(w,b) 
-&= p(y^{(1)}|x^{(1)},y^{(2)}|x^{(2)},\cdots,y^{(m)}|x^{(m)}) \\\\ 
-\\\\&= \prod_{i=1}^{m} p(y^{(i)}|x^{(i)}) \\\\ 
-\\\\&= \prod_{i:y^{(i)}=1} f_{w,b}(x^{(i)}) \prod_{i:y^{(i)}=0} \left(1 - f_{w,b}(x^{(i)})\right) \\\\
-\\\\&= \prod_{i=1}^{m} \left(f_{w,b}(x^{(i)})\right)^{y^{(i)}} \left(1 - f_{w,b}(x^{(i)})\right)^{1 - y^{(i)}} 
+L(w,b) &= \prod_{i:y^{(i)}=1} p(x^{(i)};w,b) \prod_{i:y^{(i)}=0} \left(1 - p(x^{(i)};w,b)\right) \\\\
+\\\\&= \prod_{i=1}^{m} \left(p(x^{(i)};w,b)\right)^{y^{(i)}} \left(1 - p(x^{(i)};w,b)\right)^{1 - y^{(i)}} 
 \end{split}
 $$ 
 
 将目标由 $\displaystyle\arg \max_{w,b} L(w,b)$ 转化为`取对数再取负号`后的 $\displaystyle\arg \min_{w,b} -\ln L(w,b)$，即：
 
 $$
-J(w,b) = \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
+J(w,b) = \sum_{i=1}^{m} - y^{(i)} \ln p(x^{(i)};w,b) - (1 - y^{(i)}) \ln\left(1 - p(x^{(i)};w,b)\right)
 $$
 
 ###### 交叉熵损失角度
 
-将 $p(y|x)$ 和 $p(\hat{y}|x)$ 看作两个概率分布，则可以直接使用[交叉熵](#CrossEntropy)来衡量两者的差异程度，即：
+将真实值 $y$ 和 预测值 $p(x;w,b)$ 看作两个概率分布，则可使用[交叉熵](#CrossEntropy)来衡量两者的差异程度，即：
 
 $$
 \begin{split}
