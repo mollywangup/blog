@@ -2,7 +2,7 @@
 title: "学习笔记：吴恩达机器学习"
 date: 2023-08-04T08:09:47Z
 draft: false
-description: 监督学习包括线性回归，逻辑回归，SVM，朴素贝叶斯，决策树，随机森林，XGBoost；无监督学习包括 K-means，PCA 等。附带复习相关数学基础。
+description: 监督学习包括线性回归，对数几率回归，SVM，朴素贝叶斯，决策树，随机森林，XGBoost；无监督学习包括 K-means，PCA 等。附带复习相关数学基础。
 hideToc: false
 enableToc: true
 enableTocContent: false
@@ -207,13 +207,36 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 以式 $(1)$ 的模型为例，将`将非一次项的 $x^2$ 视作新特征`，即可按照线性回归模型训练。
 
-### 逻辑回归<a id="LogisticRegression"></a>
+### 对数几率回归<a id="LogisticRegression"></a>
 
-逻辑回归（Logistic Regression）是一个`线性二分类器`，可通过 Softmax 泛化为`线性多分类器`。
+对数几率回归（Logistic Regression）是一个`线性二分类器`，可通过 Softmax 泛化为`线性多分类器`。
 
 #### 原理
 
+##### 问题背景
+
+将二分类问题，即 $y \in \lbrace C_1,C_2 \rbrace$，转化为找到`一个`概率分布函数：
+
+$$ p(y=C_1|x) $$，然后取 $\displaystyle \max \lbrace p(y=C_1|x),p(y=C_2|x) \rbrace$ 即以 $0.5$ 为分界，若 $p(y=C_1|x) \geq 0.5$ 则分类为 $C_1$，否则分类为 $C_2$，即为`对数几率回归`；
+
+将多分类问题，即 $y \in \lbrace C_1,C_2,\cdots,C_k \rbrace$，转化为找到 `k 个`概率分布函数：
+
+$$ 
+\begin{cases}
+p(y=C_1|x) \\\\ 
+\\\\p(y=C_2|x) \\\\ 
+\\\\ \cdots \\\\
+\\\\p(y=C_k|x)
+\end{cases}	
+$$
+
+然后以 $\displaystyle \max_{i} p(y=C_i|x)$ 为最终分类类别，即为 `Softmax 回归`。
+
+<!-- [伯努利分布](#BernoulliDistribution)。  -->
+
 ##### 确定模型
+
+由于 $y|x \in \lbrace 0,1 \rbrace$，即 $y$ 的条件概率接近[伯努利分布](#BernoulliDistribution)的函数，通过该函数将 $y$ 映射到
 
 模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。由于[Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 函数：
 
@@ -283,17 +306,21 @@ Softmax 解决多分类问题，设共 $k$ 个类别，对于`每个类别`，�
 
 $$ z_i = w_i \cdot x + b_i $$ 
 
-其中 $w_i \in \mathbb{R}^n, \space i \in \lbrace 1, 2, ..., k \rbrace$，则第 $i$ 个类别的概率模型：
+则第 $i$ 个类别的概率模型：
 
 $$
 p(y=i|x;w_i,b_i) = g(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}}
 $$
 
-对应的损失：
+其中 $w_i \in \mathbb{R}^n, \space i \in \lbrace 1, 2, ..., k \rbrace$.
+
+对应第 $i$ 个类别的损失函数：
 
 $$
 \begin{split}
-J = 
+L(w_i,b_i) 
+&= H(y=i|x, \hat{y}=i|x)
+&= \sum_{}^{} -p(y=1|x) \ln p(y=i|x;w_i,b_i)
 \end{split}
 $$
 
@@ -715,13 +742,13 @@ $$ accuracy = \frac{TP+TN}{TP+TN+FP+FN} $$
 
 也称作查准率，指`预测为正中的样本中，实际为正`的比例，即：
 
-$$ precision = \frac{Ture \space P}{predicted \space P} = \frac{TP}{TP+FP} $$
+$$ precision = \frac{True \space P}{predicted \space P} = \frac{TP}{TP+FP} $$
 
 ##### 召回率
 
 也称作查全率，指`实际为正中的样本中，预测为正`的比例，即：
 
-$$ recall = \frac{Ture \space P}{actual \space P}  = \frac{TP}{TP+FN} $$
+$$ recall = \frac{True \space P}{actual \space P}  = \frac{TP}{TP+FN} $$
 
 ##### F1
 
@@ -1285,7 +1312,7 @@ $$
 
 #### 相对熵<a id="KLD"></a>
 
-相对熵（Relative Entropy），又称为 `KL 散度`（Kullback-Leibler divergence），用于`衡量两个概率分布之间的差异程度`。对于两个概率分布 $p(x)$ 和 $q(x)$，其相对熵定义如下：
+相对熵（Relative Entropy），又称为 `KL 散度`（Kullback-Leibler divergence），用于`衡量两个概率分布之间的差异程度`。对于随机变量 $x$ 的两个概率分布 $p(x)$ 和 $q(x)$，其相对熵定义如下：
 
 $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
 
@@ -1311,14 +1338,14 @@ $$
 $$ 
 \begin{split}
 D_{KL}(p||q) &= \sum_x p(x) \ln \frac{p(x)}{q(x)} \\\\
-&= \sum_x p(x) \ln p(x) - \sum_x p(x) \ln q(x) \\\\
-&= -H(p) + H(p,q)
+\\\\&= \sum_x p(x) \ln p(x) - \sum_x p(x) \ln q(x) \\\\
+\\\\&= -H(p) + H(p,q)
 \end{split}
 $$
 
 其中，前半部分就是`负的 $p(x)$ 的熵`，后半部分则就是`交叉熵`（Cross Entropy）：$$ H(p,q) = - \sum_x p(x) \ln q(x) $$
 
-实际应用中，如果将 $p(x)$ 作为真实值的概率分布，$q(x)$ 作为预测值的概率分布，则由于真实值的熵 $H(p)$ 是一个常数，因此：
+实际应用中，如果将 $p(x)$ 和 $q(x)$ 分别作为`真实值`和`预测值`的概率分布，则由于前者的熵 $H(p)$ 是一个常数，因此：
 
 $$ D_{KL}(p||q) \simeq H(p,q)$$
 
