@@ -191,7 +191,7 @@ $$
 
 $$ \arg \min_{w,b} J(w,b) $$
 
-#### 多项式特征<a id="PolynomialFeatures"></a>
+#### 多项式回归<a id="PolynomialFeatures"></a>
 
 {{< alert theme="info" >}}
 通过添加`特征的多项式`可提高模型复杂度，将其视作新特征则归来仍是[线性回归](#LinearRegression)问题。
@@ -209,7 +209,7 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 ### 逻辑回归<a id="LogisticRegression"></a>
 
-逻辑回归（Logistic Regression）是一个`线性二分类器`。
+逻辑回归（Logistic Regression）是一个`线性二分类器`，可通过 Softmax 泛化为`线性多分类器`。
 
 #### 原理
 
@@ -277,8 +277,25 @@ $$
 
 $$ \arg \min_{w,b} J(w,b) $$
 
-#### Softmax 逻辑回归
+#### Softmax 回归
 
+Softmax 解决多分类问题，设共 $k$ 个类别，对于`每个类别`，都对应一个线性映射：
+
+$$ z_i = w_i \cdot x + b_i $$ 
+
+其中 $w_i \in \mathbb{R}^n, \space i \in \lbrace 1, 2, ..., k \rbrace$，则第 $i$ 个类别的概率模型：
+
+$$
+p(y=i|x;w_i,b_i) = g(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}}
+$$
+
+对应的损失：
+
+$$
+\begin{split}
+J = 
+\end{split}
+$$
 
 ### SVM<a id="SVM"></a>
 
@@ -679,9 +696,9 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 #### 分类指标
 
-以二分类问题的`混淆矩阵`（Confusion Matrix）如下：
+二分类问题的`混淆矩阵`（Confusion Matrix）如下：
 
-| 实际/预测&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
+| actual/predicted&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
 | ---------- | ---------- | ---------- |
 | **Positive** | TP（真正） | FN（假负） | 
 | **Negative** | FP（假正） | TN（真负） | 
@@ -696,19 +713,19 @@ $$ accuracy = \frac{TP+TN}{TP+TN+FP+FN} $$
 
 ##### 精确率
 
-也称作`查准率`，指预测为正中的样本中，实际为正的比例，即：
+也称作查准率，指`预测为正中的样本中，实际为正`的比例，即：
 
-$$ precision = \frac{TP}{TP+FP} $$
+$$ precision = \frac{Ture \space P}{predicted \space P} = \frac{TP}{TP+FP} $$
 
 ##### 召回率
 
-也称作`查全率`，指实际为正中的样本中，预测为正的比例，即：
+也称作查全率，指`实际为正中的样本中，预测为正`的比例，即：
 
-$$ recall = \frac{TP}{TP+FN} $$
+$$ recall = \frac{Ture \space P}{actual \space P}  = \frac{TP}{TP+FN} $$
 
 ##### F1
 
-$$ F1 = \frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率} $$
+$$ F1 = \frac{2 \times precision \times recall}{precision + recall} $$
 
 ##### ROC
 
