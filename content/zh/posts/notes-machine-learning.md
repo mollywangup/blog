@@ -34,7 +34,7 @@ pinned: true
 - 模型（`model`）：指拟合函数；
 - 模型参数（`parameter`）：调整模型的本质是调整模型参数；
 - [损失函数（Loss function）](#LossFunction)：衡量预测值与真实值之间的差异程度，"单个损失"；
-- 成本函数（`Cost function`）：用于评估模型性能，"总平均损失"；
+- 成本函数（`Cost function`）：用于评估模型性能，"总损失"；
 - 特征工程（`feature engineering`）：对特征进行选择、提取和转换等操作，用于提高模型性能；
 
 ### 符号<a id="符号"></a>
@@ -277,10 +277,7 @@ $$
 
 $$ \arg \min_{w,b} J(w,b) $$
 
-#### 多分类问题
-
-思路一：
-
+#### Softmax 逻辑回归
 
 
 ### SVM<a id="SVM"></a>
@@ -305,6 +302,8 @@ KNN (K-Nearest Neighbors)，解决**分类+回归**问题。`K 个邻居的意�
 ### 朴素贝叶斯<a id="NaiveBayes"></a>
 
 Naive Bayes，解决**分类**问题。
+
+
 
 ### 决策树<a id="DecisionTree"></a>
 
@@ -680,27 +679,40 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 #### 分类指标
 
-##### 混淆矩阵
+以二分类问题的`混淆矩阵`（Confusion Matrix）如下：
 
-（confusion matrix）
-
-用于分类模型的效果评估。以下以二分类模型为例：
-
-| 预测/实际&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
+| 实际/预测&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
 | ---------- | ---------- | ---------- |
-| **Positive** | TP  | FP&nbsp;&nbsp;&nbsp; | 
-| **Negative** | FN  | TN&nbsp;&nbsp;&nbsp; | 
+| **Positive** | TP（真正） | FN（假负） | 
+| **Negative** | FP（假正） | TN（真负） | 
 
-- 准确率（accuracy）：指预测正确的比例，即 $\frac{TP+TN}{TP+TN+FP+FN}$
-- 精确率（precision）：也称作查准率，指预测为正中实际为正的比例，即 $\frac{TP}{TP+FP}$
-- 召回率（recall）：也称作查全率，指实际为正中预测为正的比例，即 $\frac{TP}{TP+FN}$
-- F1：$\frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率}$
+其中：`T/F` 表示预测是否正确，`P/N` 表示预测结果（P=1, N=0）。
+
+##### 准确率
+
+指`预测正确`的比例，即：
+
+$$ accuracy = \frac{TP+TN}{TP+TN+FP+FN} $$
+
+##### 精确率
+
+也称作`查准率`，指预测为正中的样本中，实际为正的比例，即：
+
+$$ precision = \frac{TP}{TP+FP} $$
+
+##### 召回率
+
+也称作`查全率`，指实际为正中的样本中，预测为正的比例，即：
+
+$$ recall = \frac{TP}{TP+FN} $$
+
+##### F1
+
+$$ F1 = \frac{2 \times	 精确率 \times 召回率}{精确率 + 召回率} $$
 
 ##### ROC
 
 [深入介紹及比較ROC曲線及PR曲線](https://medium.com/nlp-tsupei/roc-pr-%E6%9B%B2%E7%B7%9A-f3faa2231b8c)
-
-用于分类模型的效果评估，以可视化的方式。
 
 ## 数学基础
 
@@ -875,7 +887,13 @@ $$
 给定`可微`函数 $f: \mathbb{R}^n \to \mathbb{R}$，则 $f$ 的**偏导数构成的向量**，称为梯度，记作 $grad f$ 或 $\nabla f$，即：
 
 $$
-grad f = \nabla f = (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},..., \frac{\partial f}{\partial x_n})
+grad f = \nabla f =
+\begin{bmatrix}
+\frac{\partial f}{\partial x_1} \\\\ 
+\frac{\partial f}{\partial x_2} \\\\ 
+\vdots \\\\ 
+\frac{\partial f}{\partial x_n} 
+\end{bmatrix} \in \mathbb{R}^n
 $$
 
 用途：[梯度下降算法](#GD)
