@@ -218,11 +218,13 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 即`二选一`问题，将 $y|x \in \lbrace C_1,C_2 \rbrace$ 转化为[伯努利分布](#BernoulliDistribution)，即：
 
 - $p(y=1|x)$ 表示是 $C_1$ 的概率；
-- $1 - p(y=1|x)$ 表示不是 $C_1$ 的概率；
+- $1 - p(y=1|x)$ 表示不是 $C_1$ 即是 $C_2$ 的概率；
 
 因此仅需要找到`一个`概率分布函数：
 
-$$ p(y=1|x) $$，然后取 $\displaystyle \max \lbrace p(y=1|x),1-p(y=1|x) \rbrace$ 即以 $0.5$ 为分界，若 $p(y=1|x) \geq 0.5$ 则分类为 $C_1$，否则分类为 $C_2$，即为`逻辑回归`；
+$$ p(y=1|x) $$
+
+然后取 $\displaystyle \max \lbrace p,1-p \rbrace$ 即以 $0.5$ 为分界，若 $p \geq 0.5$ 则分类为 $C_1$，否则分类为 $C_2$，即为`逻辑回归`；
 
 ##### 多分类
 
@@ -237,7 +239,7 @@ p(y=1|x) \\\\
 \end{cases}	
 $$
 
-其中 $\displaystyle\sum_{i=1}^{k} p(y=i|x) = 1$，然后以 $\displaystyle \max_{i} p(y=i|x)$ 为最终分类类别，即为 `Softmax 回归`。
+其中 $\displaystyle\sum_{i=1}^{k} p(y=i|x) = 1$，然后 $\displaystyle \max_{i} p(y=i|x)$ 即最终分类类别，即为 `Softmax 回归`。
 
 #### 原理
 
@@ -245,7 +247,7 @@ $$
 
 <!-- 模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。 -->
 
-<a href="https://mollywangup.com/posts/notes-deep-learning/#sigmoid" target="_blank">Sigmoid 函数：</a>
+<a href="https://mollywangup.com/posts/notes-deep-learning/#sigmoid" target="_blank">Sigmoid 函数</a>：
 
 $$ g(z) = \frac{1}{1+e^{-z}} \in (0,1) $$
 
