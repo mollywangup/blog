@@ -209,11 +209,11 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 ### 逻辑回归<a id="LogisticRegression"></a>
 
-逻辑回归（Logistic Regression）是一个`线性二分类器`，可通过 Softmax 泛化为`线性多分类器`。
+逻辑回归（Logistic Regression）是 Softmax 回归的特殊情况，都属于`线性分类器`。
 
 #### 问题背景
 
-##### 二分类
+##### 二分类（逻辑回归）
 
 即`二选一`问题，将 $y|x \in \lbrace C_1,C_2 \rbrace$ 转化为[伯努利分布](#BernoulliDistribution)，即：
 
@@ -224,9 +224,9 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 $$ p(y=1|x) $$
 
-然后取 $\displaystyle \max \lbrace p,1-p \rbrace$ 即以 $0.5$ 为分界，若 $p \geq 0.5$ 则分类为 $C_1$，否则分类为 $C_2$，即为`逻辑回归`；
+然后取 $\displaystyle \max \lbrace p,1-p \rbrace$ 即以 $0.5$ 为分界，若 $p \geq 0.5$ 则分类为 $C_1$，否则分类为 $C_2$.
 
-##### 多分类
+##### 多分类（Softmax 回归）
 
 即`多选一`问题，将 $y|x \in \lbrace C_1,C_2,\cdots,C_k \rbrace$ 转化为找到 `k 个`概率分布函数：
 
@@ -239,13 +239,13 @@ p(y=1|x) \\\\
 \end{cases}	
 $$
 
-其中 $\displaystyle\sum_{i=1}^{k} p(y=i|x) = 1$，然后 $\displaystyle \max_{i} p(y=i|x)$ 即最终分类类别，即为 `Softmax 回归`。
+其中 $\displaystyle\sum_{i=1}^{k} p(y=i|x) = 1$，然后以 $\displaystyle \max_{i} p(y=i|x)$ 为最终分类类别。
 
-#### 原理
+#### 逻辑回归
 
-##### 确定模型
+##### 模型
 
-<!-- 模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。 -->
+逻辑回归假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。
 
 <a href="https://mollywangup.com/posts/notes-deep-learning/#sigmoid" target="_blank">Sigmoid 函数</a>：
 
@@ -260,11 +260,12 @@ p(y=1|x;w,b) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
 $$
 
 说明：
-1. 再次强调，模型表示的是 $y=1$ 即正例的概率模型；
-2. 模型预测值在区间 $(0,1)$ 内连续，分类方法是 `以 0.5 为分界`，若 $p \geq 0.5$ 则分类为 $1$，否则分类为 $0$. 这也是`对数逻辑回归`别称的由来；
+1. 模型直接输出 $y=1$ 即正例的概率，即属于 $\mathbb{R}^n \to \mathbb{R}$ 单值函数；
+   - 如 $y^{(i)}$ 形如 $[0]$，$\hat{y}^{(i)}$ 形如 $[0.4]$. 
+2. `以 0.5 为分界`，若 $p \geq 0.5$ 则分类为 $1$，否则分类为 $0$. 这也是`对数逻辑回归`别称的由来；
 3. 模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$；
 
-##### 确定损失
+##### 损失
 
 以下两种角度殊途同归。注意这里没有求均值，不影响结果。
 
@@ -279,10 +280,10 @@ L(w,b) &= \prod_{i:y^{(i)}=1} p(x^{(i)};w,b) \prod_{i:y^{(i)}=0} \left(1 - p(x^{
 \end{split}
 $$ 
 
-将目标由 $\displaystyle\arg \max_{w,b} L(w,b)$ 转化为`取对数再取负号`后的 $\displaystyle\arg \min_{w,b} -\ln L(w,b)$，即：
+将目标由 $\displaystyle\arg \max_{w,b} L(w,b)$ 转化为`取对数再取负号`后的求极小值问题，取均值后成本函数如下：
 
 $$
-J(w,b) = \sum_{i=1}^{m} - y^{(i)} \ln p(x^{(i)};w,b) - (1 - y^{(i)}) \ln\left(1 - p(x^{(i)};w,b)\right)
+J(w,b) = \frac{1}{m} \sum_{i=1}^{m} - y^{(i)} \ln p(x^{(i)};w,b) - (1 - y^{(i)}) \ln\left(1 - p(x^{(i)};w,b)\right)
 $$
 
 ###### 交叉熵损失角度
@@ -291,9 +292,8 @@ $$
 
 $$
 \begin{split}
-J(w,b) &= H(p(y|x), p(\hat{y}|x)) \\\\ 
-\\\\&= \sum_{i=1}^{m} - p\left(y^{(i)}|x^{(i)}\right) \ln p\left(\hat{y}^{(i)}|x^{(i)}\right) \\\\
-\\\\&= \sum_{i=1}^{m} - y^{(i)} \ln f_{w,b}(x^{(i)}) - (1 - y^{(i)}) \ln(1 - f_{w,b}(x^{(i)}))
+J(w,b) &= \frac{1}{m} \sum_{i=1}^{m} L(\hat{y}^{(i)}, y^{(i)}) = \frac{1}{m} \sum_{i=1}^{m} H(y^{(i)}, \hat{y}^{(i)}) \\\\
+&= \frac{1}{m} \sum_{i=1}^{m} - y^{(i)} \ln p(x^{(i)};w,b) - (1 - y^{(i)}) \ln\left(1 - p(x^{(i)};w,b)\right)
 \end{split}
 $$
 
@@ -317,15 +317,22 @@ $$
 
 其中 $w_i \in \mathbb{R}^n, \space i \in \lbrace 1, 2, ..., k \rbrace$.
 
-对应第 $i$ 个类别的损失函数：
+说明：
+1. 模型直接输出 $k$ 个类别的概率，即属于 $\mathbb{R}^n \to \mathbb{R}^k$ 多值函数；
+   - 如 $k$ 取 3，则 $y^{(i)}$ 形如 $[0, 0, 1]$，$\hat{y}^{(i)}$ 形如 $[0.1, 0.4, 0.5]$. 
+2. 最终分类类别取 $\displaystyle \max_i p(y=i|x)$ 对应的即可；
+
+对应成本函数：
 
 $$
 \begin{split}
-L(w_i,b_i) 
-&= H(y=i|x, \hat{y}=i|x)
-&= \sum_{}^{} -p(y=1|x) \ln p(y=i|x;w_i,b_i)
+J = \frac{1}{m} \sum_{i=1}^{m} L(\hat{y}^{(i)}, y^{(i)}) 
+&= \frac{1}{m} \sum_{i=1}^{m} H(y^{(i)}, \hat{y}^{(i)})
+&= \frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{k} -y^{(i,j)} \ln p(x^{(i)};w_j,b_j)
 \end{split}
 $$
+
+其中，$y^{(i,j)}$ 表示第 $i$ 个训练示例的第 $j$ 个分类的概率。
 
 ### SVM<a id="SVM"></a>
 
@@ -542,30 +549,32 @@ $$
 ### 损失函数<a id='LossFunction'></a>
 
 {{< alert theme="info" >}}
-损失函数用于`衡量预测值与真实值之间的差异程度`，也就是模型的拟合程度。
+损失函数用于`衡量单个预测值与真实值之间的差异程度`，本质上是衡量两变量差异程度的通用函数。
 {{< /alert >}}
 
-给定 $\hat{y},y \in \mathbb{R}$，分别表示预测值和真实值，则损失函数表示为：$$ L(\hat{y}, y) $$
-
-成本函数 $J$ 表示为：
-
-$$
-J = \frac{1}{m} \displaystyle \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)
-$$
-
-说明：成本函数更灵活，有时会在损失函数的基础上再加上正则项；
+损失函数通常表示为 $L(\hat{y}, y)$，成本函数通常表示为 $J = \frac{1}{m} \displaystyle \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)$.
 
 #### 最小二乘<a id="LeastSquaresLoss"></a>
+
+适用于`线性回归`。给定 $\hat{y},y \in \mathbb{R}$，分别表示预测值和真实值，则：
 
 $$ L(\hat{y}, y) = \frac{1}{2} (\hat{y} - y)^2 $$
 
 #### 交叉熵<a id="CrossEntropyLoss"></a>
 
-推导详见[交叉熵](#CrossEntropy)
+适用于`线性分类`模型。将 $\hat{y},y$ 分别看作 `预测类别的分布`和`真实类别的分布`，则：
 
-$$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_x y \ln \hat{y} $$
+$$ L(\hat{y}, y) = H(y,\hat{y}) = - \sum_k y \ln \hat{y} $$
 
-对于二分类问题：$$ L(\hat{y}, y) = -y\ln\hat{y} - (1-y)\ln(1-\hat{y}) $$
+其中 $k$ 为`分类的数量`，$\displaystyle\sum_{k} y = \sum_{k} \hat{y} = 1$. 推导详见[交叉熵](#CrossEntropy)。
+
+特别的，对于二分类问题：
+
+$$ L(\hat{y}, y) = -y\ln\hat{y} - (1-y)\ln(1-\hat{y}) $$
+
+举例说明：
+对于二分类，$\hat{y},y$ 的一组取值形如 $[0.6]$ 和 $[1]$，本质上是 $[0.6, 0.4]$ 和 $[1, 0]$；
+对于三分类问题，$\hat{y},y$ 的一组取值形如 $[0.1, 0.3, 0.6]$ 和 $[0, 0, 1]$；
 
 ### 优化算法
 
