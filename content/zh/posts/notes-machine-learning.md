@@ -244,15 +244,15 @@ $$ g(z) = \frac{1}{1+e^{-z}} \in (0,1) $$
 
 令
 
-$$ z = w \cdot x + b $$ 则`正例`的概率模型：
+$$ z = w \cdot x + b $$ 则 $y=1$（也称作`正例`）的概率模型：
 
 $$
 p(y=1|x;w,b) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
 $$
 
 说明：
-1. 需要先将标签 $y \in \lbrace C_1,C_2 \rbrace$ 映射为 $y \in \lbrace 1,0 \rbrace$，这样标签就既可以`同时表示类别和概率`了；
-2. 模型表示`正例`的概率，且预测值 $\hat{y}$ 在区间 $(0,1)$ 内都有可能发生如 $0.6$，但标签是离散的非 $1$ 即 $0$。因此以 $0.5$ 为分界，若 $\hat{y} \geq 0.5$ 则分类为 $1$ 即正例，否则分类为 $0$.
+1. 将标签 $y \in \lbrace C_1,C_2 \rbrace$ 映射为 $y \in \lbrace 1,0 \rbrace$，这样标签就可以`同时表示类别和概率`了；
+2. 预测值 $\hat{y}$ 在区间 $(0,1)$ 内连续，因此`以 0.5 为分界`，若 $\hat{y} \geq 0.5$ 则分类为 $1$，否则分类为 $0$. 这也是`对数逻辑回归`别称的由来；
 3. 模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$；
 
 <!-- [伯努利分布](#BernoulliDistribution) -->
@@ -1286,7 +1286,7 @@ $$ I(x) = \ln \frac{1}{p(x)} = - \ln p(x) $$
 
 其中 $\displaystyle \sum_x p(x) = 1$.
 
-<img src='https://user-images.githubusercontent.com/46241961/278089095-219f103a-45e8-4920-825a-ef5f72e1832c.svg' alt='信息量' width=70%>
+<img src='https://user-images.githubusercontent.com/46241961/279551949-d8826d27-d365-4bc1-b2c8-5dc9035dc2e7.svg' alt='information-of-x' width=70%>
 
 <br>说明：
 1. 概率越小，信息量越大；
@@ -1300,11 +1300,14 @@ $$
 H(p) = E(I(x)) = \sum_x p(x) I(x) = - \sum_x p(x) \ln p(x)
 $$
 
-<img src='https://user-images.githubusercontent.com/46241961/278096679-4b948c28-8618-43c6-85c0-3d52de6b4c61.svg' alt='不同高斯分布的熵对比' width=70%>
+<!-- <img src='https://user-images.githubusercontent.com/46241961/278096679-4b948c28-8618-43c6-85c0-3d52de6b4c61.svg' alt='不同高斯分布的熵对比' width=70%> -->
+
+<img src='https://user-images.githubusercontent.com/46241961/279553130-70d969c6-38e3-461c-abfe-94ce32ddec1a.svg' alt='entropy-of-Bernoulli-distribution' width=70%>
 
 <br>说明：
-1. **方差越大，分布越分散（混乱），熵越大（平均信息量越大）。** [（👈 梅开二度）](#GaussianDistribution)
+1. 伯努利分布的熵在 $\phi=0.5$ 时最大；
 2. 离散型随机变量对应**求和**，连续型随机变量对应**求积分**（已省略）；
+<!-- 3. **方差越大，分布越分散（混乱），熵越大（平均信息量越大）。** [（👈 梅开二度）](#GaussianDistribution) -->
 
 #### 相对熵<a id="KLD"></a>
 
