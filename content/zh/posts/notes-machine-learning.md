@@ -1280,7 +1280,7 @@ $$
 
 #### 信息量
 
-给定随机变量 $x$ 的概率分布 $p(x) \in [0,1]$，则 $x$ 的`信息量`定义如下：
+给定随机变量 $X$ 的概率分布 $p(x) \in [0,1]$，则当 $X=x$ 发生时，$x$ 的`信息量`定义如下：
 
 $$ I(x) = \ln \frac{1}{p(x)} = - \ln p(x) $$
 
@@ -1289,29 +1289,27 @@ $$ I(x) = \ln \frac{1}{p(x)} = - \ln p(x) $$
 <img src='https://user-images.githubusercontent.com/46241961/279551949-d8826d27-d365-4bc1-b2c8-5dc9035dc2e7.svg' alt='information-of-x' width=70%>
 
 <br>说明：
-1. 概率越小，信息量越大；
+1. 信息量针对的是`单一事件`，大小仅受概率影响。概率越小，信息量越大；
 2. 对数底数仅影响量化的单位，以 2 为底对应比特，以 e 为底对应纳特（默认）。
 
 #### 熵
 
-熵（Entropy）等于 $x$ 的 **`信息量的期望值`**，用于衡量**混乱程度或不确定性**，定义如下：
+熵（Entropy）等于随机变量 $X$ `所有可能取值`的 **`信息量的期望值`**，用于衡量**混乱程度或不确定性**，定义如下：
 
 $$ 
-H(p) = E(I(x)) = \sum_x p(x) I(x) = - \sum_x p(x) \ln p(x)
+H(X) = E(I(x)) = \sum_x p(x) I(x) = - \sum_x p(x) \ln p(x)
 $$
-
-<!-- <img src='https://user-images.githubusercontent.com/46241961/278096679-4b948c28-8618-43c6-85c0-3d52de6b4c61.svg' alt='不同高斯分布的熵对比' width=70%> -->
 
 <img src='https://user-images.githubusercontent.com/46241961/279553130-70d969c6-38e3-461c-abfe-94ce32ddec1a.svg' alt='entropy-of-Bernoulli-distribution' width=70%>
 
 <br>说明：
-1. 伯努利分布的熵在 $\phi=0.5$ 时最大；
+1. 熵针对的是`整个概率分布`，也记作 $H(p)$。熵越大（平均信息量越大），分布越混乱；
 2. 离散型随机变量对应**求和**，连续型随机变量对应**求积分**（已省略）；
 <!-- 3. **方差越大，分布越分散（混乱），熵越大（平均信息量越大）。** [（👈 梅开二度）](#GaussianDistribution) -->
 
 #### 相对熵<a id="KLD"></a>
 
-相对熵（Relative Entropy），又称为 `KL 散度`（Kullback-Leibler divergence），用于`衡量两个概率分布之间的差异程度`。对于随机变量 $x$ 的两个概率分布 $p(x)$ 和 $q(x)$，其相对熵定义如下：
+相对熵（Relative Entropy），又称为 `KL 散度`（Kullback-Leibler divergence），用于`衡量两个概率分布之间的差异程度`。对于随机变量 $X$ 的两个概率分布 $p(x)$ 和 $q(x)$，其相对熵定义如下：
 
 $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} $$
 
@@ -1347,6 +1345,17 @@ $$
 实际应用中，如果将 $p(x)$ 和 $q(x)$ 分别作为`真实值`和`预测值`的概率分布，则由于前者的熵 $H(p)$ 是一个常数，因此：
 
 $$ D_{KL}(p||q) \simeq H(p,q)$$
+
+#### 条件熵<a id="ConditionEntropy"></a>
+
+给定随机变量 $X$ 和 $Y$ 及对应的概率分布 $p(x)$ 和 $p(y)$，则顾名思义条件熵定义如下：
+
+$$
+H(Y|X) = \sum_{x} p(x) H(Y|x) = \sum_{x} p(x) \sum_{y} p(y|x) \ln(p(y|x))
+$$
+
+说明：可从`全概率公式`角度理解，$H(Y|X) = \displaystyle\sum_{condition} p(condition) H(goal|condition)$.
+用途：[决策树](#DecisionTree)
 
 ## 附
 
