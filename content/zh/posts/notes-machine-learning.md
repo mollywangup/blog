@@ -211,34 +211,41 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 逻辑回归（Logistic Regression）是一个`线性二分类器`，可通过 Softmax 泛化为`线性多分类器`。
 
-#### 原理
+#### 问题背景
 
-##### 问题背景
+##### 二分类
 
-将二分类问题，即 $y \in \lbrace C_1,C_2 \rbrace$，转化为找到`一个`概率分布函数：
+即`二选一`问题，将 $y|x \in \lbrace C_1,C_2 \rbrace$ 转化为[伯努利分布](#BernoulliDistribution)，即：
 
-$$ p(y=C_1|x) $$，然后取 $\displaystyle \max \lbrace p(y=C_1|x),p(y=C_2|x) \rbrace$ 即以 $0.5$ 为分界，若 $p(y=C_1|x) \geq 0.5$ 则分类为 $C_1$，否则分类为 $C_2$，即为`逻辑回归`；
+- $p(y=1|x)$ 表示是 $C_1$ 的概率；
+- $1 - p(y=1|x)$ 表示不是 $C_1$ 的概率；
 
-将多分类问题，即 $y \in \lbrace C_1,C_2,\cdots,C_k \rbrace$，转化为找到 `k 个`概率分布函数：
+因此仅需要找到`一个`概率分布函数：
+
+$$ p(y=1|x) $$，然后取 $\displaystyle \max \lbrace p(y=1|x),1-p(y=1|x) \rbrace$ 即以 $0.5$ 为分界，若 $p(y=1|x) \geq 0.5$ 则分类为 $C_1$，否则分类为 $C_2$，即为`逻辑回归`；
+
+##### 多分类
+
+即`多选一`问题，将 $y|x \in \lbrace C_1,C_2,\cdots,C_k \rbrace$ 转化为找到 `k 个`概率分布函数：
 
 $$ 
 \begin{cases}
-p(y=C_1|x) \\\\ 
-\\\\p(y=C_2|x) \\\\ 
+p(y=1|x) \\\\ 
+\\\\p(y=2|x) \\\\ 
 \\\\ \cdots \\\\
-\\\\p(y=C_k|x)
+\\\\p(y=k|x)
 \end{cases}	
 $$
 
-其中 $\displaystyle\sum_{i=1}^{k} p(y=C_i|x) = 1$，然后以 $\displaystyle \max_{i} p(y=C_i|x)$ 为最终分类类别，即为 `Softmax 回归`。
+其中 $\displaystyle\sum_{i=1}^{k} p(y=i|x) = 1$，然后以 $\displaystyle \max_{i} p(y=i|x)$ 为最终分类类别，即为 `Softmax 回归`。
 
-<!-- [伯努利分布](#BernoulliDistribution)。  -->
+#### 原理
 
 ##### 确定模型
 
 <!-- 模型假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。 -->
 
-[Sigmoid](https://mollywangup.com/posts/notes-deep-learning/#sigmoid) 函数：
+<a href="https://mollywangup.com/posts/notes-deep-learning/#sigmoid" target="_blank">Sigmoid 函数：</a>
 
 $$ g(z) = \frac{1}{1+e^{-z}} \in (0,1) $$
 
@@ -251,11 +258,9 @@ p(y=1|x;w,b) = g(z) = \frac{1}{1 + e^{-(w \cdot x + b)}}
 $$
 
 说明：
-1. 将标签 $y \in \lbrace C_1,C_2 \rbrace$ 映射为 $y \in \lbrace 1,0 \rbrace$，这样标签就可以`同时表示类别和概率`了；
-2. 预测值 $\hat{y}$ 在区间 $(0,1)$ 内连续，因此`以 0.5 为分界`，若 $\hat{y} \geq 0.5$ 则分类为 $1$，否则分类为 $0$. 这也是`对数逻辑回归`别称的由来；
+1. 再次强调，模型表示的是 $y=1$ 即正例的概率模型；
+2. 模型预测值在区间 $(0,1)$ 内连续，分类方法是 `以 0.5 为分界`，若 $p \geq 0.5$ 则分类为 $1$，否则分类为 $0$. 这也是`对数逻辑回归`别称的由来；
 3. 模型参数同线性回归。本质上是构造了一个线性决策边界 $z = w \cdot x + b = 0$；
-
-<!-- [伯努利分布](#BernoulliDistribution) -->
 
 ##### 确定损失
 
@@ -1354,7 +1359,7 @@ $$
 H(Y|X) = \sum_{x} p(x) H(Y|x) = \sum_{x} p(x) \sum_{y} p(y|x) \ln(p(y|x))
 $$
 
-说明：可从`全概率公式`角度理解，$H(Y|X) = \displaystyle\sum_{condition} p(condition) H(goal|condition)$.
+说明：可从`全概率公式`角度理解，$\displaystyle\sum_{condition} p(condition) H(goal|condition)$.
 用途：[决策树](#DecisionTree)
 
 ## 附
