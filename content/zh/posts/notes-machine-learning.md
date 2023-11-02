@@ -28,8 +28,9 @@ pinned: true
 
 - 特征（`feature`）：指输入变量；
 - 标签（`label`）：指输出变量，真实值（`target` 或 `ground truth`），预测值（`prediction`）；
-- 训练集（`training set`）：指用于训练模型的数据集；
-- 测试集（`test set`）：指用于验证模型的数据集；
+- 训练集（`training set`）：用于训练模型；
+- 验证集（`validation set`）：用于防止模型过拟合；
+- 测试集（`test set`）：用于评估模型效果；
 - 训练示例（`training example`）：指训练集中的一组数据；
 - 模型（`model`）：指拟合函数或概率模型；
 - 模型参数（`parameter`）：调整模型的本质是调整模型参数；
@@ -215,12 +216,12 @@ $$ f_{w,b}(x) = w_1x_1 + w_2x_2 + w_3x_1x_2 + w_4x_1^2 + w_5x_2^2 + b \tag{3} $$
 
 ##### 二分类（逻辑回归）
 
-`特征全是连续值`，标签是`二选一`的分类问题。 $y|x \in \lbrace C_1,C_2 \rbrace$ 视为 [伯努利分布](#BernoulliDistribution)，即：
+即`二选一`问题。将 $y|x \in \lbrace C_1,C_2 \rbrace$ 视为 $y$ 的条件概率下的[伯努利分布](#BernoulliDistribution)，即：
 
 - $p(y=1|x)$ 表示是 $C_1$ 的概率；
 - $1 - p(y=1|x)$ 表示不是 $C_1$ 即是 $C_2$ 的概率；
 
-因此仅需要找到`一个`概率分布函数：
+<br>因此仅需要找到`一个`概率分布函数：
 
 $$ p(y=1|x) $$
 
@@ -228,7 +229,7 @@ $$ p(y=1|x) $$
 
 ##### 多分类（Softmax 回归）
 
-`特征全是连续值`，标签是`多选一`的分类问题。将 $y|x \in \lbrace C_1,C_2,\cdots,C_k \rbrace$ 转化为找到 `k 个`概率分布函数：
+即`多选一`问题。为 $y|x \in \lbrace C_1,C_2,\cdots,C_k \rbrace$ 找到 `k 个` 概率分布函数：
 
 $$ 
 \begin{cases}
@@ -239,13 +240,13 @@ p(y=1|x) \\\\
 \end{cases}	
 $$
 
-其中 $\displaystyle\sum_{i=1}^{k} p(y=i|x) = 1$，然后以 $\displaystyle \max_{i} p(y=i|x)$ 为最终分类类别。
+其中 $\displaystyle\sum_{i=1}^{k} p(y=i|x) = 1$，然后取 $\displaystyle \max_{i} p(y=i|x)$ 为最终分类类别。
 
 #### 逻辑回归
 
 ##### 模型
 
-逻辑回归假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`0-1分布`。
+逻辑回归假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`伯努利分布（0-1分布）`。
 
 <a href="https://mollywangup.com/posts/notes-deep-learning/#sigmoid" target="_blank">Sigmoid 函数</a>：
 
@@ -288,7 +289,7 @@ $$
 
 ###### 交叉熵损失角度
 
-将真实类别 $y$ 和预测类别 $p(x;w,b)$ 看作`分类类别的两个概率分布`，则可使用[交叉熵](#CrossEntropyLoss)来衡量差异程度，即：
+将`真实类别` $y$ 和`预测类别` $p(x;w,b)$ 看作`分类类别的两个概率分布`，则可使用[交叉熵](#CrossEntropyLoss)来衡量差异程度，即：
 
 $$
 \begin{split}
@@ -317,7 +318,7 @@ $$
 p(y=i|x;w_i,b_i) = g(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{k} e^{z_j}}
 $$
 
-其中 $w_i \in \mathbb{R}^n, \space i \in \lbrace 1, 2, ..., k \rbrace$.
+其中 $w_i \in \mathbb{R}^n, \space i \in \lbrace 1, 2, ..., k \rbrace$，显然 $\displaystyle\sum_{i=1}^{k} p(y=i|x;w_i,b_i) = 1$.
 
 说明：
 1. 模型直接输出 $k$ 个类别的概率，即属于 $\mathbb{R}^n \to \mathbb{R}^k$ 多值函数；
@@ -326,11 +327,13 @@ $$
 
 ##### 成本函数
 
+使用[交叉熵损失](#CrossEntropyLoss)：
+
 $$
 \begin{split}
-J = \frac{1}{m} \sum_{i=1}^{m} L(\hat{y}^{(i)}, y^{(i)}) 
-&= \frac{1}{m} \sum_{i=1}^{m} H(y^{(i)}, \hat{y}^{(i)})
-&= \frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{k} -y^{(i,j)} \ln p(x^{(i)};w_j,b_j)
+J &= \frac{1}{m} \sum_{i=1}^{m} L(\hat{y}^{(i)}, y^{(i)}) 
+= \frac{1}{m} \sum_{i=1}^{m} H(y^{(i)}, \hat{y}^{(i)}) \\\\
+\\\\&= \frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{k} -y^{(i,j)} \ln p(x^{(i)};w_j,b_j)
 \end{split}
 $$
 
@@ -375,16 +378,40 @@ $$
 
 ### 决策树<a id="DecisionTree"></a>
 
+决策树（Decision tree）可解决`分类`和`回归`问题。
+
 #### 问题背景
 
-对于输出值为分类变量，分类树。分类规则是计算`距离上一节点的信息增益`（information gain），本质上是条件熵，选信息增益最大的（对应纯度最高）。
+##### 预测离散值（分类树）
 
-对于输出值为连续变量，回归树。分类规则是计算`距离上一节点的加权方差`，选方差相差最大的（对应纯度最高）；
+特征：可包含离散值和连续值；
+标签：`离散值`； 
+思路：使用[熵](#Entropy)衡量`信息不纯度`，计算`距离上一节点的熵减`，一般称作`信息增益`（information gain），选信息增益最大的（对应纯度最高）；
+<!-- - 连续值特征离散化：可通过设置阈值转为分类； -->
 
-#### 分类树
+##### 预测连续值（回归树）
+
+特征：可包含离散值和连续值；
+标签：`连续值`； 
+思路：使用[方差](#Variance)衡量`信息不纯度`，计算`距离上一节点的加权方差之差`，选差值最大的（对应纯度最高）；
+
+#### 决策树
+
+给定训练集 $X \in \mathbb{R}^{m \times n}$，即 $m$ 个训练示例，$n$ 个`类别特征`，$k$ 个`分类标签`，则决策树的基本原理如下：
+
+步骤一：计算 $y$ 的熵：
+
+$$ H(y) = \sum_{k_y} p(k) \ln p(y=k) $$
+
+步骤二：确认`根节点`：
+计算每个类别特征 $x_j$ 作为根节点分类特征时的[信息增益](#InformationGain)，：
+
+$$ max_{x_j} Gain(y,x_j) = H(y) - H(y|x_j) $$
+
+步骤二：确认`内部节点`：
+对`未分类`的类别特征 $x_j$ 重复步骤二，直至叶节点熵 $H(y|x_j) < \varepsilon$
 
 #### 回归树
-Decision tree，解决**分类**问题。
 
 - 根节点：无入多出
 - 内部节点：一入多出
@@ -395,6 +422,9 @@ Decision tree，解决**分类**问题。
 基尼系数
 
 ### 随机森林<a id="RandomForest"></a>
+
+<img src='https://www.tibco.com/sites/tibco/files/media_entity/2021-05/random-forest-diagram.svg' alt='随机森林(图源网络见右键)' width=70%>
+
 
 有放回随机抽子集。
 
@@ -1393,8 +1423,28 @@ $$
 H(Y|X) = \sum_{x} p(x) H(Y|x) = \sum_{x} p(x) \sum_{y} p(y|x) \ln(p(y|x))
 $$
 
-说明：可从`全概率公式`角度理解，$\displaystyle\sum_{condition} p(condition) H(goal|condition)$.
+说明：可理解为原数据集是 $Y$，条件（特征）$X$ 将原数据集分组后，新的一组数据集 $Y|X$ 的熵。从`全概率公式`角度理解，$\displaystyle\sum_{condition} p(condition) H(goal|condition)$.
 用途：[决策树](#DecisionTree)
+
+#### 信息增益<a id="InformationGain"></a>
+
+分组使得熵减（数据纯度提升），`熵减的大小就是信息增益`。
+
+$$
+Gain(Y, X) = H(Y) - H(Y|X)
+$$
+
+用途：[决策树](#DecisionTree) C3 算法
+
+#### 信息增益率<a id="InformationGainRate"></a>
+
+分组后`信息增益`与`条件的熵`的比值。
+
+$$
+r(Y, X) = \frac{Gain(Y, X)}{H(X)}
+$$
+
+用途：[决策树](#DecisionTree) C4.5 算法
 
 ## 附
 
@@ -1405,6 +1455,5 @@ $$
 
 <img src='https://easyai.tech/wp-content/uploads/2022/08/523c0-2019-08-21-application.png.webp'>
 
-<img src='https://www.tibco.com/sites/tibco/files/media_entity/2021-05/random-forest-diagram.svg'>
 
 <img src='https://miro.medium.com/v2/resize:fit:1204/format:webp/1*iWHiPjPv0yj3RKaw0pJ7hA.png'> -->
