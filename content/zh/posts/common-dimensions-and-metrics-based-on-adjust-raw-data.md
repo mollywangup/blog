@@ -14,6 +14,7 @@ tags:
 categories:
 - MMP
 - OLAP
+pinned: true
 ---
 
 本文基于 Adjust（原始数据） -> S3（云存储）-> Druid（数仓）-> Superset（可视化）。

@@ -399,7 +399,7 @@ $$
 
 计算`分类前` $y$ 的熵：
 
-$$ H(y) = - \sum_{i=1}^{k} p(y=k) \ln p(y=k) $$
+$$ H(y) = - \sum_{i=1}^{k} p(y=i) \ln p(y=i) $$
 
 说明：当 $H(y) < \varepsilon$ 时，没有分类的必要了。
 
@@ -431,9 +431,7 @@ $$ Gain(y,x_j) = H(y) - H(y|x_j) $$
 
 <img src='https://www.tibco.com/sites/tibco/files/media_entity/2021-05/random-forest-diagram.svg' alt='随机森林(图源网络见右键)' width=70%>
 
-是一种`集成学习`方法，核心思想是：进行`多次有放回抽样`作为训练集，训练多个决策树，回归问题则`求均值`，分类问题则`求众数`。
-
-Random forest
+随机森林（Random forest）是一种基于树模型的`集成学习`方法。其核心思想是：重复多次有放回抽样，且每次抽样时随机选择 $k<n$ 个特征，训练多个决策树，分类问题则`求众数`，回归问题则`求均值`。
 
 ### XGBoost<a id="XGBoost"></a>
 
