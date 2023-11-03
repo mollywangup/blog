@@ -824,13 +824,13 @@ $$ accuracy = \frac{TP+TN}{TP+TN+FP+FN} $$
 
 ##### 精确率
 
-也称作查准率，指`预测为正中的样本中，实际为正`的比例，即：
+也称作查准率，指`判定为阳的样本中，实际也为阳`的比例，即：
 
 $$ precision = \frac{True \space P}{predicted \space P} = \frac{TP}{TP+FP} $$
 
 ##### 召回率
 
-也称作查全率，指`实际为正中的样本中，预测为正`的比例，即：
+也称作查全率，指`实际为阳的样本中，判定也为阳`的比例，即：
 
 $$ recall = \frac{True \space P}{actual \space P}  = \frac{TP}{TP+FN} $$
 
@@ -838,9 +838,29 @@ $$ recall = \frac{True \space P}{actual \space P}  = \frac{TP}{TP+FN} $$
 
 $$ F1 = \frac{2 \times precision \times recall}{precision + recall} $$
 
-##### ROC
+##### ROC 曲线
 
-[深入介紹及比較ROC曲線及PR曲線](https://medium.com/nlp-tsupei/roc-pr-%E6%9B%B2%E7%B7%9A-f3faa2231b8c)
+指以 FPR 为横轴, TPR 为纵轴绘制成的曲线。其中：
+
+FPR 指假阳率，也称作**误诊率**，指`实际为阴，但判定为阳`的比例，即：
+
+$$ FPR = \frac{FP}{FP+TN} $$
+
+TPR 指真阳率，就是**召回率**，指`实际为阳，判断也为阳`的比例，即：
+
+$$ TPR = \frac{TP}{TP+FN} $$
+
+说明：FPR 越低，TPR 越高，也就是越靠近 (0, 1)，说明模型分类能力越好。
+
+##### AUC
+
+AUC (Area Under Curve)指的是 `ROC 曲线下方的面积`，相较于 ROC，是一个直观的`标量`来衡量模型分类能力。
+
+- $AUC=1$: 即左上角，完美分类；
+- $AUC=0.5$: 即分类能力与随机的抛硬币毫无差异，比较差；
+- $AUC<0.5$: 分类能力很差，反着来；
+
+<br>实际中，一般在 $0.5 \to 1$ 之间。
 
 ## 数学基础
 

@@ -149,8 +149,12 @@ if __name__ == '__main__':
     main()
 ```
 
-## 模型评估
+## 运行结果
 
 指标意义详见：<a href="https://mollywangup.com/posts/notes-machine-learning/#%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87" target="_blank">分类指标</a>
 
+<img src='https://user-images.githubusercontent.com/46241961/280352945-f9086d57-773f-4332-a6a6-8dcfa0199548.png' alt='打印'>
+
 <img src='https://user-images.githubusercontent.com/46241961/280346064-4cf903b8-d82c-4810-9d9a-b020444322b9.svg' alt='ROC'>
+
+## 模型评估
