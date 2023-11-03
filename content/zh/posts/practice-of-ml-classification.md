@@ -24,11 +24,12 @@ libraries:
 ```python
 import time
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import roc_curve, roc_auc_score, accuracy_score, precision_score, recall_score, f1_score
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
@@ -37,6 +38,18 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 import xgboost as xgb
 
+
+def runplt():
+    '''
+    绘制 ROC 曲线的准备工作
+    '''
+    fig, ax = plt.subplots()
+    ax.set_title('ROC curve and AUC')
+    ax.set_xlabel('FPR (False Positive Rate)')
+    ax.set_ylabel('TPR (True Positive Rate)')
+    ax.plot([0, 1], [0, 1], color='navy', ls='--', label='random: 0.5')
+    ax.plot([0, 0, 1, 1], [0, 1, 1, 1], color='forestgreen', ls='--', label='perfect: 1')
+    return ax
 
 def main():
     '''
@@ -48,8 +61,9 @@ def main():
     
     # 拆分训练集
     X_train, X_test, y_train, y_test = train_test_split(feature, target, test_size=0.3, random_state=777)
+    print('>>> 训练集：{} 组, 测试集：{} 组 <<<'.format(X_train.shape[0], X_test.shape[0]))
     
-    # 处理文本和标签
+    # 预处理: 处理文本 (词袋模型)
     cv = CountVectorizer(stop_words='english')
     X_train = cv.fit_transform(X_train)
     X_test = cv.transform(X_test)
@@ -59,7 +73,14 @@ def main():
     y_test = le.transform(y_test)
     
     # 构建多个分类器
-    names = ['K 近邻', 'LogisticRegression', 'Naive Bayes', 'DecisionTree', 'RandomForest', 'XGBoost']
+    names = [
+        'KNN', 
+        'Logistic', 
+        'NaiveBayes', 
+        'DecisionTree', 
+        'RandomForest', 
+        'XGBoost',
+    ]
     classifiers = [
         KNeighborsClassifier(n_neighbors=3),
         LogisticRegression(),
@@ -69,17 +90,67 @@ def main():
         xgb.XGBClassifier(tree_method='hist'),
     ]
     
-    # 批量训练
+    # 批处理: 模型训练, 保存评估指标, 绘制 ROC 曲线
+    ax = runplt()
+    report = []
+    
     for name, clf in zip(names, classifiers):
+        # 模型训练
         start_time = time.time()
         clf.fit(X_train, y_train)
         duration = time.time() - start_time
+        
+        # 模型评估: 拟合度
         score_train = clf.score(X_train, y_train)
         score_test = clf.score(X_test, y_test)
-        # con = confusion_matrix()
-        print('{} (耗时 {:.5f}):\n  训练集准确率: {:.3f}\n  测试集准确率: {:.3f}'.format(name, duration, score_train, score_test))
+        print('{} (耗时 {:.5f} 秒):\n  训练集准确率: {:.3f}\n  测试集准确率: {:.3f}'.format(name, duration, score_train, score_test))
+        
+        # 模型评估: 准确率/精确率/召回率/F1
+        y_pred = clf.predict(X_test)
+        accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred)
+        recall = recall_score(y_test, y_pred)
+        f1 = f1_score(y_test, y_pred)
+        
+        # 模型评估: 绘制 ROC 曲线并标注 AUC 值
+        y_score = clf.predict_proba(X_test)
+        if y_score.shape[1] == 2:
+            y_score = y_score[:,1]
+        fpr, tpr, thresholds = roc_curve(y_test, y_score)
+        auc = roc_auc_score(y_test, y_score)
+        ax.plot(fpr, tpr, label='{}: ${:.3f}$'.format(name, auc))
 
+        # 将所有评估指标保存在 dataframe
+        _ = {
+            'classifier': name, 
+            'duration': duration, 
+            'accuracy_train': score_train, 
+            'accuracy_test': score_test, 
+            'accuracy': accuracy,
+            'precision': precision,
+            'recall': recall,
+            'f1': f1,
+            'AUC': auc,
+        }
+        report.append(_)
+
+    # 打印 dataframe
+    df = pd.DataFrame(report)
+    df = df.sort_values(by='AUC', ascending=False)
+    print(df)
+    
+    # 保存 ROC 曲线
+    ax.legend(loc='best')
+    plt.savefig('ROC.svg')
+    plt.show()
+ 
 
 if __name__ == '__main__':
     main()
 ```
+
+## 模型评估
+
+指标意义详见：<a href="https://mollywangup.com/posts/notes-machine-learning/#%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87" target="_blank">分类指标</a>
+
+<img src='https://user-images.githubusercontent.com/46241961/280346064-4cf903b8-d82c-4810-9d9a-b020444322b9.svg' alt='ROC'>

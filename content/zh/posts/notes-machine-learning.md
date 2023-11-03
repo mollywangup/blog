@@ -811,8 +811,8 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
 | actual/predicted&nbsp;&nbsp;&nbsp; | Positive&nbsp;&nbsp;&nbsp; | Negative&nbsp;&nbsp;&nbsp; |
 | ---------- | ---------- | ---------- |
-| **Positive** | TP（真正） | FN（假负） | 
-| **Negative** | FP（假正） | TN（真负） | 
+| **Positive** | TP（真阳） | FN（假阴） | 
+| **Negative** | FP（假阳） | TN（真阴） | 
 
 其中：`T/F` 表示预测是否正确，`P/N` 表示预测结果（P=1, N=0）。
 
