@@ -360,21 +360,31 @@ KNN (K-Nearest Neighbors)，解决**分类+回归**问题。`K 个邻居的意�
 
 ### 朴素贝叶斯<a id="NaiveBayes"></a>
 
-朴素贝叶斯（Naive Bayes），解决**分类**问题。
+朴素贝叶斯（Naive Bayes），解决`分类`问题。
 
-#### 问题背景
+#### 原理
 
-`多选一`分类问题，$y|x \in \lbrace C_1,C_2,\cdots,C_k \rbrace$，给定 $x$，分别通过 `k 个` 类别的先验概率来估计，概率分布函数：
+朴素贝叶斯基于[贝叶斯定理](#Bayestheorem)，并假设每个样本点的`特征相互独立`。
+
+设 $x \in \mathbb{R}^n$，$y|x \in \lbrace C_1,C_2,\cdots,C_k \rbrace$，则给定待分类的 $x$，其属于 $C_i$ 类别的概率是：
 
 $$
-p(y=C_i|x) = \frac{p(x|C_i)}{p(x)} = 
-\frac{\prod_{j=1}^{n} p(x_j|C_i) p(y=C_i)}{\prod_{j=1}^{n} p(x_j)}
+p(y=C_i|x) = \frac{p(y=C_i) p(x|y=C_i)}{p(x)} = 
+\frac{p(y=C_i) \prod_{j=1}^{n} p(x_j|y=C_i)}{\prod_{j=1}^{n} p(x_j)}
 $$
 
-#### 模型
+然后取 $k$ 个类别中概率最大的作为`预测类别`，即：
 
-朴素贝叶斯假设
+$$
+\arg \max_{C_i} p(y=C_i|x)
+$$
 
+说明：由于是比大小，因此可省去计算常量分母 $p(x)$，即：
+
+$$
+p(y=C_i|x) 
+\propto	p(y=C_i) \prod_{j=1}^{n} p(x_j|y=C_i)
+$$
 
 ### 决策树<a id="DecisionTree"></a>
 
@@ -1205,7 +1215,7 @@ $$ L(\theta) = p(x^{(1)}, x^{(2)}, \cdots, x^{(m)}) = \prod_{i=1}^{m} p(x^{(i)};
 
 说明：由于假设样本独立同分布，则联合概率等于各自概率的乘积。
 
-### 贝叶斯定理
+### 贝叶斯定理<a id="Bayestheorem"></a>
 
 贝叶斯定理（Bayes'theorem）公式如下（其中 $P(B) \neq 0$）：
 
