@@ -449,10 +449,14 @@ $$ Gain(y,x_j) = H(y) - H(y|x_j) $$
 
 <img src='https://www.tibco.com/sites/tibco/files/media_entity/2021-05/random-forest-diagram.svg' alt='随机森林(图源网络见右键)' width=70%>
 
-随机森林（Random forest）是一种基于树模型的`集成学习`方法。其核心思想是：重复多次有放回抽样，且每次抽样时随机选择 $k<n$ 个特征，训练多个决策树，分类问题则`求众数`，回归问题则`求均值`。
+随机森林（Random forest）是一种基于树模型的`集成学习`（Ensemble learning）方法。
+思想：通过重复多次有放回抽样，且每次随机选择 $k<n$ 个特征，训练若干个权重相等的决策树（弱学习器），然后投票机制，分类问题则`求众数`，回归问题则`求均值`。
+
+Bagging 
 
 ### XGBoost<a id="XGBoost"></a>
 
+也是一种`集成学习方法`，Boosting.
 
 
 ## 无监督学习<a id="UnsupervisedLearning"></a>
@@ -737,13 +741,17 @@ $$
 
 #### 评估方法
 
-留出法（Hold-out）：拆分训练集和测试集
+留出法（Hold-out）：拆分训练集和测试集，如经验上 8/2 或 7/3；
 
 交叉验证法（Cross Validation）：将数据集分成 N 块，使用 N-1 块进行训练，再用最后一块进行测试；
 
-自助法（Bootstrap）：
+自助法（Bootstrap）：有放回随机抽样；
 
-（Bagging）：
+<!-- （Bagging）：如随机森林；
+
+Boosting： -->
+
+<!-- https://www.geeksforgeeks.org/bagging-vs-boosting-in-machine-learning/ -->
 
 #### 回归指标
 
@@ -824,13 +832,15 @@ $$ accuracy = \frac{TP+TN}{TP+TN+FP+FN} $$
 
 ##### 精确率
 
-也称作查准率，指`判定为阳的样本中，实际也为阳`的比例，即：
+<!-- 也称作查准率，指`判定为阳的样本中，实际也为阳`的比例，即： -->
+也称作查准率，指`预测为正的样本中，实际也为正`的比例，即：
 
 $$ precision = \frac{True \space P}{predicted \space P} = \frac{TP}{TP+FP} $$
 
 ##### 召回率
 
-也称作查全率，指`实际为阳的样本中，判定也为阳`的比例，即：
+<!-- 也称作查全率，指`实际为阳的样本中，判定也为阳`的比例，即： -->
+也称作查全率，指`实际为正的样本中，判定也为正`的比例，即：
 
 $$ recall = \frac{True \space P}{actual \space P}  = \frac{TP}{TP+FN} $$
 
@@ -854,13 +864,17 @@ $$ TPR = \frac{TP}{TP+FN} $$
 
 ##### AUC
 
-AUC (Area Under Curve)指的是 `ROC 曲线下方的面积`，相较于 ROC，是一个直观的`标量`来衡量模型分类能力。
+AUC (Area Under ROC Curve)指的是 `ROC 曲线下方的面积`，相较于 ROC，是一个直观的`标量`来衡量模型分类能力。
 
 - $AUC=1$: 即左上角，完美分类；
 - $AUC=0.5$: 即分类能力与随机的抛硬币毫无差异，比较差；
 - $AUC<0.5$: 分类能力很差，反着来；
 
 <br>实际中，一般在 $0.5 \to 1$ 之间。
+
+##### PR 曲线
+
+指以 Recall 为横轴, precision 为纵轴绘制成的曲线。
 
 ## 数学基础
 
