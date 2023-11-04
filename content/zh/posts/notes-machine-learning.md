@@ -352,12 +352,6 @@ $$
 Hard-margin SVM
 Soft-margin SVM：加入了容错率
 
-<!-- ### KNN<a id="K-NearestNeighbors"></a>
-
-KNN (K-Nearest Neighbors)，解决**分类+回归**问题。`K 个邻居的意思`。
-
-给定训练集 $(X,y)$，KNN 要实现的是将 -->
-
 ### 朴素贝叶斯<a id="NaiveBayes"></a>
 
 朴素贝叶斯（Naive Bayes），解决`分类`问题。
@@ -458,6 +452,22 @@ Bagging
 
 也是一种`集成学习方法`，Boosting.
 
+### KNN<a id="K-NearestNeighbors"></a>
+
+KNN (K-Nearest Neighbors)，解决**分类+回归**问题。`K 个邻居的意思`。
+
+#### 原理
+
+给定训练集 $X \in \mathbb{R}^{m \times n}, y \in \mathbb{R}^m$，则给定待分类的点（特征） $x$，其所属类别由距离其`最近的 k 个点（邻居）`决定。
+
+其中，[距离计算](#)方式有多种，较常使用的[欧氏距离](#EuclideanDistance)如下：
+
+$$
+d(x, x^{(i)}) = \lVert x - x^{(i)} \rVert
+= \sqrt{\sum_{j=1}^{n} (x_j - x_j^{(i)})^2}
+$$
+
+说明：非参数，投票制。回归问题，可取均值。
 
 ## 无监督学习<a id="UnsupervisedLearning"></a>
 
@@ -473,7 +483,7 @@ Bagging
 
 ### K-means
 
-解决**聚类**问题。`K 个类别的意思`。
+解决`聚类`问题。`K 个类别的意思`。
 
 #### 原理
 
@@ -493,27 +503,27 @@ $$
 
 其中：$\mu_{c^{(i)}}$ 表示 $x^{(i)}$ 所属的簇中心；
 
-优化初始的 k 个簇中心选择：
+<!-- 优化初始的 k 个簇中心选择：
 
 1. 从 $X$ 中选择；
-2. 
+2.  -->
 
-### DBSCAN
+<!-- ### DBSCAN
 
 解决**聚类**问题。
 
 - DBSCAN（密度聚类）：将 n 个点分为三类，然后删除噪音点；（曼哈顿距离）
   - 核心点：在半径 eps（两个样本被看做邻域的最大举例） 内的点的个数超过 min_samples（簇的样本数）；
   - 边界点：在半径 eps 内的点的个数不超过 min_samples，但落在核心点的邻域内；
-  - 噪音点：既不是核心点，也不是边界点；
+  - 噪音点：既不是核心点，也不是边界点； -->
 
 ### PCA<a id="PrincipalComponentAnalysis"></a>
 
-主成分分析（Principal Component Analysis, PCA），解决**降维**问题。
+主成分分析（Principal Component Analysis, PCA），解决`降维`问题。
 
 用最少的特征尽可能解释所有的方差（越离散方差越大）。
 
-用途：可视化，
+用途：特征工程，可视化。
 
 <!-- ## 强化学习
 
@@ -581,46 +591,41 @@ $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} \in [0, \infty] $$
 
 说明：也称作[相对熵](#KLD)。非负，越小越相似。
 
-### 特征工程
+### 归一化
 
-<!-- 挖坑：
-缺失值处理
-异常值处理 -->
+归一化（Normalization）和标准化（Standardization）都是对数据进行`缩放`（Scaling）处理，作用有两点：
+1. 剔除量纲，解决`数据可比性`问题；
+2. 提高求解速度，如运行梯度下降时更快收敛。
 
-#### 特征缩放
+#### 最大最小归一化
 
-特征缩放（Feature Scaling）是一种用于**标准化自变量或特征范围**的方法。
-
-背景：不同特征之间的取值范围差异较大，导致梯度下降运行低效。特征缩放使得不同特征之间的取值范围差异，降低至可比较的范围。
-  - 除上限，如 [200, 1000] -> [0.2, 1]
-
-目标：为了使梯度下降运行的更快，最终提高模型训练性能。
-
-经验值：
-- 太大或者太小都需要：如[-0.001, 0.001]、[-100, 100]；
-- 通常[-3, 3]范围内，不需要；
-
-##### 均值归一化
-
-Mean Normalization，与均值的差异 / 上下限的整体差异：
+Min-max normalization (Rescaling)：
 
 $$
-x^{\prime} = \frac{x - \mu}{max(x) - min(x)}
+x^{\prime} = \frac{x - min(x)}{max(x) - min(x)}
 $$
 
-##### Z 分数归一化
+说明：归一化后取值范围为 $[0,1]$，适用于最大最小值较稳定的情况；
 
-Z-score normalization，与均值的差异 / 标准差：
+#### 均值归一化
+
+Mean normalization：
+
+$$
+x^{\prime} = \frac{x - \bar{x}}{max(x) - min(x)}
+$$
+
+说明：归一化后取值范围为 $[-1,1]$；
+
+#### Z 分数归一化
+
+Z-score normalization，也称作`标准化`(Standardization)：
 
 $$
 x^{\prime} = \frac{x - \mu}{\sigma}
 $$
 
-其中标准差（Standard Deviation）$\sigma$ 计算公式如下：
-
-$$
-\sigma = \sqrt{\frac{\sum {(x - \mu)}^2}{n}}
-$$
+说明：归一化后取值范围为 $[-\infty,+\infty]$，且均值为 $0$，标准差 为 $1$；
 
 ### 损失函数<a id='LossFunction'></a>
 
