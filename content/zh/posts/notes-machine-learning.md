@@ -42,8 +42,7 @@ pinned: true
 
 约定如下：
 1. `m` 个训练示例，`n` 个特征；
-2. $n$ 维向量使用小写字母表示，如 $x \in \mathbb{R}^n$，且`默认列向量`；
-3. $m \times n$ 矩阵使用大写字母表示，如 $X \in \mathbb{R}^{m \times n}$；
+2. $\mathbb{R}$ 表示`标量`，$\mathbb{R}^n$ 表示`向量`，$\mathbb{R}^{m \times n}$ 表示`矩阵`，$\mathbb{R}^{m \times n \times p \times \cdots}$ 表示`张量`（Tensor）；
 
 <br>具体符号：
 - $x \in \mathbb{R}^n$ 表示`输入变量`，$w \in \mathbb{R}^n$ 表示`回归系数`；
@@ -625,7 +624,7 @@ $$
 x^{\prime} = \frac{x - \mu}{\sigma}
 $$
 
-说明：归一化后取值范围为 $[-\infty,+\infty]$，且均值为 $0$，标准差 为 $1$；
+说明：归一化后取值范围为 $[-\infty,+\infty]$，且均值为 $0$，标准差为 $1$；
 
 ### 损失函数<a id='LossFunction'></a>
 
@@ -1085,6 +1084,14 @@ $$
 
 说明：本文一律默认列向量，在 Python 中对应一维数组。$x$ 也可视作一个 $n \times 1$ 矩阵。
 
+#### 数乘
+
+几何意义是向量的`放大或缩小`（缩放）。
+
+#### 加法
+
+几何意义是向量的`旋转和平移`。
+
 #### 点积<a id="DotProduct"></a>
 
 点积（Dot product），也称作点乘、内积、数量积。对于 $x,y \in \mathbb{R}^n$：
@@ -1136,21 +1143,80 @@ $$
 
 说明：运算结果是个矩阵。
 
+<!-- #### Hadamard product -->
+
 ### 矩阵
 
 $m \times n$ 矩阵可理解为 n 个列向量的集合（或 m 个行向量的集合）。
 
+线性空间内，**加法**运算本质上是向量的`旋转和平移`，**数乘**运算本质上是向量的`放大和缩小(缩放)`。线性运算并没有对向量进行扭曲和变形。
+
+#### 线性组合<a id="线性组合"></a>
+
+{{< alert theme="info" >}}
+向量的线性组合，就是先`各自数乘`再`相加`，几何意义是先`各自缩放`再`旋转平移`，结果仍是同维向量。
+{{< /alert >}}
+
+设有 n 个 m 维向量 $x_1,x_2,...,x_n$ 和 n 个标量 $w_1,w_2,...,w_n$，则该 n 个向量的线性组合 $y$ 表示如下：
+
+$$ y = w_1x_1 + w_2x_2 + \cdots + w_nx_n \in \mathbb{R}^m $$
+
+#### 线性变换<a id="LinearTransformation"></a>
+
+{{< alert theme="info" >}}
+矩阵可视作一次线性变换。
+{{< /alert >}}
+
+回忆[线性组合](#线性组合)，可将其写为矩阵乘向量即 $Xw=y$ 的形式：
+
+$$
+\begin{split}
+\begin{bmatrix}x_{11} & x_{12} & \cdots & x_{1n} \\\\ x_{21} & x_{22} & \cdots & x_{2n} \\\\ \vdots & \vdots & \ddots &\vdots \\\\ x_{m1} & x_{m2} & \cdots & x_{mn} \end{bmatrix} 
+\begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}
+&= \begin{bmatrix}y_1 \\\\ y_2 \\\\ \vdots \\\\ y_m \end{bmatrix} 
+\end{split}
+$$
+
+理解上述式子：
+代数角度：n 个列向量的`线性组合`，结果仍是同维向量；
+几何角度：对 n 个列向量`先各自缩放再相加`，结果仍是同一线性空间的向量；
+线性变换的几何角度：将向量 $w$ `线性变换`至 $y$，具体指：
+- 输入向量：$w$
+- 线性变换：$X$，其中，矩阵的 n 个列向量可视作**基向量**；（非严谨说法）
+- 输出向量：$y$
+
+例子：
+
+$$
+\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \end{bmatrix}
+\begin{bmatrix}x \\\\ y \\\\ z \end{bmatrix} = 
+x \begin{bmatrix}1 \\\\ 0 \\\\ 0 \end{bmatrix} + 
+y \begin{bmatrix}0 \\\\ 1 \\\\ 0 \end{bmatrix} + 
+z \begin{bmatrix}0 \\\\ 0 \\\\ 1 \end{bmatrix} = 
+\begin{bmatrix}x \\\\ y \\\\ z \end{bmatrix} 
+$$
+
+
+$$
+\begin{bmatrix}a & b & c \\\\ d & e & f \\\\ g & h & i \end{bmatrix}
+\begin{bmatrix}x \\\\ y \\\\ z \end{bmatrix} = 
+x \begin{bmatrix}a \\\\ d \\\\ g \end{bmatrix} + 
+y \begin{bmatrix}b \\\\ e \\\\ h \end{bmatrix} + 
+z \begin{bmatrix}c \\\\ f \\\\ i \end{bmatrix} = 
+\begin{bmatrix}ax+by+cz \\\\ dx+ey+fz \\\\ gx+hy+iz \end{bmatrix}
+$$
+
 #### 线性相关
 
 {{< alert theme="info" >}}
-**n 个线性无关的向量，可作为基向量，张成一个 n 维空间。**
+**n 个线性无关的向量，可作为基向量，张成一个 n 维线性空间。**
 {{< /alert >}}
 
-对于 n 个向量 $x_1,x_2,...,x_n$，令其线性组合为零向量，即等式
+对于 n 个向量 $x_1,x_2,...,x_n$，令其线性组合为零向量，即：
 
-$$ w_1x_1 + w_2x_2 + \cdots + w_nx_n = \vec{0},\space\space (n>=2) $$
+$$ w_1x_1 + w_2x_2 + \cdots + w_nx_n = \vec{0} $$
 
-其中 $w_j \in \mathbb{R}$。**`如果当且仅当 $w_1 = w_2 = \cdots = w_n = 0$ 即全部系数为零时才成立，则称该 n 个向量线性无关`**，否则线性相关。
+**`如果当且仅当 $w_1 = w_2 = \cdots = w_n = 0$ 即全部系数为零时才成立，则称该 n 个向量线性无关`**，否则线性相关。
 
 说明：线性相关，则其中一个可以用其余的线性组合表示，此时可降维。
 
@@ -1178,10 +1244,10 @@ $$ w_1x_1 + w_2x_2 + \cdots + w_nx_n = \vec{0},\space\space (n>=2) $$
 #### 矩阵乘向量
 
 {{< alert theme="info" >}}
-**矩阵是一组线性变换的组合**。
+矩阵乘向量的结果是向量，可理解为`对向量进行一次线性变换`。
 {{< /alert >}}
 
-理解：将矩阵的列向量看作一组新的**伪基向量**，则矩阵乘向量可以理解为**对向量进行一次线性变换**。
+例子：
 
 $$
 \begin{bmatrix}a & b & c \\\\ d & e & f \\\\ g & h & i \end{bmatrix}
@@ -1192,7 +1258,7 @@ z \begin{bmatrix}c \\\\ f \\\\ i \end{bmatrix} =
 \begin{bmatrix}ax+by+cz \\\\ dx+ey+fz \\\\ gx+hy+iz \end{bmatrix}
 $$
 
-特别的，当矩阵取单位矩阵时，该向量经过线性变化后，仍等于该向量。
+特别的，当取正交单位矩阵时，该向量经过线性变化后，仍等于该向量。
 
 $$
 \begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \end{bmatrix}
@@ -1205,7 +1271,11 @@ $$
 
 #### 矩阵乘矩阵
 
-理解：多次线性变化的叠加。
+{{< alert theme="info" >}}
+矩阵乘矩阵的结果是矩阵，可理解为`两次线性变换的叠加`（自右向左）。
+{{< /alert >}}
+
+例子：
 
 ### 范数<a id="Norm"></a>
 
