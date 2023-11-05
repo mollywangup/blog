@@ -1149,67 +1149,22 @@ $$
 
 $m \times n$ 矩阵可理解为 n 个列向量的集合（或 m 个行向量的集合）。
 
-线性空间内，**加法**运算本质上是向量的`旋转和平移`，**数乘**运算本质上是向量的`放大和缩小(缩放)`。线性运算并没有对向量进行扭曲和变形。
-
 #### 线性组合<a id="线性组合"></a>
 
 {{< alert theme="info" >}}
-向量的线性组合，就是先`各自数乘`再`相加`，几何意义是先`各自缩放`再`旋转平移`，结果仍是同维向量。
+向量的线性组合，就是先`各自数乘`再`相加`，结果仍是同维向量。
 {{< /alert >}}
 
 设有 n 个 m 维向量 $x_1,x_2,...,x_n$ 和 n 个标量 $w_1,w_2,...,w_n$，则该 n 个向量的线性组合 $y$ 表示如下：
 
 $$ y = w_1x_1 + w_2x_2 + \cdots + w_nx_n \in \mathbb{R}^m $$
 
-#### 线性变换<a id="LinearTransformation"></a>
-
-{{< alert theme="info" >}}
-矩阵可视作一次线性变换。
-{{< /alert >}}
-
-回忆[线性组合](#线性组合)，可将其写为矩阵乘向量即 $Xw=y$ 的形式：
-
-$$
-\begin{split}
-\begin{bmatrix}x_{11} & x_{12} & \cdots & x_{1n} \\\\ x_{21} & x_{22} & \cdots & x_{2n} \\\\ \vdots & \vdots & \ddots &\vdots \\\\ x_{m1} & x_{m2} & \cdots & x_{mn} \end{bmatrix} 
-\begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}
-&= \begin{bmatrix}y_1 \\\\ y_2 \\\\ \vdots \\\\ y_m \end{bmatrix} 
-\end{split}
-$$
-
-理解上述式子：
-代数角度：n 个列向量的`线性组合`，结果仍是同维向量；
-几何角度：对 n 个列向量`先各自缩放再相加`，结果仍是同一线性空间的向量；
-线性变换的几何角度：将向量 $w$ `线性变换`至 $y$，具体指：
-- 输入向量：$w$
-- 线性变换：$X$，其中，矩阵的 n 个列向量可视作**基向量**；（非严谨说法）
-- 输出向量：$y$
-
-例子：
-
-$$
-\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \end{bmatrix}
-\begin{bmatrix}x \\\\ y \\\\ z \end{bmatrix} = 
-x \begin{bmatrix}1 \\\\ 0 \\\\ 0 \end{bmatrix} + 
-y \begin{bmatrix}0 \\\\ 1 \\\\ 0 \end{bmatrix} + 
-z \begin{bmatrix}0 \\\\ 0 \\\\ 1 \end{bmatrix} = 
-\begin{bmatrix}x \\\\ y \\\\ z \end{bmatrix} 
-$$
-
-
-$$
-\begin{bmatrix}a & b & c \\\\ d & e & f \\\\ g & h & i \end{bmatrix}
-\begin{bmatrix}x \\\\ y \\\\ z \end{bmatrix} = 
-x \begin{bmatrix}a \\\\ d \\\\ g \end{bmatrix} + 
-y \begin{bmatrix}b \\\\ e \\\\ h \end{bmatrix} + 
-z \begin{bmatrix}c \\\\ f \\\\ i \end{bmatrix} = 
-\begin{bmatrix}ax+by+cz \\\\ dx+ey+fz \\\\ gx+hy+iz \end{bmatrix}
-$$
+说明：线性空间内，**数乘**运算本质上是向量的`放大和缩小(缩放)`，**加法**运算本质上是向量的`旋转和平移`。线性运算并没有对向量进行扭曲和变形。
 
 #### 线性相关
 
 {{< alert theme="info" >}}
-**n 个线性无关的向量，可作为基向量，张成一个 n 维线性空间。**
+n 个线性无关的向量，可作为基向量，张成一个 n 维线性空间。
 {{< /alert >}}
 
 对于 n 个向量 $x_1,x_2,...,x_n$，令其线性组合为零向量，即：
@@ -1240,6 +1195,29 @@ $$ w_1x_1 + w_2x_2 + \cdots + w_nx_n = \vec{0} $$
 
 行列式（Determinant）针对的是 `n 阶方阵`，记作 $\det$.
 
+#### 线性变换<a id="LinearTransformation"></a>
+
+{{< alert theme="info" >}}
+矩阵可视作一次线性变换。
+{{< /alert >}}
+
+回忆[线性组合](#线性组合)，可将其写为矩阵乘向量即 $Xw=y$ 的形式：
+
+$$
+\begin{split}
+\begin{bmatrix}x_{11} & x_{12} & \cdots & x_{1n} \\\\ x_{21} & x_{22} & \cdots & x_{2n} \\\\ \vdots & \vdots & \ddots &\vdots \\\\ x_{m1} & x_{m2} & \cdots & x_{mn} \end{bmatrix} 
+\begin{bmatrix}w_1 \\\\ w_2 \\\\ \vdots \\\\ w_n \end{bmatrix}
+&= \begin{bmatrix}y_1 \\\\ y_2 \\\\ \vdots \\\\ y_m \end{bmatrix} 
+\end{split}
+$$
+
+理解上述式子：
+- 代数角度：n 个列向量的`线性组合`，结果仍是同维向量；
+- 几何角度：对 n 个列向量`先各自缩放再相加`，结果仍是同一线性空间的向量；
+- 线性变换的几何角度：将向量 $w$ `线性变换`至 $y$，具体指：
+  - 输入向量：$w$
+  - 线性变换：$X$，其中，矩阵的 n 个列向量可视作**伪基向量**；
+  - 输出向量：$y$
 
 #### 矩阵乘向量
 
