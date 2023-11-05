@@ -1255,6 +1255,21 @@ $$
 
 例子：
 
+#### 特征向量与特征值
+
+对于方阵 $X \in \mathbb{R}^{n \times n}$，若存在向量 $w \in \mathbb{R}^n$ 和标量 $\lambda \in \mathbb{R}$，使得：
+
+$$
+Xw = \lambda w
+$$
+
+则 $w$ 称为矩阵 $A$ 的`特征向量`，$\lambda$ 为矩阵 $A$ 的`特征值`。
+
+理解：$w$ 在 $X$ 线性变换的作用下，仅发生了`数乘` $\lambda w$，几何意义上即仅发生了`缩放`。
+
+<!-- ####  -->
+
+
 ### 范数<a id="Norm"></a>
 
 {{< alert theme="info" >}}
