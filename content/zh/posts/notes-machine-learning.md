@@ -671,9 +671,9 @@ sns.catplot(x='your_feature', y='your_label', hue='your_label', kind='violin', d
 | $[60,80)$ | 1 |
 | $[80,100]$ | 2 |
 
-#### 归一化
+#### 特征缩放
 
-归一化（Normalization）和标准化（Standardization）都属于`特征缩放`（Feature scaling）。主要目的是：
+特征缩放（Feature scaling）主要通过`归一化`（Normalization）和`标准化`（Standardization）实现。主要目的是：
 1. 剔除量纲，解决`数据可比性`问题；
 2. 提高求解速度，如运行梯度下降时更快收敛。
 

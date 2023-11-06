@@ -1,5 +1,5 @@
 ---
-title: "机器学习实践 - 垃圾邮件分类"
+title: "机器学习实践 - 垃圾邮件分类器"
 date: 2023-10-12T10:20:28Z
 draft: false
 description: 对比 KNN、逻辑回归、SVM、朴素贝叶斯、决策树、随机森林、XGBoost 等多个分类器来对垃圾邮件进行分类。
@@ -29,10 +29,11 @@ import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import roc_curve, roc_auc_score, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import confusion_matrix, roc_curve, roc_auc_score, accuracy_score, precision_score, recall_score, f1_score
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC, SVC
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -76,6 +77,7 @@ def main():
     names = [
         'KNN', 
         'Logistic', 
+        'SVM',
         'NaiveBayes', 
         'DecisionTree', 
         'RandomForest', 
@@ -84,6 +86,7 @@ def main():
     classifiers = [
         KNeighborsClassifier(n_neighbors=3),
         LogisticRegression(),
+        SVC(kernel='linear', probability=True),
         MultinomialNB(),
         DecisionTreeClassifier(),
         RandomForestClassifier(n_estimators=100),
@@ -140,7 +143,7 @@ def main():
     print(df)
     
     # 保存 ROC 曲线
-    ax.legend(loc='best')
+    ax.legend(loc='best', frameon=True, fontsize='small')
     plt.savefig('ROC.svg')
     plt.show()
  
@@ -153,8 +156,6 @@ if __name__ == '__main__':
 
 指标意义详见：<a href="https://mollywangup.com/posts/notes-machine-learning/#%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87" target="_blank">分类指标</a>
 
-<img src='https://user-images.githubusercontent.com/46241961/280352945-f9086d57-773f-4332-a6a6-8dcfa0199548.png' alt='打印'>
+<img src='https://user-images.githubusercontent.com/46241961/280677677-52b66dee-1fe1-4523-ad5f-ba1e35f44a78.png' alt='打印'>
 
-<br><img src='https://user-images.githubusercontent.com/46241961/280346064-4cf903b8-d82c-4810-9d9a-b020444322b9.svg' alt='ROC'>
-
-## 模型评估
+<br><img src='https://user-images.githubusercontent.com/46241961/280677743-c441f94b-81f2-43ee-b3c5-e8f9136f5e97.svg' alt='ROC'>
