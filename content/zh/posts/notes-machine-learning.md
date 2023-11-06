@@ -1189,16 +1189,21 @@ $$ w_1x_1 + w_2x_2 + \cdots + w_nx_n = \vec{0} $$
 
 对于 $X \in \mathbb{R}^{m \times n}$，由于实际中 $m \gg n$，因此其秩由 $n$ 决定。且：
 - 若 $rank(X) = n$，即列满秩，则 n 个特征线性无关；
-- 若 $rank(X) < n$，即列不满秩，则 n 个特征线性相关，此时`降维`走起。
+- 若 $rank(X) < n$，即列不满秩，则 n 个特征线性相关，此时可降维。
 
 #### 行列式<a id="Determinant"></a>
 
-行列式（Determinant）针对的是 `n 阶方阵`，记作 $\det$.
+行列式（Determinant）针对的是`方阵`。对于方阵 $X \in \mathbb{R}^{n \times n}$，其行列式记作 $\det(X)$，且：
+
+若满秩则 $det(X) \neq 0$，称为`非奇异矩阵`；
+若不满秩则 $det(X) = 0$，称为`奇异矩阵`；
+
+说明：奇异矩阵无法求逆矩阵。
 
 #### 线性变换<a id="LinearTransformation"></a>
 
 {{< alert theme="info" >}}
-矩阵是一次线性变换。
+矩阵是一次**线性变换**。
 {{< /alert >}}
 
 回忆[线性组合](#线性组合)，可将其写为矩阵乘向量即 $Xw=y$ 的形式：
@@ -1257,15 +1262,15 @@ $$
 
 #### 特征向量与特征值
 
-给定方阵 $X \in \mathbb{R}^{n \times n}$，若存在非零向量 $w \in \mathbb{R}^n$ 和非零标量 $\lambda \in \mathbb{R}$，使得：
+给定方阵 $A \in \mathbb{R}^{n \times n}$，若存在非零向量 $v \in \mathbb{R}^n$ 和非零标量 $\lambda \in \mathbb{R}$，使得：
 
 $$
-Xw = \lambda w
+Av = \lambda v
 $$
 
-则称 $w$ 为矩阵 $A$ 的`特征向量`，$\lambda$ 为对应的`特征值`。
+则称 $v$ 为方阵 $A$ 的`特征向量`，$\lambda$ 为对应的`特征值`。
 
-理解：$w$ 在 $X$ 线性变换的作用下，仅发生了`数乘` $\lambda w$，几何意义上即仅发生了`缩放`。
+理解：$v$ 在 $A$ 线性变换的作用下，仅发生了`数乘` $\lambda v$，几何意义上即仅发生了`缩放`。
 
 #### 特征分解
 
@@ -1273,16 +1278,18 @@ $$
 特征分解的结果是三个矩阵相乘，即`三次线性变换的叠加`。自右向左，先旋转，再伸缩，最后再旋转。
 {{< /alert >}}
 
-特征分解是一种`矩阵分解`，且针对的是方阵。给定方阵 $X \in \mathbb{R}^{n \times n}$，若其存在 k 个线性无关的特征向量，则：
+特征分解是一种`矩阵分解`，且针对的是方阵。给定方阵 $X \in \mathbb{R}^{n \times n}$，若其存在 k 个线性无关的特征向量，则可将其分解为三个矩阵相乘：
 
 $$
-X = W diag(\lambda) W^{-1}
+A = V diag(\lambda) V^{-1}
 $$
 
 其中：
-- $W \in \mathbb{R}^{n \times n}$: 指 $X$ 的 k 个线性无关的`特征向量`作为列组成的矩阵，且单位化；
-- $diag(\lambda) \in \mathbb{R}^{n \times n}$: 指对应 k 个特征值在对角线上的`对角矩阵`；
-- $W^{-1}$: 指 $W$ 的逆矩阵；
+- $V \in \mathbb{R}^{n \times n}$：指 $A$ 的 k 个`特征向量`组成的矩阵；
+- $diag(\lambda) \in \mathbb{R}^{n \times n}$：指对应 k 个特征值在对角线上的`对角矩阵`；
+- $V^{-1}$：指 $W$ 的逆矩阵；
+
+说明：特征分解中，所有的特征向量默认**已单位化**，且**作为列向量**组成矩阵。
 
 #### 奇异值分解
 
@@ -1290,18 +1297,18 @@ $$
 奇异值分解（SVD）是特征分解推广到一般矩阵的情形，可用于**升/降维**。
 {{< /alert >}}
 
-给定矩阵 $X \in \mathbb{R}^{m \times n}$，则可将其分解为三个矩阵：
+给定矩阵 $A \in \mathbb{R}^{m \times n}$，则可将其分解为三个矩阵相乘：
 
 $$
 A = U \Sigma V^T
 $$
 
 其中：
-- $U \in \mathbb{R}^{m \times m}$: 称为左奇异矩阵；
-- $\Sigma \in \mathbb{R}^{m \times n}$: 对角阵，$\sigma$ 为奇异值，非负且降序排列；
-  - 当 $m > n$ 时，形如 $\begin{bmatrix}\sigma_1 & 0 \\\\ 0 & \sigma_2 \\\\ 0 & 0 \end{bmatrix}$ 时，起到`降维`的作用；
-  - 当 $m < n$ 时，形如 $\begin{bmatrix}\sigma_1 & 0 & 0 \\\\ 0 & \sigma_2 & 0 \end{bmatrix}$ 时，起到`升维`的作用；
-- $V^T \in \mathbb{R}^{n \times n}$: 称为右奇异矩阵；
+- $U \in \mathbb{R}^{m \times m}$：称为`左正交矩阵`，是 $AA^T$ 的特征向量组成的矩阵；
+- $\Sigma \in \mathbb{R}^{m \times n}$：`奇异（广义）对角阵`，对角线上的 $\sigma$ 称为`奇异值`，非负且降序排列；
+  - 形如 $\begin{bmatrix}\sigma_1 & 0 \\\\ 0 & \sigma_2 \\\\ 0 & 0 \end{bmatrix}$ 时，起到`降维`的作用；
+  - 形如 $\begin{bmatrix}\sigma_1 & 0 & 0 \\\\ 0 & \sigma_2 & 0 \end{bmatrix}$ 时，起到`升维`的作用；
+- $V^T \in \mathbb{R}^{n \times n}$：称为`右正交矩阵`，是 $A^TA$ 的特征向量组成的矩阵；
 
 ### 范数<a id="Norm"></a>
 
