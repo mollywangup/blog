@@ -1286,12 +1286,10 @@ $$
 
 其中：
 - $V \in \mathbb{R}^{n \times n}$：指 $A$ 的 n 个特征向量组成的`正交矩阵`；
-- $diag(\lambda) \in \mathbb{R}^{n \times n}$：指对应 k 个特征值在对角线上的`对角矩阵`；
-- $V^{-1}$：指 $W$ 的逆矩阵；
+- $diag(\lambda) \in \mathbb{R}^{n \times n}$：指对应 n 个特征值在对角线上的`对角矩阵`；
+- $V^{-1}$：指 $V$ 的逆矩阵；
 
-说明：特征分解中，所有的特征向量默认**已单位化**，且**作为列向量**组成矩阵。
-
-<br>例子：
+<br>例子（以下四个矩阵依次对应 $A, V, diag(\lambda), V^{-1}$）：
 
 $$
 \begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 0 \end{bmatrix} = 
@@ -1313,19 +1311,28 @@ A = U \Sigma V^T
 $$
 
 其中：
-- $U \in \mathbb{R}^{m \times m}$：`左正交矩阵`，是 $AA^T$ 的 m 个特征向量组成的正交矩阵；
-- $\Sigma \in \mathbb{R}^{m \times n}$：`奇异（广义）对角阵`，对角线上的 $\sigma$ 称为`奇异值`，非负且降序排列；
+- $U \in \mathbb{R}^{m \times m}$：指 $AA^T$ 的 m 个特征向量组成的`左正交矩阵`；
+- $\Sigma \in \mathbb{R}^{m \times n}$：指`对角阵`，对角线上的 $\sigma$ 称为`奇异值`，非负且降序排列，可理解为`特征的权重`；
   - 形如 $\begin{bmatrix}\sigma_1 & 0 \\\\ 0 & \sigma_2 \\\\ 0 & 0 \end{bmatrix}$ 时，起到`降维`的作用；
   - 形如 $\begin{bmatrix}\sigma_1 & 0 & 0 \\\\ 0 & \sigma_2 & 0 \end{bmatrix}$ 时，起到`升维`的作用；
-- $V^T \in \mathbb{R}^{n \times n}$：`右正交矩阵`，是 $A^TA$ 的 n 个特征向量组成的正交矩阵；
+- $V^T \in \mathbb{R}^{n \times n}$：指 $A^TA$ 的 n 个特征向量组成的`右正交矩阵`；
 
-<br>例子：
+<br>例子（以下四个矩阵依次对应 $A, U, \Sigma, V^T$）：
 
 $$
-\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \end{bmatrix} = 
-\begin{bmatrix}1 & 0 \\\\ 0 & 1 \end{bmatrix}
-\begin{bmatrix}1 & 0 \\\\ 0 & 1 \end{bmatrix} 
-\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \end{bmatrix} 
+\begin{bmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6 \end{bmatrix} = 
+\begin{bmatrix}-0.3863177 & -0.92236578 \\\\ -0.92236578 & 0.3863177 \end{bmatrix}
+\begin{bmatrix}9.508032 & 0 & 0 \\\\ 0 & 0.77286964 & 0 \end{bmatrix} 
+\begin{bmatrix}-0.42866713 & -0.56630692 & -0.7039467 \\\\ 0.80596391 &  0.11238241 & -0.58119908 \\\\ 0.40824829 & -0.81649658 &  0.40824829 \end{bmatrix} 
+$$
+
+**降维**例子（以下四个矩阵依次对应 $A, U, \Sigma, V^T$）：
+
+$$
+\begin{bmatrix}1 & 2 \\\\ 3 & 4 \\\\ 5 & 6 \end{bmatrix} = 
+\begin{bmatrix}-0.2298477 & 0.88346102 & 0.40824829 \\\\ -0.52474482 & 0.24078249 & -0.81649658 \\\\ -0.81964194 & -0.40189603 & 0.40824829 \end{bmatrix} 
+\begin{bmatrix}9.52551809 & 0 \\\\ 0 & 0.51430058 \\\\ 0 & 0 \end{bmatrix}
+\begin{bmatrix}-0.61962948 & -0.78489445 \\\\ -0.78489445 & 0.61962948 \end{bmatrix}
 $$
 
 ### 范数<a id="Norm"></a>
