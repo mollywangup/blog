@@ -1295,8 +1295,10 @@ $$
 \begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 0 \end{bmatrix} = 
 \begin{bmatrix}0 & 1 & 0 \\\\ 1 & 0 & 0 \\\\ 0 & 0 & 1 \end{bmatrix}
 \begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 0 \end{bmatrix} 
-\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 0 \end{bmatrix} 
+\begin{bmatrix}0 & 1 & 0 \\\\ 1 & 0 & 0 \\\\ 0 & 0 & 1 \end{bmatrix}
 $$
+
+理解：向量 $\begin{bmatrix}1 & 1 & 0 \end{bmatrix}^T$ 和 $\begin{bmatrix}1 & 1 \end{bmatrix}^T$ 本质上一个属于三维，一个属于二维。
 
 #### 奇异值分解
 
@@ -1317,16 +1319,23 @@ $$
   - 形如 $\begin{bmatrix}\sigma_1 & 0 & 0 \\\\ 0 & \sigma_2 & 0 \end{bmatrix}$ 时，起到`升维`的作用；
 - $V^T \in \mathbb{R}^{n \times n}$：指 $A^TA$ 的 n 个特征向量组成的`右正交矩阵`；
 
-<br>例子（以下四个矩阵依次对应 $A, U, \Sigma, V^T$）：
+<br>降维的原理如下，即取前 k 个权重高的特征来近似表示整个矩阵：
+
+$$
+A_{m \times n} = 
+U_{m \times m} \Sigma_{m \times n} V_{n \times n}^T \approx
+U_{m \times k} \Sigma_{k \times k} V_{k \times n}^T
+$$
+<!-- <br>例子（以下四个矩阵依次对应 $A, U, \Sigma, V^T$）：
 
 $$
 \begin{bmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6 \end{bmatrix} = 
 \begin{bmatrix}-0.3863177 & -0.92236578 \\\\ -0.92236578 & 0.3863177 \end{bmatrix}
 \begin{bmatrix}9.508032 & 0 & 0 \\\\ 0 & 0.77286964 & 0 \end{bmatrix} 
 \begin{bmatrix}-0.42866713 & -0.56630692 & -0.7039467 \\\\ 0.80596391 &  0.11238241 & -0.58119908 \\\\ 0.40824829 & -0.81649658 &  0.40824829 \end{bmatrix} 
-$$
+$$ -->
 
-**降维**例子（以下四个矩阵依次对应 $A, U, \Sigma, V^T$）：
+<br>**降维**例子（以下四个矩阵依次对应 $A, U, \Sigma, V^T$）：
 
 $$
 \begin{bmatrix}1 & 2 \\\\ 3 & 4 \\\\ 5 & 6 \end{bmatrix} = 
