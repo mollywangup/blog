@@ -1278,18 +1278,27 @@ $$
 特征分解的结果是三个矩阵相乘，即`三次线性变换的叠加`。自右向左，先旋转，再伸缩，最后再旋转。
 {{< /alert >}}
 
-特征分解是一种`矩阵分解`，且针对的是方阵。给定方阵 $X \in \mathbb{R}^{n \times n}$，若其存在 k 个线性无关的特征向量，则可将其分解为三个矩阵相乘：
+特征分解是一种`矩阵分解`，且针对的是方阵。给定方阵 $A \in \mathbb{R}^{n \times n}$，则可将其分解为三个矩阵相乘：
 
 $$
 A = V diag(\lambda) V^{-1}
 $$
 
 其中：
-- $V \in \mathbb{R}^{n \times n}$：指 $A$ 的 k 个`特征向量`组成的矩阵；
+- $V \in \mathbb{R}^{n \times n}$：指 $A$ 的 n 个特征向量组成的`正交矩阵`；
 - $diag(\lambda) \in \mathbb{R}^{n \times n}$：指对应 k 个特征值在对角线上的`对角矩阵`；
 - $V^{-1}$：指 $W$ 的逆矩阵；
 
 说明：特征分解中，所有的特征向量默认**已单位化**，且**作为列向量**组成矩阵。
+
+<br>例子：
+
+$$
+\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 0 \end{bmatrix} = 
+\begin{bmatrix}0 & 1 & 0 \\\\ 1 & 0 & 0 \\\\ 0 & 0 & 1 \end{bmatrix}
+\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 0 \end{bmatrix} 
+\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 0 \end{bmatrix} 
+$$
 
 #### 奇异值分解
 
@@ -1304,11 +1313,20 @@ A = U \Sigma V^T
 $$
 
 其中：
-- $U \in \mathbb{R}^{m \times m}$：称为`左正交矩阵`，是 $AA^T$ 的特征向量组成的矩阵；
+- $U \in \mathbb{R}^{m \times m}$：`左正交矩阵`，是 $AA^T$ 的 m 个特征向量组成的正交矩阵；
 - $\Sigma \in \mathbb{R}^{m \times n}$：`奇异（广义）对角阵`，对角线上的 $\sigma$ 称为`奇异值`，非负且降序排列；
   - 形如 $\begin{bmatrix}\sigma_1 & 0 \\\\ 0 & \sigma_2 \\\\ 0 & 0 \end{bmatrix}$ 时，起到`降维`的作用；
   - 形如 $\begin{bmatrix}\sigma_1 & 0 & 0 \\\\ 0 & \sigma_2 & 0 \end{bmatrix}$ 时，起到`升维`的作用；
-- $V^T \in \mathbb{R}^{n \times n}$：称为`右正交矩阵`，是 $A^TA$ 的特征向量组成的矩阵；
+- $V^T \in \mathbb{R}^{n \times n}$：`右正交矩阵`，是 $A^TA$ 的 n 个特征向量组成的正交矩阵；
+
+<br>例子：
+
+$$
+\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \end{bmatrix} = 
+\begin{bmatrix}1 & 0 \\\\ 0 & 1 \end{bmatrix}
+\begin{bmatrix}1 & 0 \\\\ 0 & 1 \end{bmatrix} 
+\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \end{bmatrix} 
+$$
 
 ### 范数<a id="Norm"></a>
 
