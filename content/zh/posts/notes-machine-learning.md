@@ -590,13 +590,94 @@ $$ D_{KL}(p||q) = \sum_x p(x) \ln \frac{p(x)}{q(x)} \in [0, \infty] $$
 
 说明：也称作[相对熵](#KLD)。非负，越小越相似。
 
-### 归一化
+### 特征工程
 
-归一化（Normalization）和标准化（Standardization）都是对数据进行`缩放`（Scaling）处理，作用有两点：
+#### EDA
+
+探索阶段，包括：
+- 缺失值；
+- 异常值；（[PCA](#PrincipalComponentAnalysis) 后可视化）
+- 线性相关性；
+
+```python
+import pandas as pd
+import seaborn as sns 
+
+df = pd.read_csv('/path/to/xxx.csv')
+
+# 查看前 5 行
+df.head()
+
+# 查看每列的数据类型
+df.info()
+
+# 描述性统计: 个数、均值、标准差、最大/小值、四分位数、中位数
+df.describe()
+
+# 探索特征两两相关性矩阵 (超好用) 
+sns.pairplot(data=df, hue='your_label') 
+
+# 探索单个特征和标签 (小提琴图)
+sns.catplot(x='your_feature', y='your_label', hue='your_label', kind='violin', data=df)
+```
+
+#### 缺失值处理
+
+##### 离散值
+
+- `删除`：缺失比例严重时；
+- ：取众数；
+- `逻辑回归`：使用**完整数据**预测**缺失数据**；
+- `不处理`：算法不敏感时，如 XGBoost;
+
+##### 连续值
+
+- `删除`：缺失比例严重时；
+- `取中位数`：（相对**均值**更能兼容[偏态分布](#Skewness)）
+- `线性回归`：使用**完整数据**预测**缺失数据**；
+- `不处理`：算法不敏感时，如 XGBoost;
+
+#### 异常值处理
+
+如何发现：
+
+#### LabelEncoder
+
+主要用于将`离散特征的多个（有序）类别`，映射为有序数字。例子：
+
+| 原特征 | 新特征 |
+| --- | --- |
+| $C_1$ | 0 |
+| $C_2$ | 1 |
+| $C_3$ | 2 |
+
+#### One-Hot 编码
+
+主要用于将`离散特征的多个（无序）类别`，转为稀疏矩阵。例子：
+
+| 原特征 | 新特征1 | 新特征2 | 新特征3 |
+| --- | --- | --- | --- |
+| $C_1$ | 1 | 0 | 0 |
+| $C_2$ | 0 | 1 | 0 |
+| $C_3$ | 0 | 0 | 1 |
+
+#### 分箱
+
+主要用于`连续特征的离散化`。例子：
+
+| 原特征 | 新特征 |
+| --- | --- |
+| $[0, 60)$ | 0 |
+| $[60,80)$ | 1 |
+| $[80,100]$ | 2 |
+
+#### 归一化
+
+归一化（Normalization）和标准化（Standardization）都属于`特征缩放`（Feature scaling）。主要目的是：
 1. 剔除量纲，解决`数据可比性`问题；
 2. 提高求解速度，如运行梯度下降时更快收敛。
 
-#### 最大最小归一化
+##### 最大最小归一化
 
 Min-max normalization (Rescaling)：
 
@@ -606,7 +687,7 @@ $$
 
 说明：归一化后取值范围为 $[0,1]$，适用于最大最小值较稳定的情况；
 
-#### 均值归一化
+##### 均值归一化
 
 Mean normalization：
 
@@ -616,7 +697,7 @@ $$
 
 说明：归一化后取值范围为 $[-1,1]$；
 
-#### Z 分数归一化
+##### Z 分数归一化
 
 Z-score normalization，也称作`标准化`(Standardization)：
 
@@ -625,6 +706,21 @@ x^{\prime} = \frac{x - \mu}{\sigma}
 $$
 
 说明：归一化后取值范围为 $[-\infty,+\infty]$，且均值为 $0$，标准差为 $1$；
+
+#### 特征提取
+
+如从文本、图像中提取`机器学习可支持的特征`。
+
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+```
+
+#### 特征选择
+
+去除变化小（`方差小`）的特征：
+
+去除共线（`线性相关`）的特征：
+
 
 ### 损失函数<a id='LossFunction'></a>
 
@@ -1260,7 +1356,7 @@ $$
 
 例子：
 
-#### 特征向量与特征值
+#### 特征值与特征向量
 
 给定方阵 $A \in \mathbb{R}^{n \times n}$，若存在非零向量 $v \in \mathbb{R}^n$ 和非零标量 $\lambda \in \mathbb{R}$，使得：
 
@@ -1319,23 +1415,15 @@ $$
   - 形如 $\begin{bmatrix}\sigma_1 & 0 & 0 \\\\ 0 & \sigma_2 & 0 \end{bmatrix}$ 时，起到`升维`的作用；
 - $V^T \in \mathbb{R}^{n \times n}$：指 $A^TA$ 的 n 个特征向量组成的`右正交矩阵`；
 
-<br>降维的原理，即取前 k 个权重高的特征来近似表示整个矩阵：
+<br>降维的原理，即**取前 k 个权重高的特征来近似表示整个矩阵**：
 
 $$
 A_{m \times n} = 
 U_{m \times m} \Sigma_{m \times n} V_{n \times n}^T \approx
 U_{m \times k} \Sigma_{k \times k} V_{k \times n}^T
 $$
-<!-- <br>例子（以下四个矩阵依次对应 $A, U, \Sigma, V^T$）：
 
-$$
-\begin{bmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6 \end{bmatrix} = 
-\begin{bmatrix}-0.3863177 & -0.92236578 \\\\ -0.92236578 & 0.3863177 \end{bmatrix}
-\begin{bmatrix}9.508032 & 0 & 0 \\\\ 0 & 0.77286964 & 0 \end{bmatrix} 
-\begin{bmatrix}-0.42866713 & -0.56630692 & -0.7039467 \\\\ 0.80596391 &  0.11238241 & -0.58119908 \\\\ 0.40824829 & -0.81649658 &  0.40824829 \end{bmatrix} 
-$$ -->
-
-<br>**降维**例子（以下四个矩阵依次对应 $A, U, \Sigma, V^T$）：
+<br>降维例子（以下四个矩阵依次对应 $A, U, \Sigma, V^T$）：
 
 $$
 \begin{split}
