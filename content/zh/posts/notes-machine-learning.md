@@ -245,7 +245,7 @@ $$
 
 ##### 模型
 
-逻辑回归假设 $y|x \sim Bernoulli(\phi)$，即 $y$ 的条件概率服从`伯努利分布（0-1分布）`。
+逻辑回归假设 $y|x \sim Bernoulli(p)$，即 $y$ 的条件概率服从`伯努利分布（0-1分布）`。
 
 <a href="https://mollywangup.com/posts/notes-deep-learning/#sigmoid" target="_blank">Sigmoid 函数</a>：
 
@@ -1562,56 +1562,54 @@ $$
 
 #### 伯努利分布<a id="BernoulliDistribution"></a>
 
-`伯努利试验`指每次试验的结果只有两种可能，如果成功（1）的概率是 $\phi$，则失败（0）的概率是 $1-\phi$.
+{{< alert theme="info" >}}
+伯努利试验指每次试验的结果只有两种可能。
+{{< /alert >}}
 
-伯努利分布（Bernoulli distribution），也称作 `0-1 分布`，指`一次伯努利试验`中，成功（1）的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
-
-`离散分布`。指每次试验的结果只有两种可能，要么成功（1），要么失败（0）。记成功的概率为 $\phi$，则成功（1）的次数服从伯努利分布，记作：
+`离散分布`。指每次试验的结果只有两种可能，要么成功（1），要么失败（0）。设成功（1）的概率为 $p$，则成功（1）发生的次数服从**伯努利分布**，记作：
 
 $$
-X \sim Bernoulli(\phi)
+X \sim Bernoulli(p)
 $$
 
 其概率质量函数、期望值和方差分别如下：
 
 $$
 \begin{split}
-p(X=x;\phi) &= 
+p(X=x;p) &= 
 \begin{cases}
-\phi & \text{if $x=1$} \\\\ \\\\
-1-\phi & \text{if $x=0$} 
-\end{cases} \\\\ 
-\\\\&= \phi^x(1-\phi)^{1-x} 
+p & \text{if $x=1$} \\\\ \\\\
+1-p & \text{if $x=0$} 
+\end{cases} 
+&= p^x(1-p)^{1-x} 
 \end{split} \tag{PMF}
 $$
 
-$$ \mu = \sum_{x} p(x) x = \phi $$
+$$ \mu = \sum_{x} p(x) x = p $$
 
-$$ \sigma^2 = \sum_{x} p(x) \left(x - \mu\right)^2 = \phi(1-\phi) $$
+$$ \sigma^2 = \sum_{x} p(x) \left(x - \mu\right)^2 = p(1-p) $$
 
-#### 二项分布
+#### 二项分布<a id="BinomialDistribution"></a>
 
 {{< alert theme="info" >}}
-伯努利分布是 n 取 1 时的二项分布。
+二项分布是**重复 n 次伯努利试验**时，成功（1）的次数的概率分布。
 {{< /alert >}}
 
-`离散分布`。指`重复 n 次伯努利试验`，则成功（1）的次数服从二项分布，记作：
-
-<!-- 二项分布（Binomial distribution）指`重复 n 次伯努利试验`，成功（1）的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作： -->
+`离散分布`。指`每次试验的结果只有两种可能，重复 n 次试验`，设成功（1）的概率为 $p$，则成功（1）发生的次数服从**二项分布**，记作：
 
 $$
-X \sim B(n, \phi)
+X \sim B(n, p)
 $$
 
 其概率质量函数、期望值和方差分别如下，其中 $x \in \lbrace 0, 1, ..., n \rbrace$：
 
 $$
-p(X=x;n,\phi) = \frac{n!}{x!(n-x)!} \phi^x (1-\phi)^{n-x}  \tag{PMF}
+p(X=x;n,p) = \frac{n!}{x!(n-x)!} p^x (1-p)^{n-x}  \tag{PMF}
 $$
 
-$$ \mu = n\phi $$
+$$ \mu = np $$
 
-$$ \sigma^2 = n\phi(1-\phi)$$
+$$ \sigma^2 = np(1-p)$$
 
 <img src='https://user-images.githubusercontent.com/46241961/278027246-01e7fc5c-66b1-4b79-b855-002f64756da9.svg' alt='二项分布：（10, 0.5）' width=70%>
 
@@ -1621,10 +1619,16 @@ $$ \sigma^2 = n\phi(1-\phi)$$
 多项分布是二项分布推广到**每次试验的结果有 k 种可能**的情形。
 {{< /alert >}}
 
-`离散分布`。指`每次试验的结果有 k 种可能，重复 n 次试验`，则第 $j$ 种可能的次数服从多项分布（Multinomial distribution），记作：
+`离散分布`。指`每次试验的结果有 k 种可能，重复 n 次试验`，设第 $j$ 种可能的概率为 $p_j$，则第 $j$ 种可能发生的次数 $X$ 服从**多项分布**，记作：
 
 $$
 X \sim M(n, p_1, \cdots, p_k)
+$$
+
+其概率质量函数、期望值和方差分别如下，其中 $j \in \lbrace 1, ..., k \rbrace, x_j \in \lbrace 0, 1, ..., n \rbrace$：
+
+$$
+p(X=x_j;n,p_1,\cdots,p_k) =   \tag{PMF}
 $$
 
 说明：当 $k=2,n=1$ 时就是伯努利分布，当 $k=2,n>1$ 时就是二项分布，当 $k>2,n>1$ 时就是多项分布。
@@ -1653,7 +1657,7 @@ $$
 <br>说明：**方差越大，分布越分散（混乱），越扁，熵越大（平均信息量越大）。**
 <!-- 
 {{< notice info>}}
-当二项分布的 $\phi$ 取 0.5（对称），n 趋于无穷（连续）时，近似高斯分布。
+当二项分布的 $p$ 取 0.5（对称），n 趋于无穷（连续）时，近似高斯分布。
 {{< /notice >}} -->
 
 <!-- #### 拉普拉斯分布 -->
