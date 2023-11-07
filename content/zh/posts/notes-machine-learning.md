@@ -115,7 +115,7 @@ Step3：求解目标：求成本函数的极小值解。求极小值问题常用
 线性回归（Linear Regression），解决线性的**回归**问题。
 <!-- 前提假设是预测值与真实值的误差（error）服从正态分布。 -->
 
-#### 简单线性回归
+#### 原理
 
 ##### 模型
 
@@ -350,6 +350,10 @@ $$
 
 Hard-margin SVM
 Soft-margin SVM：加入了容错率
+
+核函数需满足：
+
+$$ k(x,z) = g(x) g(z) $$
 
 ### 朴素贝叶斯<a id="NaiveBayes"></a>
 
@@ -626,7 +630,7 @@ sns.catplot(x='your_feature', y='your_label', hue='your_label', kind='violin', d
 ##### 离散值
 
 - `删除`：缺失比例严重时；
-- ：取众数；
+- `取众数`；
 - `逻辑回归`：使用**完整数据**预测**缺失数据**；
 - `不处理`：算法不敏感时，如 XGBoost;
 
@@ -869,7 +873,7 @@ $$ MAPE = \frac{100}{m} \sum_{i=1}^{m} \lvert \frac{y^{(i)} - \hat{y}^{(i)}}{y^{
 
 ##### MSE<a id="MSE"></a>
 
-MSE（Mean Squared Error），均方误差。最小二乘的均值版，常用于线性回归模型的成本函数。
+MSE（Mean Squared Error），均方误差。最小二乘的均值版，常用于**回归模型**。
 
 $$ MSE = \frac{1}{m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 
@@ -922,7 +926,7 @@ $$ SSE = \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2 $$
 | **Positive** | TP（真阳） | FN（假阴） | 
 | **Negative** | FP（假阳） | TN（真阴） | 
 
-其中：`T/F` 表示预测是否正确，`P/N` 表示预测结果（P=1, N=0）。
+<br>其中：`T/F` 表示预测是否正确，`P/N` 表示预测结果（P=1, N=0）。
 
 ##### 准确率
 
@@ -975,6 +979,11 @@ AUC (Area Under ROC Curve)指的是 `ROC 曲线下方的面积`，相较于 ROC�
 ##### PR 曲线
 
 指以 Recall 为横轴, precision 为纵轴绘制成的曲线。
+
+<!-- #### 聚类指标
+
+##### 轮廓系数 -->
+
 
 ## 数学基础
 
@@ -1557,6 +1566,8 @@ $$
 
 伯努利分布（Bernoulli distribution），也称作 `0-1 分布`，指`一次伯努利试验`中，成功（1）的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $\phi$ 的伯努利分布，记作：
 
+`离散分布`。指每次试验的结果只有两种可能，要么成功（1），要么失败（0）。记成功的概率为 $\phi$，则成功（1）的次数服从伯努利分布，记作：
+
 $$
 X \sim Bernoulli(\phi)
 $$
@@ -1580,7 +1591,13 @@ $$ \sigma^2 = \sum_{x} p(x) \left(x - \mu\right)^2 = \phi(1-\phi) $$
 
 #### 二项分布
 
-二项分布（Binomial distribution）指`重复 n 次伯努利试验`，成功（1）的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作：
+{{< alert theme="info" >}}
+伯努利分布是 n 取 1 时的二项分布。
+{{< /alert >}}
+
+`离散分布`。指`重复 n 次伯努利试验`，则成功（1）的次数服从二项分布，记作：
+
+<!-- 二项分布（Binomial distribution）指`重复 n 次伯努利试验`，成功（1）的次数的概率分布。`离散型`随机变量 $X$ 服从参数 $n, \phi$ 的二项分布，记作： -->
 
 $$
 X \sim B(n, \phi)
@@ -1598,9 +1615,26 @@ $$ \sigma^2 = n\phi(1-\phi)$$
 
 <img src='https://user-images.githubusercontent.com/46241961/278027246-01e7fc5c-66b1-4b79-b855-002f64756da9.svg' alt='二项分布：（10, 0.5）' width=70%>
 
-<br>说明：伯努利分布是 n 取 1 时的二项分布。
+#### 多项分布<a id="MultinomialDistribution"></a>
+
+{{< alert theme="info" >}}
+多项分布是二项分布推广到**每次试验的结果有 k 种可能**的情形。
+{{< /alert >}}
+
+`离散分布`。指`每次试验的结果有 k 种可能，重复 n 次试验`，则第 $j$ 种可能的次数服从多项分布（Multinomial distribution），记作：
+
+$$
+X \sim M(n, p_1, \cdots, p_k)
+$$
+
+说明：当 $k=2,n=1$ 时就是伯努利分布，当 $k=2,n>1$ 时就是二项分布，当 $k>2,n>1$ 时就是多项分布。
 
 #### 高斯分布<a id="GaussianDistribution"></a>
+
+<!-- {{< alert theme="info" >}}
+{{< /alert >}} -->
+
+`连续分布`。
 
 高斯分布（Gaussian distribution），也称作正态分布（Normal distribution）。`连续型`随机变量 $X$ 服从均值 $\mu$，方差 $\sigma^2$ 的正态分布，记作：
 
