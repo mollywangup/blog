@@ -1544,6 +1544,10 @@ $$P(A,B) = P(A)P(B)$$
 
 离散型随机变量对应`概率质量函数`（Probability Mass Function, PMF），连续型随机变量对应`概率密度函数`（Probability Density Function, PDF）。
 
+{{< alert theme="info" >}}
+1 次伯努利试验对应**伯努利分布**，重复 n 次伯努利试验对应**二项分布**，将二项分布推广到每次试验的结果有 k 种可能则得到**多项分布**。
+{{< /alert >}}
+
 #### 均匀分布<a id="均匀分布"></a>
 
 `离散型`随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均匀分布，则：
@@ -1557,12 +1561,12 @@ p(X=x) =
 \begin{cases}
 \frac{1}{b-a} & \text{if $x \in [a,b]$} \\\\
 \\\\0 & \text{if $x \notin [a,b]$}
-\end{cases} \tag{PMF}
+\end{cases} \tag{PDF}
 $$
 
 #### 伯努利分布<a id="BernoulliDistribution"></a>
 
-`离散分布`。指每次试验的结果只有两种可能，要么成功（1），要么失败（0）。设成功（1）的概率为 $p$，则次数 $X \in \lbrace 0, 1 \rbrace$ 服从**伯努利分布**，记作：
+`离散分布`。指每次试验的结果只有两种可能，要么成功（1），要么失败（0）。设成功（1）的概率为 $p$，则**成功（1）发生的次数** $X$ 服从**伯努利分布**，记作：
 
 $$
 X \sim Bernoulli(p)
@@ -1593,13 +1597,13 @@ $$ \sigma^2 = \sum_{x} p(x) \left(x - \mu\right)^2 = p(1-p) $$
 重复 n 次伯努利试验即得到二项分布。
 {{< /alert >}}
 
-`离散分布`。指`每次试验的结果只有两种可能，重复 n 次试验`，设成功（1）的概率为 $p$，则次数 $X \in \lbrace 0, 1, ..., n \rbrace$ 服从**二项分布**，记作：
+`离散分布`。指`每次试验的结果只有两种可能，重复 n 次试验`，设成功（1）的概率为 $p$，则**成功（1）发生的次数** $X$ 服从**二项分布**，记作：
 
 $$
 X \sim B(n, p)
 $$
 
-对应的概率质量函数、期望值和方差分别如下：
+对应的概率质量函数、期望值和方差分别如下，其中 $x \in \lbrace 0, 1, ..., n \rbrace$：
 
 $$
 p(X=x;n,p) = \frac{n!}{x!(n-x)!} p^x (1-p)^{n-x}  \tag{PMF}
@@ -1617,13 +1621,13 @@ $$ \sigma^2 = np(1-p)$$
 多项分布是二项分布推广到**每次试验的结果有 k 种可能**的情形。
 {{< /alert >}}
 
-`离散分布`。指`每次试验的结果有 k 种可能，重复 n 次试验`，设第 $j$ 种可能的概率为 $p_j$，则次数 $X \in \lbrace X_1, ..., X_k \rbrace$ 服从**多项分布**，记作：
+`离散分布`。指`每次试验的结果有 k 种可能，重复 n 次试验`，设结果 $j$ 的概率为 $p_j$，则**所有结果的次数** $X = (X_1, \cdots, X_k)$ 服从**多项分布**，记作：
 
 $$
 X \sim M(n, p_1, \cdots, p_k)
 $$
 
-其中 $x_j \in \lbrace 0,\cdots n \rbrace, \sum_{j=1}^k x_j = n$，对应的概率质量函数、期望值和方差分别如下，
+对应的概率质量函数如下，其中 $x_j \in \lbrace 0,\cdots n \rbrace, \sum_{j=1}^k x_j = n$：
 
 $$
 p(X_1=x_1,\cdots,X_k=x_k;n,p_1,\cdots,p_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_k^{x_k} \tag{PMF}
