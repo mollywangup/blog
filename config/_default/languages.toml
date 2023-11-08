@@ -1,9 +1,9 @@
-[en]
-  title = "Molly's Blog"
-  languageName = "English"
-  weight = 2
-  languagedir = "ltr"
-  contentdir = "content/en"
+# [en]
+#   title = "Molly's Blog"
+#   languageName = "English"
+#   weight = 2
+#   languagedir = "ltr"
+#   contentdir = "content/en"
 
 [zh]
   title = "Molly's Blog"
