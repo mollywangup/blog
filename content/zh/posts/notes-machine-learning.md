@@ -1807,11 +1807,6 @@ $$
 
 用途：[决策树](#DecisionTree) C4.5 算法
 
-## 附
-
-一些术语概念：
-- 特征向量：矩阵的特征向量。数据集结构的非零向量；空间中每个点对应的一个坐标向量。
-
 <!-- <img src='https://www.nvidia.cn/content/dam/en-zz/Solutions/gtcf20/data-analytics/nvidia-ai-data-science-workflow-diagram.svg'>
 
 <img src='https://easyai.tech/wp-content/uploads/2022/08/523c0-2019-08-21-application.png.webp'>

@@ -1,5 +1,5 @@
 ---
-title: "Matplotlib 绘图例子"
+title: "Matplotlib 绘图实践"
 date: 2023-10-19T05:26:51Z
 draft: false
 description: 包括概率分布函数，激活函数，SST/SSR/SSE，2D vs. 3D 等。
@@ -26,9 +26,9 @@ import matplotlib.pyplot as plt
 from scipy.stats import binom 
 
 
-def runplot(n: int, p: float, ax: plt.axes, fmt='yo', color='grey'):
+def runplt(n: int, p: float, ax: plt.axes, fmt='yo', color='grey'):
     '''
-    单个二项分布的绘制准备
+    绘制单个二项分布的准备工作
     '''
     x = np.arange(n)
     y = [binom.pmf(x, n, p) for x in x]
@@ -59,7 +59,7 @@ def main():
     
     for i in range(nrows):
         for j in range(ncols):
-            runplot(ns[i, j], ps[i, j], axes[i, j])
+            runplt(ns[i, j], ps[i, j], axes[i, j])
             
     fig.suptitle('PMF of Binomial Distribution') 
     plt.savefig('PMF-of-Binomial-distribution.svg')
