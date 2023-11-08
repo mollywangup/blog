@@ -1606,7 +1606,7 @@ $$ \mu = np $$
 
 $$ \sigma^2 = np(1-p) $$
 
-<img src='https://user-images.githubusercontent.com/46241961/278027246-01e7fc5c-66b1-4b79-b855-002f64756da9.svg' alt='二项分布：（10, 0.5）' width=70%>
+<img src='https://user-images.githubusercontent.com/46241961/281407863-b8c51d26-8195-4a18-b5ba-f11b919833a8.svg' alt='二项分布' width=70%>
 
 #### 多项分布<a id="MultinomialDistribution"></a>
 
@@ -1637,19 +1637,21 @@ $$
 泊松分布是二项分布中 p 很小 n 很大时的一种极限形式。
 {{< /alert >}}
 
-指单位时间内，随机事件发生次数的发生 $\lambda$ 次的
+指`单位时间内`，若随机事件发生的次数的期望值为 $\lambda$，则`随机事件发生的次数` $X$ 服从**泊松分布**，记作：
 
 $$
 X \sim Poisson(\lambda)
 $$
 
-其概率质量函数、期望值和方差分别如下，其中 $x \in \lbrace 0, 1, ..., n \rbrace$：
+其概率质量函数、期望值和方差分别如下，其中 $x \in \lbrace 0, 1, \cdots \rbrace$：
 
 $$
-p(X=x;\lambda) = \frac{e^{- \lambda} \lambda^x}{x!} \tag{PMF}
+p(X=x;\lambda) = \frac{\lambda^x}{x!} e^{- \lambda} \tag{PMF}
 $$
 
-$$ \mu = \sigma^2 \lambda $$
+$$ \mu = \sigma^2 = \lambda $$
+
+<img src='https://user-images.githubusercontent.com/46241961/281406354-8450fff1-5ae9-434b-a328-f3c6890fc7ea.svg' alt='泊松分布' width=70%>
 
 #### 高斯分布<a id="GaussianDistribution"></a>
 
@@ -1678,11 +1680,29 @@ $$
 
 <!-- #### 拉普拉斯分布 -->
 
+#### 指数分布<a id="ExponentialDistribution"></a>
 
-<!-- #### 指数分布 -->
+指`单位时间内`，若随机事件发生的次数的期望值为 $\lambda$，则`随机事件发生的时间间隔` $X$ 服从**指数分布**，记作：
 
+$$
+X \sim Exp(\lambda)
+$$
 
-<!-- #### 泊松分布 -->
+其概率密度函数如下：
+
+$$
+p(X=x;\lambda) = 
+\begin{cases}
+\lambda e^{-\lambda x} & \text{if $x \geq 0$} \\\\
+\\\\0 & \text{if $x < 0$}
+\end{cases} \tag{PDF}
+$$
+
+$$ \mu = \frac{1}{\lambda} $$
+
+$$ \sigma^2 = \frac{1}{\lambda^2} $$
+
+<img src="https://user-images.githubusercontent.com/46241961/281424604-6f72b284-3be8-4739-b9cd-4fedd4a0d217.svg" alt="指数分布" width=70%>
 
 ### 熵<a id="Entropy"></a>
 
