@@ -1546,11 +1546,11 @@ $$P(A,B) = P(A)P(B)$$
 
 #### 均匀分布<a id="均匀分布"></a>
 
-`离散型`随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均匀分布，则：
+随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均匀分布，则：
 
 $$ p(X=x) = \frac{1}{n} \tag{PMF} $$
 
-`连续型`随机变量 $X \in [a,b]$ 服从均匀分布，则：
+随机变量 $X \in [a,b]$ 服从均匀分布，则：
 
 $$
 p(X=x) =
@@ -1572,15 +1572,15 @@ $$
 X \sim Bernoulli(p)
 $$
 
-其概率质量函数、期望值和方差分别如下，其中 $x \in \lbrace 0, 1 \rbrace$：
+其中 $x \in \lbrace 0, 1 \rbrace$，有：
 
 $$
 p(X=x;p) = p^x(1-p)^{1-x} \tag{PMF}
 $$
 
-$$ \mu = \sum_{x} p(x) x = p $$
+$$ \mu = p $$
 
-$$ \sigma^2 = \sum_{x} p(x) \left(x - \mu\right)^2 = p(1-p) $$
+$$ \sigma^2 = p(1-p) $$
 
 说明：上述试验称为**伯努利试验**。
 
@@ -1596,7 +1596,7 @@ $$
 X \sim B(n, p)
 $$
 
-其概率质量函数、期望值和方差分别如下，其中 $x \in \lbrace 0, 1, ..., n \rbrace$：
+其中 $x \in \lbrace 0, 1, ..., n \rbrace$，有：
 
 $$
 p(X=x;n,p) = \frac{n!}{x!(n-x)!} p^x (1-p)^{n-x}  \tag{PMF}
@@ -1606,7 +1606,7 @@ $$ \mu = np $$
 
 $$ \sigma^2 = np(1-p) $$
 
-<img src='https://user-images.githubusercontent.com/46241961/281407863-b8c51d26-8195-4a18-b5ba-f11b919833a8.svg' alt='二项分布' width=70%>
+<img src='https://user-images.githubusercontent.com/46241961/281432647-34103803-f76e-4951-82d1-8569583c3f13.svg' alt='二项分布' width=70%>
 
 #### 多项分布<a id="MultinomialDistribution"></a>
 
@@ -1620,7 +1620,7 @@ $$
 X \sim M(n, p_1, \cdots, p_k)
 $$
 
-其概率质量函数如下，其中 $x_j \in \lbrace 0,\cdots n \rbrace, \sum_{j=1}^k x_j = n$：
+其中 $x_j \in \lbrace 0,\cdots n \rbrace, \sum_{j=1}^k x_j = n$，有：
 
 $$
 p(X_1=x_1,\cdots,X_k=x_k;n,p_1,\cdots,p_k) = \frac{n!}{x_1! \cdots x_k!} p_1^{x_1} \cdots p_k^{x_k} \tag{PMF}
@@ -1643,13 +1643,15 @@ $$
 X \sim Poisson(\lambda)
 $$
 
-其概率质量函数、期望值和方差分别如下，其中 $x \in \lbrace 0, 1, \cdots \rbrace$：
+其中 $x \in \lbrace 0, 1, \cdots \rbrace$，有：
 
 $$
 p(X=x;\lambda) = \frac{\lambda^x}{x!} e^{- \lambda} \tag{PMF}
 $$
 
-$$ \mu = \sigma^2 = \lambda $$
+$$ \mu = \lambda $$
+
+$$ \sigma^2 = \lambda $$
 
 <img src='https://user-images.githubusercontent.com/46241961/281406354-8450fff1-5ae9-434b-a328-f3c6890fc7ea.svg' alt='泊松分布' width=70%>
 
@@ -1658,19 +1660,19 @@ $$ \mu = \sigma^2 = \lambda $$
 <!-- {{< alert theme="info" >}}
 {{< /alert >}} -->
 
-`连续型`随机变量 $X$ 服从均值 $\mu$，方差 $\sigma^2$ 的高斯（正态）分布，记作：
+随机变量 $X$ 服从均值 $\mu$，方差 $\sigma^2$ 的高斯（正态）分布，记作：
 
 $$
 X \sim N(\mu, \sigma^2)
 $$
 
-其概率密度函数如下：
+其中 $x \in [-\infty, +\infty]$，有：
 
 $$
 p(X=x;\mu,\sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \exp\left(-\frac{(x-\mu)^2} {2 \sigma^2}\right)  \tag{PDF}
 $$
 
-<img src='https://user-images.githubusercontent.com/46241961/278098372-7c4fe92c-e433-4c38-b7a0-06964ff05b12.svg' alt='高斯分布' width=70%>
+<img src='https://user-images.githubusercontent.com/46241961/281431890-bef1027c-1a36-40fd-988a-2b49142e1af1.svg' alt='高斯分布' width=70%>
 
 <br>说明：**方差越大，分布越分散（混乱），越扁，熵越大（平均信息量越大）。**
 <!-- 
@@ -1685,17 +1687,13 @@ $$
 指`单位时间内`，若随机事件发生的次数的期望值为 $\lambda$，则`随机事件发生的时间间隔` $X$ 服从**指数分布**，记作：
 
 $$
-X \sim Exp(\lambda)
+X \sim \exp(\lambda)
 $$
 
-其概率密度函数如下：
+其中 $x \in (0, +\infty]$，有：
 
 $$
-p(X=x;\lambda) = 
-\begin{cases}
-\lambda e^{-\lambda x} & \text{if $x \geq 0$} \\\\
-\\\\0 & \text{if $x < 0$}
-\end{cases} \tag{PDF}
+p(X=x;\lambda) = \lambda e^{-\lambda x} \tag{PDF}
 $$
 
 $$ \mu = \frac{1}{\lambda} $$
