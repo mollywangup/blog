@@ -15,6 +15,190 @@ libraries:
 - mathjax
 ---
 
+## 概率分布
+
+### 二项分布
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+from scipy.stats import binom 
+
+
+def runplot(n: int, p: float, ax: plt.axes, fmt='yo', color='grey'):
+    '''
+    单个二项分布的绘制准备
+    '''
+    x = np.arange(n)
+    y = [binom.pmf(x, n, p) for x in x]
+    
+    ax.plot(x, y, fmt, ms=5, mec='black', label='p={}\nn={}'.format(p, n))
+    ax.vlines(x, 0, y, lw=5, color=color, alpha=0.5)
+    ax.vlines(x, 0, y, lw=1, color=color)
+    
+    ax.set_xticks([x for x in range(0, n + 2, 2)])
+    ax.legend(loc='best')
+
+
+def main():
+    '''
+    绘制一组二项分布：参数对比
+    '''
+    # 参数
+    ns = np.array([[10, 10, 10],
+                   [10, 15, 20]])
+    ps = np.array([[0.1, 0.5, 0.7],
+                   [0.5, 0.5, 0.5]])
+    
+    # 绘图
+    nrows = 2
+    ncols = 3
+    
+    fig, axes = plt.subplots(nrows, ncols, figsize=(14, 7), sharey=True) 
+    
+    for i in range(nrows):
+        for j in range(ncols):
+            runplot(ns[i, j], ps[i, j], axes[i, j])
+            
+    fig.suptitle('PMF of Binomial Distribution') 
+    plt.savefig('PMF-of-Binomial-distribution.svg')
+    plt.show() 
+
+
+if __name__ == '__main__':
+    main()
+```
+
+<img src="https://user-images.githubusercontent.com/46241961/281437013-da5dba2e-f5d3-42bd-bde9-2639f1b56ba1.svg" alt="二项分布">
+
+### 泊松分布
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+from scipy.stats import bernoulli, binom, multinomial, poisson
+
+
+def main():
+    '''
+    泊松分布
+    '''
+    # 三组参数
+    mus = [1, 4, 10]
+
+    # 固定 x 的最大值
+    x_max = int(poisson.ppf(0.99, np.max(mus) + 2))
+    x = np.arange(x_max)
+
+    fig, ax = plt.subplots()
+    fmts = ['bo', 'ro', 'go']
+    colors = [c[0] for c in fmts]
+    
+    for mu, fmt, color in zip(mus, fmts, colors):
+        # 数据
+        y = [poisson.pmf(x, mu) for x in x]
+        
+        # 绘图
+        ax.plot(x, y, fmt, ms=5, mec='black', label='$\lambda$ = {}'.format(mu))
+        ax.plot(x, y, c=color, alpha=0.5)
+
+    ax.set_title('$X \sim Poisson(\lambda)$')
+    ax.set_xlabel('x')
+    ax.set_ylabel('$p(X=x)$')  
+    ax.set_xticks([x for x in range(0, x_max, 5)])
+    ax.legend(loc='best', frameon=True)
+    plt.savefig('Poisson-distribution.svg')
+    plt.show()
+    
+
+if __name__ == '__main__':
+    main()
+```
+
+<img src='https://user-images.githubusercontent.com/46241961/281406354-8450fff1-5ae9-434b-a328-f3c6890fc7ea.svg' alt='泊松分布'>
+
+### 高斯分布
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+from scipy.stats import norm
+
+
+def main():
+    '''
+    高斯分布
+    '''
+    # 三组参数
+    means = [0, 1, 0]
+    variances = [1, 1, 0.5]
+    
+    x = np.linspace(-3, 4, 100)
+
+    fig, ax = plt.subplots()
+    
+    for mean, variance in zip(means, variances):
+        std = np.sqrt(variance)
+        y = norm.pdf(x, loc=mean, scale=std)
+        ax.plot(x, y, label='$\mu$={}, $\sigma^2$={}'.format(mean, variance))
+
+    ax.set_title('$X \sim N(\mu, \sigma^2)$')
+    ax.set_xlabel('x')
+    ax.set_ylabel('$p(X=x)$')  
+    ax.set_xticks([x for x in range(-3, 5)])
+    ax.legend(loc='best', frameon=True)
+    plt.savefig('Gaussian-distribution.svg')
+    plt.show()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+<img src='https://user-images.githubusercontent.com/46241961/281431890-bef1027c-1a36-40fd-988a-2b49142e1af1.svg' alt='高斯分布'>
+
+### 指数分布
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+from scipy.stats import expon
+
+
+def main():
+    '''
+    指数分布
+    '''
+    # 三组参数
+    mus = [0.5, 1, 1.5]
+    
+    x_max = int(expon.ppf(0.99, 0, 1/np.min(mus)))
+    x = np.linspace(0, x_max, 100)
+
+    fig, ax = plt.subplots()
+    
+    for mu in mus:
+        y = expon.pdf(x, loc=0, scale=1/mu)
+        ax.plot(x, y, label='$\lambda$ = {}'.format(mu))
+
+    ax.set_title('$X \sim Exp(\lambda)$')
+    ax.set_xlabel('x')
+    ax.set_ylabel('$p(X=x)$')  
+    ax.set_xticks([x for x in range(x_max + 1)])
+    ax.legend(loc='best', frameon=True)
+    plt.savefig('Exponential-distribution.svg')
+    plt.show()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+<img src="https://user-images.githubusercontent.com/46241961/281424604-6f72b284-3be8-4739-b9cd-4fedd4a0d217.svg" alt="指数分布">
 
 ## 小功能
 

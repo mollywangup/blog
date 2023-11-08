@@ -1546,7 +1546,7 @@ $$P(A,B) = P(A)P(B)$$
 
 #### 均匀分布<a id="均匀分布"></a>
 
-随机变量 $X = \lbrace x_1,x_2,\cdots,x_n \rbrace$ 服从均匀分布，则：
+随机变量 $X = \lbrace a_1,a_2,\cdots,a_n \rbrace$ 服从均匀分布，则：
 
 $$ p(X=x) = \frac{1}{n} \tag{PMF} $$
 
@@ -1690,7 +1690,7 @@ $$
 X \sim \exp(\lambda)
 $$
 
-其中 $x \in (0, +\infty]$，有：
+其中 $x \in [0, +\infty]$，有：
 
 $$
 p(X=x;\lambda) = \lambda e^{-\lambda x} \tag{PDF}
