@@ -19,8 +19,6 @@ libraries:
 
 ### 二项分布
 
-<img src="https://user-images.githubusercontent.com/46241961/281437013-da5dba2e-f5d3-42bd-bde9-2639f1b56ba1.svg" alt="二项分布">
-
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -72,9 +70,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 泊松分布
+<img src="https://user-images.githubusercontent.com/46241961/281437013-da5dba2e-f5d3-42bd-bde9-2639f1b56ba1.svg" alt="二项分布">
 
-<img src='https://user-images.githubusercontent.com/46241961/281406354-8450fff1-5ae9-434b-a328-f3c6890fc7ea.svg' alt='泊松分布'>
+### 泊松分布
 
 ```python
 import numpy as np
@@ -119,9 +117,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 高斯分布
+<img src='https://user-images.githubusercontent.com/46241961/281406354-8450fff1-5ae9-434b-a328-f3c6890fc7ea.svg' alt='泊松分布'>
 
-<img src='https://user-images.githubusercontent.com/46241961/281431890-bef1027c-1a36-40fd-988a-2b49142e1af1.svg' alt='高斯分布'>
+### 高斯分布
 
 ```python
 import numpy as np
@@ -160,9 +158,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 指数分布
+<img src='https://user-images.githubusercontent.com/46241961/281431890-bef1027c-1a36-40fd-988a-2b49142e1af1.svg' alt='高斯分布'>
 
-<img src="https://user-images.githubusercontent.com/46241961/281424604-6f72b284-3be8-4739-b9cd-4fedd4a0d217.svg" alt="指数分布">
+### 指数分布
 
 ```python
 import numpy as np
@@ -199,6 +197,8 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+<img src="https://user-images.githubusercontent.com/46241961/281424604-6f72b284-3be8-4739-b9cd-4fedd4a0d217.svg" alt="指数分布">
 
 ## 小功能
 
