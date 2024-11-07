@@ -9,9 +9,8 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - MySQL
-- SQL
 categories:
-- DB
+- OLTP
 - Notes
 libraries:
 - mathjax

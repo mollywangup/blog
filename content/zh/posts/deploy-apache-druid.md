@@ -9,9 +9,8 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Apache Druid
-- OLAP
 categories:
-- DB
+- OLAP
 ---
 
 ## 背景信息

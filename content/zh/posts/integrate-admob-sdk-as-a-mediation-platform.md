@@ -10,8 +10,6 @@ tocPosition: inner
 tags:
 - AdMob
 - Monetization
-categories:
-- SDK
 ---
 
 ## 

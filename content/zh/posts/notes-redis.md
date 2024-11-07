@@ -10,7 +10,6 @@ tocPosition: inner
 tags:
 - Redis
 categories:
-- DB
 - Notes
 ---
 

@@ -10,9 +10,7 @@ tocPosition: inner
 tags:
 - Adjust
 categories:
-- SDK
 - MMP
-- S2S
 ---
 
 本文旨在使用 Adjust SDK 追踪以下四类事件数据：

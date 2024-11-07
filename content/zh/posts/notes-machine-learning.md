@@ -8,9 +8,9 @@ enableToc: true
 enableTocContent: false
 tocPosition: inner
 tags:
-- Machine Learning
 - sklearn
 categories:
+- ML
 - Notes
 libraries:
 - mathjax

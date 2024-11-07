@@ -17,7 +17,6 @@ tags:
 - Helpshift
 - APT
 categories:
-- SDK
 - MMP
 ---
 

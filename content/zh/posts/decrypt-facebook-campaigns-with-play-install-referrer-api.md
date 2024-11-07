@@ -9,8 +9,6 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Play Install Referrer API
-- Facebook Ads
-- Firebase
 categories:
 - Attribution
 ---

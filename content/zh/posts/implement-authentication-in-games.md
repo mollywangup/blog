@@ -9,8 +9,6 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Firebase
-categories:
-- Login
 ---
 
 ## 背景信息

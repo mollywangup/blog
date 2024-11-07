@@ -9,10 +9,9 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Apache Druid
-- OLAP
 - S3
 categories:
-- DB
+- OLAP
 ---
 
 本文旨在将来自 S3 的 .csv.gz 数据，批量摄取至 Druid. 其中：

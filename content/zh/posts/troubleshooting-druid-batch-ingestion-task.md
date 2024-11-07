@@ -10,8 +10,6 @@ tocPosition: inner
 tags:
 - Apache Druid
 - S3
-- SQL-based ingestion
-- Batch Ingestion Task
 categories:
 - Troubleshooting
 ---

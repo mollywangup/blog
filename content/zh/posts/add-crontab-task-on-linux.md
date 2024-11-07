@@ -9,9 +9,8 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - Crontab
-- Linux
 categories:
-- Tool
+- Linux
 ---
 
 ## Step1. 安装 Crontab

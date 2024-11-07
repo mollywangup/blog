@@ -10,7 +10,6 @@ tocPosition: inner
 tags:
 - Adjust
 - Apache Druid
-- SQL
 categories:
 - MMP
 - OLAP

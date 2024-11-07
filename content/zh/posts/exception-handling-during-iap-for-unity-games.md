@@ -9,8 +9,6 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - IAP
-categories:
-- SDK
 ---
 
 ## 背景信息

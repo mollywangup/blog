@@ -10,7 +10,7 @@ tocPosition: inner
 tags:
 - Matplotlib
 categories:
-- Practice
+- ML
 libraries:
 - mathjax
 ---

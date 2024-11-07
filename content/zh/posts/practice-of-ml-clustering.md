@@ -8,11 +8,10 @@ enableToc: true
 enableTocContent: false
 tocPosition: inner
 tags:
-- Machine Learning
 - sklearn
 - Clustering
 categories:
-- Practice
+- ML
 libraries:
 - mathjax
 ---

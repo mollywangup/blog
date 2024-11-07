@@ -10,7 +10,6 @@ tocPosition: inner
 tags:
 - Firebase
 categories:
-- SDK
 - BAAS
 ---
 

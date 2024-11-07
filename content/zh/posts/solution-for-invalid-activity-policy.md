@@ -11,8 +11,6 @@ tags:
 - Invalid activity
 - Monetization
 - AdMob
-categories:
-- Policy
 ---
 
 无效流量，也常称作无效活动，以下统一口径为无效流量。

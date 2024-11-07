@@ -11,6 +11,7 @@ tags:
 - Deep Learning
 - TensorFlow
 categories:
+- ML
 - Notes
 libraries:
 - mathjax

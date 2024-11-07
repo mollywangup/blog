@@ -13,7 +13,6 @@ tags:
 - GP
 categories:
 - Policy
-- SDK
 ---
 
 ## 背景信息

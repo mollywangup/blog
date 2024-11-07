@@ -12,12 +12,9 @@ tags:
 - S3
 - Apache Druid
 - Apache Superset
-- OLAP
-- SQL
 categories:
 - BI
-- DB
-- Columnar
+- OLAP
 - MMP
 ---
 

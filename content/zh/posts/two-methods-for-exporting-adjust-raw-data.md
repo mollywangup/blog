@@ -10,7 +10,6 @@ tocPosition: inner
 tags:
 - Adjust
 categories:
-- SDK
 - MMP
 ---
 

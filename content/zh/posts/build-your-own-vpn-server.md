@@ -9,7 +9,6 @@ enableTocContent: false
 tocPosition: inner
 tags:
 - VPN
-- Linux
 categories:
 - Tool
 ---

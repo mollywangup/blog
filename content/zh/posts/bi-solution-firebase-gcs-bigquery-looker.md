@@ -12,12 +12,9 @@ tags:
 - GCS
 - BigQuery
 - Looker Studio
-- OLAP
-- SQL
 categories:
 - BI
-- DB
-- Columnar
+- OLAP
 - BAAS
 ---
 

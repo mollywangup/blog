@@ -11,7 +11,6 @@ tags:
 - Adjust
 - FCM
 categories:
-- SDK
 - MMP
 ---
 

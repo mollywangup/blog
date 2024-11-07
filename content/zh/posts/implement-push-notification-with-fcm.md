@@ -10,8 +10,6 @@ tocPosition: inner
 tags:
 - FCM
 - Push Notification
-categories:
-- SDK
 ---
 
 ## 背景信息
