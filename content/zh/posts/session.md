@@ -25,7 +25,7 @@ categories:
 
 每次应用启动时判断，如果本次 Session 已累计超过 30 分钟，则触发一个新 Session 事件，否则不触发。具体规则如下图：
 
-<img src="https://a.storyblok.com/f/47007/2400x1260/d428ff5b36/240529_glossary_sessions_zh_v02.png/m/2880x0/filters:quality(80)" alt="Session 统计规则">
+<img src="https://a.storyblok.com/f/47007/2400x1260/d428ff5b36/240529_glossary_sessions_zh_v02.png/m/2880x0/filters:quality(80)" alt="Session 统计规则（图源 Adjust）">
 
 ### 数据存储
 
