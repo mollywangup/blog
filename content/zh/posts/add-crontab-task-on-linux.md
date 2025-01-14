@@ -10,7 +10,7 @@ tocPosition: inner
 tags:
 - Crontab
 categories:
-- Linux
+- Tools
 ---
 
 ## Step1. 安装 Crontab

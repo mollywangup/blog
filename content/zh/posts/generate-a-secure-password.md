@@ -8,9 +8,9 @@ enableToc: true
 enableTocContent: false
 tocPosition: inner
 tags:
-- Linux
+- 
 categories:
-- Tool
+- Tools
 ---
 
 专业密码管理的工具有很多，比如 1Password/LastPass，以下仅仅是为了方便 **快速生成一个安全的随机密码**。

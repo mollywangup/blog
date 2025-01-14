@@ -10,7 +10,7 @@ tocPosition: inner
 tags:
 - VPN
 categories:
-- Tool
+- Tools
 ---
 
 共包含三种主流的连接协议：IKEv2/OpenVPN/WireGuard. 
