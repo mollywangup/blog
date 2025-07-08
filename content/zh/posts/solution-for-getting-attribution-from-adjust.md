@@ -1,7 +1,7 @@
 ---
 title: "通过 Adjust 获取用户归因的解决方案"
 date: 2025-01-12T03:36:40Z
-draft: false
+draft: true
 description: 共三类：客户端 SDK，服务端回调，设备 API 接口。
 hideToc: false
 enableToc: true
