@@ -1,4 +1,4 @@
 baseURL = "https://mollywangup.com/" # "http://example.org/"
-# languageCode = "en-us"
-# title = "My New Hugo Site"
+languageCode = "en-us"
+title = "My New Hugo Site"
 publishDir = "docs"  # GitHub Pages 默认从 docs 文件夹发布
