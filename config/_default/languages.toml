@@ -9,7 +9,7 @@
   title = "Molly's Blog"
   languageName = "中文简体"
   weight = 1
-  languagedir = "ltr"
+  # languagedir = "ltr"
   contentdir = "content/zh"
 
 # [ko]
