@@ -56,41 +56,5 @@
         
       </item>
     
-      <item>
-        <title>踩坑：ERR_TOO_MANY_REDIRECTS</title>
-        <link>https://mollywangup.com/zh/posts/troubleshooting-err-too-many-redirects/</link>
-        <pubDate>Tue, 29 Jun 2021 03:55:45 +0000</pubDate>
-        <author>mollywangup@gmail.com (Molly Wang)</author>
-        <atom:modified>Tue, 29 Jun 2021 03:55:45 +0000</atom:modified>
-        <guid>https://mollywangup.com/zh/posts/troubleshooting-err-too-many-redirects/</guid>
-        <description>&lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
-&lt;p&gt;当打开自己的网站时，浏览器报错：&lt;code&gt;ERR_TOO_MANY_REDIRECTS&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&#34;问题定位&#34;&gt;问题定位&lt;/h2&gt;
-&lt;p&gt;这个报错通常是由于重定向死循环导致，如下图:&lt;/p&gt;
-&lt;img src=&#39;https://mollywangup.com/images/posts/redirect_loop.png&#39; alt=&#39;A Redirect Loop&#39;&gt;
-&lt;h2 id=&#34;解决思路&#34;&gt;解决思路&lt;/h2&gt;
-&lt;p&gt;检查网站的重定向设置，无论是主动设置的还是被动设置的。&lt;/p&gt;</description>
-        
-        <dc:creator>Molly Wang</dc:creator>
-        
-        
-        
-        
-          
-            
-              <category>Cloudflare</category>
-            
-          
-        
-        
-          
-            
-              <category>Troubleshooting</category>
-            
-          
-        
-        
-      </item>
-    
   </channel>
 </rss>

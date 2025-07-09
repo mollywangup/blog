@@ -62,47 +62,5 @@
         
       </item>
     
-      <item>
-        <title>学习笔记：吴恩达深度学习</title>
-        <link>https://mollywangup.com/zh/posts/notes-deep-learning/</link>
-        <pubDate>Sat, 21 Oct 2023 12:36:53 +0000</pubDate>
-        <author>mollywangup@gmail.com (Molly Wang)</author>
-        <atom:modified>Sat, 21 Oct 2023 12:36:53 +0000</atom:modified>
-        <guid>https://mollywangup.com/zh/posts/notes-deep-learning/</guid>
-        <description>&lt;p&gt;挖坑中&amp;hellip;&lt;/p&gt;
-&lt;!-- 神经网络（Neural Network），解决**分类+回归**问题。 --&gt;
-&lt;h2 id=&#34;激活函数&#34;&gt;激活函数&lt;/h2&gt;
-&lt;p&gt;为了在神经网络中将线性输出转化为非线性输出。&lt;/p&gt;
-&lt;p&gt;结论：&lt;/p&gt;</description>
-        
-        <dc:creator>Molly Wang</dc:creator>
-        
-        
-        
-        
-          
-            
-              <category>Deep Learning</category>
-            
-          
-            
-              <category>TensorFlow</category>
-            
-          
-        
-        
-          
-            
-              <category>ML</category>
-            
-          
-            
-              <category>Notes</category>
-            
-          
-        
-        
-      </item>
-    
   </channel>
 </rss>

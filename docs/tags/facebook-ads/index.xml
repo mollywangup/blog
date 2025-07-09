@@ -82,117 +82,12 @@
       </item>
     
       <item>
-        <title>通用：上架 GP 常用 SDK/Service 集成需求</title>
-        <link>https://mollywangup.com/zh/posts/sdk-or-service-integration-requirements-for-unity-games/</link>
-        <pubDate>Fri, 01 Jul 2022 09:35:45 +0000</pubDate>
-        <author>mollywangup@gmail.com (Molly Wang)</author>
-        <atom:modified>Fri, 01 Jul 2022 09:35:45 +0000</atom:modified>
-        <guid>https://mollywangup.com/zh/posts/sdk-or-service-integration-requirements-for-unity-games/</guid>
-        <description>&lt;p&gt;本文适用于侧重广告变现的 Unity 游戏。&lt;/p&gt;
-&lt;p&gt;涉及到隐私政策，👉 指路我的另外一篇文章 &lt;a href=&#34;https://mollywangup.com/posts/solution-for-ad-privacy/&#34; target=&#34;_blank&#34;&gt;广告风控指南：隐私政策&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;firebase-sdk&#34;&gt;Firebase SDK&lt;/h2&gt;
-&lt;p&gt;理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；&lt;/p&gt;</description>
-        
-        <dc:creator>Molly Wang</dc:creator>
-        
-        
-        
-        
-          
-            
-              <category>Firebase</category>
-            
-          
-            
-              <category>Facebook Ads</category>
-            
-          
-            
-              <category>MAX</category>
-            
-          
-            
-              <category>Adjust</category>
-            
-          
-            
-              <category>IAP</category>
-            
-          
-            
-              <category>Subscription</category>
-            
-          
-            
-              <category>Helpshift</category>
-            
-          
-            
-              <category>APT</category>
-            
-          
-        
-        
-          
-            
-              <category>MMP</category>
-            
-          
-        
-        
-      </item>
-    
-      <item>
         <title>广告数据抓取方法论</title>
         <link>https://mollywangup.com/posts/ad-insights-api/</link>
         <pubDate>Mon, 18 Jan 2021 06:08:30 +0000</pubDate>
         <author>mollywangup@gmail.com (Molly Wang)</author>
         <atom:modified>Mon, 18 Jan 2021 06:08:30 +0000</atom:modified>
         <guid>https://mollywangup.com/posts/ad-insights-api/</guid>
-        <description>&lt;p&gt;无论哪个广告平台，数据抓取整体可概括为以下两步：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;申请接口；（访问令牌/密钥文件）&lt;/li&gt;
-&lt;li&gt;通过接口请求数据；&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;facebook-ads&#34;&gt;Facebook Ads&lt;/h2&gt;
-&lt;p&gt;每个 BM 对应一个访问令牌，访问令牌由该 BM 下管理员权限的 system_user 生成，只要授权给该 system_user 的广告账户，其数据都可以通过该访问令牌请求。&lt;/p&gt;</description>
-        
-        <dc:creator>Molly Wang</dc:creator>
-        
-        
-        
-        
-          
-            
-              <category>Facebook Ads</category>
-            
-          
-            
-              <category>Google Ads</category>
-            
-          
-            
-              <category>Apple Search Ads</category>
-            
-          
-        
-        
-          
-            
-              <category>API</category>
-            
-          
-        
-        
-      </item>
-    
-      <item>
-        <title>广告数据抓取方法论</title>
-        <link>https://mollywangup.com/zh/posts/ad-insights-api/</link>
-        <pubDate>Mon, 18 Jan 2021 06:08:30 +0000</pubDate>
-        <author>mollywangup@gmail.com (Molly Wang)</author>
-        <atom:modified>Mon, 18 Jan 2021 06:08:30 +0000</atom:modified>
-        <guid>https://mollywangup.com/zh/posts/ad-insights-api/</guid>
         <description>&lt;p&gt;无论哪个广告平台，数据抓取整体可概括为以下两步：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;申请接口；（访问令牌/密钥文件）&lt;/li&gt;

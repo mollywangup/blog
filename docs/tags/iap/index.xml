@@ -82,117 +82,12 @@
       </item>
     
       <item>
-        <title>通用：上架 GP 常用 SDK/Service 集成需求</title>
-        <link>https://mollywangup.com/zh/posts/sdk-or-service-integration-requirements-for-unity-games/</link>
-        <pubDate>Fri, 01 Jul 2022 09:35:45 +0000</pubDate>
-        <author>mollywangup@gmail.com (Molly Wang)</author>
-        <atom:modified>Fri, 01 Jul 2022 09:35:45 +0000</atom:modified>
-        <guid>https://mollywangup.com/zh/posts/sdk-or-service-integration-requirements-for-unity-games/</guid>
-        <description>&lt;p&gt;本文适用于侧重广告变现的 Unity 游戏。&lt;/p&gt;
-&lt;p&gt;涉及到隐私政策，👉 指路我的另外一篇文章 &lt;a href=&#34;https://mollywangup.com/posts/solution-for-ad-privacy/&#34; target=&#34;_blank&#34;&gt;广告风控指南：隐私政策&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;firebase-sdk&#34;&gt;Firebase SDK&lt;/h2&gt;
-&lt;p&gt;理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；&lt;/p&gt;</description>
-        
-        <dc:creator>Molly Wang</dc:creator>
-        
-        
-        
-        
-          
-            
-              <category>Firebase</category>
-            
-          
-            
-              <category>Facebook Ads</category>
-            
-          
-            
-              <category>MAX</category>
-            
-          
-            
-              <category>Adjust</category>
-            
-          
-            
-              <category>IAP</category>
-            
-          
-            
-              <category>Subscription</category>
-            
-          
-            
-              <category>Helpshift</category>
-            
-          
-            
-              <category>APT</category>
-            
-          
-        
-        
-          
-            
-              <category>MMP</category>
-            
-          
-        
-        
-      </item>
-    
-      <item>
         <title>优化支付 (IAP) 时的异常处理</title>
         <link>https://mollywangup.com/posts/exception-handling-during-iap-for-unity-games/</link>
         <pubDate>Tue, 22 Feb 2022 02:07:40 +0000</pubDate>
         <author>mollywangup@gmail.com (Molly Wang)</author>
         <atom:modified>Tue, 22 Feb 2022 02:07:40 +0000</atom:modified>
         <guid>https://mollywangup.com/posts/exception-handling-during-iap-for-unity-games/</guid>
-        <description>&lt;h2 id=&#34;背景信息&#34;&gt;背景信息&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Unity IAP；&lt;/li&gt;
-&lt;li&gt;目标是对支付异常情况的捕捉及处理；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;具体实现&#34;&gt;具体实现&lt;/h2&gt;
-&lt;h3 id=&#34;异常列表完善&#34;&gt;异常列表完善&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;内置的异常如下：
-&lt;ul&gt;
-&lt;li&gt;初始化阶段：&lt;a href=&#34;https://docs.unity3d.com/Packages/com.unity.purchasing@4.6/api/UnityEngine.Purchasing.InitializationFailureReason.html&#34;&gt;InitializationFailureReason&lt;/a&gt;（3个）&lt;/li&gt;
-&lt;li&gt;支付阶段：&lt;a href=&#34;https://docs.unity3d.com/Packages/com.unity.purchasing@4.6/api/UnityEngine.Purchasing.PurchaseFailureReason.html&#34;&gt;PurchaseFailureReason&lt;/a&gt;（8个）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;新增的异常如下（初始化阶段之前）：
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;NetworkUnavailable&lt;/code&gt;：初始化阶段的第一优先级判断，玩家本地无网络连接时；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;因此，最终的异常列表如下（异常描述就省略了，🙊 当然不是因为表格太丑二删掉的）：&lt;/p&gt;</description>
-        
-        <dc:creator>Molly Wang</dc:creator>
-        
-        
-        
-        
-          
-            
-              <category>IAP</category>
-            
-          
-        
-        
-        
-      </item>
-    
-      <item>
-        <title>优化支付 (IAP) 时的异常处理</title>
-        <link>https://mollywangup.com/zh/posts/exception-handling-during-iap-for-unity-games/</link>
-        <pubDate>Tue, 22 Feb 2022 02:07:40 +0000</pubDate>
-        <author>mollywangup@gmail.com (Molly Wang)</author>
-        <atom:modified>Tue, 22 Feb 2022 02:07:40 +0000</atom:modified>
-        <guid>https://mollywangup.com/zh/posts/exception-handling-during-iap-for-unity-games/</guid>
         <description>&lt;h2 id=&#34;背景信息&#34;&gt;背景信息&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Unity IAP；&lt;/li&gt;

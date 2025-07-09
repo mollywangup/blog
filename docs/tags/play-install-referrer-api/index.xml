@@ -66,51 +66,5 @@
         
       </item>
     
-      <item>
-        <title>使用 Play Install Referrer API 解密 Facebook Campaign</title>
-        <link>https://mollywangup.com/zh/posts/decrypt-facebook-campaigns-with-play-install-referrer-api/</link>
-        <pubDate>Tue, 25 Oct 2022 06:17:06 +0000</pubDate>
-        <author>mollywangup@gmail.com (Molly Wang)</author>
-        <atom:modified>Tue, 25 Oct 2022 06:17:06 +0000</atom:modified>
-        <guid>https://mollywangup.com/zh/posts/decrypt-facebook-campaigns-with-play-install-referrer-api/</guid>
-        <description>&lt;p&gt;本文旨在手动解析一手的 Referrer 信息，并设置为 Firebase 用户属性。如果已经接了 MMP，可直接略过。（🤝 感兴趣也可了解下）&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;实现方法：
-&lt;ul&gt;
-&lt;li&gt;工具：Play Install Referrer API；&lt;/li&gt;
-&lt;li&gt;体现：Firebase 的用户属性&lt;code&gt;campaign_id&lt;/code&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;局限性：
-&lt;ul&gt;
-&lt;li&gt;仅支持安卓系统；&lt;/li&gt;
-&lt;li&gt;仅支持 Facebook Ads；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;方法概述&#34;&gt;方法概述&lt;/h2&gt;
-&lt;p&gt;共三步：&lt;/p&gt;</description>
-        
-        <dc:creator>Molly Wang</dc:creator>
-        
-        
-        
-        
-          
-            
-              <category>Play Install Referrer API</category>
-            
-          
-        
-        
-          
-            
-              <category>Attribution</category>
-            
-          
-        
-        
-      </item>
-    
   </channel>
 </rss>
