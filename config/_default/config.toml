@@ -12,8 +12,12 @@ buildFuture = true
 copyright = "©{year}, All content is licensed under <a target='_blank' rel='external noopener' href='https://creativecommons.org/licenses/by-nc/4.0/'>CC BY-NC 4.0</a>."
 timeout = 10000
 enableEmoji = true
-paginate = 13
+# paginate = 13
+[pagination]
+  pagerSize = 10
 rssLimit = 100
+
+# disableKinds = ["RSS"]  # 临时禁用RSS生成
 
 enableGitInfo = false
 # googleAnalytics = "G-BGX5B906J4"
@@ -35,10 +39,10 @@ enableGitInfo = false
     startLevel = 2
 
 [outputs]
-  home = ["HTML", "RSS", "SearchIndex"]
-  section = ["HTML", "RSS", "SearchIndex"]
+  home = ["HTML", "SearchIndex"] # RSS
+  section = ["HTML", "SearchIndex"] # RSS
   # taxonomyTerm = ["HTML", "RSS", "SearchIndex"]
-  taxonomy = ["HTML", "RSS", "SearchIndex"]
+  taxonomy = ["HTML", "SearchIndex"] # RSS
 
 [outputFormats]
   [outputFormats.SearchIndex]

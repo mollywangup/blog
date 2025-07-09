@@ -1,1 +1,112 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Apple Search Ads on Molly's Blog</title><link>https://mollywangup.com/tags/apple-search-ads/</link><description>Recent content in Apple Search Ads on Molly's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor><webMaster>mollywangup@gmail.com (Molly Wang)</webMaster><copyright>©2025, All content is licensed under<a target="_blank" rel="external noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</copyright><lastBuildDate>Mon, 18 Jan 2021 06:08:30 +0000</lastBuildDate><atom:link href="https://mollywangup.com/tags/apple-search-ads/index.xml" rel="self" type="application/rss+xml"/><item><title>广告数据抓取方法论</title><link>https://mollywangup.com/posts/ad-insights-api/</link><pubDate>Mon, 18 Jan 2021 06:08:30 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Mon, 18 Jan 2021 06:08:30 +0000</atom:modified><guid>https://mollywangup.com/posts/ad-insights-api/</guid><description>无论哪个广告平台，数据抓取整体可概括为以下两步： 申请接口；（访问令牌/密钥文件） 通过接口请求数据； Facebook Ads 每个 BM 对应一个访问令牌，访问令牌由该 BM</description><dc:creator>Molly Wang</dc:creator><category>Facebook Ads</category><category>Google Ads</category><category>Apple Search Ads</category><category>API</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Apple Search Ads on Molly&#39;s Blog</title>
+    <link>https://mollywangup.com/tags/apple-search-ads/</link>
+    <description>Recent content in Apple Search Ads on Molly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor>
+    <webMaster>mollywangup@gmail.com (Molly Wang)</webMaster>
+    <copyright>©{year}, All content is licensed under &lt;a target=&#39;_blank&#39; rel=&#39;external noopener&#39; href=&#39;https://creativecommons.org/licenses/by-nc/4.0/&#39;&gt;CC BY-NC 4.0&lt;/a&gt;.</copyright>
+    <lastBuildDate>Mon, 18 Jan 2021 06:08:30 +0000</lastBuildDate>
+    
+        <atom:link href="https://mollywangup.com/tags/apple-search-ads/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      <item>
+        <title>广告数据抓取方法论</title>
+        <link>https://mollywangup.com/posts/ad-insights-api/</link>
+        <pubDate>Mon, 18 Jan 2021 06:08:30 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Mon, 18 Jan 2021 06:08:30 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/ad-insights-api/</guid>
+        <description>&lt;p&gt;无论哪个广告平台，数据抓取整体可概括为以下两步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;申请接口；（访问令牌/密钥文件）&lt;/li&gt;
+&lt;li&gt;通过接口请求数据；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;facebook-ads&#34;&gt;Facebook Ads&lt;/h2&gt;
+&lt;p&gt;每个 BM 对应一个访问令牌，访问令牌由该 BM 下管理员权限的 system_user 生成，只要授权给该 system_user 的广告账户，其数据都可以通过该访问令牌请求。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Facebook Ads</category>
+            
+          
+            
+              <category>Google Ads</category>
+            
+          
+            
+              <category>Apple Search Ads</category>
+            
+          
+        
+        
+          
+            
+              <category>API</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>广告数据抓取方法论</title>
+        <link>https://mollywangup.com/zh/posts/ad-insights-api/</link>
+        <pubDate>Mon, 18 Jan 2021 06:08:30 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Mon, 18 Jan 2021 06:08:30 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/ad-insights-api/</guid>
+        <description>&lt;p&gt;无论哪个广告平台，数据抓取整体可概括为以下两步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;申请接口；（访问令牌/密钥文件）&lt;/li&gt;
+&lt;li&gt;通过接口请求数据；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;facebook-ads&#34;&gt;Facebook Ads&lt;/h2&gt;
+&lt;p&gt;每个 BM 对应一个访问令牌，访问令牌由该 BM 下管理员权限的 system_user 生成，只要授权给该 system_user 的广告账户，其数据都可以通过该访问令牌请求。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Facebook Ads</category>
+            
+          
+            
+              <category>Google Ads</category>
+            
+          
+            
+              <category>Apple Search Ads</category>
+            
+          
+        
+        
+          
+            
+              <category>API</category>
+            
+          
+        
+        
+      </item>
+    
+  </channel>
+</rss>

@@ -1,1 +1,104 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>FCM on Molly's Blog</title><link>https://mollywangup.com/tags/fcm/</link><description>Recent content in FCM on Molly's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor><webMaster>mollywangup@gmail.com (Molly Wang)</webMaster><copyright>©2025, All content is licensed under<a target="_blank" rel="external noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</copyright><lastBuildDate>Thu, 02 Feb 2023 09:41:20 +0000</lastBuildDate><atom:link href="https://mollywangup.com/tags/fcm/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Adjust + FCM 追踪卸载和重装</title><link>https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</link><pubDate>Thu, 02 Feb 2023 09:41:20 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Thu, 02 Feb 2023 09:41:20 +0000</atom:modified><guid>https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</guid><description>Adjust SDK 无法独自实现追踪卸载和重装，需要借助 FCM SDK 的消息推送功能。 实现原理 官方文档：Uninstall and reinstall measurement 概括起来如下： FCM 会在新用户首次启动时，</description><dc:creator>Molly Wang</dc:creator><category>Adjust</category><category>FCM</category><category>MMP</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>FCM on Molly&#39;s Blog</title>
+    <link>https://mollywangup.com/tags/fcm/</link>
+    <description>Recent content in FCM on Molly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor>
+    <webMaster>mollywangup@gmail.com (Molly Wang)</webMaster>
+    <copyright>©{year}, All content is licensed under &lt;a target=&#39;_blank&#39; rel=&#39;external noopener&#39; href=&#39;https://creativecommons.org/licenses/by-nc/4.0/&#39;&gt;CC BY-NC 4.0&lt;/a&gt;.</copyright>
+    <lastBuildDate>Thu, 02 Feb 2023 09:41:20 +0000</lastBuildDate>
+    
+        <atom:link href="https://mollywangup.com/tags/fcm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      <item>
+        <title>使用 Adjust &#43; FCM 追踪卸载和重装</title>
+        <link>https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</link>
+        <pubDate>Thu, 02 Feb 2023 09:41:20 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Thu, 02 Feb 2023 09:41:20 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</guid>
+        <description>&lt;p&gt;Adjust SDK 无法独自实现追踪卸载和重装，需要借助 FCM SDK 的消息推送功能。&lt;/p&gt;
+&lt;h2 id=&#34;实现原理&#34;&gt;实现原理&lt;/h2&gt;
+&lt;p&gt;官方文档：&lt;a href=&#34;https://help.adjust.com/en/article/uninstalls-reinstalls&#34;&gt;Uninstall and reinstall measurement&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;概括起来如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;FCM 会在新用户首次启动时，为该设备生成一个设备标识符，即 &lt;code&gt;registration token&lt;/code&gt; 以下称作 &lt;code&gt;push token&lt;/code&gt;，在此应用场景中的作用是&lt;strong&gt;消息定位&lt;/strong&gt;该设备；&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>FCM</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>使用 Adjust &#43; FCM 追踪卸载和重装</title>
+        <link>https://mollywangup.com/zh/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</link>
+        <pubDate>Thu, 02 Feb 2023 09:41:20 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Thu, 02 Feb 2023 09:41:20 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</guid>
+        <description>&lt;p&gt;Adjust SDK 无法独自实现追踪卸载和重装，需要借助 FCM SDK 的消息推送功能。&lt;/p&gt;
+&lt;h2 id=&#34;实现原理&#34;&gt;实现原理&lt;/h2&gt;
+&lt;p&gt;官方文档：&lt;a href=&#34;https://help.adjust.com/en/article/uninstalls-reinstalls&#34;&gt;Uninstall and reinstall measurement&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;概括起来如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;FCM 会在新用户首次启动时，为该设备生成一个设备标识符，即 &lt;code&gt;registration token&lt;/code&gt; 以下称作 &lt;code&gt;push token&lt;/code&gt;，在此应用场景中的作用是&lt;strong&gt;消息定位&lt;/strong&gt;该设备；&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>FCM</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+  </channel>
+</rss>

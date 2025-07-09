@@ -1,1 +1,730 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Adjust on Molly's Blog</title><link>https://mollywangup.com/tags/adjust/</link><description>Recent content in Adjust on Molly's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor><webMaster>mollywangup@gmail.com (Molly Wang)</webMaster><copyright>©2025, All content is licensed under<a target="_blank" rel="external noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</copyright><lastBuildDate>Sun, 12 Jan 2025 03:36:40 +0000</lastBuildDate><atom:link href="https://mollywangup.com/tags/adjust/index.xml" rel="self" type="application/rss+xml"/><item><title>通过 Adjust 获取用户归因的解决方案</title><link>https://mollywangup.com/posts/solution-for-getting-attribution-from-adjust/</link><pubDate>Sun, 12 Jan 2025 03:36:40 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Sun, 12 Jan 2025 03:36:40 +0000</atom:modified><guid>https://mollywangup.com/posts/solution-for-getting-attribution-from-adjust/</guid><description>背景信息 应用有用户注册系统，用户注册成功前/后，需判断/维护用户的归因信息； 用户的归因存在更新的情形，如再归因、由 iOS 用户 ATT 授权状态变化导致的</description><dc:creator>Molly Wang</dc:creator><category>Adjust</category><category>MMP</category></item><item><title>Session</title><link>https://mollywangup.com/posts/session/</link><pubDate>Sun, 12 Jan 2025 01:42:27 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Sun, 12 Jan 2025 01:42:27 +0000</atom:modified><guid>https://mollywangup.com/posts/session/</guid><description>Session 定义 官方定义详见 会话定义 应用会话是指用户在安装后与应用进行交互的行为。 Session 统计规则 触发机制 每次应用启动时判断，如果本次 Session 已累计超过 30 分钟，则</description><dc:creator>Molly Wang</dc:creator><category>Adjust</category><category>MMP</category></item><item><title>BI 方案：Adjust + S3 + Druid + Superset</title><link>https://mollywangup.com/posts/bi-solution-adjust-s3-druid-superset/</link><pubDate>Sun, 07 May 2023 16:03:28 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Sun, 07 May 2023 16:03:28 +0000</atom:modified><guid>https://mollywangup.com/posts/bi-solution-adjust-s3-druid-superset/</guid><description>🙇‍♀️ 本文是个文章地图索引。 本文旨在将来自 Adjust 的原始数据可视化在 Superset. 其中，不同的工具分工如下： Adjust： MMP； 用于收集原始数据； S3： 云</description><dc:creator>Molly Wang</dc:creator><category>Adjust</category><category>S3</category><category>Apache Druid</category><category>Apache Superset</category><category>BI</category><category>OLAP</category><category>MMP</category></item><item><title>基于 Adjust 原始数据的指标体系</title><link>https://mollywangup.com/posts/common-dimensions-and-metrics-based-on-adjust-raw-data/</link><pubDate>Sun, 16 Apr 2023 08:39:46 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Sun, 16 Apr 2023 08:39:46 +0000</atom:modified><guid>https://mollywangup.com/posts/common-dimensions-and-metrics-based-on-adjust-raw-data/</guid><description>本文基于 Adjust（原始数据） -&amp;gt; S3（云存储）-&amp;gt; Druid（数仓）-&amp;gt; Superset（可视化）。 几点说明： 共两个阶段会对已</description><dc:creator>Molly Wang</dc:creator><category>Adjust</category><category>Apache Druid</category><category>MMP</category><category>OLAP</category></item><item><title>将 Adjust 原始数据导出的两种方法</title><link>https://mollywangup.com/posts/two-methods-for-exporting-adjust-raw-data/</link><pubDate>Sat, 04 Feb 2023 16:01:08 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Sat, 04 Feb 2023 16:01:08 +0000</atom:modified><guid>https://mollywangup.com/posts/two-methods-for-exporting-adjust-raw-data/</guid><description>由于 Adjust 看板数据具有较大的分析局限性，因此有必要使用原始数据导出功能，用以更细颗粒度、更自由的多维度交叉分析。 共两种方法，一种是导出至云存储，</description><dc:creator>Molly Wang</dc:creator><category>Adjust</category><category>MMP</category></item><item><title>使用 Adjust + FCM 追踪卸载和重装</title><link>https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</link><pubDate>Thu, 02 Feb 2023 09:41:20 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Thu, 02 Feb 2023 09:41:20 +0000</atom:modified><guid>https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</guid><description>Adjust SDK 无法独自实现追踪卸载和重装，需要借助 FCM SDK 的消息推送功能。 实现原理 官方文档：Uninstall and reinstall measurement 概括起来如下： FCM 会在新用户首次启动时，</description><dc:creator>Molly Wang</dc:creator><category>Adjust</category><category>FCM</category><category>MMP</category></item><item><title>使用 Adjust 追踪事件和收入数据</title><link>https://mollywangup.com/posts/tracking-event-and-revenue-with-adjust-sdk/</link><pubDate>Thu, 02 Feb 2023 06:06:12 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Thu, 02 Feb 2023 06:06:12 +0000</atom:modified><guid>https://mollywangup.com/posts/tracking-event-and-revenue-with-adjust-sdk/</guid><description>本文旨在使用 Adjust SDK 追踪以下四类事件数据： 普通事件（指非收入事件）； 广告收入； 内购收入（一次性）； 订阅收入（周期性）； 💡 理论上，收入事件 = 设置了</description><dc:creator>Molly Wang</dc:creator><category>Adjust</category><category>MMP</category></item><item><title>通用：上架 GP 常用 SDK/Service 集成需求</title><link>https://mollywangup.com/posts/sdk-or-service-integration-requirements-for-unity-games/</link><pubDate>Fri, 01 Jul 2022 09:35:45 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Fri, 01 Jul 2022 09:35:45 +0000</atom:modified><guid>https://mollywangup.com/posts/sdk-or-service-integration-requirements-for-unity-games/</guid><description>本文适用于侧重广告变现的 Unity 游戏。 涉及到隐私政策，👉 指路我的另外一篇文章 广告风控指南：隐私政策 Firebase SDK 理解：Firebase 项目实际上只是一个启用</description><dc:creator>Molly Wang</dc:creator><category>Firebase</category><category>Facebook Ads</category><category>MAX</category><category>Adjust</category><category>IAP</category><category>Subscription</category><category>Helpshift</category><category>APT</category><category>MMP</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Adjust on Molly&#39;s Blog</title>
+    <link>https://mollywangup.com/tags/adjust/</link>
+    <description>Recent content in Adjust on Molly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor>
+    <webMaster>mollywangup@gmail.com (Molly Wang)</webMaster>
+    <copyright>©{year}, All content is licensed under &lt;a target=&#39;_blank&#39; rel=&#39;external noopener&#39; href=&#39;https://creativecommons.org/licenses/by-nc/4.0/&#39;&gt;CC BY-NC 4.0&lt;/a&gt;.</copyright>
+    <lastBuildDate>Sun, 12 Jan 2025 01:42:27 +0000</lastBuildDate>
+    
+        <atom:link href="https://mollywangup.com/tags/adjust/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      <item>
+        <title>Session</title>
+        <link>https://mollywangup.com/posts/session/</link>
+        <pubDate>Sun, 12 Jan 2025 01:42:27 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Sun, 12 Jan 2025 01:42:27 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/session/</guid>
+        <description>&lt;h2 id=&#34;session-定义&#34;&gt;Session 定义&lt;/h2&gt;
+&lt;p&gt;官方定义详见 &lt;a href=&#34;https://www.adjust.com/zh/glossary/session/&#34; target=&#34;_blank&#34;&gt;会话定义&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;应用会话是指用户在安装后与应用进行交互的行为。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;session-统计规则&#34;&gt;Session 统计规则&lt;/h2&gt;
+&lt;h3 id=&#34;触发机制&#34;&gt;触发机制&lt;/h3&gt;
+&lt;p&gt;每次应用启动时判断，如果本次 Session 已累计超过 30 分钟，则触发一个新 Session 事件，否则不触发。具体规则如下图：&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>Session</title>
+        <link>https://mollywangup.com/zh/posts/session/</link>
+        <pubDate>Sun, 12 Jan 2025 01:42:27 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Sun, 12 Jan 2025 01:42:27 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/session/</guid>
+        <description>&lt;h2 id=&#34;session-定义&#34;&gt;Session 定义&lt;/h2&gt;
+&lt;p&gt;官方定义详见 &lt;a href=&#34;https://www.adjust.com/zh/glossary/session/&#34; target=&#34;_blank&#34;&gt;会话定义&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;应用会话是指用户在安装后与应用进行交互的行为。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;session-统计规则&#34;&gt;Session 统计规则&lt;/h2&gt;
+&lt;h3 id=&#34;触发机制&#34;&gt;触发机制&lt;/h3&gt;
+&lt;p&gt;每次应用启动时判断，如果本次 Session 已累计超过 30 分钟，则触发一个新 Session 事件，否则不触发。具体规则如下图：&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>BI 方案：Adjust &#43; S3 &#43; Druid &#43; Superset</title>
+        <link>https://mollywangup.com/posts/bi-solution-adjust-s3-druid-superset/</link>
+        <pubDate>Sun, 07 May 2023 16:03:28 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Sun, 07 May 2023 16:03:28 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/bi-solution-adjust-s3-druid-superset/</guid>
+        <description>&lt;p&gt;🙇‍♀️ 本文是个文章地图索引。&lt;/p&gt;
+&lt;p&gt;本文旨在将来自 Adjust 的原始数据可视化在 Superset. 其中，不同的工具分工如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Adjust&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;MMP；&lt;/li&gt;
+&lt;li&gt;用于收集原始数据；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;S3&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;云存储，分布式文件系统；&lt;/li&gt;
+&lt;li&gt;用于存储原始数据；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Apache Druid&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;开源的 OLAP 数据库，列式存储，时间序列分析；&lt;/li&gt;
+&lt;li&gt;可用于批量摄取来自 S3 的原始数据；&lt;/li&gt;
+&lt;li&gt;可用于将 segments 数据持久化到 S3（建议新建一个专门的存储捅）；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Apache Superset&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;开源的可视化工具；&lt;/li&gt;
+&lt;li&gt;可直接连接 Apache Druid 数据库；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;step1-收集原始数据&#34;&gt;Step1. 收集原始数据&lt;/h2&gt;
+&lt;p&gt;本文使用的是 &lt;strong&gt;Adjust&lt;/strong&gt;.&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>S3</category>
+            
+          
+            
+              <category>Apache Druid</category>
+            
+          
+            
+              <category>Apache Superset</category>
+            
+          
+        
+        
+          
+            
+              <category>BI</category>
+            
+          
+            
+              <category>OLAP</category>
+            
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>BI 方案：Adjust &#43; S3 &#43; Druid &#43; Superset</title>
+        <link>https://mollywangup.com/zh/posts/bi-solution-adjust-s3-druid-superset/</link>
+        <pubDate>Sun, 07 May 2023 16:03:28 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Sun, 07 May 2023 16:03:28 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/bi-solution-adjust-s3-druid-superset/</guid>
+        <description>&lt;p&gt;🙇‍♀️ 本文是个文章地图索引。&lt;/p&gt;
+&lt;p&gt;本文旨在将来自 Adjust 的原始数据可视化在 Superset. 其中，不同的工具分工如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Adjust&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;MMP；&lt;/li&gt;
+&lt;li&gt;用于收集原始数据；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;S3&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;云存储，分布式文件系统；&lt;/li&gt;
+&lt;li&gt;用于存储原始数据；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Apache Druid&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;开源的 OLAP 数据库，列式存储，时间序列分析；&lt;/li&gt;
+&lt;li&gt;可用于批量摄取来自 S3 的原始数据；&lt;/li&gt;
+&lt;li&gt;可用于将 segments 数据持久化到 S3（建议新建一个专门的存储捅）；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Apache Superset&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;开源的可视化工具；&lt;/li&gt;
+&lt;li&gt;可直接连接 Apache Druid 数据库；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;step1-收集原始数据&#34;&gt;Step1. 收集原始数据&lt;/h2&gt;
+&lt;p&gt;本文使用的是 &lt;strong&gt;Adjust&lt;/strong&gt;.&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>S3</category>
+            
+          
+            
+              <category>Apache Druid</category>
+            
+          
+            
+              <category>Apache Superset</category>
+            
+          
+        
+        
+          
+            
+              <category>BI</category>
+            
+          
+            
+              <category>OLAP</category>
+            
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>基于 Adjust 原始数据的指标体系</title>
+        <link>https://mollywangup.com/posts/common-dimensions-and-metrics-based-on-adjust-raw-data/</link>
+        <pubDate>Sun, 16 Apr 2023 08:39:46 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Sun, 16 Apr 2023 08:39:46 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/common-dimensions-and-metrics-based-on-adjust-raw-data/</guid>
+        <description>&lt;p&gt;本文基于 Adjust（原始数据） -&amp;gt; S3（云存储）-&amp;gt; Druid（数仓）-&amp;gt; Superset（可视化）。&lt;/p&gt;
+&lt;p&gt;几点说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;共两个阶段会对已有字段（以下称为列）进行加工：
+&lt;ul&gt;
+&lt;li&gt;写入数仓时：在 Adjust/S3 原有列的基础上；&lt;/li&gt;
+&lt;li&gt;写入数仓后：在 Druid 原有列的基础上，也就是可视化查询时；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;示例的 SQL 语句省略了除0的情况；&lt;/li&gt;
+&lt;li&gt;Druid 不支持窗口函数；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;统计原则&#34;&gt;统计原则&lt;/h2&gt;
+&lt;h3 id=&#34;一个-id两个时间戳&#34;&gt;一个 ID，两个时间戳&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;adid&lt;/code&gt;：用户唯一标识；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;installed_at&lt;/code&gt;：首次打开的时间戳；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;created_at&lt;/code&gt;：事件发生的时间戳，在数仓中为&lt;code&gt;__time&lt;/code&gt;；（Druid 需要）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;notices info&#34; data-title=&#34;Info&#34;&gt;
+  时区说明：时间戳类型全部为 UTC 时区；
+&lt;/div&gt;
+&lt;h3 id=&#34;统计次数&#34;&gt;统计次数&lt;/h3&gt;
+&lt;p&gt;没有使用 &lt;code&gt;COUNT(*)&lt;/code&gt;，是为了事件&lt;strong&gt;去重&lt;/strong&gt;。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>Apache Druid</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+            
+              <category>OLAP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>基于 Adjust 原始数据的指标体系</title>
+        <link>https://mollywangup.com/zh/posts/common-dimensions-and-metrics-based-on-adjust-raw-data/</link>
+        <pubDate>Sun, 16 Apr 2023 08:39:46 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Sun, 16 Apr 2023 08:39:46 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/common-dimensions-and-metrics-based-on-adjust-raw-data/</guid>
+        <description>&lt;p&gt;本文基于 Adjust（原始数据） -&amp;gt; S3（云存储）-&amp;gt; Druid（数仓）-&amp;gt; Superset（可视化）。&lt;/p&gt;
+&lt;p&gt;几点说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;共两个阶段会对已有字段（以下称为列）进行加工：
+&lt;ul&gt;
+&lt;li&gt;写入数仓时：在 Adjust/S3 原有列的基础上；&lt;/li&gt;
+&lt;li&gt;写入数仓后：在 Druid 原有列的基础上，也就是可视化查询时；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;示例的 SQL 语句省略了除0的情况；&lt;/li&gt;
+&lt;li&gt;Druid 不支持窗口函数；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;统计原则&#34;&gt;统计原则&lt;/h2&gt;
+&lt;h3 id=&#34;一个-id两个时间戳&#34;&gt;一个 ID，两个时间戳&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;adid&lt;/code&gt;：用户唯一标识；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;installed_at&lt;/code&gt;：首次打开的时间戳；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;created_at&lt;/code&gt;：事件发生的时间戳，在数仓中为&lt;code&gt;__time&lt;/code&gt;；（Druid 需要）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;notices info&#34; data-title=&#34;Info&#34;&gt;
+  时区说明：时间戳类型全部为 UTC 时区；
+&lt;/div&gt;
+&lt;h3 id=&#34;统计次数&#34;&gt;统计次数&lt;/h3&gt;
+&lt;p&gt;没有使用 &lt;code&gt;COUNT(*)&lt;/code&gt;，是为了事件&lt;strong&gt;去重&lt;/strong&gt;。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>Apache Druid</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+            
+              <category>OLAP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>将 Adjust 原始数据导出的两种方法</title>
+        <link>https://mollywangup.com/posts/two-methods-for-exporting-adjust-raw-data/</link>
+        <pubDate>Sat, 04 Feb 2023 16:01:08 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Sat, 04 Feb 2023 16:01:08 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/two-methods-for-exporting-adjust-raw-data/</guid>
+        <description>&lt;p&gt;由于 Adjust 看板数据具有较大的分析局限性，因此有必要使用&lt;a href=&#34;https://help.adjust.com/en/article/raw-data-exports&#34;&gt;原始数据导出功能&lt;/a&gt;，用以更细颗粒度、更自由的多维度交叉分析。&lt;/p&gt;
+&lt;p&gt;共两种方法，一种是导出至云存储，一种是实时回传给自己的服务器。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.ctfassets.net/5s247im0esyq/5IzZDHUzGTvKFMe2IGnPCj/5b60d8ac5c97a05b2e71976c7be8b77f/02075bdf-e44b-4d3c-ac3b-31b736c20a56.png&#34; alt=&#34;How it works（图源 Adjust）&#34;&gt;&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>将 Adjust 原始数据导出的两种方法</title>
+        <link>https://mollywangup.com/zh/posts/two-methods-for-exporting-adjust-raw-data/</link>
+        <pubDate>Sat, 04 Feb 2023 16:01:08 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Sat, 04 Feb 2023 16:01:08 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/two-methods-for-exporting-adjust-raw-data/</guid>
+        <description>&lt;p&gt;由于 Adjust 看板数据具有较大的分析局限性，因此有必要使用&lt;a href=&#34;https://help.adjust.com/en/article/raw-data-exports&#34;&gt;原始数据导出功能&lt;/a&gt;，用以更细颗粒度、更自由的多维度交叉分析。&lt;/p&gt;
+&lt;p&gt;共两种方法，一种是导出至云存储，一种是实时回传给自己的服务器。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://images.ctfassets.net/5s247im0esyq/5IzZDHUzGTvKFMe2IGnPCj/5b60d8ac5c97a05b2e71976c7be8b77f/02075bdf-e44b-4d3c-ac3b-31b736c20a56.png&#34; alt=&#34;How it works（图源 Adjust）&#34;&gt;&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>使用 Adjust &#43; FCM 追踪卸载和重装</title>
+        <link>https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</link>
+        <pubDate>Thu, 02 Feb 2023 09:41:20 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Thu, 02 Feb 2023 09:41:20 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</guid>
+        <description>&lt;p&gt;Adjust SDK 无法独自实现追踪卸载和重装，需要借助 FCM SDK 的消息推送功能。&lt;/p&gt;
+&lt;h2 id=&#34;实现原理&#34;&gt;实现原理&lt;/h2&gt;
+&lt;p&gt;官方文档：&lt;a href=&#34;https://help.adjust.com/en/article/uninstalls-reinstalls&#34;&gt;Uninstall and reinstall measurement&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;概括起来如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;FCM 会在新用户首次启动时，为该设备生成一个设备标识符，即 &lt;code&gt;registration token&lt;/code&gt; 以下称作 &lt;code&gt;push token&lt;/code&gt;，在此应用场景中的作用是&lt;strong&gt;消息定位&lt;/strong&gt;该设备；&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>FCM</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>使用 Adjust &#43; FCM 追踪卸载和重装</title>
+        <link>https://mollywangup.com/zh/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</link>
+        <pubDate>Thu, 02 Feb 2023 09:41:20 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Thu, 02 Feb 2023 09:41:20 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/implement-uninstalls-and-reinstalls-with-adjust-and-fcm/</guid>
+        <description>&lt;p&gt;Adjust SDK 无法独自实现追踪卸载和重装，需要借助 FCM SDK 的消息推送功能。&lt;/p&gt;
+&lt;h2 id=&#34;实现原理&#34;&gt;实现原理&lt;/h2&gt;
+&lt;p&gt;官方文档：&lt;a href=&#34;https://help.adjust.com/en/article/uninstalls-reinstalls&#34;&gt;Uninstall and reinstall measurement&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;概括起来如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;FCM 会在新用户首次启动时，为该设备生成一个设备标识符，即 &lt;code&gt;registration token&lt;/code&gt; 以下称作 &lt;code&gt;push token&lt;/code&gt;，在此应用场景中的作用是&lt;strong&gt;消息定位&lt;/strong&gt;该设备；&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>FCM</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>使用 Adjust 追踪事件和收入数据</title>
+        <link>https://mollywangup.com/posts/tracking-event-and-revenue-with-adjust-sdk/</link>
+        <pubDate>Thu, 02 Feb 2023 06:06:12 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Thu, 02 Feb 2023 06:06:12 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/tracking-event-and-revenue-with-adjust-sdk/</guid>
+        <description>&lt;p&gt;本文旨在使用 Adjust SDK 追踪以下四类事件数据：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;普通事件（指非收入事件）；&lt;/li&gt;
+&lt;li&gt;广告收入；&lt;/li&gt;
+&lt;li&gt;内购收入（一次性）；&lt;/li&gt;
+&lt;li&gt;订阅收入（周期性）；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;br&gt;
+&lt;div class=&#34;notices info&#34; data-title=&#34;Info&#34;&gt;
+  💡 理论上，收入事件 = 设置了金额和币种参数的普通事件，所以额外收费的&lt;strong&gt;广告收入&lt;/strong&gt;和&lt;strong&gt;订阅收入&lt;/strong&gt;服务，是可以作为一个普通的收入事件上报的（此方法本文已略）。
+&lt;/div&gt;
+&lt;h2 id=&#34;追踪普通事件&#34;&gt;追踪普通事件&lt;/h2&gt;
+&lt;h3 id=&#34;方法描述&#34;&gt;方法描述&lt;/h3&gt;
+&lt;p&gt;在 Adjust 后台为每个事件创建一个 event token，然后直接上报即可。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>使用 Adjust 追踪事件和收入数据</title>
+        <link>https://mollywangup.com/zh/posts/tracking-event-and-revenue-with-adjust-sdk/</link>
+        <pubDate>Thu, 02 Feb 2023 06:06:12 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Thu, 02 Feb 2023 06:06:12 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/tracking-event-and-revenue-with-adjust-sdk/</guid>
+        <description>&lt;p&gt;本文旨在使用 Adjust SDK 追踪以下四类事件数据：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;普通事件（指非收入事件）；&lt;/li&gt;
+&lt;li&gt;广告收入；&lt;/li&gt;
+&lt;li&gt;内购收入（一次性）；&lt;/li&gt;
+&lt;li&gt;订阅收入（周期性）；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;br&gt;
+&lt;div class=&#34;notices info&#34; data-title=&#34;Info&#34;&gt;
+  💡 理论上，收入事件 = 设置了金额和币种参数的普通事件，所以额外收费的&lt;strong&gt;广告收入&lt;/strong&gt;和&lt;strong&gt;订阅收入&lt;/strong&gt;服务，是可以作为一个普通的收入事件上报的（此方法本文已略）。
+&lt;/div&gt;
+&lt;h2 id=&#34;追踪普通事件&#34;&gt;追踪普通事件&lt;/h2&gt;
+&lt;h3 id=&#34;方法描述&#34;&gt;方法描述&lt;/h3&gt;
+&lt;p&gt;在 Adjust 后台为每个事件创建一个 event token，然后直接上报即可。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Adjust</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>通用：上架 GP 常用 SDK/Service 集成需求</title>
+        <link>https://mollywangup.com/posts/sdk-or-service-integration-requirements-for-unity-games/</link>
+        <pubDate>Fri, 01 Jul 2022 09:35:45 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Fri, 01 Jul 2022 09:35:45 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/sdk-or-service-integration-requirements-for-unity-games/</guid>
+        <description>&lt;p&gt;本文适用于侧重广告变现的 Unity 游戏。&lt;/p&gt;
+&lt;p&gt;涉及到隐私政策，👉 指路我的另外一篇文章 &lt;a href=&#34;https://mollywangup.com/posts/solution-for-ad-privacy/&#34; target=&#34;_blank&#34;&gt;广告风控指南：隐私政策&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;firebase-sdk&#34;&gt;Firebase SDK&lt;/h2&gt;
+&lt;p&gt;理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Firebase</category>
+            
+          
+            
+              <category>Facebook Ads</category>
+            
+          
+            
+              <category>MAX</category>
+            
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>IAP</category>
+            
+          
+            
+              <category>Subscription</category>
+            
+          
+            
+              <category>Helpshift</category>
+            
+          
+            
+              <category>APT</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>通用：上架 GP 常用 SDK/Service 集成需求</title>
+        <link>https://mollywangup.com/zh/posts/sdk-or-service-integration-requirements-for-unity-games/</link>
+        <pubDate>Fri, 01 Jul 2022 09:35:45 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Fri, 01 Jul 2022 09:35:45 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/sdk-or-service-integration-requirements-for-unity-games/</guid>
+        <description>&lt;p&gt;本文适用于侧重广告变现的 Unity 游戏。&lt;/p&gt;
+&lt;p&gt;涉及到隐私政策，👉 指路我的另外一篇文章 &lt;a href=&#34;https://mollywangup.com/posts/solution-for-ad-privacy/&#34; target=&#34;_blank&#34;&gt;广告风控指南：隐私政策&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;firebase-sdk&#34;&gt;Firebase SDK&lt;/h2&gt;
+&lt;p&gt;理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Firebase</category>
+            
+          
+            
+              <category>Facebook Ads</category>
+            
+          
+            
+              <category>MAX</category>
+            
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>IAP</category>
+            
+          
+            
+              <category>Subscription</category>
+            
+          
+            
+              <category>Helpshift</category>
+            
+          
+            
+              <category>APT</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+  </channel>
+</rss>

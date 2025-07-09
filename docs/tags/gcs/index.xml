@@ -1,1 +1,180 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>GCS on Molly's Blog</title><link>https://mollywangup.com/tags/gcs/</link><description>Recent content in GCS on Molly's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor><webMaster>mollywangup@gmail.com (Molly Wang)</webMaster><copyright>©2025, All content is licensed under<a target="_blank" rel="external noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</copyright><lastBuildDate>Tue, 28 Feb 2023 16:02:30 +0000</lastBuildDate><atom:link href="https://mollywangup.com/tags/gcs/index.xml" rel="self" type="application/rss+xml"/><item><title>BI 方案：Firebase + GCS + BigQuery + Looker Studio</title><link>https://mollywangup.com/posts/bi-solution-firebase-gcs-bigquery-looker/</link><pubDate>Tue, 28 Feb 2023 16:02:30 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Tue, 28 Feb 2023 16:02:30 +0000</atom:modified><guid>https://mollywangup.com/posts/bi-solution-firebase-gcs-bigquery-looker/</guid><description>🙇‍♀️ 本文是个文章地图索引。 本文旨在将来自 Firebase/BigQuery 的原始数据可视化在 Looker Studio. 其中，不同的工具分工如下： Firebase： BAAS； 用于收集原始数据；</description><dc:creator>Molly Wang</dc:creator><category>Firebase</category><category>GCS</category><category>BigQuery</category><category>Looker Studio</category><category>BI</category><category>OLAP</category><category>BAAS</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>GCS on Molly&#39;s Blog</title>
+    <link>https://mollywangup.com/tags/gcs/</link>
+    <description>Recent content in GCS on Molly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor>
+    <webMaster>mollywangup@gmail.com (Molly Wang)</webMaster>
+    <copyright>©{year}, All content is licensed under &lt;a target=&#39;_blank&#39; rel=&#39;external noopener&#39; href=&#39;https://creativecommons.org/licenses/by-nc/4.0/&#39;&gt;CC BY-NC 4.0&lt;/a&gt;.</copyright>
+    <lastBuildDate>Tue, 28 Feb 2023 16:02:30 +0000</lastBuildDate>
+    
+        <atom:link href="https://mollywangup.com/tags/gcs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      <item>
+        <title>BI 方案：Firebase &#43; GCS &#43; BigQuery &#43; Looker Studio</title>
+        <link>https://mollywangup.com/posts/bi-solution-firebase-gcs-bigquery-looker/</link>
+        <pubDate>Tue, 28 Feb 2023 16:02:30 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Tue, 28 Feb 2023 16:02:30 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/bi-solution-firebase-gcs-bigquery-looker/</guid>
+        <description>&lt;p&gt;🙇‍♀️ 本文是个文章地图索引。&lt;/p&gt;
+&lt;p&gt;本文旨在将来自 Firebase/BigQuery 的原始数据可视化在 Looker Studio. 其中，不同的工具分工如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Firebase&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;BAAS；&lt;/li&gt;
+&lt;li&gt;用于收集原始数据；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GCS&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;云存储，Google 生态；&lt;/li&gt;
+&lt;li&gt;用于存储原始数据；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BigQuery&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;OLAP 数据库，列式存储，Google 生态；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Looker Studio&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Google 生态的可视化工具；&lt;/li&gt;
+&lt;li&gt;可直接连接 BigQuery，Google 生态；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;step1-收集原始数据&#34;&gt;Step1. 收集原始数据&lt;/h2&gt;
+&lt;p&gt;本文使用的是 &lt;strong&gt;Firebase&lt;/strong&gt;.&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Firebase</category>
+            
+          
+            
+              <category>GCS</category>
+            
+          
+            
+              <category>BigQuery</category>
+            
+          
+            
+              <category>Looker Studio</category>
+            
+          
+        
+        
+          
+            
+              <category>BI</category>
+            
+          
+            
+              <category>OLAP</category>
+            
+          
+            
+              <category>BAAS</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>BI 方案：Firebase &#43; GCS &#43; BigQuery &#43; Looker Studio</title>
+        <link>https://mollywangup.com/zh/posts/bi-solution-firebase-gcs-bigquery-looker/</link>
+        <pubDate>Tue, 28 Feb 2023 16:02:30 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Tue, 28 Feb 2023 16:02:30 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/bi-solution-firebase-gcs-bigquery-looker/</guid>
+        <description>&lt;p&gt;🙇‍♀️ 本文是个文章地图索引。&lt;/p&gt;
+&lt;p&gt;本文旨在将来自 Firebase/BigQuery 的原始数据可视化在 Looker Studio. 其中，不同的工具分工如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Firebase&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;BAAS；&lt;/li&gt;
+&lt;li&gt;用于收集原始数据；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GCS&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;云存储，Google 生态；&lt;/li&gt;
+&lt;li&gt;用于存储原始数据；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BigQuery&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;OLAP 数据库，列式存储，Google 生态；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Looker Studio&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;Google 生态的可视化工具；&lt;/li&gt;
+&lt;li&gt;可直接连接 BigQuery，Google 生态；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;step1-收集原始数据&#34;&gt;Step1. 收集原始数据&lt;/h2&gt;
+&lt;p&gt;本文使用的是 &lt;strong&gt;Firebase&lt;/strong&gt;.&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Firebase</category>
+            
+          
+            
+              <category>GCS</category>
+            
+          
+            
+              <category>BigQuery</category>
+            
+          
+            
+              <category>Looker Studio</category>
+            
+          
+        
+        
+          
+            
+              <category>BI</category>
+            
+          
+            
+              <category>OLAP</category>
+            
+          
+            
+              <category>BAAS</category>
+            
+          
+        
+        
+      </item>
+    
+  </channel>
+</rss>

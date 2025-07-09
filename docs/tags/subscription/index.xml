@@ -1,1 +1,146 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Subscription on Molly's Blog</title><link>https://mollywangup.com/tags/subscription/</link><description>Recent content in Subscription on Molly's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor><webMaster>mollywangup@gmail.com (Molly Wang)</webMaster><copyright>©2025, All content is licensed under<a target="_blank" rel="external noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</copyright><lastBuildDate>Fri, 01 Jul 2022 09:35:45 +0000</lastBuildDate><atom:link href="https://mollywangup.com/tags/subscription/index.xml" rel="self" type="application/rss+xml"/><item><title>通用：上架 GP 常用 SDK/Service 集成需求</title><link>https://mollywangup.com/posts/sdk-or-service-integration-requirements-for-unity-games/</link><pubDate>Fri, 01 Jul 2022 09:35:45 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Fri, 01 Jul 2022 09:35:45 +0000</atom:modified><guid>https://mollywangup.com/posts/sdk-or-service-integration-requirements-for-unity-games/</guid><description>本文适用于侧重广告变现的 Unity 游戏。 涉及到隐私政策，👉 指路我的另外一篇文章 广告风控指南：隐私政策 Firebase SDK 理解：Firebase 项目实际上只是一个启用</description><dc:creator>Molly Wang</dc:creator><category>Firebase</category><category>Facebook Ads</category><category>MAX</category><category>Adjust</category><category>IAP</category><category>Subscription</category><category>Helpshift</category><category>APT</category><category>MMP</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Subscription on Molly&#39;s Blog</title>
+    <link>https://mollywangup.com/tags/subscription/</link>
+    <description>Recent content in Subscription on Molly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor>
+    <webMaster>mollywangup@gmail.com (Molly Wang)</webMaster>
+    <copyright>©{year}, All content is licensed under &lt;a target=&#39;_blank&#39; rel=&#39;external noopener&#39; href=&#39;https://creativecommons.org/licenses/by-nc/4.0/&#39;&gt;CC BY-NC 4.0&lt;/a&gt;.</copyright>
+    <lastBuildDate>Fri, 01 Jul 2022 09:35:45 +0000</lastBuildDate>
+    
+        <atom:link href="https://mollywangup.com/tags/subscription/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      <item>
+        <title>通用：上架 GP 常用 SDK/Service 集成需求</title>
+        <link>https://mollywangup.com/posts/sdk-or-service-integration-requirements-for-unity-games/</link>
+        <pubDate>Fri, 01 Jul 2022 09:35:45 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Fri, 01 Jul 2022 09:35:45 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/sdk-or-service-integration-requirements-for-unity-games/</guid>
+        <description>&lt;p&gt;本文适用于侧重广告变现的 Unity 游戏。&lt;/p&gt;
+&lt;p&gt;涉及到隐私政策，👉 指路我的另外一篇文章 &lt;a href=&#34;https://mollywangup.com/posts/solution-for-ad-privacy/&#34; target=&#34;_blank&#34;&gt;广告风控指南：隐私政策&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;firebase-sdk&#34;&gt;Firebase SDK&lt;/h2&gt;
+&lt;p&gt;理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Firebase</category>
+            
+          
+            
+              <category>Facebook Ads</category>
+            
+          
+            
+              <category>MAX</category>
+            
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>IAP</category>
+            
+          
+            
+              <category>Subscription</category>
+            
+          
+            
+              <category>Helpshift</category>
+            
+          
+            
+              <category>APT</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>通用：上架 GP 常用 SDK/Service 集成需求</title>
+        <link>https://mollywangup.com/zh/posts/sdk-or-service-integration-requirements-for-unity-games/</link>
+        <pubDate>Fri, 01 Jul 2022 09:35:45 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Fri, 01 Jul 2022 09:35:45 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/sdk-or-service-integration-requirements-for-unity-games/</guid>
+        <description>&lt;p&gt;本文适用于侧重广告变现的 Unity 游戏。&lt;/p&gt;
+&lt;p&gt;涉及到隐私政策，👉 指路我的另外一篇文章 &lt;a href=&#34;https://mollywangup.com/posts/solution-for-ad-privacy/&#34; target=&#34;_blank&#34;&gt;广告风控指南：隐私政策&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;firebase-sdk&#34;&gt;Firebase SDK&lt;/h2&gt;
+&lt;p&gt;理解：Firebase 项目实际上只是一个启用了额外的 Firebase 特定配置和服务的 Google Cloud 项目；&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Firebase</category>
+            
+          
+            
+              <category>Facebook Ads</category>
+            
+          
+            
+              <category>MAX</category>
+            
+          
+            
+              <category>Adjust</category>
+            
+          
+            
+              <category>IAP</category>
+            
+          
+            
+              <category>Subscription</category>
+            
+          
+            
+              <category>Helpshift</category>
+            
+          
+            
+              <category>APT</category>
+            
+          
+        
+        
+          
+            
+              <category>MMP</category>
+            
+          
+        
+        
+      </item>
+    
+  </channel>
+</rss>

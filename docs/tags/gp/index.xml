@@ -1,1 +1,226 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>GP on Molly's Blog</title><link>https://mollywangup.com/tags/gp/</link><description>Recent content in GP on Molly's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor><webMaster>mollywangup@gmail.com (Molly Wang)</webMaster><copyright>©2025, All content is licensed under<a target="_blank" rel="external noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</copyright><lastBuildDate>Thu, 23 Jun 2022 10:43:11 +0000</lastBuildDate><atom:link href="https://mollywangup.com/tags/gp/index.xml" rel="self" type="application/rss+xml"/><item><title>GP 包签名管理（Release Key）</title><link>https://mollywangup.com/posts/solution-for-gp-release-key-management/</link><pubDate>Thu, 23 Jun 2022 10:43:11 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Thu, 23 Jun 2022 10:43:11 +0000</atom:modified><guid>https://mollywangup.com/posts/solution-for-gp-release-key-management/</guid><description>上架 GP 时，除了内测轨道，必须使用正式签名（Release Key）。 创建方法 方法一：IDE直接生成； 方法二：命令行生成；（推荐） 1 keytool -genkey -v -keystore &amp;lt;RELEASE_KEY_PATH&amp;gt; -alias</description><dc:creator>Molly Wang</dc:creator><category>GP</category></item><item><title>广告风控指南：隐私政策</title><link>https://mollywangup.com/posts/solution-for-ad-privacy/</link><pubDate>Wed, 29 Sep 2021 07:14:58 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Wed, 29 Sep 2021 07:14:58 +0000</atom:modified><guid>https://mollywangup.com/posts/solution-for-ad-privacy/</guid><description>背景信息 移动应用/游戏出海业务（不考虑Web） 广告变现角度（开发者角度） AdMob 作为聚合平台 GP 包 结论 隐私政策的核心思想： 可以概括为：约束开发者利用</description><dc:creator>Molly Wang</dc:creator><category>Monetization</category><category>AdMob</category><category>GP</category><category>Policy</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>GP on Molly&#39;s Blog</title>
+    <link>https://mollywangup.com/tags/gp/</link>
+    <description>Recent content in GP on Molly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor>
+    <webMaster>mollywangup@gmail.com (Molly Wang)</webMaster>
+    <copyright>©{year}, All content is licensed under &lt;a target=&#39;_blank&#39; rel=&#39;external noopener&#39; href=&#39;https://creativecommons.org/licenses/by-nc/4.0/&#39;&gt;CC BY-NC 4.0&lt;/a&gt;.</copyright>
+    <lastBuildDate>Thu, 23 Jun 2022 10:43:11 +0000</lastBuildDate>
+    
+        <atom:link href="https://mollywangup.com/tags/gp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      <item>
+        <title>GP 包签名管理（Release Key）</title>
+        <link>https://mollywangup.com/posts/solution-for-gp-release-key-management/</link>
+        <pubDate>Thu, 23 Jun 2022 10:43:11 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Thu, 23 Jun 2022 10:43:11 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/solution-for-gp-release-key-management/</guid>
+        <description>&lt;p&gt;上架 GP 时，除了内测轨道，必须使用正式签名（Release Key）。&lt;/p&gt;
+&lt;h2 id=&#34;创建方法&#34;&gt;创建方法&lt;/h2&gt;
+&lt;p&gt;方法一：IDE直接生成；&lt;/p&gt;
+&lt;p&gt;方法二：命令行生成；（推荐）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;keytool -genkey -v -keystore &amp;lt;RELEASE_KEY_PATH&amp;gt; -alias &amp;lt;RELEASE_KEY_ALIAS&amp;gt; -storepass &amp;lt;STOREPASS&amp;gt; -keypass &amp;lt;KEYPASS&amp;gt; -keyalg RSA -keysize &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; -validity &lt;span class=&#34;m&#34;&gt;36500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;查看方法&#34;&gt;查看方法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 需要输入key store的密码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;keytool -v -list -keystore &amp;lt;RELEASE_KEY_PATH&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;获取-key-的哈希值&#34;&gt;获取 Key 的哈希值&lt;/h2&gt;
+&lt;p&gt;方法详见 &lt;a href=&#34;https://developers.facebook.com/docs/android/getting-started/#release-key-hash&#34;&gt;Create a Release Key Hash&lt;/a&gt;&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>GP</category>
+            
+          
+        
+        
+          
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>GP 包签名管理（Release Key）</title>
+        <link>https://mollywangup.com/zh/posts/solution-for-gp-release-key-management/</link>
+        <pubDate>Thu, 23 Jun 2022 10:43:11 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Thu, 23 Jun 2022 10:43:11 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/solution-for-gp-release-key-management/</guid>
+        <description>&lt;p&gt;上架 GP 时，除了内测轨道，必须使用正式签名（Release Key）。&lt;/p&gt;
+&lt;h2 id=&#34;创建方法&#34;&gt;创建方法&lt;/h2&gt;
+&lt;p&gt;方法一：IDE直接生成；&lt;/p&gt;
+&lt;p&gt;方法二：命令行生成；（推荐）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;keytool -genkey -v -keystore &amp;lt;RELEASE_KEY_PATH&amp;gt; -alias &amp;lt;RELEASE_KEY_ALIAS&amp;gt; -storepass &amp;lt;STOREPASS&amp;gt; -keypass &amp;lt;KEYPASS&amp;gt; -keyalg RSA -keysize &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; -validity &lt;span class=&#34;m&#34;&gt;36500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;查看方法&#34;&gt;查看方法&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 需要输入key store的密码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;keytool -v -list -keystore &amp;lt;RELEASE_KEY_PATH&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;获取-key-的哈希值&#34;&gt;获取 Key 的哈希值&lt;/h2&gt;
+&lt;p&gt;方法详见 &lt;a href=&#34;https://developers.facebook.com/docs/android/getting-started/#release-key-hash&#34;&gt;Create a Release Key Hash&lt;/a&gt;&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>GP</category>
+            
+          
+        
+        
+          
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>广告风控指南：隐私政策</title>
+        <link>https://mollywangup.com/posts/solution-for-ad-privacy/</link>
+        <pubDate>Wed, 29 Sep 2021 07:14:58 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Wed, 29 Sep 2021 07:14:58 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/solution-for-ad-privacy/</guid>
+        <description>&lt;h2 id=&#34;背景信息&#34;&gt;背景信息&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;移动应用/游戏出海业务（不考虑Web）&lt;/li&gt;
+&lt;li&gt;广告变现角度（开发者角度）&lt;/li&gt;
+&lt;li&gt;AdMob 作为聚合平台&lt;/li&gt;
+&lt;li&gt;GP 包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;隐私政策的核心思想：&lt;/p&gt;
+&lt;p&gt;可以概括为：约束开发者&lt;strong&gt;利用隐私数据进行&lt;u&gt;相关&lt;/u&gt;盈利&lt;/strong&gt;的行为，更具体一点指&lt;strong&gt;收集设备信息标识用户，用以对不同用户进行差异化的广告展示，即展示个性化广告&lt;/strong&gt;。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Monetization</category>
+            
+          
+            
+              <category>AdMob</category>
+            
+          
+            
+              <category>GP</category>
+            
+          
+        
+        
+          
+            
+              <category>Policy</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>广告风控指南：隐私政策</title>
+        <link>https://mollywangup.com/zh/posts/solution-for-ad-privacy/</link>
+        <pubDate>Wed, 29 Sep 2021 07:14:58 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Wed, 29 Sep 2021 07:14:58 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/solution-for-ad-privacy/</guid>
+        <description>&lt;h2 id=&#34;背景信息&#34;&gt;背景信息&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;移动应用/游戏出海业务（不考虑Web）&lt;/li&gt;
+&lt;li&gt;广告变现角度（开发者角度）&lt;/li&gt;
+&lt;li&gt;AdMob 作为聚合平台&lt;/li&gt;
+&lt;li&gt;GP 包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;隐私政策的核心思想：&lt;/p&gt;
+&lt;p&gt;可以概括为：约束开发者&lt;strong&gt;利用隐私数据进行&lt;u&gt;相关&lt;/u&gt;盈利&lt;/strong&gt;的行为，更具体一点指&lt;strong&gt;收集设备信息标识用户，用以对不同用户进行差异化的广告展示，即展示个性化广告&lt;/strong&gt;。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Monetization</category>
+            
+          
+            
+              <category>AdMob</category>
+            
+          
+            
+              <category>GP</category>
+            
+          
+        
+        
+          
+            
+              <category>Policy</category>
+            
+          
+        
+        
+      </item>
+    
+  </channel>
+</rss>

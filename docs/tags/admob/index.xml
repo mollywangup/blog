@@ -1,1 +1,228 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>AdMob on Molly's Blog</title><link>https://mollywangup.com/tags/admob/</link><description>Recent content in AdMob on Molly's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor><webMaster>mollywangup@gmail.com (Molly Wang)</webMaster><copyright>©2025, All content is licensed under<a target="_blank" rel="external noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</copyright><lastBuildDate>Mon, 18 Oct 2021 09:43:43 +0000</lastBuildDate><atom:link href="https://mollywangup.com/tags/admob/index.xml" rel="self" type="application/rss+xml"/><item><title>广告风控指南：无效流量</title><link>https://mollywangup.com/posts/solution-for-invalid-activity-policy/</link><pubDate>Mon, 18 Oct 2021 09:43:43 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Mon, 18 Oct 2021 09:43:43 +0000</atom:modified><guid>https://mollywangup.com/posts/solution-for-invalid-activity-policy/</guid><description>无效流量，也常称作无效活动，以下统一口径为无效流量。 结论 减少误点击（划重点：各广告平台权重最高的数据指标是 CTR ）： 可通过使用测试广告单元 ID 及添</description><dc:creator>Molly Wang</dc:creator><category>Invalid activity</category><category>Monetization</category><category>AdMob</category></item><item><title>广告风控指南：隐私政策</title><link>https://mollywangup.com/posts/solution-for-ad-privacy/</link><pubDate>Wed, 29 Sep 2021 07:14:58 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Wed, 29 Sep 2021 07:14:58 +0000</atom:modified><guid>https://mollywangup.com/posts/solution-for-ad-privacy/</guid><description>背景信息 移动应用/游戏出海业务（不考虑Web） 广告变现角度（开发者角度） AdMob 作为聚合平台 GP 包 结论 隐私政策的核心思想： 可以概括为：约束开发者利用</description><dc:creator>Molly Wang</dc:creator><category>Monetization</category><category>AdMob</category><category>GP</category><category>Policy</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>AdMob on Molly&#39;s Blog</title>
+    <link>https://mollywangup.com/tags/admob/</link>
+    <description>Recent content in AdMob on Molly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor>
+    <webMaster>mollywangup@gmail.com (Molly Wang)</webMaster>
+    <copyright>©{year}, All content is licensed under &lt;a target=&#39;_blank&#39; rel=&#39;external noopener&#39; href=&#39;https://creativecommons.org/licenses/by-nc/4.0/&#39;&gt;CC BY-NC 4.0&lt;/a&gt;.</copyright>
+    <lastBuildDate>Mon, 18 Oct 2021 09:43:43 +0000</lastBuildDate>
+    
+        <atom:link href="https://mollywangup.com/tags/admob/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      <item>
+        <title>广告风控指南：无效流量</title>
+        <link>https://mollywangup.com/posts/solution-for-invalid-activity-policy/</link>
+        <pubDate>Mon, 18 Oct 2021 09:43:43 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Mon, 18 Oct 2021 09:43:43 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/solution-for-invalid-activity-policy/</guid>
+        <description>&lt;p&gt;无效流量，也常称作无效活动，以下统一口径为无效流量。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;减少误点击（划重点：各广告平台权重最高的数据指标是 CTR ）：
+&lt;ul&gt;
+&lt;li&gt;可通过使用测试广告单元 ID 及添加测试设备，来避免开发者的误点击；&lt;/li&gt;
+&lt;li&gt;可通过遵守广告格式植入指南，来避免用户的误点击；&lt;/li&gt;
+&lt;li&gt;可通过优化广告请求及展示逻辑，来进行频次控制；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用最新的变现 SDK：
+&lt;ul&gt;
+&lt;li&gt;可避免因 SDK 自身 bug 引发的相关问题；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;无效流量&#34;&gt;无效流量&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;定义见 &lt;a href=&#34;https://support.google.com/admob/answer/3342054?hl=en&#34;&gt;Invalid traffic&lt;/a&gt;&lt;br /&gt;
+可理解为：广告点击表现异常时，会被AdMob（各个广告平台大同小异）判定为无效流量。且无效流量不会产生收益，已产生的收益也会被收回；
+&lt;blockquote&gt;
+&lt;p&gt;所有可能会&lt;strong&gt;虚增&lt;/strong&gt;广告客户费用或发布商收入的点击或展示都属于无效流量。这其中包括蓄意制造的欺诈性流量，也包括误点击。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Invalid activity</category>
+            
+          
+            
+              <category>Monetization</category>
+            
+          
+            
+              <category>AdMob</category>
+            
+          
+        
+        
+        
+      </item>
+    
+      <item>
+        <title>广告风控指南：无效流量</title>
+        <link>https://mollywangup.com/zh/posts/solution-for-invalid-activity-policy/</link>
+        <pubDate>Mon, 18 Oct 2021 09:43:43 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Mon, 18 Oct 2021 09:43:43 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/solution-for-invalid-activity-policy/</guid>
+        <description>&lt;p&gt;无效流量，也常称作无效活动，以下统一口径为无效流量。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;减少误点击（划重点：各广告平台权重最高的数据指标是 CTR ）：
+&lt;ul&gt;
+&lt;li&gt;可通过使用测试广告单元 ID 及添加测试设备，来避免开发者的误点击；&lt;/li&gt;
+&lt;li&gt;可通过遵守广告格式植入指南，来避免用户的误点击；&lt;/li&gt;
+&lt;li&gt;可通过优化广告请求及展示逻辑，来进行频次控制；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用最新的变现 SDK：
+&lt;ul&gt;
+&lt;li&gt;可避免因 SDK 自身 bug 引发的相关问题；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;无效流量&#34;&gt;无效流量&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;定义见 &lt;a href=&#34;https://support.google.com/admob/answer/3342054?hl=en&#34;&gt;Invalid traffic&lt;/a&gt;&lt;br /&gt;
+可理解为：广告点击表现异常时，会被AdMob（各个广告平台大同小异）判定为无效流量。且无效流量不会产生收益，已产生的收益也会被收回；
+&lt;blockquote&gt;
+&lt;p&gt;所有可能会&lt;strong&gt;虚增&lt;/strong&gt;广告客户费用或发布商收入的点击或展示都属于无效流量。这其中包括蓄意制造的欺诈性流量，也包括误点击。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Invalid activity</category>
+            
+          
+            
+              <category>Monetization</category>
+            
+          
+            
+              <category>AdMob</category>
+            
+          
+        
+        
+        
+      </item>
+    
+      <item>
+        <title>广告风控指南：隐私政策</title>
+        <link>https://mollywangup.com/posts/solution-for-ad-privacy/</link>
+        <pubDate>Wed, 29 Sep 2021 07:14:58 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Wed, 29 Sep 2021 07:14:58 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/solution-for-ad-privacy/</guid>
+        <description>&lt;h2 id=&#34;背景信息&#34;&gt;背景信息&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;移动应用/游戏出海业务（不考虑Web）&lt;/li&gt;
+&lt;li&gt;广告变现角度（开发者角度）&lt;/li&gt;
+&lt;li&gt;AdMob 作为聚合平台&lt;/li&gt;
+&lt;li&gt;GP 包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;隐私政策的核心思想：&lt;/p&gt;
+&lt;p&gt;可以概括为：约束开发者&lt;strong&gt;利用隐私数据进行&lt;u&gt;相关&lt;/u&gt;盈利&lt;/strong&gt;的行为，更具体一点指&lt;strong&gt;收集设备信息标识用户，用以对不同用户进行差异化的广告展示，即展示个性化广告&lt;/strong&gt;。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Monetization</category>
+            
+          
+            
+              <category>AdMob</category>
+            
+          
+            
+              <category>GP</category>
+            
+          
+        
+        
+          
+            
+              <category>Policy</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>广告风控指南：隐私政策</title>
+        <link>https://mollywangup.com/zh/posts/solution-for-ad-privacy/</link>
+        <pubDate>Wed, 29 Sep 2021 07:14:58 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Wed, 29 Sep 2021 07:14:58 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/solution-for-ad-privacy/</guid>
+        <description>&lt;h2 id=&#34;背景信息&#34;&gt;背景信息&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;移动应用/游戏出海业务（不考虑Web）&lt;/li&gt;
+&lt;li&gt;广告变现角度（开发者角度）&lt;/li&gt;
+&lt;li&gt;AdMob 作为聚合平台&lt;/li&gt;
+&lt;li&gt;GP 包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;隐私政策的核心思想：&lt;/p&gt;
+&lt;p&gt;可以概括为：约束开发者&lt;strong&gt;利用隐私数据进行&lt;u&gt;相关&lt;/u&gt;盈利&lt;/strong&gt;的行为，更具体一点指&lt;strong&gt;收集设备信息标识用户，用以对不同用户进行差异化的广告展示，即展示个性化广告&lt;/strong&gt;。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Monetization</category>
+            
+          
+            
+              <category>AdMob</category>
+            
+          
+            
+              <category>GP</category>
+            
+          
+        
+        
+          
+            
+              <category>Policy</category>
+            
+          
+        
+        
+      </item>
+    
+  </channel>
+</rss>

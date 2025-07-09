@@ -1,1 +1,218 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Troubleshooting on Molly's Blog</title><link>https://mollywangup.com/categories/troubleshooting/</link><description>Recent content in Troubleshooting on Molly's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor><webMaster>mollywangup@gmail.com (Molly Wang)</webMaster><copyright>©2025, All content is licensed under<a target="_blank" rel="external noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</copyright><lastBuildDate>Fri, 30 Jun 2023 07:37:04 +0000</lastBuildDate><atom:link href="https://mollywangup.com/categories/troubleshooting/index.xml" rel="self" type="application/rss+xml"/><item><title>踩坑：Druid + S3 批量摄取任务中的各种报错</title><link>https://mollywangup.com/posts/troubleshooting-druid-batch-ingestion-task/</link><pubDate>Fri, 30 Jun 2023 07:37:04 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Fri, 30 Jun 2023 07:37:04 +0000</atom:modified><guid>https://mollywangup.com/posts/troubleshooting-druid-batch-ingestion-task/</guid><description>背景信息 Apache Druid: 26.0.0 Batch ingestion task informations: SQL-based ingestion S3 input source Duplicate column entries found 详细报错 1 2 3 4 { &amp;#34;errorCode&amp;#34;: &amp;#34;CannotParseExternalData&amp;#34;, &amp;#34;errorMessage&amp;#34;: &amp;#34;Duplicate column entries found : [0, Facebook]&amp;#34; } 解决方案 Druid 属于列式存储，出现此问题的根本原因是，存在名称相同</description><dc:creator>Molly Wang</dc:creator><category>Apache Druid</category><category>S3</category><category>Troubleshooting</category></item><item><title>踩坑：ERR_TOO_MANY_REDIRECTS</title><link>https://mollywangup.com/posts/troubleshooting-err-too-many-redirects/</link><pubDate>Tue, 29 Jun 2021 03:55:45 +0000</pubDate><author>mollywangup@gmail.com (Molly Wang)</author><atom:modified>Tue, 29 Jun 2021 03:55:45 +0000</atom:modified><guid>https://mollywangup.com/posts/troubleshooting-err-too-many-redirects/</guid><description>问题描述 当打开自己的网站时，浏览器报错：ERR_TOO_MANY_REDIRECTS 问题定位 这个报错通常是由于重定向死循环导致，如下图: 解决</description><dc:creator>Molly Wang</dc:creator><category>Cloudflare</category><category>Troubleshooting</category></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" 
+  xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:atom="http://www.w3.org/2005/Atom" 
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+  xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Troubleshooting on Molly&#39;s Blog</title>
+    <link>https://mollywangup.com/categories/troubleshooting/</link>
+    <description>Recent content in Troubleshooting on Molly&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <managingEditor>mollywangup@gmail.com (Molly Wang)</managingEditor>
+    <webMaster>mollywangup@gmail.com (Molly Wang)</webMaster>
+    <copyright>©{year}, All content is licensed under &lt;a target=&#39;_blank&#39; rel=&#39;external noopener&#39; href=&#39;https://creativecommons.org/licenses/by-nc/4.0/&#39;&gt;CC BY-NC 4.0&lt;/a&gt;.</copyright>
+    <lastBuildDate>Fri, 30 Jun 2023 07:37:04 +0000</lastBuildDate>
+    
+        <atom:link href="https://mollywangup.com/categories/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+      <item>
+        <title>踩坑：Druid &#43; S3 批量摄取任务中的各种报错</title>
+        <link>https://mollywangup.com/posts/troubleshooting-druid-batch-ingestion-task/</link>
+        <pubDate>Fri, 30 Jun 2023 07:37:04 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Fri, 30 Jun 2023 07:37:04 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/troubleshooting-druid-batch-ingestion-task/</guid>
+        <description>&lt;h2 id=&#34;背景信息&#34;&gt;背景信息&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Apache Druid: &lt;code&gt;26.0.0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Batch ingestion task informations:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://druid.apache.org/docs/latest/multi-stage-query/index.html&#34; target=&#34;_blank&#34;&gt;SQL-based ingestion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://druid.apache.org/docs/latest/ingestion/native-batch-input-sources.html#s3-input-source&#34; target=&#34;_blank&#34;&gt;S3 input source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;duplicate-column-entries-found&#34;&gt;Duplicate column entries found&lt;/h2&gt;
+&lt;h3 id=&#34;详细报错&#34;&gt;详细报错&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;errorCode&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;CannotParseExternalData&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;errorMessage&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Duplicate column entries found : [0, Facebook]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;解决方案&#34;&gt;解决方案&lt;/h3&gt;
+&lt;p&gt;Druid 属于列式存储，出现此问题的根本原因是，&lt;strong&gt;存在名称相同的两列&lt;/strong&gt;。因此需要定位到名称相同的两列，并进行手动调整。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Apache Druid</category>
+            
+          
+            
+              <category>S3</category>
+            
+          
+        
+        
+          
+            
+              <category>Troubleshooting</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>踩坑：Druid &#43; S3 批量摄取任务中的各种报错</title>
+        <link>https://mollywangup.com/zh/posts/troubleshooting-druid-batch-ingestion-task/</link>
+        <pubDate>Fri, 30 Jun 2023 07:37:04 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Fri, 30 Jun 2023 07:37:04 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/troubleshooting-druid-batch-ingestion-task/</guid>
+        <description>&lt;h2 id=&#34;背景信息&#34;&gt;背景信息&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Apache Druid: &lt;code&gt;26.0.0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Batch ingestion task informations:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://druid.apache.org/docs/latest/multi-stage-query/index.html&#34; target=&#34;_blank&#34;&gt;SQL-based ingestion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://druid.apache.org/docs/latest/ingestion/native-batch-input-sources.html#s3-input-source&#34; target=&#34;_blank&#34;&gt;S3 input source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;duplicate-column-entries-found&#34;&gt;Duplicate column entries found&lt;/h2&gt;
+&lt;h3 id=&#34;详细报错&#34;&gt;详细报错&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;errorCode&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;CannotParseExternalData&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;#34;errorMessage&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Duplicate column entries found : [0, Facebook]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;解决方案&#34;&gt;解决方案&lt;/h3&gt;
+&lt;p&gt;Druid 属于列式存储，出现此问题的根本原因是，&lt;strong&gt;存在名称相同的两列&lt;/strong&gt;。因此需要定位到名称相同的两列，并进行手动调整。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Apache Druid</category>
+            
+          
+            
+              <category>S3</category>
+            
+          
+        
+        
+          
+            
+              <category>Troubleshooting</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>踩坑：ERR_TOO_MANY_REDIRECTS</title>
+        <link>https://mollywangup.com/posts/troubleshooting-err-too-many-redirects/</link>
+        <pubDate>Tue, 29 Jun 2021 03:55:45 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Tue, 29 Jun 2021 03:55:45 +0000</atom:modified>
+        <guid>https://mollywangup.com/posts/troubleshooting-err-too-many-redirects/</guid>
+        <description>&lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
+&lt;p&gt;当打开自己的网站时，浏览器报错：&lt;code&gt;ERR_TOO_MANY_REDIRECTS&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;问题定位&#34;&gt;问题定位&lt;/h2&gt;
+&lt;p&gt;这个报错通常是由于重定向死循环导致，如下图:&lt;/p&gt;
+&lt;img src=&#39;https://mollywangup.com/images/posts/redirect_loop.png&#39; alt=&#39;A Redirect Loop&#39;&gt;
+&lt;h2 id=&#34;解决思路&#34;&gt;解决思路&lt;/h2&gt;
+&lt;p&gt;检查网站的重定向设置，无论是主动设置的还是被动设置的。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Cloudflare</category>
+            
+          
+        
+        
+          
+            
+              <category>Troubleshooting</category>
+            
+          
+        
+        
+      </item>
+    
+      <item>
+        <title>踩坑：ERR_TOO_MANY_REDIRECTS</title>
+        <link>https://mollywangup.com/zh/posts/troubleshooting-err-too-many-redirects/</link>
+        <pubDate>Tue, 29 Jun 2021 03:55:45 +0000</pubDate>
+        <author>mollywangup@gmail.com (Molly Wang)</author>
+        <atom:modified>Tue, 29 Jun 2021 03:55:45 +0000</atom:modified>
+        <guid>https://mollywangup.com/zh/posts/troubleshooting-err-too-many-redirects/</guid>
+        <description>&lt;h2 id=&#34;问题描述&#34;&gt;问题描述&lt;/h2&gt;
+&lt;p&gt;当打开自己的网站时，浏览器报错：&lt;code&gt;ERR_TOO_MANY_REDIRECTS&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;问题定位&#34;&gt;问题定位&lt;/h2&gt;
+&lt;p&gt;这个报错通常是由于重定向死循环导致，如下图:&lt;/p&gt;
+&lt;img src=&#39;https://mollywangup.com/images/posts/redirect_loop.png&#39; alt=&#39;A Redirect Loop&#39;&gt;
+&lt;h2 id=&#34;解决思路&#34;&gt;解决思路&lt;/h2&gt;
+&lt;p&gt;检查网站的重定向设置，无论是主动设置的还是被动设置的。&lt;/p&gt;</description>
+        
+        <dc:creator>Molly Wang</dc:creator>
+        
+        
+        
+        
+          
+            
+              <category>Cloudflare</category>
+            
+          
+        
+        
+          
+            
+              <category>Troubleshooting</category>
+            
+          
+        
+        
+      </item>
+    
+  </channel>
+</rss>
