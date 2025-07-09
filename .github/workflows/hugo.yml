@@ -1,32 +1,29 @@
-name: Deploy Hugo to GitHub Pages  # 工作流的名称（可自定义）
+name: Deploy Hugo to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]  # 触发条件：当代码推送到 main 分支时运行
+    branches: [ "main" ]
 
 jobs:
-  deploy:  # 定义一个名为 "deploy" 的任务
-    runs-on: ubuntu-latest  # 运行环境配置
-    steps:  # 定义具体的执行步骤
-      # 步骤1：检出代码
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true  # 如果使用 Git 子模块（如 Hugo 主题）
-          fetch-depth: 0    # 获取完整 Git 历史记录
+          submodules: true
+          fetch-depth: 0
 
-      # 步骤2：安装 Hugo
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: "0.120.4"  # 使用已知稳定的版本
+          hugo-version: "0.125.7"
+          extended: true
 
-      # 步骤3：构建静态网站
       - name: Build
-        run: hugo --minify  # 执行 hugo 命令生成静态文件
+        run: hugo --minify
 
-      # 步骤4：部署到 GitHub Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # 自动使用的密钥
-          publish_dir: ./docs  # 部署 public/ 目录的内容
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
